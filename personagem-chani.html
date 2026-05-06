@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="fremen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chani — Personagens — Dune Universe</title>
+  <meta name="description" content="Chani, filha de Liet-Kynes, guerreira Fremen e companheira de Paul Atreides — a voz do realismo no meio da profecia.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#2980b9;--fc-bg:#060e16;--fc-glow:rgba(41,128,185,0.12);}
+    .c-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .c-hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#060e16 0%,#0a1825 50%,#04090f 100%);}
+    .c-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0.3;filter:saturate(0.6) brightness(0.5);}
+    .c-hero-portrait{position:absolute;right:5%;bottom:0;height:90%;max-width:400px;z-index:3;}
+    .c-hero-portrait img{height:100%;width:auto;object-fit:cover;object-position:top center;mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);}
+    .c-hero-pattern{position:absolute;inset:0;opacity:.03;background-image:repeating-linear-gradient(45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .c-hero-dunes{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(180deg,transparent,rgba(6,14,22,0.8),#060e16);}
+    .c-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .c-symbol{font-size:10rem;color:rgba(41,128,185,0.04);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:3%;bottom:0;line-height:1;}
+    .c-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(41,128,185,0.12);border:1px solid rgba(41,128,185,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .c-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .c-subtitle{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .c-body{padding:5rem 0;background:var(--color-black);}
+    .c-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .c-section{margin-bottom:3.5rem;}
+    .c-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(41,128,185,.15);}
+    .c-section h3{font-family:'Cinzel',serif;font-size:1.05rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .c-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .c-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .c-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .c-section ul li::before{content:'◈';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(41,128,185,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border-bottom:none;}
+    .stat-key{font-size:.78rem;color:rgba(245,240,232,.35);letter-spacing:.05em;}
+    .stat-val{font-size:.85rem;color:rgba(245,240,232,.75);font-weight:500;text-align:right;}
+    .skill-bar{margin-bottom:1rem;}
+    .skill-label{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(245,240,232,.4);margin-bottom:.35rem;}
+    .skill-label span:last-child{color:var(--fc);}
+    @media(max-width:900px){.c-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="c-hero">
+  <div class="c-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=TaSjI3R5VORhpbrEUkafvwixcNOzxkWSLEFfqLiu5TPFD4gIrNj6vTHnNtkLxaE20pqx0C2M9KV6hhomZQIsy1CL%2F1fhJAhO9D43kt5HAHOSc1relOdRU47i%2FsYSCSLqG249WaTo2cYBowl9aQ%3D%3D&u2=luGDtWWRixG84cJ6&width=2560" alt="Arrakis Desert Fremen">
+  </div>
+  <div class="c-hero-pattern"></div>
+  <div class="c-hero-dunes"></div>
+  <div class="c-hero-portrait">
+    <img src="https://sspark.genspark.ai/cfimages?u1=l7PqNcitCexcEbQepTSYGtDFtz9qCl0Vjgr%2Bg7VXA%2BZxlcVEM7rcOpPhvuzek7UcLeYP7Z9%2BD%2B5qaysGzv5xR534Mgy0vmuH7w0R3Dx%2Fk4iPVjnK6xrFlH5e4KqRHOvXLjEboEFUn7CYv6ZAUoK4LMZHcw%3D%3D&u2=%2BaLGl1UBq%2BCTaOLb&width=2560" alt="Chani - Zendaya">
+  </div>
+  <div class="c-symbol">◈</div>
+  <div class="container c-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Chani</span></nav>
+    <div class="c-tag">◈ Fremen · Guerreira do Deserto</div>
+    <h1 class="c-name">Chani</h1>
+    <p class="c-subtitle">"Não sou a tua profecia — sou uma mulher."</p>
+    <p style="font-size:.95rem;color:rgba(245,240,232,.45);max-width:540px;line-height:1.9;">Filha de Liet-Kynes. Guerreira Fremen. Companheira de Paul. A voz da realidade que ousou questionar o messias quando todo o universo o adorava.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<main class="c-body">
+  <div class="container">
+    <div class="c-grid">
+
+      <!-- Main content -->
+      <div>
+        <div class="c-section reveal">
+          <h2>Nascida no Deserto</h2>
+          <p>Chani nasce em Arrakis, filha de Liet-Kynes — o ecologista imperial que se tornara líder espiritual dos Fremen — e de uma mãe Fremen. Desde criança, é criada nas sietchs do deserto profundo, aprendendo as técnicas de sobrevivência que as tribos dominam ao longo de gerações: como montar vermes de areia, como usar o destilante, como caminhar sem ritmo para não atrair as grandes criaturas do Erg.</p>
+          <p>A sua educação é completamente Fremen: dura, prática, sem espaço para sentimentalismo. Aprende a usar o crys-knife (a faca de dente de verme), a navegar pelas estrelas, a ler as correntes de areia. O deserto não é o seu inimigo — é o seu lar, o seu professor e a sua arma.</p>
+          <p>Quando Paul e Lady Jessica chegam ao deserto fugindo da traição Harkonnen, é Chani quem os guia para o mundo dos Fremen. Não como uma vítima da profecia, mas como uma mulher com juízo próprio que avalia os recém-chegados com olhos de guerreira.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"O deserto ensina coisas que os palácios nunca ensinam. Aprendi a não depender de ninguém para sobreviver. Aprendi que a lealdade deve ser conquistada, não exigida."</p>
+          <cite>— Chani, nas sietchs de Arrakis</cite>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>A Companheira de Muad'Dib</h2>
+          <p>A relação entre Chani e Paul é uma das mais complexas e subversivas de toda a saga. Ela não se apaixona pelo "Lisan al-Gaib" — apaixona-se pelo Paul humano, vulnerável, que ela conhece nas sietchs, antes de ele se transformar no messias que o universo criou.</p>
+          <p>Enquanto toda a comunidade Fremen vê em Paul a realização das profecias da Bene Gesserit, Chani mantém uma posição única: o ceticismo pragmático de quem conhece o homem real por detrás do mito. Ela testemunha a transformação de Paul de sobrevivente a profeta — e sabe, melhor do que ninguém, o que ele perdeu ao longo do caminho.</p>
+          <p>Chani representa no texto aquilo que Paul não consegue ser: enraizado no presente, liberto do peso das visões proféticas, genuíno na sua humanidade. É ao mesmo tempo a sua maior âncora ao mundo real e o espelho que lhe mostra o que está a tornar-se.</p>
+
+          <h3>No Filme de Denis Villeneuve</h3>
+          <p>Em <em>Dune: Part Two</em> (2024), Zendaya traz a Chani uma dimensão de resistência que é mais explícita do que no livro. A Chani do filme é cética em relação à religião messiânica desde o início, e o seu arco termina com uma ruptura significativa: ao ver Paul abraçar a Jihad que ela sempre temeu, afasta-se — não por falta de amor, mas por integridade.</p>
+          <p>Esta versão de Chani é uma das mais poderosas do universo audiovisual de Dune: a única personagem que recusa dobrar-se perante o messias, mesmo amando o homem.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>Guerreira do Sietch</h2>
+          <p>Chani é considerada uma das melhores guerreiras de Sietch Tabr. O seu treino Fremen combina técnicas de combate corpo-a-corpo refinadas ao longo de gerações, uso magistral do crys-knife, e uma compreensão instintiva do terreno de Arrakis.</p>
+          <p>No sistema Fremen, as mulheres combatem em pé de igualdade com os homens — o deserto não distingue géneros. A necessidade de sobrevivência nivelou a tribo de forma que as casas imperiais nunca conseguiram. Uma guerreira Fremen como Chani pode derrotar Sardaukar — os guerreiros mais treinados do Imperium — porque cresceu com o inimigo mais duro de todos: o próprio deserto.</p>
+
+          <h3>A Morte do Filho</h3>
+          <p>Chani tem um filho com Paul — Leto (não confundir com Leto II, que viria depois). A criança morre durante um ataque Harkonnen à sietch. Esta perda é devastadora e marca tanto Chani como Paul de forma indelével. É a primeira de muitas perdas que o caminho de Paul exige — e cada uma parece confirmar as visões que ele tanto temia.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>Símbolo de Resistência</h2>
+          <p>Frank Herbert criou Chani como contraponto deliberado ao arco heróico de Paul. Numa saga que questiona profundamente a adoração de heróis e messias, Chani é a personagem que carrega a crítica mais clara: ela vê Paul como humano quando todos os outros já o vêm como deus.</p>
+          <p>A sua recusa em se tornar "imperatriz" — preferindo ser a concubina real de Paul a tornar-se sua esposa política — é também um gesto de subversão. Ela não quer os seus títulos. Quer o homem que conheceu no deserto. E quando esse homem desaparece sob o peso da profecia, Chani não vai atrás do deus que o substituiu.</p>
+          <p>No arco mais amplo da saga, os filhos de Chani e Paul — Leto II e Ghanima — continuam a herança tanto da visão de Paul como da lucidez de Chani. É através deles que o legado do deserto persiste.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"Nunca te pedi que fosses o Mahdi. Pedi que fosses Paul."</p>
+          <cite>— Chani a Paul Atreides</cite>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>No Universo Alargado</h2>
+          <p>Após os eventos de <em>Dune</em>, Chani permanece ao lado de Paul durante o seu reinado, mesmo vendo a Jihad a expandir-se por milhares de planetas. Em <em>Dune Messiah</em>, está grávida dos filhos gémeos (Leto II e Ghanima) quando morre durante o parto — uma ironia cruel para a mulher que tanto combateu a profecia.</p>
+          <p>A sua morte não é em batalha, não é heroica na forma convencional — é humana, física, inevitável. Como tudo em Chani, é uma lembrança de que mesmo no centro de uma saga épica, existem verdades simples e implacáveis.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="sidebar-card reveal">
+          <h4>Ficha do Personagem</h4>
+          <div class="stat-row"><span class="stat-key">Nome completo</span><span class="stat-val">Chani Kynes</span></div>
+          <div class="stat-row"><span class="stat-key">Facção</span><span class="stat-val">Fremen — Sietch Tabr</span></div>
+          <div class="stat-row"><span class="stat-key">Pai</span><span class="stat-val">Liet-Kynes</span></div>
+          <div class="stat-row"><span class="stat-key">Parceiro</span><span class="stat-val">Paul Atreides (Muad'Dib)</span></div>
+          <div class="stat-row"><span class="stat-key">Nome Fremen</span><span class="stat-val">Sihaya (Alondra do Deserto)</span></div>
+          <div class="stat-row"><span class="stat-key">Título informal</span><span class="stat-val">Consorte do Muad'Dib</span></div>
+          <div class="stat-row"><span class="stat-key">Habitats</span><span class="stat-val">Sietch Tabr, Arrakeen</span></div>
+          <div class="stat-row"><span class="stat-key">Actriz (2021/24)</span><span class="stat-val">Zendaya</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Capacidades</h4>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Combate Fremen</span><span>97%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="97" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Sobrevivência no Deserto</span><span>99%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="99" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Montada de Verme</span><span>88%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="88" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Discernimento Político</span><span>85%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="85" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Uso do Crys-knife</span><span>94%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="94" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Aparições nas Obras</h4>
+          <div class="stat-row"><span class="stat-key">Dune (1965)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Dune Messiah (1969)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Children of Dune (1976)</span><span class="stat-val" style="color:rgba(245,240,232,0.4)">Memória</span></div>
+          <div class="stat-row"><span class="stat-key">Dune (2021 — Filme)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Dune: Part Two (2024)</span><span class="stat-val" style="color:var(--fc)">Co-protagonista</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <ul style="display:flex;flex-direction:column;gap:.5rem;">
+            <li><a href="personagem-paul.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Paul Atreides</a></li>
+            <li><a href="personagem-stilgar.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Stilgar</a></li>
+            <li><a href="faccao-fremen.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Os Fremen</a></li>
+            <li><a href="planetas.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Arrakis</a></li>
+            <li><a href="filme-dune-part-two.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Dune: Part Two</a></li>
+          </ul>
+        </div>
+
+        <a href="personagens.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:.75rem;">← Todos os Personagens</a>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

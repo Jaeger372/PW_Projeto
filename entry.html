@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUNE — Escolhe o teu caminho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #d4a843;
+      --gold-bright: #f0c85a;
+      --black: #050402;
+      --white: #f5f0e8;
+      --muted: #6a6050;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ---- ENTRY SCENE ---- */
+    #entry-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #000;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    #entry-scene.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Desert background */
+    .entry-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 100%, rgba(180, 120, 20, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 50%, rgba(100, 70, 10, 0.08) 0%, transparent 70%),
+        linear-gradient(180deg, #000 0%, #0a0702 40%, #0f0a03 70%, #050300 100%);
+      overflow: hidden;
+    }
+
+    .entry-bg-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      filter: saturate(0.5) brightness(0.4);
+      z-index: 0;
+    }
+
+    /* Sand dunes silhouette */
+    .dune-silhouette {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: linear-gradient(180deg, transparent 0%, #060402 100%);
+      overflow: hidden;
+    }
+
+    .dune-silhouette::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -10%;
+      width: 120%;
+      height: 100%;
+      background: radial-gradient(ellipse 60% 50% at 30% 100%, #0d0905 40%, transparent 70%),
+                  radial-gradient(ellipse 70% 60% at 70% 100%, #0d0905 40%, transparent 70%);
+    }
+
+    /* Stars */
+    .stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: twinkle ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.9; }
+    }
+
+    /* Sand drift particles */
+    .entry-sand {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      overflow: visible;
+    }
+
+    .sand-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,150,40,0.3), transparent);
+      animation: driftLine linear infinite;
+    }
+
+    @keyframes driftLine {
+      from { transform: translateX(-100vw); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      to { transform: translateX(200vw); opacity: 0; }
+    }
+
+    /* Phase 1: Opening text */
+    #phase-text {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .opening-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.5);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.5s forwards;
+    }
+
+    .opening-quote {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.4;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeInUp 1.2s ease 1.2s forwards;
+      max-width: 700px;
+    }
+
+    .opening-quote span {
+      color: var(--gold);
+    }
+
+    .opening-sub {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      opacity: 0;
+      animation: fadeInUp 1s ease 2s forwards;
+    }
+
+    .opening-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2rem auto;
+      animation: expandLine 1s ease 1.8s forwards;
+    }
+
+    @keyframes expandLine {
+      to { width: 200px; }
+    }
+
+    .continue-btn {
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 3s forwards;
+    }
+
+    .continue-btn button {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: transparent;
+      border: 1px solid rgba(212,168,67,0.4);
+      padding: 14px 40px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .continue-btn button:hover {
+      background: rgba(212,168,67,0.1);
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(212,168,67,0.15);
+    }
+
+    /* Phase 2: Faction choice */
+    #phase-faction {
+      display: none;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    #phase-faction.active {
+      display: block;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .faction-intro {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.7);
+      margin-bottom: 0.5rem;
+    }
+
+    .faction-headline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .faction-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+      margin-bottom: 3rem;
+    }
+
+    /* Faction cards */
+    .faction-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .faction-card {
+      position: relative;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .faction-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .faction-card[data-faction="atreides"]::before {
+      background: radial-gradient(ellipse at center, rgba(74,158,106,0.15) 0%, transparent 70%);
+    }
+
+    .faction-card[data-faction="harkonnen"]::before {
+      background: radial-gradient(ellipse at center, rgba(192,57,43,0.15) 0%, transparent 70%);
+    }
+
+    .faction-card[data-faction="fremen"]::before {
+      background: radial-gradient(ellipse at center, rgba(41,128,185,0.15) 0%, transparent 70%);
+    }
+
+    .faction-card[data-faction="bene-gesserit"]::before {
+      background: radial-gradient(ellipse at center, rgba(142,68,173,0.15) 0%, transparent 70%);
+    }
+
+    .faction-card:hover::before,
+    .faction-card.selected::before {
+      opacity: 1;
+    }
+
+    .faction-card[data-faction="atreides"]:hover,
+    .faction-card[data-faction="atreides"].selected {
+      border-color: #4a9e6a;
+      box-shadow: 0 0 40px rgba(74,158,106,0.2), inset 0 0 40px rgba(74,158,106,0.03);
+    }
+
+    .faction-card[data-faction="harkonnen"]:hover,
+    .faction-card[data-faction="harkonnen"].selected {
+      border-color: #c0392b;
+      box-shadow: 0 0 40px rgba(192,57,43,0.2), inset 0 0 40px rgba(192,57,43,0.03);
+    }
+
+    .faction-card[data-faction="fremen"]:hover,
+    .faction-card[data-faction="fremen"].selected {
+      border-color: #2980b9;
+      box-shadow: 0 0 40px rgba(41,128,185,0.2), inset 0 0 40px rgba(41,128,185,0.03);
+    }
+
+    .faction-card[data-faction="bene-gesserit"]:hover,
+    .faction-card[data-faction="bene-gesserit"].selected {
+      border-color: #8e44ad;
+      box-shadow: 0 0 40px rgba(142,68,173,0.2), inset 0 0 40px rgba(142,68,173,0.03);
+    }
+
+    .faction-symbol {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .faction-card:hover .faction-symbol {
+      transform: scale(1.15);
+    }
+
+    .faction-card[data-faction="atreides"] .faction-symbol { color: #4a9e6a; }
+    .faction-card[data-faction="harkonnen"] .faction-symbol { color: #c0392b; }
+    .faction-card[data-faction="fremen"] .faction-symbol { color: #2980b9; }
+    .faction-card[data-faction="bene-gesserit"] .faction-symbol { color: #8e44ad; }
+
+    .faction-card-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .faction-card-motto {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .faction-card-desc {
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.5);
+      line-height: 1.6;
+    }
+
+    .faction-card-cta {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.3);
+      transition: color 0.3s ease;
+    }
+
+    .faction-card[data-faction="atreides"]:hover .faction-card-cta { color: #4a9e6a; }
+    .faction-card[data-faction="harkonnen"]:hover .faction-card-cta { color: #c0392b; }
+    .faction-card[data-faction="fremen"]:hover .faction-card-cta { color: #2980b9; }
+    .faction-card[data-faction="bene-gesserit"]:hover .faction-card-cta { color: #8e44ad; }
+
+    .faction-skip {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.2);
+      cursor: pointer;
+      transition: color 0.3s ease;
+      background: none;
+      border: none;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .faction-skip:hover {
+      color: rgba(245,240,232,0.5);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Transition overlay ---- */
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .transition-overlay.active {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .faction-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .faction-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .faction-card {
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 1rem;
+      }
+
+      .faction-symbol {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+    }
+
+    /* Sound toggle */
+    .sound-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(212,168,67,0.3);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: rgba(212,168,67,0.6);
+      font-size: 1rem;
+    }
+
+    .sound-toggle:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="transition-overlay" id="transitionOverlay"></div>
+
+  <!-- Entry Scene -->
+  <div id="entry-scene">
+    <!-- Background -->
+    <div class="entry-bg">
+      <img class="entry-bg-image" src="https://sspark.genspark.ai/cfimages?u1=XCcnQpBnpQ5lg2a%2FO0CQCDUwyPo3rA5S8FhhEbSKVLCuU6Z5Uj2iu%2Bjc0ZjzzUs7vt%2F845udncXScTMqiOCHBhq15cLo3zsO2urqu3i%2FdTVthTha7yCxgurwY0Kg%2BUsmLAjXSLs5dsJ3pjbn5o0VAVnVHkjKWKc6Ug%3D%3D&u2=CVKbt344h93qDauq&width=2560" alt="Arrakis Desert">
+      <div class="stars" id="starsContainer"></div>
+      <div class="dune-silhouette"></div>
+      <div class="entry-sand" id="sandLines"></div>
+    </div>
+
+    <!-- Phase 1: Opening text -->
+    <div id="phase-text">
+      <p class="opening-eyebrow">Universo Dune</p>
+      <h1 class="opening-quote">
+        "Todo o poder começa<br>com uma <span>escolha</span>"
+      </h1>
+      <div class="opening-divider"></div>
+      <p class="opening-sub">Frank Herbert · 1965</p>
+      <div class="continue-btn">
+        <button onclick="showFactionChoice()">Fazer a minha escolha</button>
+      </div>
+    </div>
+
+    <!-- Phase 2: Faction choice -->
+    <div id="phase-faction">
+      <p class="faction-intro">Antes de entrar no universo</p>
+      <h2 class="faction-headline">Escolhe a tua facção</h2>
+      <p class="faction-sub">A tua escolha moldará a experiência</p>
+
+      <div class="faction-grid">
+
+        <div class="faction-card" data-faction="atreides" onclick="selectFaction('atreides')" style="position:relative;overflow:hidden;">
+          <img src="https://sspark.genspark.ai/cfimages?u1=V3YBhlXUS%2Fm6B0wOll99msI9225GpAe1GDrFdpIEt%2FDCqDk4NVHn%2BWFIHs9%2B2LZxmRRkeDsSo34fjyvirSdT1np0SuKb6sTGi3VCHKpSWGkWDbdUJ2qXAxK%2FYhMatHDFxCGvjEfVbcakabg2Zr2xI13OZUJ%2FjgQtCdlUuzl1WV2nVgxAJgCfo0d%2FR3b1lg%3D%3D&u2=ntiUadYS7f66Szil&width=2560" alt="Paul Atreides" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0.12;filter:saturate(0.5);z-index:0;">
+          <span class="faction-symbol" style="position:relative;z-index:1;">⚔</span>
+          <div class="faction-card-name" style="position:relative;z-index:1;">Casa Atreides</div>
+          <div class="faction-card-motto" style="position:relative;z-index:1;">Coragem e Honra</div>
+          <div class="faction-card-desc" style="position:relative;z-index:1;">Nobreza, honra e estratégia definem esta casa. Os Atreides acreditam que o poder deve servir ao povo.</div>
+          <span class="faction-card-cta" style="position:relative;z-index:1;">Traçar o caminho →</span>
+        </div>
+
+        <div class="faction-card" data-faction="harkonnen" onclick="selectFaction('harkonnen')" style="position:relative;overflow:hidden;">
+          <img src="https://sspark.genspark.ai/cfimages?u1=zqcCZU249w3xZ7Ep8mYpP84GNc%2B2PGJ2HBt3k876Nj1%2FFoxrskK%2BdzUr1%2F9ljdy06Ji5fX0CTpoXyWhZjkkkfuIuXbUeYCkl6lLxea%2FULxdahX4ckDMo%2FZwonbw4q7bDNo6eCvJcGQ%3D%3D&u2=OuVAhKMHLSquN%2B0J&width=2560" alt="Baron Harkonnen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0.1;filter:saturate(0.4);z-index:0;">
+          <span class="faction-symbol" style="position:relative;z-index:1;">⚡</span>
+          <div class="faction-card-name" style="position:relative;z-index:1;">Casa Harkonnen</div>
+          <div class="faction-card-motto" style="position:relative;z-index:1;">Poder acima de tudo</div>
+          <div class="faction-card-desc" style="position:relative;z-index:1;">Brutalidade, dominação e medo. Os Harkonnen usam o terror como ferramenta de controle absoluto.</div>
+          <span class="faction-card-cta" style="position:relative;z-index:1;">Tomar o poder →</span>
+        </div>
+
+        <div class="faction-card" data-faction="fremen" onclick="selectFaction('fremen')" style="position:relative;overflow:hidden;">
+          <img src="https://sspark.genspark.ai/cfimages?u1=TaSjI3R5VORhpbrEUkafvwixcNOzxkWSLEFfqLiu5TPFD4gIrNj6vTHnNtkLxaE20pqx0C2M9KV6hhomZQIsy1CL%2F1fhJAhO9D43kt5HAHOSc1relOdRU47i%2FsYSCSLqG249WaTo2cYBowl9aQ%3D%3D&u2=luGDtWWRixG84cJ6&width=2560" alt="Fremen Desert" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.12;filter:saturate(0.5);z-index:0;">
+          <span class="faction-symbol" style="position:relative;z-index:1;">◈</span>
+          <div class="faction-card-name" style="position:relative;z-index:1;">Fremen</div>
+          <div class="faction-card-motto" style="position:relative;z-index:1;">O deserto é nossa arma</div>
+          <div class="faction-card-desc" style="position:relative;z-index:1;">Filhos do deserto de Arrakis. Sobrevivência, profecia e uma fé inabalável no seu destino coletivo.</div>
+          <span class="faction-card-cta" style="position:relative;z-index:1;">Seguir o deserto →</span>
+        </div>
+
+        <div class="faction-card" data-faction="bene-gesserit" onclick="selectFaction('bene-gesserit')" style="position:relative;overflow:hidden;">
+          <img src="https://sspark.genspark.ai/cfimages?u1=Zo69U8BIrxZWUZ74VGJL4qm6VveRds6WwN4NYIYy5PSvN2hofHPznfB4BLMPHXQQPLQx%2BNkN2D0AbZ1Oeeb7&u2=9GG0GwBExT3bC0Cn&width=2560" alt="Lady Jessica Bene Gesserit" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0.12;filter:saturate(0.4);z-index:0;">
+          <span class="faction-symbol" style="position:relative;z-index:1;">◉</span>
+          <div class="faction-card-name" style="position:relative;z-index:1;">Bene Gesserit</div>
+          <div class="faction-card-motto" style="position:relative;z-index:1;">Ver além do véu</div>
+          <div class="faction-card-desc" style="position:relative;z-index:1;">Manipulação, visão e controle das linhagens humanas. Uma ordem de mulheres com poderes sobre mente e corpo.</div>
+          <span class="faction-card-cta" style="position:relative;z-index:1;">Ver além →</span>
+        </div>
+
+      </div>
+
+      <button class="faction-skip" onclick="skipToHome()">Entrar sem escolher facção</button>
+    </div>
+  </div>
+
+  <!-- Sound toggle -->
+  <button class="sound-toggle" id="soundToggle" title="Ativar som ambiente" onclick="toggleSound()">♪</button>
+
+  <!-- Audio ambient -->
+  <audio id="ambientAudio" loop preload="none">
+    <!-- Ambient sound would be added here if available -->
+  </audio>
+
+  <script>
+    // ---- STARS ----
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.cssText = `
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 70}%;
+        width: ${Math.random() > 0.8 ? 3 : 2}px;
+        height: ${Math.random() > 0.8 ? 3 : 2}px;
+        animation-duration: ${2 + Math.random() * 4}s;
+        animation-delay: ${Math.random() * 5}s;
+        opacity: ${0.3 + Math.random() * 0.7};
+      `;
+      starsContainer.appendChild(star);
+    }
+
+    // ---- SAND LINES ----
+    const sandContainer = document.getElementById('sandLines');
+    function createSandLine() {
+      const line = document.createElement('div');
+      line.classList.add('sand-line');
+      const top = Math.random() * 100 - 50;
+      const width = 100 + Math.random() * 200;
+      const duration = 8 + Math.random() * 15;
+      const delay = Math.random() * 10;
+      line.style.cssText = `
+        width: ${width}px;
+        top: ${top}px;
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+        opacity: 0;
+      `;
+      sandContainer.appendChild(line);
+    }
+    for (let i = 0; i < 12; i++) createSandLine();
+
+    // ---- CHECK IF ALREADY HAS FACTION ----
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('dune_faction');
+      if (saved) {
+        // Has faction: redirect to home after brief intro
+        setTimeout(() => {
+          skipToHome();
+        }, 3500);
+      }
+    });
+
+    // ---- SHOW FACTION CHOICE ----
+    function showFactionChoice() {
+      const phaseText = document.getElementById('phase-text');
+      const phaseFaction = document.getElementById('phase-faction');
+
+      phaseText.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      phaseText.style.opacity = '0';
+      phaseText.style.transform = 'translateY(-20px)';
+
+      setTimeout(() => {
+        phaseText.style.display = 'none';
+        phaseFaction.classList.add('active');
+      }, 500);
+    }
+
+    // ---- SELECT FACTION ----
+    function selectFaction(factionId) {
+      // Visual feedback
+      document.querySelectorAll('.faction-card').forEach(c => c.classList.remove('selected'));
+      const card = document.querySelector(`.faction-card[data-faction="${factionId}"]`);
+      if (card) card.classList.add('selected');
+
+      // Save faction
+      localStorage.setItem('dune_faction', factionId);
+
+      // Brief pause then redirect
+      setTimeout(() => {
+        navigateToHome();
+      }, 700);
+    }
+
+    // ---- SKIP ----
+    function skipToHome() {
+      navigateToHome();
+    }
+
+    function navigateToHome() {
+      const overlay = document.getElementById('transitionOverlay');
+      overlay.classList.add('active');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 800);
+    }
+
+    // ---- SOUND TOGGLE ----
+    let soundEnabled = false;
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('soundToggle');
+      btn.style.color = soundEnabled ? '#d4a843' : 'rgba(212,168,67,0.6)';
+      btn.textContent = soundEnabled ? '♫' : '♪';
+    }
+  </script>
+</body>
+</html>

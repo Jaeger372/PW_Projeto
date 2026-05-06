@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="fremen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stilgar — Personagens — Dune Universe</title>
+  <meta name="description" content="Stilgar, Naib de Sietch Tabr, líder dos Fremen e guardião de Paul Muad'Dib — o guerreiro do deserto que escolheu acreditar.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#2980b9;--fc-bg:#060e16;--fc-glow:rgba(41,128,185,0.12);}
+    .c-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .c-hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#06101e 0%,#0a1f38 50%,#040c16 100%);}
+    .c-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25;filter:saturate(0.5) brightness(0.5);}
+    .c-hero-portrait{position:absolute;right:5%;bottom:0;height:90%;max-width:380px;z-index:3;}
+    .c-hero-portrait img{height:100%;width:auto;object-fit:cover;object-position:top center;mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);}
+    .c-hero-pattern{position:absolute;inset:0;opacity:.025;background-image:repeating-linear-gradient(60deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:24px 24px;}
+    .c-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .c-symbol{font-size:10rem;color:rgba(41,128,185,0.04);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:3%;bottom:0;line-height:1;}
+    .c-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(41,128,185,0.12);border:1px solid rgba(41,128,185,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .c-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .c-subtitle{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .c-body{padding:5rem 0;background:var(--color-black);}
+    .c-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .c-section{margin-bottom:3.5rem;}
+    .c-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(41,128,185,.15);}
+    .c-section h3{font-family:'Cinzel',serif;font-size:1.05rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .c-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .c-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .c-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .c-section ul li::before{content:'◈';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(41,128,185,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border-bottom:none;}
+    .stat-key{font-size:.78rem;color:rgba(245,240,232,.35);letter-spacing:.05em;}
+    .stat-val{font-size:.85rem;color:rgba(245,240,232,.75);font-weight:500;text-align:right;}
+    .skill-bar{margin-bottom:1rem;}
+    .skill-label{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(245,240,232,.4);margin-bottom:.35rem;}
+    .skill-label span:last-child{color:var(--fc);}
+    @media(max-width:900px){.c-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="c-hero">
+  <div class="c-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=PdDv%2BfeHGLPreJJPi%2FUPJhLDwsj6qCnF8%2FPDypHvV5B%2BGtrOJFTd5QQ3ZEfrkdzCp1iBG30dgwPshztqUNNZWjzkl%2BOvvOSQD0RF9BLDKoX1sx8Q3kk3vVZG4ctZafz4jyuuMGYHOrwF4J1K6n8D&u2=6QKcL%2BHuDVTOw76F&width=2560" alt="Fremen Desert">
+  </div>
+  <div class="c-hero-pattern"></div>
+  <div class="c-hero-portrait">
+    <img src="https://sspark.genspark.ai/cfimages?u1=YxBpDRohPOg2hkaHV28wx209yGnmqlJCNIIbxn1QtKq1MoNkTkhN90C4123LA%2BF%2BK9ag7plRG%2FBxirvQiO9%2FWaciFnuECAc5ex6MvyCeGhUVrQkjJOdbLtS8r3QgajsFVQ%3D%3D&u2=439QHZjI6P8cmvvI&width=2560" alt="Stilgar - Javier Bardem">
+  </div>
+  <div class="c-symbol">◈</div>
+  <div class="container c-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Stilgar</span></nav>
+    <div class="c-tag">◈ Fremen · Naib de Sietch Tabr</div>
+    <h1 class="c-name">Stilgar</h1>
+    <p class="c-subtitle">"Vi o que vi. E acreditei."</p>
+    <p style="font-size:.95rem;color:rgba(245,240,232,.45);max-width:540px;line-height:1.9;">O guerreiro que escolheu acreditar no profeta. O líder que reconheceu em Paul algo que transcendia a política. O homem que serviu o Mahdi com devoção absoluta — e que ninguém pôde duvidar que o fez por convicção genuína.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<main class="c-body">
+  <div class="container">
+    <div class="c-grid">
+
+      <!-- Main content -->
+      <div>
+        <div class="c-section reveal">
+          <h2>Naib de Sietch Tabr</h2>
+          <p>Stilgar é o Naib — o líder — de Sietch Tabr, uma das comunidades Fremen mais importantes de Arrakis. O título de Naib não é hereditário: é conquistado em combate ou reconhecido pela comunidade através de demonstrações de sabedoria e força. Stilgar chegou a essa posição por mérito absoluto, tendo defendido o seu sietch contra ataques Harkonnen repetidos e liderado raids de especiaria que alimentaram a tribo durante anos difíceis.</p>
+          <p>Quando Paul e Lady Jessica chegam ao deserto, Stilgar é o primeiro Fremen de alto escalão a interagir com eles. A sua avaliação é imediata e prática: estes forasteiros têm capacidades incomuns — a mulher com a Voz Bene Gesserit, o menino com reflexos sobre-humanos. Stilgar decide que vale a pena integrá-los na tribo em vez de os matar, como seria o protocolo normal para sobreviventes do deserto.</p>
+          <p>Esta decisão muda o universo.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"Há neste rapaz algo que não entendo completamente. Mas vejo os seus olhos e vejo o deserto. Vejo um Fremen."</p>
+          <cite>— Stilgar após conhecer Paul</cite>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>O Guardião do Mahdi</h2>
+          <p>A progressão de Stilgar de líder pragmático a devoto do Mahdi é um dos arcos mais complexos e problematizados da saga. Inicialmente, Stilgar vê Paul como um forasteiro excepcional — alguém que pode aprender a ser Fremen. Mas à medida que Paul demonstra capacidades que ultrapassam qualquer explicação racional, Stilgar começa a ver as profecias a cumprir-se diante dos seus olhos.</p>
+          <p>A sua conversão não é forçada nem manipulada pela Voz Bene Gesserit ou pelas manobras políticas de Paul. Stilgar <em>escolhe</em> acreditar porque viu coisas que não consegue explicar de outra forma. É esta autenticidade da fé de Stilgar que torna o seu personagem simultaneamente admirável e trágico na perspectiva de Frank Herbert.</p>
+
+          <h3>O Problema da Fé Absoluta</h3>
+          <p>Herbert usou Stilgar para ilustrar um ponto filosófico central: a fé genuína pode ser tão perigosa quanto a fé fabricada. Stilgar não está a ser manipulado — ele acredita de verdade. E é precisamente porque a sua fé é real que tem tanto poder sobre os outros Fremen.</p>
+          <p>Em <em>Dune Messiah</em> e <em>Children of Dune</em>, vemos Stilgar lutar entre a lealdade ao homem que conheceu no deserto e a devoção ao deus em que esse homem se tornou. A tensão nunca se resolve completamente — é parte do que o torna uma das personagens mais humanas da saga.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>Guerreiro do Erg Profundo</h2>
+          <p>As capacidades de combate de Stilgar são legendárias entre os Fremen. Ele domina todas as técnicas de luta do deserto: o uso do crys-knife (faca de dente de verme que nunca pode ser desembainhada sem matar), o combate em tempestade de areia, e as táticas de guerrilha que tornaram os Fremen virtualmente invencíveis no seu território.</p>
+          <p>O que distingue Stilgar de outros guerreiros Fremen é a sua inteligência táctica. Ele pensa três passos à frente, considera o terreno como parte da batalha, e compreende quando combater e quando recuar. Estas qualidades fizeram dele um Naib eficaz durante anos de resistência contra os Harkonnen e, mais tarde, um general inestimável na insurreição de Paul.</p>
+
+          <h3>Treino de Paul</h3>
+          <p>Stilgar é um dos principais mestres de Paul durante o período nas sietchs. Ensina-lhe as técnicas de montar vermes de areia — uma das provas de iniciação mais exigentes dos Fremen — e as sutilezas do combate com o crys-knife. Mas mais do que técnicas específicas, transmite a Paul uma compreensão do deserto como entidade viva, como aliado potencial em vez de inimigo a superar.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>Contexto Político no Sietch</h2>
+          <p>Stilgar navega numa posição politicamente delicada: líder de um sietch de vários milhares de pessoas, responsável pela sua sobrevivência, com obrigações tanto para com a tradição Fremen como para com as exigências da profecia emergente. A chegada de Paul cria pressões que testam cada uma destas responsabilidades.</p>
+          <p>Por um lado, receber Paul como Naib potencial viola os protocolos de liderança — um Naib só pode ser substituído em combate ou morte. Paul, ao crescer em influência, torna-se tecnicamente um rival. Stilgar resolve esta tensão não através da política, mas através da fé: se Paul é o Mahdi, então a autoridade de Paul vem de um plano superior.</p>
+
+          <h3>Relação com Chani</h3>
+          <p>Stilgar foi criado juntamente com Liet-Kynes e conhecia Chani desde bebé. Esta ligação pessoal é outro factor na sua aceitação de Paul: ver a sua filha adoptiva (no sentido tribal) escolher este forasteiro tem um peso emocional significativo. A aprovação de Chani valida a de Stilgar.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"Sou Fremen. Acredito no que vejo com os meus olhos e ouço com os meus ouvidos. Vi este homem fazer o que nenhum homem faz. Isso é suficiente para mim."</p>
+          <cite>— Stilgar ao conselho do sietch</cite>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>Legado e Continuação</h2>
+          <p>Stilgar sobrevive aos eventos de <em>Dune</em> e permanece como uma das figuras mais fiéis do reinado de Paul. Em <em>Children of Dune</em>, é o guardião dos filhos gémeos de Paul e Chani — Leto II e Ghanima — após a morte do pai. Esta responsabilidade define a última fase da sua vida: não como guerreiro ou líder político, mas como protetor de um legado que ainda não compreende completamente.</p>
+          <p>A sua jornada de Naib pragmático a devoto leal a guardião de crianças proféticas representa uma das maiores ironias de Dune: o homem mais duramente pragmático do deserto tornou-se o crente mais genuíno de todos.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="sidebar-card reveal">
+          <h4>Ficha do Personagem</h4>
+          <div class="stat-row"><span class="stat-key">Título</span><span class="stat-val">Naib de Sietch Tabr</span></div>
+          <div class="stat-row"><span class="stat-key">Facção</span><span class="stat-val">Fremen</span></div>
+          <div class="stat-row"><span class="stat-key">Sietch</span><span class="stat-val">Sietch Tabr</span></div>
+          <div class="stat-row"><span class="stat-key">Papel com Paul</span><span class="stat-val">Guardião / General</span></div>
+          <div class="stat-row"><span class="stat-key">Arma de eleição</span><span class="stat-val">Crys-knife</span></div>
+          <div class="stat-row"><span class="stat-key">Ator (2021/24)</span><span class="stat-val">Javier Bardem</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Capacidades</h4>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Combate Fremen</span><span>96%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="96" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Liderança Tribal</span><span>95%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="95" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Táctica Militar</span><span>90%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="90" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Conhecimento do Deserto</span><span>99%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="99" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Montada de Verme</span><span>95%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="95" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Aparições nas Obras</h4>
+          <div class="stat-row"><span class="stat-key">Dune (1965)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Dune Messiah (1969)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Children of Dune (1976)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Dune (2021 — Filme)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+          <div class="stat-row"><span class="stat-key">Dune: Part Two (2024)</span><span class="stat-val" style="color:var(--fc)">Principal</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <ul style="display:flex;flex-direction:column;gap:.5rem;">
+            <li><a href="personagem-paul.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Paul Atreides</a></li>
+            <li><a href="personagem-chani.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Chani</a></li>
+            <li><a href="faccao-fremen.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Os Fremen</a></li>
+            <li><a href="planetas.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Arrakis</a></li>
+            <li><a href="filme-dune-2021.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Dune (2021)</a></li>
+          </ul>
+        </div>
+
+        <a href="personagens.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:.75rem;">← Todos os Personagens</a>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

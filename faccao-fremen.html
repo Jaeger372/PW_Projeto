@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="fremen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fremen — Facções — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#2980b9;--fc-bg:#060e16;--fc-glow:rgba(41,128,185,0.12);}
+    .f-hero{min-height:70vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .f-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#060e16,#0a1825,#040a10);}
+    .f-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;filter:saturate(0.6) brightness(0.5);}
+    .f-hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .f-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .f-symbol{font-size:8rem;color:rgba(41,128,185,0.08);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:5%;bottom:2rem;line-height:1;}
+    .f-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(41,128,185,0.12);border:1px solid rgba(41,128,185,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .f-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .f-motto{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .f-body{padding:5rem 0;background:var(--color-black);}
+    .f-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(41,128,185,.15);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(41,128,185,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .member-list{display:flex;flex-direction:column;gap:.75rem;}
+    .member-item{display:flex;align-items:center;gap:1rem;padding:.75rem;background:rgba(41,128,185,.04);border:1px solid rgba(41,128,185,.1);border-radius:6px;text-decoration:none;transition:all .3s;}
+    .member-item:hover{border-color:rgba(41,128,185,.3);}
+    .member-icon{width:36px;height:36px;border-radius:50%;background:rgba(41,128,185,.12);border:1px solid rgba(41,128,185,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .member-name{font-family:'Cinzel',serif;font-size:.85rem;color:#f5f0e8;}
+    .member-role{font-size:.7rem;color:rgba(41,128,185,.7);text-transform:uppercase;letter-spacing:.1em;}
+    .sietch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1rem 0;}
+    .sietch-card{padding:1.2rem;background:rgba(41,128,185,.04);border:1px solid rgba(41,128,185,.1);border-radius:6px;}
+    .sietch-name{font-family:'Cinzel',serif;font-size:.9rem;color:#5dade2;margin-bottom:.4rem;}
+    .sietch-desc{font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.6;}
+    @media(max-width:900px){.f-grid{grid-template-columns:1fr;}.sietch-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="f-hero">
+  <div class="f-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=vm%2FZ19arAcRPnPnoytJ%2FboTqP%2F6QvnSl3dNFJr4NUZfhDPr0UB3OmJt5ZQWw7F9g2ZGN5nJVwNJveT7KKXSuz2TM14BD0%2FSjB1tGWO3fZqAUpWNjOfs9dfo%3D&u2=vbinAJuHBZewuku5&width=2560" alt="Fremen - Povo de Arrakis">
+  </div><div class="f-hero-pattern"></div>
+  <div class="f-symbol">◈</div>
+  <div class="container f-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="faccoes.html">Facções</a><span>/</span><span class="current">Fremen</span></nav>
+    <div class="f-tag">◈ Povo Nativo de Arrakis</div>
+    <h1 class="f-name">Fremen</h1>
+    <p class="f-motto">"O deserto é nossa arma"</p>
+  </div>
+</section>
+
+<section class="f-body">
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="f-section reveal">
+          <h2>Quem são os Fremen</h2>
+          <p>Os Fremen são o povo original de Arrakis — ou pelo menos os que ali chegaram primeiro e se adaptaram completamente ao ambiente mais hostil do universo conhecido. Descendentes de um povo Zensunni nómada que viveu em vários planetas antes de chegar a Arrakis, os Fremen sobreviveram onde impérios inteiros teriam sucumbido.</p>
+          <p>Para o Imperium, os Fremen são invisíveis — "criminosos do deserto" sem importância política, refugiados nas areias inacessíveis de Arrakis. Esta invisibilidade foi a sua maior proteção. Enquanto os Harkonnen e o Imperium ignoravam o povo do deserto, os Fremen construíam silenciosamente a força militar mais formidável de todo o planeta.</p>
+          <p>Os seus olhos — azul profundo em toda a íris, sem branco visível — são o resultado de décadas de exposição à especiaria Melange que permeia o ar, água e comida de Arrakis. São a marca inconfundível do povo de Shai-Hulud.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Cultura e Sociedade</h2>
+          <h3>O Sietch — A Unidade Fundamental</h3>
+          <p>A vida Fremen organiza-se em torno do sietch — uma comunidade escondida nas rochas do deserto. Cada sietch é uma unidade autossuficiente com os seus próprios reservatórios de água, jardins subterrâneos, artesãos, guerreiros e liderança. O Naib é o líder do sietch — uma posição que pode ser desafiada pelo combate a qualquer momento.</p>
+
+          <div class="sietch-grid">
+            <div class="sietch-card"><div class="sietch-name">Sietch Tabr</div><div class="sietch-desc">O sietch principal dos eventos do livro. Lar de Stilgar, Chani e, eventualmente, Paul e Jessica.</div></div>
+            <div class="sietch-card"><div class="sietch-name">Sietch Jacurutu</div><div class="sietch-desc">Lendário sietch maldito. Abandonado depois de um massacre, considerado taboo pelos Fremen.</div></div>
+            <div class="sietch-card"><div class="sietch-name">Cave of the Ridges</div><div class="sietch-desc">Um dos maiores complexos de sietches do erg meridional. Ponto de reunião estratégico.</div></div>
+            <div class="sietch-card"><div class="sietch-name">Sietches do Norte</div><div class="sietch-desc">Sietches mais próximos das zonas habitadas, com maior risco de contacto com os invasores.</div></div>
+          </div>
+
+          <h3>A Água como Religião</h3>
+          <p>No universo dos Fremen, a água é sagrada de um modo que vai além da mera utilidade. Cuspir em alguém é um gesto de respeito profundo — oferecer a humidade do seu corpo. Verter lágrimas num funeral é um tributo imenso. Os rituais fúnebres centram-se na recuperação de toda a água do corpo do falecido — devolvida à reserva coletiva da comunidade. "A água de um homem pertence ao sietch" quando ele morre.</p>
+
+          <h3>Shai-Hulud — O Deus do Deserto</h3>
+          <img src="https://sspark.genspark.ai/cfimages?u1=2S6hlU5%2FUF8EUacybSBSxVsukded6GDD9WIhvxJkpm%2Bqg40Pvgb4Jurs74FWfECvQL6MU9Iay%2Foj1K6WdHkfYckK44iqSv5M%2Fh%2B%2B6C%2BPA%2F80K8mtopw%2BkhwGKoQY5ETA%2B4wcZ8I45dXmf7eSPVkrGuYCOl%2FwlVYJbczCziYjP4ekUe3Zgg%3D%3D&u2=FsulRmc%2BRkaonBjM&width=2560" alt="Fremen montando Sandworm - Shai-Hulud" style="width:100%;border-radius:6px;margin-bottom:1rem;opacity:0.8;filter:saturate(0.7) brightness(0.85);">
+          <p>Os grandes Vermes da Areia — que os Fremen chamam Shai-Hulud ("Pai das Eternidades") — são objetos de veneração religiosa. Montar um verme adulto é um rito de passagem para os guerreiros Fremen. A sua habilidade em controlar estes gigantes do deserto é a sua suprema arma de guerra.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Os Fremen como Força Militar</h2>
+          <p>Aquilo que o Imperium ignorou durante décadas era precisamente o mais perigoso: os Fremen como força militar. Treinados desde a infância para sobreviver num ambiente que mata humanos não-adaptados em horas, os Fremen são combatentes de uma ferocidade que rivaliza com os Sardaukar imperiais — e em Arrakis, num terreno que os Sardaukar não conhecem, são superiores.</p>
+          <ul>
+            <li><strong>Mobilidade total</strong> — Capazes de percorrer o deserto sem apoio logístico por dias, usando apenas os seus destiladores corporais.</li>
+            <li><strong>Conhecimento do terreno</strong> — Cada duna, cada canal de vento, cada cavidade de rocha é familiar. O deserto é o seu campo de batalha escolhido.</li>
+            <li><strong>Controlo dos Vermes</strong> — Um exército a montar Shai-Hulud é uma arma sem paralelo no universo.</li>
+            <li><strong>Disciplina de silêncio</strong> — Os Fremen eliminaram o ruído dos seus movimentos. No deserto, o som atrai Vermes — e inimigos.</li>
+            <li><strong>Crysknives</strong> — As lâminas fabricadas com dentes de Verme, que devem sempre ser "saciadas" em sangue uma vez desembainhadas.</li>
+          </ul>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>A Profecia e o Sonho Verde</h2>
+          <p>Os Fremen vivem com dois sonhos simultâneos que estão em tensão: a profecia do Lisan al-Gaib (o "Enviado do Exterior" que os liderará à liberdade) e o Sonho Verde — transformar Arrakis num planeta com água e vegetação abundantes.</p>
+          <p>Ironicamente, a Bene Gesserit plantou deliberadamente a profecia do Lisan al-Gaib nas culturas Fremen gerações antes — uma ferramenta de manipulação que se tornou autónoma. Quando Paul chega, a profecia está preparada para o receber. Mas o que a Bene Gesserit não previu foi que o produto do seu programa genético seria simultaneamente mais e menos controlável do que planearam.</p>
+          <p>O Sonho Verde — liderado pelo planetologista Liet-Kynes e depois por Chani — envolve um projeto de terraformação secreto que dura gerações. A tragédia central é que a conquista do Sonho Verde — tornar Arrakis verde — destruiria os Vermes da Areia e portanto a especiaria. O paraíso Fremen é o fim do universo tal como existe.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Planeta</span><span>Arrakis</span></div>
+          <div class="stat-row"><span>Idioma</span><span>Chakobsa</span></div>
+          <div class="stat-row"><span>Olhos</span><span>Azul sem branco</span></div>
+          <div class="stat-row"><span>Fato</span><span>Destilador corporal</span></div>
+          <div class="stat-row"><span>Lema</span><span>"O deserto é nossa arma"</span></div>
+          <div class="stat-row"><span>Número estimado</span><span>Milhões (secreto)</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Forças e Fraquezas</h4>
+          <div class="stat-row"><span>Combate no deserto</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Lealdade comunitária</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Conhecimento de Arrakis</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Recursos tecnológicos</span><span>★★☆☆☆</span></div>
+          <div class="stat-row"><span>Influência política</span><span>★★☆☆☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--fc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Figuras Principais</h4>
+          <div class="member-list">
+            <a href="personagens.html" class="member-item"><div class="member-icon">◈</div><div><div class="member-name">Stilgar</div><div class="member-role">Naib · Líder</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">◈</div><div><div class="member-name">Chani</div><div class="member-role">Guerreira · Filha de Kynes</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">◈</div><div><div class="member-name">Liet-Kynes</div><div class="member-role">Planetologista Imperial</div></div></a>
+            <a href="personagem-jessica.html" class="member-item"><div class="member-icon">◉</div><div><div class="member-name">Lady Jessica</div><div class="member-role">Reverenda Mãe</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:700px;margin:0 auto 4rem;padding:0 2rem;">
+  <div class="quote-block reveal" style="border-left-color:var(--fc);">
+    <p>"Ainda não vi nenhum povo que soubesse tão bem como os Fremen o que significa ser humano."</p>
+    <cite>Duncan Idaho</cite>
+  </div>
+</div>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(41,128,185,0.1);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="faccao-atreides.html" class="btn btn-outline">Casa Atreides</a>
+      <a href="faccao-harkonnen.html" class="btn btn-outline">Casa Harkonnen</a>
+      <a href="faccao-bene-gesserit.html" class="btn btn-outline">Bene Gesserit</a>
+      <a href="faccoes.html" class="btn btn-ghost">Todas as Facções</a>
+    </div>
+  </div>
+</section>
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

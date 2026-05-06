@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baron Vladimir Harkonnen — Personagem — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .char-hero { min-height:70vh; position:relative; display:flex; align-items:flex-end; overflow:hidden; }
+    .char-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg,#0a0404 0%,#1a0606 40%,#100404 70%,#040202 100%); }
+    .char-hero-pattern { position:absolute; inset:0; opacity:.03; background-image:repeating-linear-gradient(45deg,#c0392b 0,#c0392b 1px,transparent 0,transparent 50%); background-size:20px 20px; }
+    .char-hero-glow { position:absolute; left:0; top:0; bottom:0; width:60%; background:radial-gradient(ellipse at left,rgba(192,57,43,0.07) 0%,transparent 70%); }
+    .char-hero-content { position:relative; z-index:5; width:100%; padding:160px 0 5rem; }
+    .char-header-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; }
+    .char-portrait { width:100%; max-width:400px; aspect-ratio:3/4; background:linear-gradient(160deg,#1a0606,#280a0a,#0a0202); border:1px solid rgba(192,57,43,0.2); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:9rem; font-weight:900; color:rgba(192,57,43,0.06); overflow:hidden; }
+    .char-portrait img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+    .char-faction-tag { display:inline-flex; align-items:center; gap:.5rem; padding:6px 14px; background:rgba(192,57,43,0.12); border:1px solid rgba(192,57,43,0.3); border-radius:20px; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:#e74c3c; margin-bottom:1.5rem; }
+    .char-name { font-family:'Cinzel',serif; font-size:clamp(2rem,5vw,4.5rem); font-weight:900; color:#f5f0e8; line-height:1.05; margin-bottom:.5rem; }
+    .char-titles { font-size:.8rem; letter-spacing:.15em; color:rgba(245,240,232,.35); text-transform:uppercase; margin-bottom:1.5rem; }
+    .char-epithet { font-family:'Crimson Text',serif; font-size:1.4rem; font-style:italic; color:rgba(192,57,43,.7); margin-bottom:2rem; }
+    .char-quick-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .qs-item { padding:1rem; background:rgba(192,57,43,.05); border:1px solid rgba(192,57,43,.12); border-radius:4px; }
+    .qs-label { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(192,57,43,.7); margin-bottom:.3rem; }
+    .qs-value { font-family:'Cinzel',serif; font-size:.95rem; color:#f5f0e8; }
+    .char-body { padding:5rem 0; background:var(--color-black); }
+    .char-grid { display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:start; }
+    .char-section { margin-bottom:4rem; }
+    .char-section h2 { font-family:'Cinzel',serif; font-size:1.6rem; color:#c0392b; margin-bottom:1.2rem; padding-bottom:.75rem; border-bottom:1px solid rgba(192,57,43,.15); }
+    .char-section h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:#f5f0e8; margin:1.5rem 0 .6rem; }
+    .char-section p { font-size:.95rem; color:rgba(245,240,232,.6); line-height:1.9; margin-bottom:1rem; }
+    .char-section ul { display:flex; flex-direction:column; gap:.6rem; }
+    .char-section ul li { font-size:.9rem; color:rgba(245,240,232,.55); padding-left:1.2rem; position:relative; line-height:1.7; }
+    .char-section ul li::before { content:'◆'; position:absolute; left:0; color:#c0392b; font-size:.5rem; top:.4rem; }
+    .timeline-v { position:relative; padding-left:2rem; }
+    .timeline-v::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(180deg,#c0392b,rgba(192,57,43,0.1)); }
+    .tl-entry { position:relative; margin-bottom:2rem; }
+    .tl-entry::before { content:''; position:absolute; left:-2.4rem; top:.3rem; width:10px; height:10px; border-radius:50%; background:#c0392b; box-shadow:0 0 10px rgba(192,57,43,0.4); }
+    .tl-entry-year { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.1em; color:#c0392b; margin-bottom:.3rem; }
+    .tl-entry-title { font-family:'Cinzel',serif; font-size:1rem; color:#f5f0e8; margin-bottom:.4rem; }
+    .tl-entry-text { font-size:.85rem; color:rgba(245,240,232,.5); line-height:1.7; }
+    .sidebar-card { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(192,57,43,.1); border-radius:8px; margin-bottom:1.5rem; }
+    .sidebar-card h4 { font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.1em; color:#c0392b; text-transform:uppercase; margin-bottom:1rem; }
+    .stat-row { display:flex; justify-content:space-between; align-items:center; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.04); }
+    .stat-row:last-child { border:none; }
+    .stat-row span:first-child { font-size:.8rem; color:rgba(245,240,232,.4); }
+    .stat-row span:last-child { font-size:.8rem; color:#f5f0e8; font-weight:500; }
+    .compare-block { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(192,57,43,.1); border-radius:8px; }
+    .compare-row { margin-bottom:1rem; }
+    .compare-label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.35); margin-bottom:.4rem; }
+    .compare-cols { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+    .compare-col { padding:.6rem .8rem; border-radius:4px; font-size:.8rem; color:rgba(245,240,232,.6); line-height:1.5; }
+    .compare-col.book { background:rgba(192,57,43,.06); border:1px solid rgba(192,57,43,.12); }
+    .compare-col.film { background:rgba(212,168,67,.06); border:1px solid rgba(212,168,67,.12); }
+    .compare-tag { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:.3rem; }
+    .compare-col.book .compare-tag { color:#c0392b; }
+    .compare-col.film .compare-tag { color:#d4a843; }
+    .rel-grid { display:flex; flex-direction:column; gap:.75rem; }
+    .rel-item { display:flex; align-items:center; gap:1rem; padding:.75rem 1rem; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:6px; text-decoration:none; transition:all .3s; }
+    .rel-item:hover { border-color:rgba(192,57,43,.3); background:rgba(192,57,43,.04); }
+    .rel-icon { width:36px; height:36px; border-radius:50%; background:rgba(192,57,43,.1); border:1px solid rgba(192,57,43,.2); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .rel-name { font-family:'Cinzel',serif; font-size:.85rem; color:#f5f0e8; }
+    .rel-type { font-size:.7rem; letter-spacing:.1em; color:rgba(192,57,43,.7); text-transform:uppercase; }
+    @media(max-width:900px){ .char-header-grid{grid-template-columns:1fr;} .char-grid{grid-template-columns:1fr;} .char-quick-stats{grid-template-columns:1fr 1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="char-hero">
+  <div class="char-hero-bg"></div><div class="char-hero-pattern"></div><div class="char-hero-glow"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Baron Harkonnen</span></nav>
+    <div class="char-header-grid">
+      <div>
+        <div class="char-faction-tag">⚡ Casa Harkonnen</div>
+        <h1 class="char-name">Baron Vladimir<br>Harkonnen</h1>
+        <p class="char-titles">Baron de Giedi Prime · Governador de Arrakis · Arquiteto da Traição</p>
+        <p class="char-epithet">"A crueldade não é uma ferramenta — é uma arte."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Casa</div><div class="qs-value">Harkonnen</div></div>
+          <div class="qs-item"><div class="qs-label">Planeta</div><div class="qs-value">Giedi Prime</div></div>
+          <div class="qs-item"><div class="qs-label">Sobrinhos</div><div class="qs-value">Rabban, Feyd-Rautha</div></div>
+        </div>
+      </div>
+      <div class="char-portrait">
+          <img src="https://sspark.genspark.ai/cfimages?u1=zqcCZU249w3xZ7Ep8mYpP84GNc%2B2PGJ2HBt3k876Nj1%2FFoxrskK%2BdzUr1%2F9ljdy06Ji5fX0CTpoXyWhZjkkkfuIuXbUeYCkl6lLxea%2FULxdahX4ckDMo%2FZwonbw4q7bDNo6eCvJcGQ%3D%3D&u2=OuVAhKMHLSquN%2B0J&width=2560" alt="Baron Harkonnen - Stellan Skarsgard">
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="char-body">
+  <div class="container">
+    <div class="char-grid">
+      <div class="char-main">
+        <div class="char-section reveal">
+          <h2>Quem é o Baron</h2>
+          <p>Vladimir Harkonnen é o vilão arquetípico de Dune — mas Herbert recusa-se a fazer dele uma caricatura. O Baron é genuinamente inteligente, politicamente brilhante e com um sentido de humor negro que o torna perturbadoramente humano. É isso que o torna tão aterrorizador.</p>
+          <p>Como Baron de Giedi Prime e antigo governador de Arrakis, Vladimir construiu a sua fortuna no sangue dos povos que controla. O seu corpo enorme — sustentado por sistemas de levitação anti-gravitacional — é deliberadamente apresentado por Herbert como uma manifestação física da sua ganância e da sua visão distorcida do mundo. Mas não é fraqueza: é poder demonstrado através do excesso.</p>
+          <p>O que distingue o Baron dos vilões simples é a sua tridimensionalidade. Ele tem um projeto a longo prazo — colocar o sobrinho Feyd-Rautha no trono imperial. Tem afetos reais (dentro da sua natureza). Tem uma inteligência política que o coloca ao nível dos maiores jogadores do Imperium. Ele perde, no final — mas é uma derrota que precisou de um Kwisatz Haderach para acontecer.</p>
+          <p>Há também um segredo sombrio: o Baron é avô de Paul Atreides. Jessica, mãe de Paul, é filha do Baron — um facto que a Bene Gesserit manteve oculto e que complica toda a dinâmica moral da saga.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Timeline e Estratégia</h2>
+          <div class="timeline-v">
+            <div class="tl-entry">
+              <div class="tl-entry-year">Décadas antes do livro</div>
+              <div class="tl-entry-title">A Ascensão</div>
+              <div class="tl-entry-text">Vladimir sobe ao poder em Giedi Prime através de uma combinação de assassinatos calculados, alianças estratégicas e terror absoluto. Constrói a casa Harkonnen como uma máquina de extração e dominação.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.191 A.G. — A Armadilha</div>
+              <div class="tl-entry-title">A Grande Traição</div>
+              <div class="tl-entry-text">O Baron convence o Imperador Shaddam IV a apoiá-lo numa armadilha mortal contra a Casa Atreides. Usando os Sardaukar imperiais disfarçados, destrói Leto e toma Arrakis. Um golpe político e militar magistral.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">Durante o livro</div>
+              <div class="tl-entry-title">Rabban, o Martelo</div>
+              <div class="tl-entry-text">O Baron coloca o brutal Rabban no controlo de Arrakis — não para gerir bem, mas para esgotar a população com opressão. O plano: depois de Rabban criar caos, introduzir Feyd-Rautha como "salvador" e colher a gratidão popular.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.193 A.G. — A Queda</div>
+              <div class="tl-entry-title">A Neta que Nunca Conheceu</div>
+              <div class="tl-entry-text">O Baron morre em Arrakis, às mãos de Alia Atreides — a sua própria neta. A ironia é devastadora: o homem que manipulou o destino de tantos é morto pela única descendente que não conhecia.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Anatomia de um Vilão</h2>
+          <h3>A Inteligência do Baron</h3>
+          <p>É tentador reduzir o Baron a crueldade pura — mas isso seria ignorar o que Herbert construiu. O Baron é um estrategista de excelência. O seu plano para Arrakis — Rabban como terror, Feyd-Rautha como alívio — é politicamente sofisticado. A sua manipulação do Imperador revela um conhecimento profundo das fraquezas humanas.</p>
+          <h3>Excesso como Identidade</h3>
+          <p>O corpo do Baron — a sua enorme massa que requer levitação — não é um detalhe estético. Herbert usa-o como símbolo da filosofia Harkonnen: o poder não tem limites, não tem contenção, não tem vergonha. O excesso é a prova de que as regras dos outros não se aplicam. É performance de superioridade.</p>
+          <h3>O Segredo da Paternidade</h3>
+          <p>O Baron é o pai biológico de Lady Jessica — e portanto avô de Paul e bisavô de Alia. A Bene Gesserit criou deliberadamente esta linhagem genética, usando o Baron como progenitor sem o seu conhecimento. Esta revelação — que ocorre gradualmente na saga — adiciona uma camada de tragédia genuína ao arco do Baron: ele é parte de um plano que nunca compreendeu.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Livro vs. Filme</h2>
+          <div class="compare-block">
+            <div class="compare-row">
+              <div class="compare-label">Físico e Presença</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Obeso, enorme, sustentado por suspensores. Uma presença física avassaladora que combina com a sua crueldade declarada.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Skarsgård traz uma qualidade visceral e quase animal. Mais físico, mais perturbador, menos o político calculista do livro.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Inteligência Política</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Um dos maiores políticos do Imperium. As suas estratégias ocupam capítulos inteiros de análise.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Mais instintivo, menos cerebral. O filme sacrifica a dimensão política pela impacto visceral.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">O Plano Feyd-Rautha</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Um plano a décadas para colocar Feyd no trono. Mostra a visão estratégica de longo prazo do Baron.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme (P2)</span>Austin Butler como Feyd é presente, mas o plano do Baron é menos desenvolvido explicitamente.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="char-sidebar">
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Casa</span><span>Harkonnen</span></div>
+          <div class="stat-row"><span>Título</span><span>Baron</span></div>
+          <div class="stat-row"><span>Planeta base</span><span>Giedi Prime</span></div>
+          <div class="stat-row"><span>Sobrinho (1)</span><span>Glossu Rabban</span></div>
+          <div class="stat-row"><span>Sobrinho (2)</span><span>Feyd-Rautha</span></div>
+          <div class="stat-row"><span>Filho (secreto)</span><span>Lady Jessica</span></div>
+          <div class="stat-row"><span>Morte</span><span>Às mãos de Alia</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Atributos</h4>
+          <div class="stat-row"><span>Inteligência política</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Crueldade</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Combate direto</span><span>★★☆☆☆</span></div>
+          <div class="stat-row"><span>Manipulação</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Visão estratégica</span><span>★★★★☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:#c0392b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Relações</h4>
+          <div class="rel-grid">
+            <a href="personagem-paul.html" class="rel-item"><div class="rel-icon">⚔</div><div class="rel-info"><div class="rel-name">Paul Atreides</div><div class="rel-type">Neto (secreto) · Inimigo</div></div></a>
+            <a href="faccao-harkonnen.html" class="rel-item"><div class="rel-icon">⚡</div><div class="rel-info"><div class="rel-name">Feyd-Rautha</div><div class="rel-type">Sobrinho · Herdeiro</div></div></a>
+            <a href="faccao-harkonnen.html" class="rel-item"><div class="rel-icon">⚡</div><div class="rel-info"><div class="rel-name">Glossu Rabban</div><div class="rel-type">Sobrinho · Instrumento</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:linear-gradient(180deg,var(--color-black),#050402);">
+  <div class="container" style="max-width:700px;">
+    <div class="quote-block reveal" style="border-left-color:#c0392b;">
+      <p>"Nunca mostres misericórdia que não seja uma faca escondida."</p>
+      <cite>Baron Vladimir Harkonnen</cite>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+      <a href="personagem-paul.html" class="btn btn-outline">Paul Atreides →</a>
+      <a href="personagem-jessica.html" class="btn btn-outline">Lady Jessica →</a>
+      <a href="personagens.html" class="btn btn-ghost">Todos os Personagens</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

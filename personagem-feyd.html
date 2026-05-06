@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="harkonnen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feyd-Rautha — Personagens — Dune Universe</title>
+  <meta name="description" content="Feyd-Rautha Harkonnen, o gladiador-príncipe da Casa Harkonnen — cruel, carismático e o maior antagonista pessoal de Paul Atreides.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#c0392b;--fc-bg:#0a0606;--fc-glow:rgba(192,57,43,0.12);}
+    .c-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .c-hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#0a0606 0%,#1a0808 50%,#080404 100%);}
+    .c-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.2;filter:saturate(0.4) brightness(0.5);}
+    .c-hero-portrait{position:absolute;right:5%;bottom:0;height:90%;max-width:380px;z-index:3;}
+    .c-hero-portrait img{height:100%;width:auto;object-fit:cover;object-position:top center;mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 60%,transparent 100%);}
+    .c-hero-pattern{position:absolute;inset:0;opacity:.025;background-image:repeating-linear-gradient(-45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .c-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .c-symbol{font-size:10rem;color:rgba(192,57,43,0.04);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:3%;bottom:0;line-height:1;}
+    .c-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(192,57,43,0.12);border:1px solid rgba(192,57,43,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .c-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .c-subtitle{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .c-body{padding:5rem 0;background:var(--color-black);}
+    .c-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .c-section{margin-bottom:3.5rem;}
+    .c-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(192,57,43,.15);}
+    .c-section h3{font-family:'Cinzel',serif;font-size:1.05rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .c-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .c-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .c-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .c-section ul li::before{content:'⚡';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(192,57,43,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border-bottom:none;}
+    .stat-key{font-size:.78rem;color:rgba(245,240,232,.35);letter-spacing:.05em;}
+    .stat-val{font-size:.85rem;color:rgba(245,240,232,.75);font-weight:500;text-align:right;}
+    .skill-bar{margin-bottom:1rem;}
+    .skill-label{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(245,240,232,.4);margin-bottom:.35rem;}
+    .skill-label span:last-child{color:var(--fc);}
+    .warning-box{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:1.5rem;margin:2rem 0;}
+    .warning-box p{font-size:.88rem;color:rgba(245,240,232,.55);line-height:1.8;margin:0;}
+    @media(max-width:900px){.c-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="c-hero">
+  <div class="c-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=JnoDTuOTUGDaKGQ7EOjn8ZbSGaRZEw9xtd8ke03ef%2FPOuPr%2BYyIGmKisgrzohho6NGfhGzNjnU0xSPcHNOxHjA0ijL%2BLrj1w4JfhsPBGVLUT%2FS1qv5H4fDfpxW%2FGM%2Bq8NloWj3%2F1CyUWB8j0jlCyoemcVPk95clx5o4I5omqTQtjdiFI7jr4%2F%2BZfluZMoKFcQU%2FnMRwO0xqsmiowzhZHd7QAfbn59ch3hE08EvZ3uS8DDLvb0CfSzAhTy74W7q7IVF%2Fn%2BKfNjx2zvm0Pr6h114fSR6XsRX0VaaIhvvpNk0rKStUmMKNuREMZnap%2Fr3o%2B%2BTehtX4JFAmKHo6V5nIoddRvGtFyGQs%2Bxe09qOAERb86nvi7226ttYjW%2FV2zJQCVMn977I6Adf231b7G0rBEZ%2Fqqx72edCsr35yh1Z3cuNEQVhL5WGoJK%2BWhxqy3HTnommf%2BGme%2BzDIeAHuYVlSe3%2FlMefFzWrk4E9i49CxfP9CyympE0weywpEJffolhGaFZn2me3w%3D%3D&u2=nWNT6TisfL7svNVC&width=2560" alt="Harkonnen">
+  </div>
+  <div class="c-hero-pattern"></div>
+  <div class="c-hero-portrait">
+    <img src="https://sspark.genspark.ai/cfimages?u1=mnOiJWFbp4%2BaCZfWG39L3oIKj3l4UEjYo9t5qDZ41KK7ko%2FywOF22%2F%2B5ytKdhOqUEpUln7TUTzdKWh1hwjtzyKPlx14QWbD3ijTf6o0mRDzD6COLrt0LvAQjYkH0lmJfl6ReYfJkE%2FdMJQ%3D%3D&u2=CLvsgIKdF199fCVN&width=2560" alt="Feyd-Rautha - Austin Butler">
+  </div>
+  <div class="c-symbol">⚡</div>
+  <div class="container c-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Feyd-Rautha</span></nav>
+    <div class="c-tag">⚡ Casa Harkonnen · Gladiador-Príncipe</div>
+    <h1 class="c-name">Feyd-Rautha<br><span style="color:var(--fc);">Harkonnen</span></h1>
+    <p class="c-subtitle">"Belleza e crueldade são dois lados da mesma faca."</p>
+    <p style="font-size:.95rem;color:rgba(245,240,232,.45);max-width:540px;line-height:1.9;">Sobrinho do Barão. Campeão do coliseu de Giedi Prime. O espelho invertido de Paul Atreides — igualmente excepcional, moldado por uma filosofia completamente oposta.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<main class="c-body">
+  <div class="container">
+    <div class="c-grid">
+
+      <!-- Main content -->
+      <div>
+        <div class="c-section reveal">
+          <h2>O Príncipe de Giedi Prime</h2>
+          <p>Feyd-Rautha Harkonnen é o sobrinho mais novo do Barão Vladimir Harkonnen — e a sua obra-prima pessoal. Enquanto o Barão vê o irmão mais velho Rabban como uma ferramenta bruta (o "Aranha da Besta"), Feyd é esculpido com cuidado: treinado desde criança para o combate, para a sedução política e para o espectáculo do poder.</p>
+          <p>Criado no ambiente austero e brutal de Giedi Prime — um planeta industrial de céu escuro, sem verde, governado pela filosofia do domínio absoluto — Feyd absorve a ética Harkonnen até ao tutano. Para ele, a crueldade não é um vício: é uma ferramenta. O medo não é um pecado: é a base de toda a governação eficaz.</p>
+          <p>O Barão tem planos específicos para Feyd: enquanto Rabban gasta recursos em Arrakis com extracção brutal, Feyd chegará depois como "libertador" — o rosto simpático do poder Harkonnen que os Fremen abraçarão com alívio comparativo. É uma manipulação política a longo prazo, e Feyd está consciente e confortável com o seu papel nela.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"O meu tio fez de mim uma arma. Mas sou a única arma que escolhe os seus alvos."</p>
+          <cite>— Feyd-Rautha Harkonnen</cite>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>O Gladiador do Coliseu</h2>
+          <p>Uma das facetas mais perturbadoras de Feyd é o seu papel como gladiador nas arenas de Giedi Prime. Os combates são encenados como entretenimento público — um ritual de dominação que mantém a população aterrorizada e fascinada. Feyd luta e mata, geralmente contra adversários druggados ou enfraquecidos.</p>
+          <p>Mas Feyd não se contenta com vitórias fabricadas. Em privado, procura combates reais — não pela honra (um conceito que despreza), mas pela adrenalina e pela sensação de poder que o combate genuíno lhe dá. Este traço é simultaneamente a sua maior força e a sementes da sua queda.</p>
+
+          <h3>Habilidades de Combate</h3>
+          <p>As capacidades de combate de Feyd são genuinamente excepcionais. Ao contrário de outros Harkonnen que dependem da brutalidade em massa, Feyd é um artista do combate singular. Domina o escudo-espada, luta com precisão cirúrgica e tem reflexos que poucos no universo conseguem igualar.</p>
+          <p>É significativo que Feyd seja apontado como um dos poucos potenciais "rivais génicos" ao Kwisatz Haderach — uma indicação de que o programa da Bene Gesserit reconhecia nele um potencial excepcional que apenas o ambiente Harkonnen distorceu para fins diferentes.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>O Espelho de Paul Atreides</h2>
+          <p>A estrutura narrativa de Dune coloca deliberadamente Feyd como espelho invertido de Paul. Ambos são jovens de casas nobres com capacidades físicas e mentais excepcionais. Ambos são preparados desde criança para papéis específicos em jogos políticos que os ultrapassam. Ambos aceitam esses papéis — mas com filosofias radicalmente opostas.</p>
+          <p>Paul pergunta-se se deve usar o seu poder para servir ou para dominar. Feyd nunca faz esta pergunta: dominar é o único propósito do poder. Paul vê as consequências das suas acções com angústia. Feyd vê-as como confirmação da sua superioridade.</p>
+
+          <div class="warning-box">
+            <p><strong style="color:var(--fc)">Nota literária:</strong> Frank Herbert criou Feyd para demonstrar o que Paul poderia ter-se tornado numa cultura diferente. A diferença entre os dois não é de capacidade, mas de valores — e esses valores são o produto dos mundos que habitaram. Dune é também uma meditação sobre como o ambiente molda o carácter.</p>
+          </div>
+
+          <h3>No Filme de Denis Villeneuve</h3>
+          <p>Em <em>Dune: Part Two</em> (2024), Austin Butler interpreta Feyd-Rautha numa caracterização que amplia a dimensão visual do personagem. Villeneuve filma as cenas de Giedi Prime a preto e branco (ultravioleta), criando um contraste visual marcante que sublinha a desumanidade do mundo que formou Feyd.</p>
+          <p>A performance de Butler captura tanto a sedução aristocrática de Feyd como a sua crueldade essencial — um produto que conhece o seu valor e não tem ilusões sobre o que é.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>A Bene Gesserit e o Legado Genético</h2>
+          <p>Um elemento fascinante da história de Feyd é a sua relação com a Bene Gesserit, especialmente com o Reverendo Mãe Gaius Helen Mohiam. A Ordem reconhece nele um potencial genético excepcional — parte do mesmo pool genético que produziu Paul — e mantém um interesse cuidadoso no seu desenvolvimento.</p>
+          <p>A linha genética Harkonnen não é acidental: a Bene Gesserit trabalhou durante gerações para combinar as linhagens Harkonnen e Atreides, na esperança de que a combinação produziria o Kwisatz Haderach. Paul é, em parte, produto desta combinação — Lady Jessica era filha do Barão Harkonnen, tornando Paul sobrinho do Barão e primo (de certa forma) de Feyd.</p>
+          <p>Este parentesco obscuro dá ao confronto final entre Paul e Feyd uma dimensão adicional: não é apenas o conflito entre duas casas, mas entre dois ramos da mesma árvore genética, moldados por mundos completamente opostos.</p>
+        </div>
+
+        <div class="c-section reveal">
+          <h2>O Confronto Final</h2>
+          <p>O duelo final entre Paul e Feyd é um dos momentos mais carregados da saga. É um combate singular — não uma batalha em grande escala — que decide o destino do universo. Feyd entra no duelo confiante: os seus anos no coliseu, a sua excepcional capacidade de combate, e a crença de que Paul é apenas um noble filho mimado.</p>
+          <p>O que Feyd não antecipa é que Paul tem algo que vai além da técnica: a capacidade de ver vários passos à frente, de ler o inimigo com precisão Bene Gesserit, e a determinação de quem lutou pela sobrevivência nas sietchs do deserto profundo.</p>
+          <p>A morte de Feyd marca o fim não apenas de um antagonista, mas de uma possibilidade alternativa — o que o universo de Dune poderia ter sido se o poder tivesse tomado um caminho diferente.</p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>"No final, ambos somos produtos do que outros nos fizeram. A diferença é que eu nunca me iludir sobre isso."</p>
+          <cite>— Feyd-Rautha, no duelo final</cite>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="sidebar-card reveal">
+          <h4>Ficha do Personagem</h4>
+          <div class="stat-row"><span class="stat-key">Nome completo</span><span class="stat-val">Feyd-Rautha Harkonnen</span></div>
+          <div class="stat-row"><span class="stat-key">Facção</span><span class="stat-val">Casa Harkonnen</span></div>
+          <div class="stat-row"><span class="stat-key">Relação com o Barão</span><span class="stat-val">Sobrinho (favorito)</span></div>
+          <div class="stat-row"><span class="stat-key">Papel</span><span class="stat-val">Herdeiro / Gladiador</span></div>
+          <div class="stat-row"><span class="stat-key">Planeta base</span><span class="stat-val">Giedi Prime</span></div>
+          <div class="stat-row"><span class="stat-key">Ator (livro)</span><span class="stat-val">Sting (1984)</span></div>
+          <div class="stat-row"><span class="stat-key">Ator (2024)</span><span class="stat-val">Austin Butler</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Capacidades</h4>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Combate Singular</span><span>96%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="96" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Manipulação Política</span><span>85%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="85" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Inteligência Táctica</span><span>88%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="88" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Carisma / Sedução</span><span>90%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="90" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-label"><span>Implacabilidade</span><span>97%</span></div>
+            <div class="progress-bar"><div class="progress-fill" data-width="97" style="width:0%;background:var(--fc)"></div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Aparições nas Obras</h4>
+          <div class="stat-row"><span class="stat-key">Dune (1965)</span><span class="stat-val" style="color:var(--fc)">Antagonista</span></div>
+          <div class="stat-row"><span class="stat-key">Dune (1984 — Filme)</span><span class="stat-val" style="color:var(--fc)">Antagonista</span></div>
+          <div class="stat-row"><span class="stat-key">Dune: Part Two (2024)</span><span class="stat-val" style="color:var(--fc)">Antagonista</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <ul style="display:flex;flex-direction:column;gap:.5rem;">
+            <li><a href="personagem-baron.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Baron Harkonnen</a></li>
+            <li><a href="personagem-paul.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Paul Atreides (rival)</a></li>
+            <li><a href="faccao-harkonnen.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Casa Harkonnen</a></li>
+            <li><a href="planetas.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Giedi Prime</a></li>
+            <li><a href="filme-dune-part-two.html" style="font-size:.85rem;color:rgba(245,240,232,.5);">→ Dune: Part Two</a></li>
+          </ul>
+        </div>
+
+        <a href="personagens.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:.75rem;border-color:var(--fc);color:var(--fc);">← Todos os Personagens</a>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

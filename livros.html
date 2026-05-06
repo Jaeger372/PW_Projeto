@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livros — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .book-hero{background:linear-gradient(135deg,#050402,#0f0c08,#050402);}
+    .books-list{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.03);}
+    .book-entry{display:grid;grid-template-columns:auto 1fr;gap:0;background:var(--color-black);transition:background .3s;}
+    .book-cover{width:100px;flex-shrink:0;position:relative;overflow:hidden;}
+    .book-cover img{width:100%;height:100%;object-fit:cover;opacity:0.8;filter:saturate(0.7);transition:opacity .3s;}
+    .book-entry:hover .book-cover img{opacity:1;}
+    .book-entry:hover{background:rgba(255,255,255,.02);}
+    .book-number{width:100px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:3rem;font-weight:900;color:rgba(212,168,67,.06);border-right:1px solid rgba(255,255,255,.04);flex-shrink:0;}
+    .book-body{padding:3rem;}
+    .book-year{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(212,168,67,.5);margin-bottom:.5rem;}
+    .book-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#f5f0e8;margin-bottom:.5rem;}
+    .book-subtitle{font-size:.8rem;letter-spacing:.1em;color:rgba(245,240,232,.3);text-transform:uppercase;margin-bottom:1rem;}
+    .book-desc{font-size:.9rem;color:rgba(245,240,232,.55);line-height:1.9;margin-bottom:1.5rem;max-width:700px;}
+    .book-themes{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+    .book-read-more{cursor:pointer;}
+    .book-extra{display:none;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.04);}
+    .book-extra.open{display:block;animation:fadeIn .4s ease;}
+    .book-extra h4{font-family:'Cinzel',serif;font-size:1rem;color:var(--faction-primary,#d4a843);margin-bottom:.75rem;}
+    .book-extra p{font-size:.85rem;color:rgba(245,240,232,.5);line-height:1.8;margin-bottom:.75rem;}
+    .book-extra ul{display:flex;flex-direction:column;gap:.4rem;}
+    .book-extra ul li{font-size:.85rem;color:rgba(245,240,232,.5);padding-left:1.2rem;position:relative;}
+    .book-extra ul li::before{content:'◆';position:absolute;left:0;color:var(--faction-primary,#d4a843);font-size:.45rem;top:.4rem;}
+    .hero-quote{max-width:800px;margin:4rem auto;text-align:center;}
+    .hero-quote p{font-family:'Crimson Text',serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-style:italic;color:rgba(245,240,232,.7);line-height:1.6;margin-bottom:1rem;}
+    .hero-quote cite{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,168,67,.6);}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @media(max-width:700px){.book-entry{grid-template-columns:1fr;}.book-number{width:100%;height:60px;font-size:2rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.04);}.book-body{padding:1.5rem;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero book-hero" style="position:relative;overflow:hidden;">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#080604,#1a1508,#050402);"></div>
+  <img src="https://sspark.genspark.ai/cfimages?u1=EZ%2BYboXSAfen%2F7U2u99MuR76dKog2vuV%2BNcrM8t%2B0drMoJGG0o8sodghKpx7KXypbfqAL3l9k1JjHfMN5aYgblF2Hn73L8pyZIj%2FMjK6VrJQEC8%3D&u2=ydyBGEiTasNP9J1Q&width=2560" alt="Dune Books" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.15;filter:saturate(0.4) brightness(0.5);z-index:0;">
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Livros</span></nav>
+    <p class="section-label">Frank Herbert</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">A Saga<br><span style="color:var(--faction-primary,#d4a843);">Original</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">Frank Herbert escreveu seis livros sobre o universo Dune entre 1965 e 1985. Uma das sagas literárias mais complexas, ambiciosas e influentes da história da ficção científica.</p>
+  </div>
+</section>
+
+<div class="container hero-quote reveal">
+  <p>"Não devo ter medo. O medo mata a mente. O medo é a pequena morte que traz a obliteração total. Enfrentarei o meu medo."</p>
+  <cite>A Litania contra o Medo — Frank Herbert, Dune (1965)</cite>
+</div>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Seis Livros</p><h2 class="section-title">A Saga Completa de Herbert</h2><div class="section-divider"></div></div>
+
+    <div class="books-list reveal">
+
+      <!-- DUNE -->
+      <div class="book-entry">
+        <div class="book-number book-cover">
+          <img src="https://sspark.genspark.ai/cfimages?u1=NJRLeFWODuukHVrMZnN%2B7JHo1Ynm1nUGyoyxrF73HziIG3GysneXwsMTzm%2BJiav72aWJgo639vCqQGhqR2E9fmgZdonSg3kYi%2BOOb445oq6QZxjPRWA9woEUCCXGS2Yj1WTtp6CERk17LgMMPTgNT%2BI%3D&u2=SI85ngrPExnr8S2N&width=2560" alt="Dune - Frank Herbert">
+        </div>
+        <div class="book-body">
+          <div class="book-year">1965</div>
+          <h2 class="book-title">Dune</h2>
+          <div class="book-subtitle">O Livro Fundador · O Maior Romance de Ficção Científica de Sempre</div>
+          <p class="book-desc">O início de tudo. Paul Atreides chega a Arrakis, o planeta mais perigoso e valioso do universo. Uma história de poder, traição, sobrevivência e profecia que mistura política, ecologia, religião e filosofia num único romance que redefiniu o género.</p>
+          <div class="book-themes">
+            <span class="tag">Poder</span><span class="tag">Profecia</span><span class="tag">Ecologia</span><span class="tag">Religião</span><span class="tag">Identidade</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book1')">Aprofundar →</button>
+          <div class="book-extra" id="book1">
+            <h4>O Impacto de Dune</h4>
+            <p>Dune ganhou o Prémio Hugo e o Prémio Nebula em 1966 — os dois prémios mais importantes da ficção científica. É o livro de ficção científica mais vendido de todos os tempos. A sua influência estende-se muito além do género: Star Wars, Game of Thrones, e centenas de outras obras bebem diretamente da sua fonte.</p>
+            <h4>Temas Centrais</h4>
+            <ul>
+              <li><strong>A Ecologia como Destino</strong> — Arrakis não é apenas o cenário. É a força que molda tudo — a especiaria, os Fremen, a política, o próprio Paul. Herbert foi um dos primeiros autores a colocar a ecologia no centro de uma narrativa épica.</li>
+              <li><strong>O Perigo do Herói</strong> — Herbert deixou claro: Dune é um aviso sobre messianismos. Paul não é um herói simples — é um ser que, ao tentar fazer o bem, desencadeia uma das maiores catástrofes da história humana.</li>
+              <li><strong>A Especiaria como Petróleo</strong> — A metáfora é explícita: um recurso único numa região instável, controlado por poderes imperiais, com consequências devastadoras para os habitantes locais.</li>
+            </ul>
+            <h4>Estrutura Narrativa</h4>
+            <p>Dune é narrado através de múltiplas perspetivas — Paul, Jessica, o Baron, Thufir Hawat, Liet-Kynes — com o acesso ao pensamento interno de cada personagem. Esta técnica cria uma profundidade política e psicológica rara no género épico.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DUNE MESSIAH -->
+      <div class="book-entry">
+        <div class="book-number book-cover">
+          <img src="https://sspark.genspark.ai/cfimages?u1=vPx9%2FHu2038OIGtJ4B3uSCgEIyP75PkpWhWk4PdswWFKnuTSy%2Ff2pgrgZobm78LNfQMLNIsPVxG7I6YhGtVMhN66SyhT5Pxo52Lh7owqas2sDuHGv5YLG34%3D&u2=QPWFL8ipJRx%2Bfo8X&width=2560" alt="Dune Messiah">
+        </div>
+        <div class="book-body">
+          <div class="book-year">1969</div>
+          <h2 class="book-title">Dune Messiah</h2>
+          <div class="book-subtitle">A Corrupção do Poder · A Jihad e as Suas Consequências</div>
+          <p class="book-desc">12 anos depois dos eventos de Dune. Paul Muad'Dib governa o Imperium — e a Jihad que desencadeou já matou 61 mil milhões de pessoas em todo o universo. É o livro mais subversivo da saga: transforma o herói do primeiro livro no antagonista moral da sequela.</p>
+          <div class="book-themes">
+            <span class="tag">Consequências</span><span class="tag">Traição</span><span class="tag">Sacrifício</span><span class="tag">Presciente</span><span class="tag">Declínio</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book2')">Aprofundar →</button>
+          <div class="book-extra" id="book2">
+            <h4>A Subversão de Herbert</h4>
+            <p>Dune Messiah é deliberadamente o anti-épico. Herbert viu que os leitores amavam Paul como herói sem perceber a crítica embutida no primeiro livro. Em Dune Messiah, torna impossível ignorar: Paul é agora Imperador de um Jihad que matou mais pessoas do que qualquer guerra na história. É um tirano benevolente — mas tirano.</p>
+            <h4>Conspirações e Traições</h4>
+            <ul>
+              <li>A Bene Gesserit, a Guilda, os Tleilaxu e as Faces Alteradas conspiram contra Paul</li>
+              <li>Scytale, o Face Dancer Tleilaxu, penetra no círculo interno de Muad'Dib</li>
+              <li>A Princesa Irulan trabalha contra Chani — a sua rival pelo coração de Paul</li>
+              <li>Paul vê a conspiração nas suas visões — mas escolhe deixá-la prosseguir</li>
+            </ul>
+            <h4>O Final Devastador</h4>
+            <p>Paul é cegado por uma bomba atômica — e ainda assim "vê" através da sua presciente. Chani morre no parto de gémeos: Leto II e Ghanima. Paul caminha para o deserto — a tradição Fremen para os cegos — mas o seu legado está assegurado de um modo que ele nunca poderia controlar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHILDREN OF DUNE -->
+      <div class="book-entry">
+        <div class="book-number">03</div>
+        <div class="book-body">
+          <div class="book-year">1976</div>
+          <h2 class="book-title">Filhos de Dune</h2>
+          <div class="book-subtitle">A Nova Geração · O Preço da Imortalidade</div>
+          <p class="book-desc">Os filhos gémeos de Paul — Leto II e Ghanima — crescem numa Arrakis em transformação. Alia, agora Regente, sucumbe à "Possessão" do seu avô o Baron Harkonnen. Leto II embarca na mais radical transformação da história humana — o Prescrito Dourado.</p>
+          <div class="book-themes">
+            <span class="tag">Transformação</span><span class="tag">Sacrifício</span><span class="tag">Loucura</span><span class="tag">Destino</span><span class="tag">Ecologia</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book3')">Aprofundar →</button>
+          <div class="book-extra" id="book3">
+            <h4>Leto II — O Maior Sacrifício</h4>
+            <p>Leto II toma a decisão mais extrema da saga: fundir o seu corpo com Sand Trout — as larvas dos Vermes da Areia — iniciando uma transformação que o tornará imortal ao custo da sua humanidade. Ao longo de três mil e quinhentos anos, tornar-se-á o Imperador Verme — o Tirano — que guiará a humanidade para o que chama de Prescrito Dourado.</p>
+            <h4>Alia e a Possessão</h4>
+            <p>Alia — a "Abominação" nascida com memórias ancestrais completas — não consegue resistir à influência do Baron Vladimir Harkonnen, cujas memórias residem dentro dela. A sua descida à loucura é uma das narrativas mais trágicas da saga.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOD EMPEROR -->
+      <div class="book-entry">
+        <div class="book-number">04</div>
+        <div class="book-body">
+          <div class="book-year">1981</div>
+          <h2 class="book-title">O Imperador-Deus de Dune</h2>
+          <div class="book-subtitle">3500 Anos Depois · A Tirania Necessária</div>
+          <p class="book-desc">Três mil e quinhentos anos após os eventos de Filhos de Dune. Leto II é agora metade homem, metade Verme da Areia — quase imortal, omnisciente, o tirano mais absoluto da história humana. E faz tudo isso deliberadamente para libertar a humanidade.</p>
+          <div class="book-themes">
+            <span class="tag">Imortalidade</span><span class="tag">Tirania</span><span class="tag">Liberdade</span><span class="tag">O Prescrito Dourado</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book4')">Aprofundar →</button>
+          <div class="book-extra" id="book4">
+            <h4>O Prescrito Dourado</h4>
+            <p>Leto II governa como tirano absoluto porque conhece o futuro: sem o seu controlo totalitário, a humanidade estagnará e será eventualmente destruída. O Prescrito Dourado é o seu plano para dispersar a humanidade pelo universo de um modo que a tornará impossível de exterminar — mesmo que signifique milénios de escravidão.</p>
+            <h4>A Filosofia do Maior Bem</h4>
+            <p>O quarto livro é o mais filosófico da saga. Leto II não é um vilão — é um ser que sacrificou a sua humanidade pelo bem de toda a espécie, e que sabe que será odiado por isso. "Quero que a humanidade me odeie tanto que nunca mais aceite um Deus-Imperador." É uma narrativa sobre o custo impossível da benevolência total.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERETICS -->
+      <div class="book-entry">
+        <div class="book-number">05</div>
+        <div class="book-body">
+          <div class="book-year">1984</div>
+          <h2 class="book-title">Hereges de Dune</h2>
+          <div class="book-subtitle">1500 Anos Depois do Tirano · O Retorno</div>
+          <p class="book-desc">Mais de 1500 anos após a morte de Leto II. A Scattering — a dispersão da humanidade pelo universo — criou civilizações que agora regressam. As Bene Gesserit, os Honorados Matre e um novo Ghola de Duncan Idaho são os protagonistas.</p>
+          <div class="book-themes">
+            <span class="tag">Regresso</span><span class="tag">Novo Começo</span><span class="tag">Herança</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book5')">Aprofundar →</button>
+          <div class="book-extra" id="book5">
+            <h4>Um Universo Completamente Novo</h4>
+            <p>Os primeiros quatro livros passam-se num universo reconhecível como continuação de Dune. Hereges e o sexto livro passam-se tão distante no tempo que são quase um recomeço. Os Honorados Matre — uma versão sombria das Bene Gesserit — são o novo poder dominante. Duncan Idaho retorna como Ghola pela 11ª vez.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAPTERHOUSE -->
+      <div class="book-entry">
+        <div class="book-number">06</div>
+        <div class="book-body">
+          <div class="book-year">1985</div>
+          <h2 class="book-title">Casa Chapterhouse: Dune</h2>
+          <div class="book-subtitle">O Último de Herbert · O Final Incompleto</div>
+          <p class="book-desc">O sexto e último livro de Frank Herbert. As Bene Gesserit refugiam-se em Chapterhouse enquanto os Honorados Matre conquistam o universo. O destino de toda a humanidade está em xeque — e o livro termina num cliffhanger. Herbert morreu antes de escrever o sétimo.</p>
+          <div class="book-themes">
+            <span class="tag">Resistência</span><span class="tag">Fim</span><span class="tag">Mistério</span><span class="tag">Legado</span>
+          </div>
+          <button class="btn btn-ghost book-read-more" onclick="toggleExtra('book6')">Aprofundar →</button>
+          <div class="book-extra" id="book6">
+            <h4>O Final que Nunca Existiu</h4>
+            <p>Frank Herbert morreu em 1986, deixando notas para o sétimo livro. O seu filho Brian Herbert e Kevin J. Anderson escreveram "Hunters of Dune" e "Sandworms of Dune" baseados nestas notas — uma conclusão que divide os fãs entre aqueles que a aceitam e aqueles que preferem considerar o sexto livro o final ambíguo definitivo.</p>
+            <h4>O Legado</h4>
+            <p>A saga Dune de Frank Herbert permanece uma das maiores realizações da literatura de ficção científica. Seis livros que exploram consistentemente as mesmas questões — poder, destino, ecologia, religião — de ângulos sempre diferentes e sempre surpreendentes. Herbert nunca repetiu uma resposta. Cada livro reabria as questões com mais complexidade do que as fechava.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Brian Herbert books -->
+<section class="section-sm" style="background:rgba(255,255,255,0.01);border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Continuação</p><h2 class="section-title">As Prequelas de Brian Herbert</h2><div class="section-divider"></div><p class="section-desc">Brian Herbert e Kevin J. Anderson expandiram o universo com prequelas e sequelas baseadas nas notas de Frank Herbert.</p></div>
+    <div class="grid grid-3 reveal">
+      <div class="card"><div class="card-body"><div class="card-meta">Trilogia de Prequelas</div><h3 class="card-title">Legends of Dune</h3><p class="card-text">A Jihad Butleriana — a guerra contra as máquinas pensantes. O período que moldou toda a civilização do universo de Dune 10.000 anos antes dos eventos principais.</p></div></div>
+      <div class="card"><div class="card-body"><div class="card-meta">Prequela</div><h3 class="card-title">House Atreides / Harkonnen / Corrino</h3><p class="card-text">A geração anterior a Dune: o pai do Duque Leto, o jovem Baron Harkonnen, e os eventos que prepararam a armadilha de Arrakis.</p></div></div>
+      <div class="card"><div class="card-body"><div class="card-meta">Conclusão</div><h3 class="card-title">Hunters & Sandworms of Dune</h3><p class="card-text">A conclusão do cliffhanger de Casa Chapterhouse, baseada nas notas de Frank Herbert. O debate sobre se é o final "verdadeiro" continua entre os fãs.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function toggleExtra(id){
+  const el=document.getElementById(id);
+  const btn=el.previousElementSibling;
+  if(el.classList.contains('open')){
+    el.classList.remove('open');
+    btn.textContent='Aprofundar →';
+  } else {
+    el.classList.add('open');
+    btn.textContent='Fechar ←';
+  }
+}
+</script>
+</body>
+</html>

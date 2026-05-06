@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="corrino">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Princesa Irulan — Personagem — Dune Universe</title>
+  <meta name="description" content="Princesa Irulan — Filha do Imperador Shaddam IV, esposa nominal de Paul, cronista da saga. Interpretada por Florence Pugh.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#d4a843;--fc-dark:#b8860b;--fc-glow:rgba(212,168,67,.2);}
+    .char-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:linear-gradient(135deg,#08060000,#180e00,#08060000);}
+    .char-hero-bg{position:absolute;inset:0;}
+    .char-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.22;filter:saturate(0.5) brightness(0.4);}
+    .char-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,0,1) 0%,rgba(8,6,0,0.7) 40%,rgba(8,6,0,0.2) 100%);}
+    .char-hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,168,67,0.08) 0%,transparent 60%);}
+    .char-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .char-header-grid{display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:end;}
+    .char-portrait{width:100%;max-width:320px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid rgba(212,168,67,.25);position:relative;}
+    .char-portrait img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:saturate(0.8)brightness(0.85);}
+    .char-portrait-glow{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,0,.8) 0%,transparent 60%);}
+    .char-faction-tag{display:inline-block;padding:4px 14px;border:1px solid rgba(212,168,67,.3);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fc,#d4a843);margin-bottom:1rem;background:rgba(212,168,67,.05);}
+    .char-name{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .char-titles{font-size:.9rem;color:rgba(245,240,232,.4);letter-spacing:.1em;margin-bottom:.75rem;}
+    .char-epithet{font-family:'Crimson Text',serif;font-size:1.3rem;font-style:italic;color:rgba(212,168,67,.7);}
+    .char-quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-top:2rem;}
+    .qs-item{padding:1rem;background:var(--color-black);}
+    .qs-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:.3rem;}
+    .qs-value{font-size:.9rem;color:#f5f0e8;font-weight:500;}
+    .char-body{padding:5rem 0;background:var(--color-black);}
+    .char-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .char-section{margin-bottom:3.5rem;}
+    .char-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc,#d4a843);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(212,168,67,.12);}
+    .char-section h3{font-family:'Cinzel',serif;font-size:1rem;color:#f5f0e8;margin:1.5rem 0 .5rem;}
+    .char-section p{font-size:.9rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .char-section ul{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
+    .char-section ul li{font-size:.88rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .char-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc,#d4a843);font-size:.5rem;top:.4rem;}
+    .quote-block{padding:1.5rem 2rem;border-left:3px solid rgba(212,168,67,.35);margin:1.5rem 0;background:rgba(212,168,67,.03);}
+    .quote-block p{font-family:'Crimson Text',serif;font-size:1.1rem;font-style:italic;color:rgba(245,240,232,.65);margin:0;}
+    .quote-source{font-size:.75rem;color:rgba(245,240,232,.3);margin-top:.5rem;display:block;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,67,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc,#d4a843);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .messiah-badge{display:inline-block;padding:4px 12px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);border-radius:20px;font-size:.65rem;letter-spacing:.1em;color:rgba(192,57,43,.9);text-transform:uppercase;margin-bottom:.75rem;}
+    @media(max-width:900px){.char-header-grid{grid-template-columns:1fr;gap:2rem;}.char-portrait{max-width:240px;}.char-grid{grid-template-columns:1fr;}.char-quick-stats{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="char-hero">
+  <div class="char-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=v92d%2Fa7ANXhszwcz6%2FtDWkth%2BVDhp5kWzpnX3Yb8YH%2Btte6EXtENLdc9KYyRHe4Lzav9icx35CCmNwIlK4lGm%2FTrtFWgMFHDyDDEirC7iCWvpL4%3D&u2=qGwuShIiaPiF6red&width=2560" alt="Princesa Irulan">
+  </div>
+  <div class="char-hero-overlay"></div>
+  <div class="char-hero-glow"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Princesa Irulan</span></nav>
+    <div class="char-header-grid">
+      <div class="char-portrait">
+        <img src="https://sspark.genspark.ai/cfimages?u1=v92d%2Fa7ANXhszwcz6%2FtDWkth%2BVDhp5kWzpnX3Yb8YH%2Btte6EXtENLdc9KYyRHe4Lzav9icx35CCmNwIlK4lGm%2FTrtFWgMFHDyDDEirC7iCWvpL4%3D&u2=qGwuShIiaPiF6red&width=2560" alt="Princesa Irulan — Florence Pugh">
+        <div class="char-portrait-glow"></div>
+      </div>
+      <div>
+        <div class="char-faction-tag">👑 Casa Corrino</div>
+        <div class="messiah-badge">⚔ Dune: Part Three (2026)</div>
+        <h1 class="char-name">Princesa Irulan</h1>
+        <p class="char-titles">Filha de Shaddam IV · Esposa de Paul · Cronista Imperial</p>
+        <p class="char-epithet">"Ela escreveu a história de Muad'Dib — e nunca foi sua."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Interpretada por</div><div class="qs-value">Florence Pugh</div></div>
+          <div class="qs-item"><div class="qs-label">Casa</div><div class="qs-value">Corrino</div></div>
+          <div class="qs-item"><div class="qs-label">Pai</div><div class="qs-value">Imperador Shaddam IV</div></div>
+          <div class="qs-item"><div class="qs-label">Marido</div><div class="qs-value">Paul Atreides</div></div>
+          <div class="qs-item"><div class="qs-label">Treino</div><div class="qs-value">Bene Gesserit</div></div>
+          <div class="qs-item"><div class="qs-label">Aparece em</div><div class="qs-value">Part Two + Part Three</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="char-body">
+  <div class="container">
+    <div class="char-grid">
+      <div>
+        <div class="char-section reveal">
+          <h2>A Princesa que Escreveu a História</h2>
+          <p>Irulan Corrino é um dos personagens mais fascinantes da saga precisamente porque a sua influência é quase invisível — ela narra os eventos sem os protagonizar, deseja um homem que nunca a amou, e conspira contra um futuro que ela própria documentou.</p>
+          <p>Filha mais velha do Imperador Shaddam IV, Irulan foi educada pelo Bene Gesserit — tornando-a não apenas numa princesa, mas numa intelectual formidável, observadora perspicaz e manipuladora subtil. Nos livros de Frank Herbert, os capítulos começam frequentemente com excertos das suas obras — livros históricos que ela escreveu sobre o reinado de Muad'Dib.</p>
+          <div class="quote-block">
+            <p>"Aqui começo com um epílogo, o que pode confundir alguns mas é a única forma honesta de começar a história de Paul-Muad'Dib."</p>
+            <span class="quote-source">— Princesa Irulan, "Manual de Muad'Dib"</span>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Irulan em Dune: Part Two</h2>
+          <p>Em <em>Dune: Part Two</em>, Florence Pugh interpreta Irulan como uma observadora frustrada — uma mulher inteligente presa nas regras do poder imperial, que vê Paul ascender mas nunca consegue aproximar-se genuinamente dele. A sua relação com o pai Shaddam IV (Christopher Walken) e a sua lealdade dividida são centrais para a narrativa política do filme.</p>
+          <p>Villeneuve expandiu o papel de Irulan relativamente ao livro original, onde ela tem uma presença mais marginal nos eventos directos — transformando-a numa perspectiva política que equilibra a emotividade de Chani.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Irulan em Dune Messiah — Part Three</h2>
+          <h3>A Esposa Nominal</h3>
+          <p>No início de <em>Messiah</em>, Irulan é a esposa de Paul — mas num casamento puramente político. Paul nunca a amou, nunca a tratou como esposa, e Chani continua a ser a sua verdadeira companheira. Irulan aceita este papel com uma dignidade que esconde uma amargura profunda.</p>
+          <h3>A Conspiradora</h3>
+          <p>O que torna Irulan numa personagem verdadeiramente complexa em <em>Messiah</em> é a sua participação na conspiração contra Paul. Ela ajuda a tecer a armadilha — não por malícia, mas por uma mistura de lealdade ao Bene Gesserit, frustração pessoal, e uma crença genuína de que Paul está a destruir o universo.</p>
+          <ul>
+            <li>Adicionava agentes de fertilidade à comida de Chani para prevenir que esta conceba um herdeiro de Paul</li>
+            <li>Manteve contacto com agentes do Bene Gesserit durante todo o reinado de Muad'Dib</li>
+            <li>A sua traição é finalmente descoberta por Paul — um dos momentos mais dolorosos do livro</li>
+          </ul>
+          <h3>A Redentora</h3>
+          <p>Mas Irulan não é apenas uma vilã — o seu arco em <em>Messiah</em> é de uma mulher que começa como conspiradora e termina como guardiã. Após a partida de Paul, é Irulan quem cuida dos gémeos Atreides e os protege — tornando-se, paradoxalmente, a mãe adoptiva das crianças do homem que nunca a amou.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Florence Pugh no Papel</h2>
+          <p>Florence Pugh traz ao papel uma qualidade única: a capacidade de mostrar inteligência e dor em simultâneo. A sua Irulan em <em>Part Two</em> é uma mulher que compreende exactamente a sua posição — usada como peça política pelo pai, ignorada pelo marido, mas recusando-se a ser apenas uma vítima.</p>
+          <p>Em <em>Part Three</em>, este arco promete atingir o seu clímax: a conspiração, a descoberta, e a redenção final. Pugh confirmou o seu entusiasmo pelo desenvolvimento do personagem ao longo da trilogia.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Ficha de Personagem</h4>
+          <div class="stat-row"><span>Nome completo</span><span>Irulan Corrino</span></div>
+          <div class="stat-row"><span>Pai</span><span>Imperador Shaddam IV</span></div>
+          <div class="stat-row"><span>Casa</span><span>Corrino</span></div>
+          <div class="stat-row"><span>Marido</span><span>Paul Atreides (político)</span></div>
+          <div class="stat-row"><span>Treino</span><span>Bene Gesserit</span></div>
+          <div class="stat-row"><span>Habilidade</span><span>Cronista · Política</span></div>
+          <div class="stat-row"><span>Planeta base</span><span>Kaitain → Arrakis</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>No Cinema</h4>
+          <div class="stat-row"><span>Actriz</span><span>Florence Pugh</span></div>
+          <div class="stat-row"><span>Aparece em</span><span>Part Two (2024)</span></div>
+          <div class="stat-row"><span>Papel central</span><span>Part Three (2026)</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Obras de Irulan</h4>
+          <p style="font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;margin-bottom:.75rem;">Nos livros, Irulan é a autora de várias obras históricas que citam os eventos da saga:</p>
+          <div class="stat-row"><span>Manual de Muad'Dib</span><span>📚</span></div>
+          <div class="stat-row"><span>Notas sobre Muad'Dib</span><span>📚</span></div>
+          <div class="stat-row"><span>Conversas com Muad'Dib</span><span>📚</span></div>
+          <div class="stat-row"><span>A Criança Imperial</span><span>📚</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <a href="personagem-paul.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#d4a843'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Paul Atreides (marido nominal)</a>
+          <a href="personagem-chani.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#2980b9'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Chani (rival/aliada)</a>
+          <a href="personagem-scytale.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Scytale (co-conspirador)</a>
+          <a href="filme-dune-messiah.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;text-decoration:none;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Dune: Part Three (2026)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(212,168,67,0.08);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="personagens.html" class="btn btn-outline">← Todos os Personagens</a>
+      <a href="personagem-alia.html" class="btn btn-outline">Alia Atreides</a>
+      <a href="personagem-scytale.html" class="btn btn-outline">Scytale</a>
+      <a href="filme-dune-messiah.html" class="btn btn-primary">Dune: Part Three →</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

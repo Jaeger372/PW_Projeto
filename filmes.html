@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmes — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .films-hero{background:linear-gradient(135deg,#050302,#0f0c04,#050402);}
+    .film-feature{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;margin-bottom:2px;}
+    .film-feature-visual{position:relative;overflow:hidden;}
+    .film-feature-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s;}
+    .film-feature:hover .film-feature-bg{transform:scale(1.03);}
+    .film-feature-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,4,2,0.95) 0%,rgba(5,4,2,0.3) 100%);}
+    .film-feature-content{padding:4rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+    .film-year-badge{display:inline-block;padding:4px 14px;border:1px solid rgba(212,168,67,.3);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faction-primary,#d4a843);margin-bottom:1.5rem;}
+    .film-title-big{font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;}
+    .film-tagline{font-family:'Crimson Text',serif;font-size:1.2rem;font-style:italic;color:rgba(245,240,232,.5);margin-bottom:1.5rem;}
+    .film-meta-row{display:flex;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+    .film-meta-item{font-size:.75rem;}
+    .film-meta-label{color:rgba(245,240,232,.35);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.2rem;}
+    .film-meta-value{color:#f5f0e8;font-weight:500;}
+    .film-desc{font-size:.9rem;color:rgba(245,240,232,.55);line-height:1.9;margin-bottom:2rem;}
+    .film-feature-visual-right{order:1;}
+    .film-feature-content-left{order:0;}
+    .film-awards{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+    .award-badge{padding:4px 12px;font-size:.65rem;letter-spacing:.1em;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:20px;color:rgba(212,168,67,.8);}
+    @media(max-width:900px){.film-feature{grid-template-columns:1fr;min-height:auto;} .film-feature-visual{height:300px;} .film-feature-visual-right{order:0;} .film-feature-content{padding:2rem;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero films-hero">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#080602,#1a1608,#050402);"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Filmes</span></nav>
+    <p class="section-label">Cinema</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">A Saga<br><span style="color:var(--faction-primary,#d4a843);">nos Ecrãs</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">Denis Villeneuve adaptou o impossível. Duas obras-primas que definem a era moderna da ficção científica cinematográfica.</p>
+  </div>
+</section>
+
+<!-- FILM 1 -->
+<div class="film-feature">
+  <div class="film-feature-content film-feature-content-left" style="background:linear-gradient(135deg,#0a0802,#1a1408);">
+    <div class="film-year-badge">2021 · Parte I</div>
+    <h2 class="film-title-big">Dune</h2>
+    <p class="film-tagline">"O início de uma lenda. A formação de um destino."</p>
+    <div class="film-meta-row">
+      <div class="film-meta-item"><span class="film-meta-label">Realizador</span><span class="film-meta-value">Denis Villeneuve</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Duração</span><span class="film-meta-value">2h 35min</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Classificação</span><span class="film-meta-value">M/12</span></div>
+    </div>
+    <div class="film-awards">
+      <span class="award-badge">🏆 6 Óscares</span>
+      <span class="award-badge">BAFTA Melhor Filme Britânico</span>
+      <span class="award-badge">Fotografia · Edição · Efeitos Visuais</span>
+    </div>
+    <p class="film-desc">A primeira metade da adaptação do livro seminal de Frank Herbert. Paul Atreides acompanha a sua família para o planeta mais perigoso do universo — Arrakis — e descobre que o seu destino é maior do que qualquer profecia poderia conter. Villeneuve cria um épico visual monumental, com uma atenção ao detalhe e à escala raramente vistas no cinema de ficção científica.</p>
+    <a href="filme-dune-2021.html" class="btn btn-primary">Análise completa →</a>
+  </div>
+  <div class="film-feature-visual film-feature-visual-right">
+    <div class="film-feature-bg" style="background:linear-gradient(160deg,#1a1205 0%,#2a1a08 30%,#0f0a03 60%,#050402 100%);background-image:url('https://sspark.genspark.ai/cfimages?u1=WNQGFSOM49iKzu9RM%2FTOTDGKmiV2NZdw85eaj2YkXNkfH3JbXF8o0tRaN10tISr%2F25Oy%2BQaNdzuleA2r0E%2Fznc8PMhMy6chT6TmFwCWYmJ2sXGH4r3imYwxxD67JlHrWhm4tTCEh&u2=sVK7tcgHWo6zHbmr&width=2560');background-size:cover;background-position:center;"></div>
+    <div class="film-feature-overlay"></div>
+  </div>
+</div>
+
+<!-- FILM 2 -->
+<div class="film-feature">
+  <div class="film-feature-visual">
+    <div class="film-feature-bg" style="background:linear-gradient(160deg,#0a0702 0%,#1f1508 30%,#1a0f04 60%,#050402 100%);background-image:url('https://sspark.genspark.ai/cfimages?u1=pJ4LiRmSMrVOVfJRp7UptkQSLgS8wltIXq66xaj17pHVMGKg0V9dz7RRK547ldhcmcJOfQK9n9h6CF3UgujY37hTwIv5Zy1vWkOubBh3Pffp9FRo0xJoqCyDZWMi&u2=%2FE1ia%2FRqevc3v9lb&width=2560');background-size:cover;background-position:center;"></div>
+    <div class="film-feature-overlay" style="background:linear-gradient(270deg,rgba(5,4,2,0.95) 0%,rgba(5,4,2,0.3) 100%);"></div>
+  </div>
+  <div class="film-feature-content" style="background:linear-gradient(225deg,#0a0802,#160e04);">
+    <div class="film-year-badge">2024 · Parte II</div>
+    <h2 class="film-title-big">Dune:<br>Part Two</h2>
+    <p class="film-tagline">"O Messias desperta. O universo treme."</p>
+    <div class="film-meta-row">
+      <div class="film-meta-item"><span class="film-meta-label">Realizador</span><span class="film-meta-value">Denis Villeneuve</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Duração</span><span class="film-meta-value">2h 46min</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Orçamento</span><span class="film-meta-value">$190M</span></div>
+    </div>
+    <div class="film-awards">
+      <span class="award-badge">🌟 Crítica Unânime</span>
+      <span class="award-badge">$714M bilheteira</span>
+      <span class="award-badge">Melhor continuação da saga</span>
+    </div>
+    <p class="film-desc">Paul Muad'Dib abraça o seu destino entre os Fremen enquanto Chani questiona a profecia que o rodeia. Villeneuve eleva o épico a proporções mitológicas — da arena de Giedi Prime filmada em preto e branco ao assalto final no deserto. Uma das maiores sequelas da história recente do cinema.</p>
+    <a href="filme-dune-part-two.html" class="btn btn-primary">Análise completa →</a>
+  </div>
+</div>
+
+<!-- Comparison + Future -->
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Análise</p><h2 class="section-title">Os Dois Filmes Comparados</h2><div class="section-divider"></div></div>
+    <div class="grid grid-2 reveal" style="gap:2px;background:rgba(255,255,255,0.04);">
+      <div style="background:var(--color-black);padding:3rem;">
+        <h3 style="font-family:'Cinzel',serif;color:var(--faction-primary,#d4a843);margin-bottom:1.5rem;">Dune (2021)</h3>
+        <ul style="display:flex;flex-direction:column;gap:.75rem;list-style:none;">
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Tom de descoberta e maravilha — o mundo de Arrakis é revelado como algo nunca visto
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Foco na política imperial e na fragilidade da Casa Atreides face ao poder estabelecido
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Paul como jovem vulnerável, em aprendizagem — não ainda como profeta
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Música de Hans Zimmer dominada por vozes femininas e texturas do deserto
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Final deliberadamente aberto — um cliffhanger de proporções épicas
+          </li>
+        </ul>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);padding:3rem;">
+        <h3 style="font-family:'Cinzel',serif;color:var(--faction-primary,#d4a843);margin-bottom:1.5rem;">Dune: Part Two (2024)</h3>
+        <ul style="display:flex;flex-direction:column;gap:.75rem;list-style:none;">
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Tom mais sombrio, mais épico — a narrativa eleva-se para escala mítica
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Chani como força moral e cética — Zendaya ampliado significativamente
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Austin Butler como Feyd-Rautha: uma performance visceral em paleta monocromática
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>Villeneuve torna Paul mais claramente um agente ativo da destruição
+          </li>
+          <li style="font-size:.9rem;color:rgba(245,240,232,.6);padding-left:1.2rem;position:relative;">
+            <span style="position:absolute;left:0;color:var(--faction-primary,#d4a843);">◆</span>A sequência do deserto final: cinema épico ao mais alto nível
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILM 3 -->
+<div class="film-feature">
+  <div class="film-feature-content film-feature-content-left" style="background:linear-gradient(135deg,#0a0002,#180405);">
+    <div class="film-year-badge" style="border-color:rgba(192,57,43,.4);color:#c0392b;">2026 · Parte III · Em Produção</div>
+    <h2 class="film-title-big">Dune:<br>Part Three</h2>
+    <p class="film-tagline" style="color:rgba(192,57,43,.7);">"O messias cai. O império desmorona."</p>
+    <div class="film-meta-row">
+      <div class="film-meta-item"><span class="film-meta-label">Realizador</span><span class="film-meta-value">Denis Villeneuve</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Estreia</span><span class="film-meta-value">Dezembro 2026</span></div>
+      <div class="film-meta-item"><span class="film-meta-label">Base</span><span class="film-meta-value">Dune Messiah (1969)</span></div>
+    </div>
+    <div class="film-awards">
+      <span class="award-badge" style="border-color:rgba(192,57,43,.3);color:rgba(192,57,43,.9);background:rgba(192,57,43,.08);">🎬 Em Produção</span>
+      <span class="award-badge" style="border-color:rgba(192,57,43,.3);color:rgba(192,57,43,.9);background:rgba(192,57,43,.08);">Timothée Chalamet · Zendaya</span>
+      <span class="award-badge" style="border-color:rgba(192,57,43,.3);color:rgba(192,57,43,.9);background:rgba(192,57,43,.08);">Anya Taylor-Joy · Robert Pattinson</span>
+    </div>
+    <p class="film-desc">Doze anos após os eventos de Part Two. Paul Muad'Dib reina como Imperador — mas o peso de sessenta mil milhões de mortes da Jihad esmaga-o. Uma conspiração formada por Tleilaxu, Bene Gesserit e a Guilda dos Navegadores tece a sua queda. O messias enfrenta a sua profecia mais sombria: a cegueira, a traição, e a única saída — a renúncia a tudo.</p>
+    <a href="filme-dune-messiah.html" class="btn btn-primary" style="background:rgba(192,57,43,.15);border-color:rgba(192,57,43,.5);color:#c0392b;" onmouseover="this.style.background='rgba(192,57,43,.3)'" onmouseout="this.style.background='rgba(192,57,43,.15)'">Análise completa →</a>
+  </div>
+  <div class="film-feature-visual film-feature-visual-right">
+    <div class="film-feature-bg" style="background-image:url('https://sspark.genspark.ai/cfimages?u1=HXvT3GRwRkf3cNz0Jdbs1Qjxb2VTg7NlwpOiW5%2Bqfy8SmpB506hy5sKmwsWMhkXqRUCMUZmrkaq39vdHLPAtOAmvqRG%2BzXz6jRbPPaN%2BuxRqeDXkhmmLpghuBCjqVnjCTVE%3D&u2=001whLVPZXw0sHng&width=2560');background-size:cover;background-position:center;filter:saturate(0.6)brightness(0.7);"></div>
+    <div class="film-feature-overlay"></div>
+    <div style="position:absolute;top:2rem;right:2rem;z-index:5;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);padding:6px 14px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#c0392b;border-radius:20px;">Em Produção 2026</div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

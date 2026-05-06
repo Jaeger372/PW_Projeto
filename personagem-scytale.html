@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scytale — Personagem — Dune Universe</title>
+  <meta name="description" content="Scytale — Face Dancer do Tleilaxu, vilão principal de Dune Messiah. Capaz de assumir qualquer aparência humana. Interpretado por Robert Pattinson em Dune: Part Three (2026).">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#9b59b6;--fc-dark:#7d3c98;--fc-glow:rgba(155,89,182,.2);}
+    .char-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:linear-gradient(135deg,#030008,#0a0015,#020008);}
+    .char-hero-bg{position:absolute;inset:0;}
+    .char-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.22;filter:saturate(0.4) brightness(0.35) hue-rotate(20deg);}
+    .char-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,0,8,1) 0%,rgba(3,0,8,0.7) 40%,rgba(3,0,8,0.2) 100%);}
+    .char-hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(155,89,182,0.1) 0%,transparent 60%);}
+    .char-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .char-header-grid{display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:end;}
+    .char-portrait{width:100%;max-width:320px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid rgba(155,89,182,.25);position:relative;}
+    .char-portrait img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:saturate(0.7)brightness(0.8);}
+    .char-portrait-glow{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,0,8,.8) 0%,transparent 60%);}
+    .char-faction-tag{display:inline-block;padding:4px 14px;border:1px solid rgba(155,89,182,.35);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fc,#9b59b6);margin-bottom:1rem;background:rgba(155,89,182,.06);}
+    .char-name{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .char-titles{font-size:.9rem;color:rgba(245,240,232,.4);letter-spacing:.1em;margin-bottom:.75rem;}
+    .char-epithet{font-family:'Crimson Text',serif;font-size:1.3rem;font-style:italic;color:rgba(155,89,182,.7);}
+    .char-quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-top:2rem;}
+    .qs-item{padding:1rem;background:var(--color-black);}
+    .qs-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:.3rem;}
+    .qs-value{font-size:.9rem;color:#f5f0e8;font-weight:500;}
+    .char-body{padding:5rem 0;background:var(--color-black);}
+    .char-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .char-section{margin-bottom:3.5rem;}
+    .char-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc,#9b59b6);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(155,89,182,.12);}
+    .char-section h3{font-family:'Cinzel',serif;font-size:1rem;color:#f5f0e8;margin:1.5rem 0 .5rem;}
+    .char-section p{font-size:.9rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .char-section ul{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
+    .char-section ul li{font-size:.88rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .char-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc,#9b59b6);font-size:.5rem;top:.4rem;}
+    .quote-block{padding:1.5rem 2rem;border-left:3px solid rgba(155,89,182,.4);margin:1.5rem 0;background:rgba(155,89,182,.04);}
+    .quote-block p{font-family:'Crimson Text',serif;font-size:1.1rem;font-style:italic;color:rgba(245,240,232,.65);margin:0;}
+    .quote-source{font-size:.75rem;color:rgba(245,240,232,.3);margin-top:.5rem;display:block;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(155,89,182,.12);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc,#9b59b6);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .danger-badge{display:inline-block;padding:4px 12px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:20px;font-size:.65rem;letter-spacing:.1em;color:rgba(192,57,43,.9);text-transform:uppercase;margin-bottom:.75rem;}
+    .fear-meter{margin:1rem 0;}
+    .fear-meter-label{font-size:.75rem;color:rgba(245,240,232,.4);margin-bottom:.4rem;display:flex;justify-content:space-between;}
+    .fear-meter-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+    .fear-meter-fill{height:100%;background:linear-gradient(90deg,var(--fc,#9b59b6),rgba(192,57,43,.8));border-radius:2px;}
+    @media(max-width:900px){.char-header-grid{grid-template-columns:1fr;gap:2rem;}.char-portrait{max-width:240px;}.char-grid{grid-template-columns:1fr;}.char-quick-stats{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="char-hero">
+  <div class="char-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=xye0cYISTGWSgYvCPvt2P%2BlOsPda218NDcV0BK9FoXaeypjEAXw1udu9nU%2BBgL0F%2B8AOCvlkyBcMRguyLwVAbNAgUguo7MgU9BY29P7KgzBbC%2B1HUGKmWIqQ%2F%2F2tY0RW%2F%2FKMSPLxB%2FHEDrK60kzvp9tGK47nRaKgnhTnfnhSD%2BbdUnVXwNJh&u2=KjeaC4x9lIhB8ml6&width=2560" alt="Scytale — Robert Pattinson">
+  </div>
+  <div class="char-hero-overlay"></div>
+  <div class="char-hero-glow"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Scytale</span></nav>
+    <div class="char-header-grid">
+      <div class="char-portrait">
+        <img src="https://sspark.genspark.ai/cfimages?u1=LHZ8g5dEhMXTJvz5KjQLca%2FlVN%2FVwAHPE%2BDKSKg0HMzqibmq11pSwcYTxTta8e%2BXqLzZc7nIMJhnIoalMp4gedhJMwU8Pv9qIExsnXW5CNqVrNJ4Akx3OeGRQ1xsSSxhvzC779MKQftK1DAVQcpPdmLDkz%2FKtPXpCnWnSADbkAVR6E3MDw%3D%3D&u2=7IJAcG4oh54VAP1o&width=2560" alt="Scytale — Robert Pattinson em Dune: Part Three">
+        <div class="char-portrait-glow"></div>
+      </div>
+      <div>
+        <div class="char-faction-tag">🔬 Tleilaxu · Face Dancer</div>
+        <div class="danger-badge">⚠ Vilão Principal · Part Three</div>
+        <h1 class="char-name">Scytale</h1>
+        <p class="char-titles">Face Dancer · Agente do Tleilaxu · Conspirateur Principal</p>
+        <p class="char-epithet">"Ele pode ser qualquer pessoa. Essa é a ameaça mais perfeita que alguma vez existiu."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Interpretado por</div><div class="qs-value">Robert Pattinson</div></div>
+          <div class="qs-item"><div class="qs-label">Facção</div><div class="qs-value">Tleilaxu</div></div>
+          <div class="qs-item"><div class="qs-label">Tipo</div><div class="qs-value">Face Dancer</div></div>
+          <div class="qs-item"><div class="qs-label">Papel</div><div class="qs-value">Vilão Principal</div></div>
+          <div class="qs-item"><div class="qs-label">Arma</div><div class="qs-value">Metamorfismo</div></div>
+          <div class="qs-item"><div class="qs-label">Aparece em</div><div class="qs-value">Dune: Part Three</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="char-body">
+  <div class="container">
+    <div class="char-grid">
+      <div>
+        <div class="char-section reveal">
+          <h2>O Espião Impossível de Derrotar</h2>
+          <p>Scytale é um Face Dancer do Tleilaxu — um ser geneticamente modificado para assumir a aparência de qualquer humano com precisão perfeita: rosto, voz, postura, padrões de comportamento. Não é disfarce — é transformação celular completa.</p>
+          <p>Isso torna Scytale a ameaça mais insidiosa que Paul Muad'Dib jamais enfrentou. Guerreiros podem ser vistos; bombas podem ser detectadas; conspiradores podem ser rastreados. Mas como te defends de um inimigo que pode ser qualquer pessoa na tua mesa de jantar, na tua guarda pessoal, no teu quarto?</p>
+          <div class="quote-block">
+            <p>"Os Tleilaxu criaram uma nova forma de assassino — um que não precisa de esconder a arma porque ele mesmo é a arma. Scytale é o espaço entre a confiança e a traição."</p>
+            <span class="quote-source">— Dune Messiah, Frank Herbert</span>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Os Tleilaxu — A Ameaça Invisível</h2>
+          <h3>Quem São os Tleilaxu</h3>
+          <p>Os Tleilaxu são uma das facções mais misteriosas e perturbadoras do universo de Dune. Operam nas sombras do Landsraad Imperial, vendendo os seus serviços biotecnológicos: gholas (clones com memórias implantadas), Face Dancers, substitutos genéticos, e tecnologias orgânicas que rozam o que seria proibido.</p>
+          <p>Enquanto os Harkonnen são vilões de poder bruto e os Corrino são vilões de poder institucional, os Tleilaxu são vilões de poder oculto — eles controlam não o que as pessoas fazem, mas quem as pessoas são.</p>
+          <h3>A Conspiração de Messiah</h3>
+          <p>Em <em>Dune Messiah</em>, o Tleilaxu entra numa aliança improvável com o Bene Gesserit, a Guilda dos Navegadores e a Princesa Irulan — todos unidos num único objectivo: derrubar Paul Muad'Dib antes que a sua Jihad destrua o universo (incluindo os seus próprios poderes).</p>
+          <p>Scytale é o executivo desta conspiração — o agente que coordena, que actua, que implementa o plano. A sua arma mais elaborada não é uma faca ou uma bomba: é o ghola de Duncan Idaho, cuidadosamente preparado para ser tanto uma oferta como um vírus psicológico.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Scytale como Vilão Único</h2>
+          <h3>A Diferença para os Outros Vilões da Trilogia</h3>
+          <p>O Baron Harkonnen em <em>Part One</em> é um vilão de poder e crueldade — grandioso, físico, inegável. Feyd-Rautha em <em>Part Two</em> é um vilão de beleza e violência — o espelho negro de Paul, igualmente mortal mas sem a profecia.</p>
+          <p>Scytale é algo diferente: um vilão de inteligência pura e ausência de identidade. Não tem rosto próprio. Não tem corpo permanente. É um agente sem ego, sem ambição pessoal visível — o que o torna ainda mais aterrorizante, porque não podes compreender o que o move.</p>
+          <h3>As Capacidades de um Face Dancer</h3>
+          <ul>
+            <li>Transformação física completa: rosto, voz, tamanho, postura</li>
+            <li>Memorização perfeita de padrões comportamentais de qualquer alvo</li>
+            <li>Capacidade de manter múltiplas identidades simultâneas ao longo do tempo</li>
+            <li>Resistência a drogas de verdade e alguns métodos Bene Gesserit de detecção</li>
+            <li>Treinamento de combate ao nível dos melhores guerreiros do universo</li>
+          </ul>
+
+          <div style="margin:1.5rem 0;">
+            <div class="fear-meter">
+              <div class="fear-meter-label"><span>Ameaça Física</span><span>95%</span></div>
+              <div class="fear-meter-bar"><div class="fear-meter-fill" style="width:95%;"></div></div>
+            </div>
+            <div class="fear-meter">
+              <div class="fear-meter-label"><span>Ameaça de Infiltração</span><span>100%</span></div>
+              <div class="fear-meter-bar"><div class="fear-meter-fill" style="width:100%;"></div></div>
+            </div>
+            <div class="fear-meter">
+              <div class="fear-meter-label"><span>Manipulação Política</span><span>88%</span></div>
+              <div class="fear-meter-bar"><div class="fear-meter-fill" style="width:88%;"></div></div>
+            </div>
+            <div class="fear-meter">
+              <div class="fear-meter-label"><span>Imprevisibilidade</span><span>92%</span></div>
+              <div class="fear-meter-bar"><div class="fear-meter-fill" style="width:92%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Robert Pattinson — A Escolha Perfeita</h2>
+          <p>Robert Pattinson traz ao papel uma qualidade que poucos actores possuem: uma presença que é simultaneamente magnética e perturbadora — como se existisse uma ligeira distorção na realidade em torno dele. É exactamente isso que Scytale requer.</p>
+          <p>Pattinson tem demonstrado ao longo da sua carreira recente (<em>The Batman</em>, <em>The Lighthouse</em>, <em>Good Time</em>) uma capacidade única para habitar personagens que se movem entre o humano e o alienígena — figuras que parecem familiares mas que escondem algo completamente outro.</p>
+          <p><em>"Scytale não é humano de uma forma que nenhum outro personagem do universo Dune captura tão completamente. Ele é a ausência de identidade elevada à categoria de arma."</em> — Análise da casting, Nerdist</p>
+          <img src="https://sspark.genspark.ai/cfimages?u1=xye0cYISTGWSgYvCPvt2P%2BlOsPda218NDcV0BK9FoXaeypjEAXw1udu9nU%2BBgL0F%2B8AOCvlkyBcMRguyLwVAbNAgUguo7MgU9BY29P7KgzBbC%2B1HUGKmWIqQ%2F%2F2tY0RW%2F%2FKMSPLxB%2FHEDrK60kzvp9tGK47nRaKgnhTnfnhSD%2BbdUnVXwNJh&u2=KjeaC4x9lIhB8ml6&width=2560" alt="Robert Pattinson como Scytale em Dune Part Three" style="width:100%;border-radius:6px;margin-top:1rem;filter:saturate(0.7)brightness(0.8);">
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Ficha de Personagem</h4>
+          <div class="stat-row"><span>Nome</span><span>Scytale</span></div>
+          <div class="stat-row"><span>Espécie</span><span>Face Dancer (Tleilaxu)</span></div>
+          <div class="stat-row"><span>Facção</span><span>Bene Tleilax</span></div>
+          <div class="stat-row"><span>Papel na Conspiração</span><span>Executor</span></div>
+          <div class="stat-row"><span>Arma principal</span><span>Metamorfismo</span></div>
+          <div class="stat-row"><span>Aparece em</span><span>Dune Messiah</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>No Cinema</h4>
+          <div class="stat-row"><span>Actor</span><span>Robert Pattinson</span></div>
+          <div class="stat-row"><span>Filme</span><span>Dune: Part Three (2026)</span></div>
+          <div class="stat-row"><span>Tipo</span><span>Vilão Principal</span></div>
+        </div>
+
+        <div class="sidebar-card reveal" style="border-color:rgba(155,89,182,.25);background:rgba(155,89,182,.04);">
+          <h4>O Tleilaxu — Factos</h4>
+          <p style="font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;margin-bottom:.75rem;">Os Bene Tleilax (Tleilaxu) são uma das facções mais obscuras do universo Dune:</p>
+          <div class="stat-row"><span>Planeta base</span><span>Tleilax</span></div>
+          <div class="stat-row"><span>Especialidade</span><span>Biotecnologia proibida</span></div>
+          <div class="stat-row"><span>Criações</span><span>Gholas, Face Dancers</span></div>
+          <div class="stat-row"><span>Motivação</span><span>Poder oculto e religioso</span></div>
+          <div class="stat-row"><span>Relação com Guild</span><span>Aliados ocasionais</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>A Conspiração — Aliados</h4>
+          <div class="stat-row"><span>Tleilaxu</span><span>Scytale</span></div>
+          <div class="stat-row"><span>Bene Gesserit</span><span>Via Irulan</span></div>
+          <div class="stat-row"><span>Guilda dos Nav.</span><span>Steersman Edric</span></div>
+          <div class="stat-row"><span>Corrino</span><span>Princesa Irulan</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <a href="personagem-paul.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Paul Atreides (alvo)</a>
+          <a href="personagem-irulan.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#d4a843'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Princesa Irulan (aliada)</a>
+          <a href="personagem-alia.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#8e44ad'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Alia Atreides (peça xadrez)</a>
+          <a href="filme-dune-messiah.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;text-decoration:none;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Dune: Part Three (2026)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(155,89,182,0.08);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="personagens.html" class="btn btn-outline">← Todos os Personagens</a>
+      <a href="personagem-alia.html" class="btn btn-outline">Alia Atreides</a>
+      <a href="personagem-irulan.html" class="btn btn-outline">Princesa Irulan</a>
+      <a href="filme-dune-messiah.html" class="btn btn-primary">Dune: Part Three →</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

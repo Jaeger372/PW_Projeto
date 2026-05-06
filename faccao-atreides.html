@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="atreides">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Atreides — Facções — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#4a9e6a;--fc-bg:#071510;--fc-glow:rgba(74,158,106,0.12);}
+    .f-hero{min-height:70vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .f-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#071510,#0d2218,#050e08);}
+    .f-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25;filter:saturate(0.5) brightness(0.5);}
+    .f-hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .f-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .f-symbol{font-size:8rem;color:rgba(74,158,106,0.08);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:5%;bottom:2rem;line-height:1;}
+    .f-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(74,158,106,0.12);border:1px solid rgba(74,158,106,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .f-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .f-motto{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .f-body{padding:5rem 0;background:var(--color-black);}
+    .f-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(74,158,106,.15);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(74,158,106,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .member-list{display:flex;flex-direction:column;gap:.75rem;}
+    .member-item{display:flex;align-items:center;gap:1rem;padding:.75rem;background:rgba(74,158,106,.04);border:1px solid rgba(74,158,106,.1);border-radius:6px;text-decoration:none;transition:all .3s;}
+    .member-item:hover{border-color:rgba(74,158,106,.3);}
+    .member-icon{width:36px;height:36px;border-radius:50%;background:rgba(74,158,106,.12);border:1px solid rgba(74,158,106,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+    .member-name{font-family:'Cinzel',serif;font-size:.85rem;color:#f5f0e8;}
+    .member-role{font-size:.7rem;color:rgba(74,158,106,.7);text-transform:uppercase;letter-spacing:.1em;}
+    @media(max-width:900px){.f-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="f-hero">
+  <div class="f-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=iPlL%2B8l7qwHPavkX4iiej2Qu66CbU8M3LmO6yez3T%2FbqBde2PH%2B0DvwWJcnUR9HOmLQCOFee57ABPDwZ74eaAcagiOfffYb%2FmuVoqEAC8zNusVfjhFXkvH4%3D&u2=bp2LjAnoi%2FyhWEic&width=2560" alt="Casa Atreides">
+  </div><div class="f-hero-pattern"></div>
+  <div class="f-symbol">⚔</div>
+  <div class="container f-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="faccoes.html">Facções</a><span>/</span><span class="current">Atreides</span></nav>
+    <div class="f-tag">⚔ Casa Nobre do Landsraad</div>
+    <h1 class="f-name">Casa<br>Atreides</h1>
+    <p class="f-motto">"Coragem e Honra"</p>
+  </div>
+</section>
+
+<section class="f-body">
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="f-section reveal">
+          <h2>História</h2>
+          <p>A Casa Atreides é uma das mais antigas e respeitadas casas nobres do Imperium Galáctico. A sua linhagem remonta ao mítico Duque Agamemnon da Terra — embora esta ligação seja mais simbólica do que genealógica. O que distingue os Atreides ao longo dos séculos é uma filosofia consistente: o poder deve servir o povo que governa.</p>
+          <p>Governantes do planeta oceânico Caladan há 26 gerações, os Atreides construíram uma reputação de lealdade e justiça que os tornou amados pelos seus vassalos e respeitados (com desconfiança) pelas outras casas. Esta popularidade é exatamente o que os coloca na mira do Imperador Shaddam IV.</p>
+          <p>Quando os Atreides recebem o controlo de Arrakis — aparentemente um prémio, na realidade uma armadilha mortal — a casa enfrenta o maior desafio da sua existência. O Duque Leto sabe que é uma armadilha. Vai mesmo assim, porque recusar equivale a perder tudo. É uma decisão trágica e nobre em partes iguais.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Filosofia e Governação</h2>
+          <h3>O Poder ao Serviço do Povo</h3>
+          <p>Os Atreides acreditam genuinamente que a lealdade é uma troca, não uma imposição. O Duque Leto tratava os seus soldados e vassalos como pessoas com dignidade — uma abordagem radical num Imperium onde a maioria dos nobres vê os seus súbditos como recursos descartáveis.</p>
+          <h3>Estratégia vs. Força Bruta</h3>
+          <p>Militarmente, os Atreides preferem a inteligência à brutalidade. Os seus soldados são bem treinados e leais. Os seus generais — Gurney Halleck, Duncan Idaho, Thufir Hawat — são veteranos com décadas de experiência. A estratégia Atreides prioriza posições defensáveis, informação de qualidade e coesão interna.</p>
+          <h3>O Problema da Nobreza</h3>
+          <p>A principal vulnerabilidade dos Atreides é, paradoxalmente, a sua virtude. Num universo de traição e poder nu, a honra pode ser explorada. O Duque Leto sabe que tem um traidor entre os seus — e não consegue descobrir quem. A confiança que define os Atreides torna-os vulneráveis à traição que os destrói.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Estratégia Política</h2>
+          <ul>
+            <li><strong>Consolidação de lealdades</strong> — Os Atreides trabalham para criar laços pessoais reais com aliados, não apenas acordos frios.</li>
+            <li><strong>Inteligência superior</strong> — Thufir Hawat como Mentat garante análise política de alto nível constante.</li>
+            <li><strong>Popularidade como escudo</strong> — A boa reputação do Duque dificulta ataques abertos dos inimigos.</li>
+            <li><strong>Alianças com Fremen</strong> — Duncan Idaho é enviado para estabelecer contacto com os Fremen antes da chegada da casa — uma visão estratégica rara.</li>
+            <li><strong>Controlo da especiaria</strong> — Tomar Arrakis significaria quebrar o monopólio económico Harkonnen e fortalecer a posição no CHOAM.</li>
+          </ul>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Arma Secreta: A Lealdade</h2>
+          <p>O elemento mais poderoso da Casa Atreides não é militar — é humano. Os soldados Atreides lutam por escolha, não por medo. Quando a casa cai em Arrakis, múltiplos vassalos e soldados resistem até à morte — não por obrigação, mas por amor genuíno. Gurney Halleck passa anos como contrabandista esperando a oportunidade de servir de novo. Duncan Idaho morre para proteger Paul e Jessica. Thufir Hawat mantém a sua lealdade mesmo sendo usado pelos Harkonnen.</p>
+          <p>Esta lealdade é o legado mais duradouro da Casa Atreides — e a semente de que Paul Muad'Dib precisou para construir o que se seguiu.</p>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Planeta Base</span><span>Caladan</span></div>
+          <div class="stat-row"><span>Planeta Secundário</span><span>Arrakis</span></div>
+          <div class="stat-row"><span>Cor Heráldica</span><span>Verde e Ouro</span></div>
+          <div class="stat-row"><span>Símbolo</span><span>Falcão Atreides</span></div>
+          <div class="stat-row"><span>Lema</span><span>"Coragem e Honra"</span></div>
+          <div class="stat-row"><span>Influência</span><span>Alta (Landsraad)</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Forças e Fraquezas</h4>
+          <div class="stat-row"><span>Lealdade interna</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Reputação</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Capacidade militar</span><span>★★★★☆</span></div>
+          <div class="stat-row"><span>Recursos económicos</span><span>★★★☆☆</span></div>
+          <div class="stat-row"><span>Resistência à traição</span><span>★★☆☆☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--fc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Membros Principais</h4>
+          <div class="member-list">
+            <a href="personagem-paul.html" class="member-item"><div class="member-icon">⚔</div><div><div class="member-name">Paul Atreides</div><div class="member-role">Herdeiro · Duque</div></div></a>
+            <a href="personagem-jessica.html" class="member-item"><div class="member-icon">◉</div><div><div class="member-name">Lady Jessica</div><div class="member-role">Concubina · BG</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚔</div><div><div class="member-name">Duque Leto I</div><div class="member-role">Chefe de Casa</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚔</div><div><div class="member-name">Duncan Idaho</div><div class="member-role">Mestre de Espadas</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚔</div><div><div class="member-name">Gurney Halleck</div><div class="member-role">Mestre de Armas</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚔</div><div><div class="member-name">Thufir Hawat</div><div class="member-role">Mentat</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-block reveal" style="max-width:700px;margin:0 auto 4rem;border-left-color:var(--fc);">
+  <p>"Um Duque que não serve o seu povo não merece ser chamado de Duque."</p>
+  <cite>Duque Leto I Atreides</cite>
+</div>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(74,158,106,0.1);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="faccao-harkonnen.html" class="btn btn-outline">Casa Harkonnen</a>
+      <a href="faccao-fremen.html" class="btn btn-outline">Fremen</a>
+      <a href="faccao-bene-gesserit.html" class="btn btn-outline">Bene Gesserit</a>
+      <a href="faccoes.html" class="btn btn-ghost">Todas as Facções</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

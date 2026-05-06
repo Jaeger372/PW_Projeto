@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecnologia — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,.04);}
+    .tech-card{background:var(--color-black);padding:3rem;position:relative;overflow:hidden;transition:background .3s;cursor:pointer;}
+    .tech-card:hover{background:rgba(255,255,255,.02);}
+    .tech-icon{font-size:3rem;margin-bottom:1.5rem;display:block;}
+    .tech-name{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--faction-primary,#d4a843);margin-bottom:.5rem;}
+    .tech-tagline{font-family:'Crimson Text',serif;font-style:italic;color:rgba(245,240,232,.4);margin-bottom:1rem;font-size:.95rem;}
+    .tech-desc{font-size:.9rem;color:rgba(245,240,232,.55);line-height:1.9;}
+    .tech-extra{display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.04);}
+    .tech-extra.open{display:block;animation:fadeIn .4s ease;}
+    .tech-extra p{font-size:.85rem;color:rgba(245,240,232,.5);line-height:1.9;margin-bottom:.75rem;}
+    .tech-extra ul{display:flex;flex-direction:column;gap:.4rem;}
+    .tech-extra ul li{font-size:.85rem;color:rgba(245,240,232,.5);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .tech-extra ul li::before{content:'◆';position:absolute;left:0;color:var(--faction-primary,#d4a843);font-size:.45rem;top:.35rem;}
+    .tech-expand{margin-top:1rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(212,168,67,.5);background:none;border:none;cursor:pointer;font-family:'Raleway',sans-serif;transition:color .3s;}
+    .tech-expand:hover{color:var(--faction-primary,#d4a843);}
+    .weapons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+    .weapon-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px;}
+    .weapon-name{font-family:'Cinzel',serif;font-size:.9rem;color:var(--faction-primary,#d4a843);margin-bottom:.4rem;}
+    .weapon-desc{font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @media(max-width:768px){.tech-grid{grid-template-columns:1fr;}.weapons-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:500px){.weapons-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero" style="position:relative;overflow:hidden;">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#060408,#1008010,#040206);"></div>
+  <img src="https://sspark.genspark.ai/cfimages?u1=WNQGFSOM49iKzu9RM%2FTOTDGKmiV2NZdw85eaj2YkXNkfH3JbXF8o0tRaN10tISr%2F25Oy%2BQaNdzuleA2r0E%2Fznc8PMhMy6chT6TmFwCWYmJ2sXGH4r3imYwxxD67JlHrWhm4tTCEh&u2=sVK7tcgHWo6zHbmr&width=2560" alt="Dune Technology" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.12;filter:saturate(0.3) brightness(0.5);z-index:0;">
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Tecnologia</span></nav>
+    <p class="section-label">O Sistema Humano</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">Tecnologia<br><span style="color:var(--faction-primary,#d4a843);">Humana</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:600px;line-height:1.9;">Num universo sem computadores, os humanos tornaram-se a tecnologia. Mentats, Bene Gesserit, a Guilda — cada ordem é uma solução humana para um problema que as máquinas outrora resolviam.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Ordens e Capacidades</p><h2 class="section-title">Os Pilares da Civilização</h2><div class="section-divider"></div></div>
+
+    <div class="tech-grid reveal">
+
+      <!-- MENTATS -->
+      <div class="tech-card">
+        <span class="tech-icon">🧠</span>
+        <h3 class="tech-name">Mentats</h3>
+        <p class="tech-tagline">"Computadores humanos — a mente como máquina"</p>
+        <p class="tech-desc">Após a Jihad Butleriana proibir os computadores, os Mentats emergiram como a resposta: humanos treinados desde cedo para funcionar como processadores de dados vivos. Análise lógica, previsão de probabilidades, síntese de informação complexa — tudo realizado pela mente humana sem qualquer suporte eletrónico.</p>
+        <button class="tech-expand" onclick="toggleTech('mentat')">Saber mais →</button>
+        <div class="tech-extra" id="mentat">
+          <p>O treino de um Mentat começa na infância e dura décadas. Envolve o desenvolvimento de capacidades de memória prodigiosa, raciocínio abstrato e a capacidade de processar grandes volumes de informação para produzir avaliações de probabilidade precisas.</p>
+          <p>Existe o Suco de Pré-especiaria — uma substância que aguça temporariamente as capacidades Mentat, tornando os olhos ligeiramente tingidos de vermelho. É uma ferramenta comum para análises críticas.</p>
+          <ul>
+            <li><strong>Thufir Hawat</strong> — O Mentat dos Atreides: veterano, leal, mas eventualmente vítima de uma traição que ele próprio não conseguiu prever.</li>
+            <li><strong>Piter de Vries</strong> — O "Mentat Torcido" dos Harkonnen: as suas capacidades analíticas são combinadas com crueldade deliberada.</li>
+            <li><strong>Paul Atreides</strong> — Recebeu treino Mentat de Thufir Hawat, o que combinado com as suas capacidades Bene Gesserit e presciente cria algo sem precedentes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BENE GESSERIT -->
+      <div class="tech-card">
+        <span class="tech-icon">◉</span>
+        <h3 class="tech-name">Bene Gesserit</h3>
+        <p class="tech-tagline">"O corpo como instrumento de precisão absoluta"</p>
+        <p class="tech-desc">A Bene Gesserit desenvolveu ao longo de séculos um conjunto de disciplinas que transformam o corpo e a mente humana em instrumentos de precisão sobre-humana. Prana-Bindu, A Voz, Perceção Aumentada, Controlo Biológico — capacidades que parecem sobrenaturais mas têm bases em treino rigoroso.</p>
+        <button class="tech-expand" onclick="toggleTech('bg')">Saber mais →</button>
+        <div class="tech-extra" id="bg">
+          <p>O Prana-Bindu é o controlo muscular e nervoso total — a Bene Gesserit pode ativar qualquer músculo do corpo isoladamente, alterar o batimento cardíaco, regular a circulação, sintetizar antídotos internamente. É um nível de controlo biológico que nenhuma tecnologia mecânica consegue replicar.</p>
+          <p>A Voz é talvez a capacidade mais perturbadora: usando frequências, tonalidades e modulações específicas da voz humana, uma Bene Gesserit treinada pode forçar obediência imediata em qualquer ser humano não treinado para resistir. É a palavra como arma.</p>
+          <ul>
+            <li>O treino Bene Gesserit começa na infância e é brutalmente exigente — muitas candidatas não completam o processo.</li>
+            <li>A Reverenda Mãe é o nível mais elevado — alcançado através do ritual da Água da Vida que transmite a Memória Ancestral.</li>
+            <li>As Bene Gesserit são deliberadamente mantidas fora de posições de poder visível para preservar a sua influência invisível.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- GUILDA -->
+      <div class="tech-card">
+        <span class="tech-icon">⚓</span>
+        <h3 class="tech-name">Guilda dos Navegadores</h3>
+        <p class="tech-tagline">"A especiaria como portal para o universo"</p>
+        <p class="tech-desc">Os Navegadores da Guilda Espacial são seres que já não são completamente humanos. Imergidos em tanques de especiaria pura desde jovens, os seus corpos e mentes transformam-se ao longo de décadas numa forma de ser totalmente nova — capaz de ver o espaço entre as estrelas e encontrar o caminho seguro através do dobramento espacial.</p>
+        <button class="tech-expand" onclick="toggleTech('guilda')">Saber mais →</button>
+        <div class="tech-extra" id="guilda">
+          <p>O dobramento espacial (Heighliner) não usa propulsão física para atravessar o espaço — dobra o próprio espaço, movendo um ponto até outro. Mas este processo requer que alguém "veja" o espaço dobrável com antecedência suficiente para garantir que o destino está livre. A especiaria dá aos Navegadores esta visão presciente limitada.</p>
+          <ul>
+            <li>Os Heighliner — as naves da Guilda — são estruturas de escala imensurável, capazes de transportar frotas inteiras de uma vez.</li>
+            <li>O monopólio da Guilda sobre o transporte interestelar é o elemento que torna a especiaria insubstituível: sem Navegadores, nenhum exército se move, nenhum comércio existe.</li>
+            <li>Os Navegadores vivem em câmaras de especiaria — transformados ao ponto de terem morfologia corporal não-humana mas capacidades mentais sobrenaturais.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ESPECIARIA -->
+      <div class="tech-card">
+        <span class="tech-icon">✦</span>
+        <h3 class="tech-name">A Melange — A Especiaria</h3>
+        <p class="tech-tagline">"O recurso que sustenta toda a civilização"</p>
+        <p class="tech-desc">A Melange não é tecnologia no sentido convencional — mas é a fundação de toda a tecnologia do universo de Dune. Sem ela, não há Navegadores, não há transporte interestelar, não há Reverenda Mãe, não há presciente. É literalmente a substância que mantém o universo coeso.</p>
+        <button class="tech-expand" onclick="toggleTech('spice')">Saber mais →</button>
+        <div class="tech-extra" id="spice">
+          <p>A especiaria estende a vida — consumidores regulares podem viver várias vezes a duração humana normal. Altera a pigmentação dos olhos. Em doses suficientes, desperta capacidades prescientes. Em doses maciças (como os Navegadores consomem), transforma completamente o ser.</p>
+          <ul>
+            <li>Só é produzida em Arrakis — pelo ciclo de vida dos Vermes da Areia.</li>
+            <li>A privação de especiaria mata consumidores habituais — criando uma dependência que é simultaneamente o maior poder e a maior vulnerabilidade de quem a usa.</li>
+            <li>A sua cor é azul-dourada e cheira a canela. Para os Fremen, que a consomem desde nascença, tem implicações espirituais profundas.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WEAPONS -->
+<section class="section" style="background:rgba(255,255,255,0.01);border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Armamento</p><h2 class="section-title">Armas e Tecnologia de Guerra</h2><div class="section-divider"></div><p class="section-desc">Os Escudos de Holtzman mudaram tudo — tornando as armas brancas o centro da guerra novamente.</p></div>
+    <div class="weapons-grid reveal">
+      <div class="weapon-card">
+        <div class="weapon-name">Escudos de Holtzman</div>
+        <div class="weapon-desc">Barreiras de energia que bloqueiam projéteis de alta velocidade. Penetráveis apenas por lâminas que se movam lentamente. Revolucionaram a guerra — tornando espadas e facas dominantes novamente.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-name">Crysknife</div>
+        <div class="weapon-desc">A faca sagrada dos Fremen, fabricada com dentes de Verme da Areia. Uma vez desembainhada, deve ser "saciada" em sangue. Arma icónica do povo de Arrakis.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-name">Lasgun</div>
+        <div class="weapon-desc">Arma de feixe de laser. Extremamente poderosa mas inutilizável perto de Escudos de Holtzman — a interação cria uma explosão nuclear que destrói atacante e alvo.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-name">Gom Jabbar</div>
+        <div class="weapon-desc">A agulha da Bene Gesserit — com neurotoxina mortal de ação instantânea. Usada no teste de humanidade: quem retira a mão da dor antes do tempo morre. Símbolo do controlo sobre o instinto animal.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-name">Armas Atómicas</div>
+        <div class="weapon-desc">Existem mas são sujeitas à Grande Convenção — proibidas contra seres humanos. Violá-la cria o direito à jihad de toda a humanidade contra o violador. Paul viola esta convenção contra os Sardaukar como ato extremo de poder.</div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-name">Destiladores (Stillsuit)</div>
+        <div class="weapon-desc">Não são armas mas são sobrevivência — os fatos Fremen que reciclam toda a humidade do corpo. Permitem atravessar o deserto por dias. Sem eles, o homem morre em horas em Arrakis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function toggleTech(id){
+  const el=document.getElementById(id);
+  const btn=el.previousElementSibling;
+  if(el.classList.contains('open')){el.classList.remove('open');btn.textContent='Saber mais →';}
+  else{el.classList.add('open');btn.textContent='Fechar ←';}
+}
+</script>
+</body>
+</html>

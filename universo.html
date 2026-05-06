@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Universo de Dune — Portal Dune</title>
+  <meta name="description" content="Compreende o universo de Dune: Arrakis, a Especiaria, o Império, a Jihad Butleriana e muito mais.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .universe-hero { background: radial-gradient(ellipse at 60% 40%, rgba(212,168,67,0.06) 0%, transparent 60%), linear-gradient(180deg,#050402 0%,#0c0900 100%); }
+
+    .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: rgba(255,255,255,0.04); margin-bottom: 4rem; }
+    .topic-card { background: var(--color-black); padding: 3rem; position: relative; overflow: hidden; transition: background .3s; }
+    .topic-card:hover { background: rgba(255,255,255,0.02); }
+    .topic-card-number { font-family:'Cinzel',serif; font-size:4rem; font-weight:900; color:rgba(212,168,67,0.05); position:absolute; top:1rem; right:1.5rem; line-height:1; }
+    .topic-card-icon { font-size:2rem; margin-bottom:1rem; }
+    .topic-card-title { font-family:'Cinzel',serif; font-size:1.3rem; color:var(--faction-primary,#d4a843); margin-bottom:.75rem; }
+    .topic-card-text { font-size:.9rem; color:rgba(245,240,232,.55); line-height:1.85; }
+    .topic-card-link { display:inline-block; margin-top:1.2rem; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(212,168,67,.5); transition:color .3s; }
+    .topic-card:hover .topic-card-link { color:var(--faction-primary,#d4a843); }
+
+    .deep-section { padding:5rem 0; }
+    .deep-grid { display:grid; grid-template-columns:1fr 2fr; gap:4rem; align-items:start; }
+    .deep-sidebar { position:sticky; top:6rem; }
+    .deep-nav { display:flex; flex-direction:column; gap:.5rem; }
+    .deep-nav-item { padding:.75rem 1rem; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.4); cursor:pointer; border-left:2px solid transparent; transition:all .3s; }
+    .deep-nav-item.active, .deep-nav-item:hover { color:var(--faction-primary,#d4a843); border-left-color:var(--faction-primary,#d4a843); }
+
+    .deep-content h2 { font-family:'Cinzel',serif; font-size:clamp(1.6rem,3vw,2.4rem); color:var(--faction-primary,#d4a843); margin-bottom:1.5rem; }
+    .deep-content p { font-size:.95rem; color:rgba(245,240,232,.65); line-height:1.9; margin-bottom:1.2rem; }
+    .deep-content h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:#f5f0e8; margin:2rem 0 .75rem; }
+    .deep-content ul { margin-bottom:1.2rem; display:flex; flex-direction:column; gap:.5rem; }
+    .deep-content ul li { font-size:.9rem; color:rgba(245,240,232,.55); padding-left:1.2rem; position:relative; line-height:1.7; }
+    .deep-content ul li::before { content:'◆'; position:absolute; left:0; color:var(--faction-primary,#d4a843); font-size:.5rem; top:.4rem; }
+
+    .deep-section-block { display:none; }
+    .deep-section-block.active { display:block; animation:fadeIn .4s ease; }
+
+    .info-box { padding:1.5rem 2rem; background:rgba(212,168,67,.04); border:1px solid rgba(212,168,67,.12); border-radius:8px; margin:1.5rem 0; }
+    .info-box strong { color:var(--faction-primary,#d4a843); font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:.5rem; }
+    .info-box p { font-size:.85rem; color:rgba(245,240,232,.6); margin:0; }
+
+    .timeline-mini { display:flex; flex-direction:column; gap:1rem; margin:1.5rem 0; }
+    .tl-item { display:flex; gap:1rem; align-items:flex-start; }
+    .tl-dot { width:10px; height:10px; border-radius:50%; background:var(--faction-primary,#d4a843); flex-shrink:0; margin-top:.35rem; }
+    .tl-text { font-size:.85rem; color:rgba(245,240,232,.6); line-height:1.7; }
+    .tl-year { font-family:'Cinzel',serif; font-size:.75rem; color:var(--faction-primary,#d4a843); display:block; margin-bottom:.2rem; }
+
+    @media(max-width:768px){ .topic-grid{grid-template-columns:1fr;} .deep-grid{grid-template-columns:1fr;} .deep-sidebar{position:static;} .deep-nav{flex-direction:row;flex-wrap:wrap;} }
+    @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="page-hero universe-hero" style="position:relative;overflow:hidden;">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#0c0a04,#1a1205,#0a0800);"></div>
+  <img src="https://sspark.genspark.ai/cfimages?u1=l0FTYbi67OJLXssR%2Fvu1Q0fq9X8BaaPasi1l3oJXWYn%2BUvKjcAmjn9E%2BuPmGA2yiDerS0N1QqcViP8hpYAzBWmWLCdOKUKq1midYsGlAMYmbRXXsuvvx49tV6Yta7NsBb%2Bs&u2=69nRNsC0%2FXWknW4B&width=2560" alt="Arrakis Desert" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.2;filter:saturate(0.5) brightness(0.5);z-index:0;">
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Universo</span></nav>
+    <p class="section-label">Conhecimento</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">O Universo<br><span style="color:var(--faction-primary,#d4a843);">de Dune</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">Um cosmos de imenso detalhe e profundidade. Arrakis, o Imperium, a Especiaria — tudo conectado numa tapeçaria única de poder, religião e ecologia.</p>
+  </div>
+</section>
+
+<!-- TOPIC OVERVIEW GRID -->
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Fundamentos</p>
+      <h2 class="section-title">Os Pilares do Universo</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="topic-grid reveal">
+      <div class="topic-card" onclick="showSection('arrakis')">
+        <span class="topic-card-number">01</span>
+        <div class="topic-card-icon">🌍</div>
+        <h3 class="topic-card-title">Arrakis — O Planeta Deserto</h3>
+        <p class="topic-card-text">O único lugar no universo onde a Especiaria pode ser encontrada. Um planeta brutal, belo e misterioso que dita o destino de toda a humanidade.</p>
+        <span class="topic-card-link">Aprofundar →</span>
+      </div>
+      <div class="topic-card" onclick="showSection('especiaria')">
+        <span class="topic-card-number">02</span>
+        <div class="topic-card-icon">✦</div>
+        <h3 class="topic-card-title">A Especiaria Melange</h3>
+        <p class="topic-card-text">A substância mais valiosa do universo. Estende a vida, expande a consciência e permite a navegação interestelar. Quem a controla, controla tudo.</p>
+        <span class="topic-card-link">Aprofundar →</span>
+      </div>
+      <div class="topic-card" onclick="showSection('imperio')">
+        <span class="topic-card-number">03</span>
+        <div class="topic-card-icon">👑</div>
+        <h3 class="topic-card-title">O Imperium</h3>
+        <p class="topic-card-text">Uma estrutura de poder feudal espalhada por milhares de planetas. O Imperador, as Grandes Casas e o CHOAM formam um equilíbrio frágil e brutal.</p>
+        <span class="topic-card-link">Aprofundar →</span>
+      </div>
+      <div class="topic-card" onclick="showSection('jihad')">
+        <span class="topic-card-number">04</span>
+        <div class="topic-card-icon">⚙</div>
+        <h3 class="topic-card-title">A Jihad Butleriana</h3>
+        <p class="topic-card-text">O evento que proibiu os computadores e máquinas pensantes. Uma revolução que redefiniu o que significa ser humano — e criou ordens como os Mentats.</p>
+        <span class="topic-card-link">Aprofundar →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section class="deep-section">
+  <div class="container">
+    <div class="deep-grid">
+      <div class="deep-sidebar reveal-left">
+        <p style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faction-primary,#d4a843);margin-bottom:1rem;">Navegar</p>
+        <div class="deep-nav">
+          <div class="deep-nav-item active" onclick="showSection('arrakis')">Arrakis</div>
+          <div class="deep-nav-item" onclick="showSection('especiaria')">Especiaria</div>
+          <div class="deep-nav-item" onclick="showSection('imperio')">O Imperium</div>
+          <div class="deep-nav-item" onclick="showSection('jihad')">Jihad Butleriana</div>
+          <div class="deep-nav-item" onclick="showSection('fremen')">Os Fremen</div>
+          <div class="deep-nav-item" onclick="showSection('ecologia')">Ecologia de Arrakis</div>
+          <div class="deep-nav-item" onclick="showSection('choam')">CHOAM</div>
+        </div>
+      </div>
+      <div class="deep-content reveal-right">
+
+        <!-- ARRAKIS -->
+        <div class="deep-section-block active" id="sec-arrakis">
+          <h2>Arrakis — O Planeta Deserto</h2>
+          <p>Arrakis — também conhecida como Dune — é o terceiro planeta do sistema Canopus. É o único lugar em todo o universo conhecido onde a Especiaria Melange é produzida naturalmente. Esta singularidade torna-o o centro político, económico e espiritual do Imperium Galáctico.</p>
+          <p>O planeta é coberto quase inteiramente por desertos de areia. As temperaturas durante o dia atingem valores letais para seres humanos não adaptados. As noites são geladas. A água é o bem mais precioso da sociedade Fremen — mais valioso do que a própria especiaria para os seus habitantes.</p>
+          <div class="info-box"><strong>Dados Geográficos</strong><p>Superfície: ~95% deserto arenoso · Polar norte: calotas de gelo permanente · Maior duna: Harg Pass (centenas de metros de altura) · Fauna dominante: Vermes da Areia (Shai-Hulud)</p></div>
+          <h3>Zonas Habitadas</h3>
+          <ul>
+            <li><strong>Arrakeen</strong> — A capital imperial, sede do poder administrativo e da extração de especiaria.</li>
+            <li><strong>Carthag</strong> — A fortaleza dos Harkonnen, construída para esmagar qualquer resistência.</li>
+            <li><strong>Sietch Tabr</strong> — O principal sietch Fremen, lar de Stilgar e dos seus guerreiros.</li>
+            <li><strong>Sietch Jacurutu</strong> — Um sietch lendário, considerado amaldiçoado pelos Fremen.</li>
+          </ul>
+          <h3>O Clima Brutal</h3>
+          <p>As tempestades de areia de Arrakis podem soterrar cidades inteiras. Os Fremen desenvolveram destilarias corporais — os "destiladores" — para recuperar a água transpirada e exalada pelo corpo, permitindo sobrevivência no deserto por dias. O planeta é um mestre implacável: só os mais adaptados sobrevivem.</p>
+          <div class="info-box"><strong>Importância Estratégica</strong><p>Controlar Arrakis é controlar a especiaria. Controlar a especiaria é controlar a navegação interestelar, o comércio, a política e a consciência expandida de toda a humanidade. É literalmente o centro do universo.</p></div>
+        </div>
+
+        <!-- ESPECIARIA -->
+        <div class="deep-section-block" id="sec-especiaria">
+          <h2>A Especiaria Melange</h2>
+          <p>A Melange — vulgarmente chamada "especiaria" — é uma substância psicoativa de cor azul-dourada com um aroma de canela. É o recurso mais valioso do universo conhecido, produzido exclusivamente nas areias de Arrakis pelos ciclos biológicos dos Vermes da Areia.</p>
+          <p>A especiaria não é apenas uma droga. É a base de toda a civilização humana galáctica. Sem ela, a Guilda dos Navegadores perde a capacidade de dobrar o espaço — e o transporte interestelar colapsa. Sem ela, as capacidades mentais dos Mentats e das Bene Gesserit diminuem. É a força vital do cosmos.</p>
+          <h3>Efeitos na Mente e no Corpo</h3>
+          <ul>
+            <li><strong>Extensão da vida</strong> — O consumo regular prolonga significativamente a longevidade humana.</li>
+            <li><strong>Expansão da consciência</strong> — Permite visão presciente em doses elevadas; os Navegadores são completamente imersos nela.</li>
+            <li><strong>Pigmentação ocular</strong> — Os consumidores regulares desenvolvem os "Olhos de Ibad": a íris azul profundo que marca os Fremen e viciados.</li>
+            <li><strong>Dependência total</strong> — A privação de especiaria é fatal para consumidores habituais. Uma vez iniciado, não há retorno.</li>
+            <li><strong>Despertar presciente</strong> — Em doses maciças ou combinado com capacidades Bene Gesserit, pode despertar visão do futuro.</li>
+          </ul>
+          <div class="info-box"><strong>Origem Biológica</strong><p>A especiaria é produzida pelos ciclos de vida das Sand Trout (trutas de areia) e dos grandes Vermes da Areia. As larvas libertam uma substância pré-especiaria que, ao contactar com água subterrânea, produz uma explosão química — a "explosão de bolhas" — que forma a Melange. Por isso, a água é inimiga do processo de produção.</p></div>
+          <h3>Metáfora do Petróleo</h3>
+          <p>Frank Herbert construiu conscientemente a especiaria como uma alegoria ao petróleo e à dependência energética do século XX. Um único recurso essencial numa região instável, controlado por potências imperiais, capaz de desencadear guerras e colapsos civilizacionais. A mensagem de Herbert permanece devastadoramente relevante.</p>
+        </div>
+
+        <!-- IMPERIUM -->
+        <div class="deep-section-block" id="sec-imperio">
+          <h2>O Imperium Galáctico</h2>
+          <p>O Imperium é a estrutura de governo que controla milhares de planetas habitados. É uma teocracia feudal — um sistema em que o poder é distribuído através de casas nobres que devem lealdade ao Imperador Padishah, mas que também se equilibram umas às outras numa dança constante de aliança e traição.</p>
+          <h3>Estrutura de Poder</h3>
+          <ul>
+            <li><strong>O Imperador Padishah</strong> — No período do livro original, é Shaddam IV da Casa Corrino. Governa com poder absoluto — em teoria. Na prática, depende do equilíbrio de forças.</li>
+            <li><strong>As Grandes Casas (Landsraad)</strong> — Centenas de casas nobres com poder territorial. Controlam planetas, exércitos e recursos. Atreides, Harkonnen, Corrino são das mais poderosas.</li>
+            <li><strong>A Guilda dos Navegadores</strong> — Monopólio absoluto do transporte interestelar. Sem a Guilda, nenhum exército se move, nenhum comércio existe.</li>
+            <li><strong>CHOAM</strong> — A empresa que controla todo o comércio do Imperium. Quem tem ações do CHOAM tem poder económico real.</li>
+            <li><strong>Bene Gesserit</strong> — A ordem de mulheres que manipula as linhagens genéticas e a política há milénios.</li>
+          </ul>
+          <div class="info-box"><strong>O Grande Equilíbrio</strong><p>O genial sistema político de Herbert: o Imperador teme o Landsraad unido; o Landsraad teme o exército imperial (os Sardaukar); todos temem a Guilda que pode bloquear qualquer movimento de tropas. Este equilíbrio de terror é o que mantém a "paz" do Imperium.</p></div>
+          <h3>Os Sardaukar</h3>
+          <p>Os soldados do Imperador. Treinados no planeta prisão Salusa Secundus — um mundo de condições brutais que forja guerreiros incomparáveis. São o segredo militar de Shaddam IV e a espinha dorsal do seu poder. Apenas os Fremen de Arrakis rivalizam com eles em ferocidade.</p>
+        </div>
+
+        <!-- JIHAD -->
+        <div class="deep-section-block" id="sec-jihad">
+          <h2>A Jihad Butleriana</h2>
+          <p>Aproximadamente 10.000 anos antes dos eventos do primeiro livro, a humanidade travou a guerra mais importante da sua história: a Jihad Butleriana. Foi a revolta contra as máquinas pensantes — os computadores e robots que tinham escravizado a mente humana através da dependência e, eventualmente, do domínio físico.</p>
+          <p>O mandamento sagrado que emergiu desta guerra está gravado na Bíblia Católica Naranja: <em>"Não farás uma máquina à semelhança da mente humana."</em> Este interdito moldou toda a civilização que se seguiu.</p>
+          <h3>Consequências para a Civilização</h3>
+          <ul>
+            <li><strong>Mentats</strong> — Humanos treinados para funcionar como computadores vivos: análise, previsão, processamento de dados.</li>
+            <li><strong>Bene Gesserit</strong> — Desenvolvem capacidades mentais e físicas extraordinárias através de séculos de treino e seleção genética.</li>
+            <li><strong>Guilda dos Navegadores</strong> — Usam especiaria para expandir a consciência e calcular rotas de dobramento espacial.</li>
+            <li><strong>Txecos</strong> — Mestres das armas brancas: facas, escudos de Holtzman tornam as armas de projétil obsoletas.</li>
+          </ul>
+          <div class="info-box"><strong>O Paradoxo de Herbert</strong><p>Herbert propõe que a dependência de máquinas atrofia o potencial humano. A Jihad Butleriana forçou a humanidade a desenvolver-se internamente — a tornar-se mais humana. É uma crítica profunda à tecnologia como substituto da capacidade humana.</p></div>
+          <h3>Impacto nos Escudos de Holtzman</h3>
+          <p>A tecnologia que sobreviveu à Jihad inclui os escudos de energia Holtzman — barreiras que bloqueiam projéteis de alta velocidade mas que são penetráveis por lâminas lentas. Este desenvolvimento revolucionou a guerra, tornando o combate corpo a corpo novamente dominante e fazendo das espadas e facas as armas mais importantes do Imperium.</p>
+        </div>
+
+        <!-- FREMEN -->
+        <div class="deep-section-block" id="sec-fremen">
+          <h2>Os Fremen</h2>
+          <p>Os Fremen são os habitantes nativos de Arrakis — o povo do deserto. Descendentes de refugiados Zensunni que chegaram a Arrakis há milénios, os Fremen adaptaram-se completamente ao ambiente brutal do planeta deserto. São, por necessidade, os guerreiros mais formidáveis do universo.</p>
+          <p>Para os poderes do Imperium, os Fremen são pouco mais do que selvagens insignificantes — criminosos do deserto sem importância política. Esta perceção errada custaria muito caro a muitos invasores.</p>
+          <h3>Cultura e Sociedade</h3>
+          <ul>
+            <li><strong>Sietch</strong> — A unidade básica social Fremen. Uma comunidade escondida nas rochas do deserto, altamente organizada e autossuficiente.</li>
+            <li><strong>Naib</strong> — O líder de um sietch. Posição de autoridade total mas constantemente desafiável pelo combate ritual.</li>
+            <li><strong>A Água como Sagrado</strong> — Os Fremen acreditam que água desperdiçada é uma profanação. Os seus rituais fúnebres envolvem recolher toda a água do corpo do morto para a comunidade.</li>
+            <li><strong>Destiladores</strong> — Os fatos que cobrem os Fremen no deserto são destiladores corporais que reciclam toda a humidade do corpo.</li>
+            <li><strong>Shai-Hulud</strong> — Os grandes Vermes da Areia são objetos de veneração religiosa. Montar um verme é um rito de passagem.</li>
+          </ul>
+          <div class="info-box"><strong>O Sonho Verde</strong><p>Os Fremen guardam um sonho antigo: transformar Arrakis num planeta verde e com água abundante. Liderados pela Reverenda Mãe Ramallo e depois por Chani, trabalham durante gerações numa terraformação secreta que poderia mudar o planeta para sempre.</p></div>
+        </div>
+
+        <!-- ECOLOGIA -->
+        <div class="deep-section-block" id="sec-ecologia">
+          <h2>Ecologia de Arrakis</h2>
+          <p>Frank Herbert era um ecologista apaixonado muito antes de escrever Dune. O livro é profundamente informado pela ecologia sistémica — a ideia de que todos os elementos de um ecossistema estão interligados e que mexer num ponto pode ter consequências imprevisíveis em todo o sistema.</p>
+          <h3>O Ciclo da Especiaria</h3>
+          <div class="timeline-mini">
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-year">Fase 1</span>As Sand Trout (trutas de areia) encapsulam a água subterrânea de Arrakis para criar zonas secas onde podem prosperar.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-year">Fase 2</span>As bolsas de pré-especiaria formam-se abaixo da superfície quando as larvas libertam substratos bioquímicos.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-year">Fase 3</span>O contacto com oxigênio ou água causa explosões — as "sopradas" — que libertam a especiaria para a superfície.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-year">Fase 4</span>Os Vermes adultos são a forma madura das Sand Trout. Protegem os depósitos de especiaria e são o elo final do ciclo.</div></div>
+          </div>
+          <h3>Interdependência Frágil</h3>
+          <p>Introduzir água em Arrakis destruiria os Vermes da Areia — e portanto a produção de especiaria. Terraformar o planeta significaria o fim da Melange. Este dilema está no coração do conflito em Dune Messiah e Filhos de Dune: o sonho verde dos Fremen e o pesadelo ecológico que representa.</p>
+        </div>
+
+        <!-- CHOAM -->
+        <div class="deep-section-block" id="sec-choam">
+          <h2>CHOAM — Companhia para o Comércio Espaçal</h2>
+          <p>A Combine Honnete Ober Advancer Mercantiles — CHOAM — é a entidade económica que controla todo o comércio interestelar do Imperium. Quem controla ações do CHOAM controla riqueza real. A especiaria é o seu produto mais valioso.</p>
+          <p>As quotas do CHOAM são distribuídas pelo Imperador entre as Grandes Casas como recompensa e instrumento de poder. Retirar a quota de uma casa é equivalente a condená-la à ruína económica. É uma das ferramentas políticas mais poderosas do Imperador.</p>
+          <h3>Estrutura de Controlo</h3>
+          <ul>
+            <li>O Imperador possui a maior quota individual do CHOAM</li>
+            <li>A Guilda mantém quotas significativas em troca do monopólio de transporte</li>
+            <li>As Bene Gesserit recebem quotas pela sua influência política e conselho</li>
+            <li>As Grandes Casas do Landsraad dividem o restante entre si</li>
+          </ul>
+          <div class="info-box"><strong>Relevância Contemporânea</strong><p>CHOAM é a representação de Herbert das corporações multinacionais e do capitalismo de extração de recursos naturais. A ideia de que uma única empresa pode ter poder sobre governos e destinos de planetas inteiros é uma crítica direta ao poder corporativo do século XX — e, argumentavelmente, do XXI.</p></div>
+        </div>
+
+      </div><!-- deep-content -->
+    </div><!-- deep-grid -->
+  </div>
+</section>
+
+<!-- CTA links -->
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="container text-center">
+    <p class="section-label">Continuar a Explorar</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Mergulha mais fundo</h2>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="planetas.html" class="btn btn-outline">Planetas</a>
+      <a href="faccoes.html" class="btn btn-outline">Facções</a>
+      <a href="tecnologia.html" class="btn btn-outline">Tecnologia</a>
+      <a href="personagens.html" class="btn btn-outline">Personagens</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function showSection(id){
+  document.querySelectorAll('.deep-section-block').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.deep-nav-item').forEach(n=>n.classList.remove('active'));
+  const block=document.getElementById('sec-'+id);
+  if(block) block.classList.add('active');
+  document.querySelectorAll('.deep-nav-item').forEach(n=>{ if(n.textContent.toLowerCase().includes(id.toLowerCase().split('-')[0])||n.getAttribute('onclick')&&n.getAttribute('onclick').includes(id)) n.classList.add('active'); });
+}
+</script>
+</body>
+</html>

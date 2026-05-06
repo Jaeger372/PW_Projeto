@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facções — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .factions-hero { background:radial-gradient(ellipse at 40% 60%,rgba(212,168,67,0.07) 0%,transparent 60%),linear-gradient(180deg,#050402 0%,#0a0802 100%); }
+    .faction-panels { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:rgba(255,255,255,0.03); margin-bottom:4rem; }
+    .fp { position:relative; padding:4rem 3rem; overflow:hidden; transition:all .4s; cursor:pointer; text-decoration:none; display:block; }
+    .fp::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s; }
+    .fp[data-f="atreides"]::before { background:radial-gradient(ellipse at bottom left,rgba(74,158,106,0.12) 0%,transparent 70%); }
+    .fp[data-f="harkonnen"]::before { background:radial-gradient(ellipse at bottom left,rgba(192,57,43,0.12) 0%,transparent 70%); }
+    .fp[data-f="fremen"]::before { background:radial-gradient(ellipse at bottom left,rgba(41,128,185,0.12) 0%,transparent 70%); }
+    .fp[data-f="bene-gesserit"]::before { background:radial-gradient(ellipse at bottom left,rgba(142,68,173,0.12) 0%,transparent 70%); }
+    .fp:hover::before { opacity:1; }
+    .fp-symbol { font-size:3.5rem; margin-bottom:1.5rem; display:block; transition:transform .3s; }
+    .fp:hover .fp-symbol { transform:scale(1.1); }
+    .fp[data-f="atreides"] .fp-symbol,.fp[data-f="atreides"] .fp-name,.fp[data-f="atreides"] .fp-link { color:#4a9e6a; }
+    .fp[data-f="harkonnen"] .fp-symbol,.fp[data-f="harkonnen"] .fp-name,.fp[data-f="harkonnen"] .fp-link { color:#c0392b; }
+    .fp[data-f="fremen"] .fp-symbol,.fp[data-f="fremen"] .fp-name,.fp[data-f="fremen"] .fp-link { color:#2980b9; }
+    .fp[data-f="bene-gesserit"] .fp-symbol,.fp[data-f="bene-gesserit"] .fp-name,.fp[data-f="bene-gesserit"] .fp-link { color:#8e44ad; }
+    .fp-label { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,.3); margin-bottom:.5rem; position:relative; z-index:1; }
+    .fp-name { font-family:'Cinzel',serif; font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; margin-bottom:.5rem; position:relative; z-index:1; }
+    .fp-motto { font-family:'Crimson Text',serif; font-style:italic; font-size:1rem; color:rgba(245,240,232,.4); margin-bottom:1rem; position:relative; z-index:1; }
+    .fp-desc { font-size:.9rem; color:rgba(245,240,232,.5); line-height:1.8; margin-bottom:1.5rem; position:relative; z-index:1; }
+    .fp-link { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; position:relative; z-index:1; }
+    .fp-link-neutral { opacity:0; transition:opacity .3s; }
+    .fp:hover .fp-link-neutral { opacity:1; }
+    .relations-map { padding:4rem 0; }
+    .relations-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.04); }
+    .rel-cell { padding:2rem; background:var(--color-black); }
+    .rel-cell-title { font-family:'Cinzel',serif; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:1rem; }
+    .rel-cell-title[data-f="atreides"] { color:#4a9e6a; }
+    .rel-cell-title[data-f="harkonnen"] { color:#c0392b; }
+    .rel-cell-title[data-f="fremen"] { color:#2980b9; }
+    .rel-cell-title[data-f="bene-gesserit"] { color:#8e44ad; }
+    .rel-entry { font-size:.8rem; color:rgba(245,240,232,.5); margin-bottom:.5rem; padding:.4rem .6rem; border-radius:4px; display:flex; align-items:center; gap:.5rem; }
+    .rel-entry.ally { background:rgba(74,158,106,.05); border-left:2px solid rgba(74,158,106,.3); }
+    .rel-entry.enemy { background:rgba(192,57,43,.05); border-left:2px solid rgba(192,57,43,.3); }
+    .rel-entry.neutral { background:rgba(212,168,67,.05); border-left:2px solid rgba(212,168,67,.2); }
+    @media(max-width:768px){ .faction-panels{grid-template-columns:1fr;} .relations-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:500px){ .relations-grid{grid-template-columns:1fr;} .fp{padding:2.5rem 1.5rem;} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero factions-hero" style="position:relative;overflow:hidden;">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#0a0802,#1a1208,#050402);"></div>
+  <img src="https://sspark.genspark.ai/cfimages?u1=ruz1vZxiTtvRm8nL6BNIPYMVnVJu5UR6SrIENIYOOcWZ3sWwKjlRM%2F1EnBdbk9zBZEdsRBHzxzZtmyTSV5DvyxqOZFRdzMjjfh4wfAXOQyMNybDsZ%2Fsr79T%2B%2F7BTQ7YTGDZKR3HzGCIz5aSN%2FA%3D%3D&u2=2cl6bhxfP1p%2BB8hO&width=2560" alt="Dune Factions" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.15;filter:saturate(0.4) brightness(0.5);z-index:0;">
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Facções</span></nav>
+    <p class="section-label">Política</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">As Grandes<br><span style="color:var(--faction-primary,#d4a843);">Facções</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">Cada facção representa uma visão diferente do que significa ter poder — e do custo de o manter.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">As Quatro Grandes Forças</p><h2 class="section-title">Escolhe o teu lado</h2><div class="section-divider"></div></div>
+    <div class="faction-panels reveal">
+      <a href="faccao-atreides.html" class="fp" data-f="atreides" style="position:relative;overflow:hidden;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=iPlL%2B8l7qwHPavkX4iiej2Qu66CbU8M3LmO6yez3T%2FbqBde2PH%2B0DvwWJcnUR9HOmLQCOFee57ABPDwZ74eaAcagiOfffYb%2FmuVoqEAC8zNusVfjhFXkvH4%3D&u2=bp2LjAnoi%2FyhWEic&width=2560" alt="Atreides" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;filter:saturate(0.4);z-index:0;pointer-events:none;">
+        <span class="fp-symbol" style="position:relative;z-index:1;">⚔</span>
+        <div class="fp-label">Casa Nobre</div>
+        <h2 class="fp-name">Casa Atreides</h2>
+        <p class="fp-motto">"Coragem e Honra"</p>
+        <p class="fp-desc">Uma das casas mais respeitadas do Landsraad. Os Atreides governam pelo exemplo e acreditam que a lealdade é conquistada, não imposta. O Duque Leto é amado pelo seu povo — o que o torna perigoso.</p>
+        <span class="fp-link fp-link-neutral">Explorar Atreides →</span>
+      </a>
+      <a href="faccao-harkonnen.html" class="fp" data-f="harkonnen" style="position:relative;overflow:hidden;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=JnoDTuOTUGDaKGQ7EOjn8ZbSGaRZEw9xtd8ke03ef%2FPOuPr%2BYyIGmKisgrzohho6NGfhGzNjnU0xSPcHNOxHjA0ijL%2BLrj1w4JfhsPBGVLUT%2FS1qv5H4fDfpxW%2FGM%2Bq8NloWj3%2F1CyUWB8j0jlCyoemcVPk95clx5o4I5omqTQtjdiFI7jr4%2F%2BZfluZMoKFcQU%2FnMRwO0xqsmiowzhZHd7QAfbn59ch3hE08EvZ3uS8DDLvb0CfSzAhTy74W7q7IVF%2Fn%2BKfNjx2zvm0Pr6h114fSR6XsRX0VaaIhvvpNk0rKStUmMKNuREMZnap%2Fr3o%2B%2BTehtX4JFAmKHo6V5nIoddRvGtFyGQs%2Bxe09qOAERb86nvi7226ttYjW%2FV2zJQCVMn977I6Adf231b7G0rBEZ%2Fqqx72edCsr35yh1Z3cuNEQVhL5WGoJK%2BWhxqy3HTnommf%2BGme%2BzDIeAHuYVlSe3%2FlMefFzWrk4E9i49CxfP9CyympE0weywpEJffolhGaFZn2me3w%3D%3D&u2=nWNT6TisfL7svNVC&width=2560" alt="Harkonnen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;filter:saturate(0.3);z-index:0;pointer-events:none;">
+        <span class="fp-symbol" style="position:relative;z-index:1;">⚡</span>
+        <div class="fp-label">Casa Nobre</div>
+        <h2 class="fp-name">Casa Harkonnen</h2>
+        <p class="fp-motto">"Poder acima de tudo"</p>
+        <p class="fp-desc">O oposto espelhado dos Atreides. Os Harkonnen governam pelo terror. A crueldade não é excesso — é política deliberada. Mostrar fraqueza é o único pecado que não perdoam.</p>
+        <span class="fp-link fp-link-neutral">Explorar Harkonnen →</span>
+      </a>
+      <a href="faccao-fremen.html" class="fp" data-f="fremen" style="position:relative;overflow:hidden;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=vm%2FZ19arAcRPnPnoytJ%2FboTqP%2F6QvnSl3dNFJr4NUZfhDPr0UB3OmJt5ZQWw7F9g2ZGN5nJVwNJveT7KKXSuz2TM14BD0%2FSjB1tGWO3fZqAUpWNjOfs9dfo%3D&u2=vbinAJuHBZewuku5&width=2560" alt="Fremen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;filter:saturate(0.4);z-index:0;pointer-events:none;">
+        <span class="fp-symbol" style="position:relative;z-index:1;">◈</span>
+        <div class="fp-label">Povo Nativo</div>
+        <h2 class="fp-name">Fremen</h2>
+        <p class="fp-motto">"O deserto é nossa arma"</p>
+        <p class="fp-desc">Ignorados pelos poderes imperiais, os Fremen construíram em segredo a força militar mais formidável de Arrakis. Sobreviventes por natureza, guerreiros por necessidade, e profetas por esperança.</p>
+        <span class="fp-link fp-link-neutral">Explorar Fremen →</span>
+      </a>
+      <a href="faccao-bene-gesserit.html" class="fp" data-f="bene-gesserit" style="position:relative;overflow:hidden;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=ECukwJ%2Fw2WEl3XZ%2BuWd%2FFkYt8gWwWt4k846EhDjl8wqDhTHAGqriEEfAtB0GYFE3H0i%2BcLsE1nHD08VNaukeQ0IqG%2BThpqjoD67A89vCL2NnzkB5%2FzzPlPQsgKCy0Zn1j%2BCCnAN1QHEg%2FhC4Nw8u1GmziOFulZxFgB86%2Fw4x%2FxF445vhdrMAYc6kdr2zoQgNyKrUSvTWT3Av89V&u2=Gi2MXuuFkSlIy4eo&width=2560" alt="Bene Gesserit" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;filter:saturate(0.3);z-index:0;pointer-events:none;">
+        <span class="fp-symbol" style="position:relative;z-index:1;">◉</span>
+        <div class="fp-label">Ordem Secreta</div>
+        <h2 class="fp-name">Bene Gesserit</h2>
+        <p class="fp-motto">"Ver além do véu"</p>
+        <p class="fp-desc">Durante milénios, as Bene Gesserit manipularam silenciosamente as linhagens genéticas e a política imperial. O seu objetivo final é criar o ser humano perfeito — o Kwisatz Haderach.</p>
+        <span class="fp-link fp-link-neutral">Explorar Bene Gesserit →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Relations Map -->
+<section class="relations-map" style="background:var(--color-black);border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Diplomacia</p><h2 class="section-title">Mapa de Relações</h2><div class="section-divider"></div><p class="section-desc">As alianças e inimizades que definem a política do Imperium.</p></div>
+    <div class="relations-grid reveal">
+      <div class="rel-cell">
+        <div class="rel-cell-title" data-f="atreides">⚔ Atreides vê...</div>
+        <div class="rel-entry ally">⚔ Fremen → Aliados potenciais</div>
+        <div class="rel-entry neutral">◉ Bene Gesserit → Instrumentos mútuos</div>
+        <div class="rel-entry enemy">⚡ Harkonnen → Inimigos mortais</div>
+        <div class="rel-entry neutral">👑 Corrino → Desconfiança crescente</div>
+      </div>
+      <div class="rel-cell">
+        <div class="rel-cell-title" data-f="harkonnen">⚡ Harkonnen vê...</div>
+        <div class="rel-entry enemy">⚔ Atreides → Rivais a eliminar</div>
+        <div class="rel-entry neutral">◈ Fremen → Mão de obra descartável</div>
+        <div class="rel-entry neutral">◉ Bene Gesserit → Ferramenta a usar</div>
+        <div class="rel-entry ally">👑 Corrino → Aliado temporário</div>
+      </div>
+      <div class="rel-cell">
+        <div class="rel-cell-title" data-f="fremen">◈ Fremen veem...</div>
+        <div class="rel-entry neutral">⚔ Atreides → Possíveis aliados</div>
+        <div class="rel-entry enemy">⚡ Harkonnen → Opressores</div>
+        <div class="rel-entry neutral">◉ Bene Gesserit → Manipuladores da profecia</div>
+        <div class="rel-entry enemy">👑 Corrino → Exploradores imperiais</div>
+      </div>
+      <div class="rel-cell">
+        <div class="rel-cell-title" data-f="bene-gesserit">◉ Bene Gesserit vê...</div>
+        <div class="rel-entry neutral">⚔ Atreides → Peças do plano genético</div>
+        <div class="rel-entry neutral">⚡ Harkonnen → Progenitores úteis</div>
+        <div class="rel-entry neutral">◈ Fremen → Solo fértil para a profecia</div>
+        <div class="rel-entry neutral">👑 Corrino → Poder a gerir discretamente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Other factions -->
+<section class="section" style="background:var(--color-black);border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="container">
+    <div class="section-header reveal"><p class="section-label">Outras Forças</p><h2 class="section-title">Mais Poderes do Imperium</h2><div class="section-divider"></div></div>
+    <div class="grid grid-3 reveal">
+      <div class="card"><div class="card-body">
+        <div style="font-size:2rem;margin-bottom:1rem;">👑</div>
+        <div class="card-meta">Casa Imperial</div>
+        <h3 class="card-title" style="color:#d4a843;">Casa Corrino</h3>
+        <p class="card-text">A casa imperial que governa o Imperium há 10.000 anos. O Imperador Shaddam IV comanda os temíveis Sardaukar — os soldados mais ferozes do universo, treinados no planeta-prisão Salusa Secundus.</p>
+      </div></div>
+      <div class="card"><div class="card-body">
+        <div style="font-size:2rem;margin-bottom:1rem;">⚓</div>
+        <div class="card-meta">Monopólio do Espaço</div>
+        <h3 class="card-title" style="color:#5dade2;">Guilda dos Navegadores</h3>
+        <p class="card-text">A organização que detém o monopólio do transporte interestelar. Os Navegadores transformam o seu corpo e mente através da especiaria para dobrar o espaço. Sem eles, o Imperium não existe.</p>
+      </div></div>
+      <div class="card"><div class="card-body">
+        <div style="font-size:2rem;margin-bottom:1rem;">⚖</div>
+        <div class="card-meta">Conselho de Casas</div>
+        <h3 class="card-title" style="color:#d4a843;">O Landsraad</h3>
+        <p class="card-text">O conselho das Grandes Casas do Imperium. É o contrapeso ao poder imperial — juntos, o Landsraad pode desafiar o Imperador. É o equilíbrio frágil que mantém a "paz" galáctica.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

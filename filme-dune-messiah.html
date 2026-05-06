@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dune: Part Three — Messiah (2026) — Dune Universe</title>
+  <meta name="description" content="Análise completa de Dune: Part Three (Messiah) 2026 — a conclusão épica da trilogia de Denis Villeneuve, baseada no livro Dune Messiah de Frank Herbert.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root { --fc:#c0392b; --fc-dark:#8b0000; --fc-glow:rgba(192,57,43,0.25); }
+
+    /* HERO */
+    .film-hero{min-height:85vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:linear-gradient(135deg,#0a0000,#1a0502,#050000);}
+    .film-hero-bg{position:absolute;inset:0;}
+    .film-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.28;filter:saturate(0.5) brightness(0.45);}
+    .film-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,0,0,1) 0%,rgba(5,0,0,0.7) 40%,rgba(5,0,0,0.2) 100%);}
+    .film-hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(192,57,43,0.12) 0%,transparent 65%);}
+    .film-hero-year{position:absolute;right:2%;bottom:1rem;font-family:'Cinzel',serif;font-size:12rem;font-weight:900;color:rgba(192,57,43,0.04);line-height:1;z-index:1;}
+    .film-hero-content{position:relative;z-index:5;width:100%;padding:180px 0 6rem;}
+    .film-tag{display:inline-block;padding:4px 16px;border:1px solid rgba(192,57,43,.4);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--fc,#c0392b);margin-bottom:1.5rem;background:rgba(192,57,43,.05);}
+    .film-hero-title{font-family:'Cinzel',serif;font-size:clamp(2.8rem,7vw,6.5rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .film-hero-title span{color:var(--fc,#c0392b);}
+    .film-hero-tagline{font-family:'Crimson Text',serif;font-size:1.5rem;font-style:italic;color:rgba(192,57,43,.75);margin-bottom:1.5rem;}
+    .film-hero-cast{font-size:.85rem;color:rgba(245,240,232,.35);letter-spacing:.1em;}
+
+    /* STATUS BANNER */
+    .status-banner{background:linear-gradient(90deg,rgba(192,57,43,0.08),rgba(192,57,43,0.12),rgba(192,57,43,0.08));border-top:1px solid rgba(192,57,43,0.2);border-bottom:1px solid rgba(192,57,43,0.2);padding:1rem 0;text-align:center;}
+    .status-banner-inner{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;}
+    .status-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.55);}
+    .status-item strong{color:var(--fc,#c0392b);}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--fc,#c0392b);animation:pulse 2s ease-in-out infinite;}
+
+    /* BODY */
+    .film-body{padding:5rem 0;background:var(--color-black);}
+    .film-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--fc,#c0392b);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(192,57,43,.12);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc,#c0392b);font-size:.5rem;top:.4rem;}
+
+    /* CAST GRID */
+    .cast-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem;}
+    .cast-card{background:rgba(192,57,43,.04);border:1px solid rgba(192,57,43,.1);border-radius:6px;overflow:hidden;display:flex;gap:0;transition:border-color .3s;}
+    .cast-card:hover{border-color:rgba(192,57,43,.3);}
+    .cast-card-img{width:80px;flex-shrink:0;position:relative;overflow:hidden;background:rgba(192,57,43,.08);}
+    .cast-card-img img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:saturate(0.7);transition:filter .3s;}
+    .cast-card:hover .cast-card-img img{filter:saturate(1);}
+    .cast-card-info{padding:.75rem 1rem;}
+    .cast-card-actor{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fc,#c0392b);margin-bottom:.2rem;}
+    .cast-card-char{font-family:'Cinzel',serif;font-size:.9rem;color:#f5f0e8;margin-bottom:.2rem;}
+    .cast-card-role{font-size:.75rem;color:rgba(245,240,232,.4);}
+
+    /* SECTION IMAGE */
+    .section-image{width:100%;border-radius:6px;overflow:hidden;margin:1.5rem 0;position:relative;}
+    .section-image img{width:100%;height:auto;display:block;filter:saturate(0.75) brightness(0.85);transition:filter .4s;}
+    .section-image:hover img{filter:saturate(1) brightness(1);}
+    .section-image-caption{font-size:.7rem;text-align:center;color:rgba(245,240,232,.3);padding:.5rem;font-style:italic;}
+
+    /* SIDEBAR */
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(192,57,43,.12);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc,#c0392b);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+
+    /* BOOK VS FILM */
+    .compare-block{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(192,57,43,.1);border-radius:8px;}
+    .compare-row{margin-bottom:1.2rem;}
+    .compare-row:last-child{margin-bottom:0;}
+    .compare-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:.4rem;}
+    .compare-cols{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+    .compare-col{padding:.6rem .8rem;border-radius:4px;font-size:.8rem;color:rgba(245,240,232,.6);line-height:1.5;}
+    .compare-col.book{background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.12);}
+    .compare-col.film{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.12);}
+    .compare-tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.3rem;}
+    .compare-col.book .compare-tag{color:#d4a843;}
+    .compare-col.film .compare-tag{color:#c0392b;}
+
+    /* TIMELINE */
+    .timeline-preview{display:flex;flex-direction:column;gap:0;position:relative;}
+    .timeline-preview::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:1px;background:rgba(192,57,43,.15);}
+    .tp-item{display:flex;gap:1.5rem;padding:.75rem 0;position:relative;}
+    .tp-dot{width:33px;height:33px;border-radius:50%;border:1px solid rgba(192,57,43,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;font-weight:700;color:var(--fc,#c0392b);font-family:'Cinzel',serif;background:rgba(5,0,0,.8);position:relative;z-index:1;}
+    .tp-content{}
+    .tp-year{font-size:.65rem;letter-spacing:.15em;color:var(--fc,#c0392b);text-transform:uppercase;margin-bottom:.2rem;}
+    .tp-event{font-size:.85rem;color:rgba(245,240,232,.65);line-height:1.6;}
+
+    /* SPOILER NOTE */
+    .spoiler-note{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.15);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1.5rem;display:flex;gap:.75rem;align-items:flex-start;}
+    .spoiler-note span:first-child{color:var(--fc,#c0392b);font-size:1.1rem;flex-shrink:0;}
+    .spoiler-note p{margin:0;font-size:.82rem;color:rgba(245,240,232,.5);line-height:1.7;}
+
+    /* THEMES GRID */
+    .themes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem;}
+    .theme-card{padding:1.2rem;background:rgba(192,57,43,.04);border:1px solid rgba(192,57,43,.1);border-radius:6px;}
+    .theme-num{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;color:rgba(192,57,43,.12);line-height:1;}
+    .theme-name{font-family:'Cinzel',serif;font-size:.9rem;color:#f5f0e8;margin:.4rem 0 .3rem;}
+    .theme-desc{font-size:.8rem;color:rgba(245,240,232,.45);line-height:1.6;}
+
+    /* AWARD */
+    .award-strip{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0;}
+    .award-badge{padding:4px 12px;font-size:.65rem;letter-spacing:.1em;background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.2);border-radius:20px;color:rgba(192,57,43,.9);}
+
+    /* HERO IMAGE SECTION */
+    .hero-img-section{position:relative;overflow:hidden;max-height:500px;}
+    .hero-img-section img{width:100%;height:auto;display:block;filter:saturate(0.7) brightness(0.6);}
+    .hero-img-section-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--color-black) 0%,transparent 60%);}
+
+    /* EXPECTED SECTION */
+    .expected-section{background:linear-gradient(135deg,rgba(192,57,43,.04),rgba(192,57,43,.02));border:1px solid rgba(192,57,43,.1);border-radius:8px;padding:2rem;margin:1.5rem 0;}
+
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+    @media(max-width:900px){
+      .film-grid{grid-template-columns:1fr;}
+      .cast-grid{grid-template-columns:1fr;}
+      .themes-grid{grid-template-columns:1fr;}
+      .film-hero-year{font-size:6rem;}
+    }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="film-hero">
+  <div class="film-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=HXvT3GRwRkf3cNz0Jdbs1Qjxb2VTg7NlwpOiW5%2Bqfy8SmpB506hy5sKmwsWMhkXqRUCMUZmrkaq39vdHLPAtOAmvqRG%2BzXz6jRbPPaN%2BuxRqeDXkhmmLpghuBCjqVnjCTVE%3D&u2=001whLVPZXw0sHng&width=2560" alt="Dune: Part Three — Trailer Still">
+  </div>
+  <div class="film-hero-overlay"></div>
+  <div class="film-hero-glow"></div>
+  <div class="film-hero-year">2026</div>
+  <div class="container film-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="filmes.html">Filmes</a><span>/</span><span class="current">Dune: Part Three</span></nav>
+    <div class="film-tag">Parte III · 2026 · Dune Messiah</div>
+    <h1 class="film-hero-title">Dune:<br><span>Part Three</span></h1>
+    <p class="film-hero-tagline">"O messias cai. O empire desmorona."</p>
+    <p class="film-hero-cast">Denis Villeneuve · Timothée Chalamet · Zendaya · Anya Taylor-Joy · Florence Pugh · Robert Pattinson · Jason Momoa</p>
+  </div>
+</section>
+
+<!-- STATUS BANNER -->
+<div class="status-banner">
+  <div class="container">
+    <div class="status-banner-inner">
+      <div class="status-item"><div class="status-dot"></div> <strong>Em produção</strong></div>
+      <div class="status-item">Estreia prevista: <strong>Dezembro 2026</strong></div>
+      <div class="status-item">Realizador: <strong>Denis Villeneuve</strong></div>
+      <div class="status-item">Base literária: <strong>Dune Messiah (1969)</strong></div>
+      <div class="status-item">Estúdio: <strong>Legendary / Warner Bros.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<section class="film-body">
+  <div class="container">
+    <div class="film-grid">
+
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <!-- SINOPSE -->
+        <div class="f-section reveal">
+          <h2>Sinopse</h2>
+          <div class="spoiler-note">
+            <span>⚠</span>
+            <p>Esta página contém informação baseada no livro <em>Dune Messiah</em> (1969) de Frank Herbert. Se preferes descobrir o filme sem spoilers do livro, avança para a secção "O Que Esperar".</p>
+          </div>
+          <p>Doze anos após os eventos de <em>Dune: Part Two</em>, Paul Muad'Dib reina como Imperador do Universo. A Jihad que nunca quis já ceifou mais de sessenta mil milhões de vidas em inúmeros mundos. O que começou como sobrevivência transformou-se num terror galáctico — e Paul vive preso numa profecia que o conduz inevitavelmente para a destruição.</p>
+          <p>Uma conspiração formada por forças improváveis — o Tleilaxu, a Guilda dos Navegadores, o Bene Gesserit e a Princesa Irulan — tece uma armadilha perfeita contra o Imperador. No centro está Scytale, um Face Dancer do Tleilaxu capaz de assumir qualquer aparência — o espião perfeito, o assassino ideal.</p>
+          <p>Mas a maior ameaça a Paul não vem de fora — vem de dentro. A sua visão presciente revela-lhe um futuro inescapável: a cegueira física que o aguarda, e a escolha impossível que deve fazer para salvar o que resta da humanidade enquanto abdica do que mais ama.</p>
+
+          <div class="section-image">
+            <img src="https://sspark.genspark.ai/cfimages?u1=inWXRGTtWPfm%2FloFX9jqoSbqalYQymFxfWnlhODO%2Fgc2ygL7YOgyagN%2BfPM%2BgJfsiRU%2FSU%2BlAcVqvZZKC%2BcVItjmYJgtGawUih2BpcZFjEIb2qRB7kSLfQu%2B%2F8iZpB9m2MeCaSmy1PZmWWcjBFik6Vj42LPHtf5VuYFqHukpiNEOlVw51BHuswEKRRENwrw5fJUA3taQHqs1UNDzWRgiIWsMo4grTlptjTILI97FfOdM7KEY2fO05z11tjKAf88jSAcvMFNy0cRyLoOrD%2FPb340UKJ8Fu9k9YNb9rALfOIuivhPYwcnvaCIm2p24&u2=Ut7PBu%2BUcAO7uWRZ&width=2560" alt="Dune: Part Three — Paul Atreides como Messias e Imperador">
+            <div class="section-image-caption">Timothée Chalamet regressa como Paul Atreides — agora como Imperador de um universo que ele mesmo destruiu.</div>
+          </div>
+        </div>
+
+        <!-- O LIVRO DUNE MESSIAH -->
+        <div class="f-section reveal">
+          <h2>O Livro: Dune Messiah (1969)</h2>
+          <p>Frank Herbert escreveu <em>Dune Messiah</em> precisamente para subverter o que o primeiro livro construiu. Horrorizado com a ideia de que os leitores poderiam considerar Paul Atreides um herói a emular — um líder carismático que conduz as massas para a guerra santa — Herbert escreveu uma continuação deliberadamente anti-triunfal.</p>
+          <h3>A Intenção de Herbert</h3>
+          <p><em>"Dune Messiah é um aviso. Estou a mostrar as consequências inevitáveis de confiar num líder carismático e de permitir que o fanatismo religioso tome o controlo de uma civilização."</em> — Frank Herbert</p>
+          <p>O livro é mais curto, mais sombrio e mais filosófico que o original. Paul já não é o protagonista em ascensão — é um homem a afundar-se no peso das suas próprias escolhas. A narrativa examina o custo do poder, a prisão da profecia, e a impossibilidade de um messias ser também um ser humano.</p>
+          <h3>Os Temas Centrais</h3>
+          <div class="themes-grid">
+            <div class="theme-card">
+              <div class="theme-num">01</div>
+              <div class="theme-name">O Peso do Poder</div>
+              <div class="theme-desc">Paul governa um universo — e sente cada uma das sessenta mil milhões de mortes que a sua ascensão causou.</div>
+            </div>
+            <div class="theme-card">
+              <div class="theme-num">02</div>
+              <div class="theme-name">A Prisão da Profecia</div>
+              <div class="theme-desc">Paul vê o futuro mas não pode mudá-lo sem sacrifícios impossíveis. A prescência é uma maldição tanto quanto um dom.</div>
+            </div>
+            <div class="theme-card">
+              <div class="theme-num">03</div>
+              <div class="theme-name">O Perigo do Messianismo</div>
+              <div class="theme-desc">Herbert questiona a idolatria de líderes carismáticos — Paul é prova de que os melhores líderes são os mais perigosos.</div>
+            </div>
+            <div class="theme-card">
+              <div class="theme-num">04</div>
+              <div class="theme-name">O Sacrifício e a Redenção</div>
+              <div class="theme-desc">A única saída para Paul implica abandonar tudo — o poder, a visão, o amor — para preservar o futuro da humanidade.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELENCO E PERSONAGENS -->
+        <div class="f-section reveal">
+          <h2>Elenco Confirmado</h2>
+          <p>Denis Villeneuve reúne o elenco mais poderoso da trilogia, adicionando novos rostos cruciais à narrativa de Messiah.</p>
+          <div class="cast-grid">
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=Gwb7Sr5mAg%2BtFHZqVLdeVSrjEVN7VqoCWxnt2TDSzLyeJ%2FlOqXHRP5O2H6D6L4Qz9beO86z6CdJWcleIa7L065u7GiDiUR2aWRUjifwKUzB8YeIxFzAdlOFz0osSkut3lzFXZsIGPd8OX4URYSxxvpb6qlVyK4fPWJ7LWKmfF%2BQ8Iw%3D%3D&u2=nsJ1DRXtJqFvt9Ly&width=2560" alt="Timothée Chalamet como Paul Atreides">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Timothée Chalamet</div>
+                <div class="cast-card-char">Paul Atreides</div>
+                <div class="cast-card-role">Muad'Dib · Imperador Kwisatz Haderach</div>
+              </div>
+            </div>
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=5xsyTwMPXY8xtYF7fVmpbjDuIyBsXnBFNNDx3AMqNc3NQg%2F%2BpIO%2Fbary96VXNXy3ASSPH0YkoVsNTpz74pLwaUgpIt8bfngnL2OWb76HPUGpmCH73%2BxOtzWNOJOuuN4Bb1XMnQXTF5AjB75Dj%2FmwbY0c3IhrFhLYuRB3&u2=TGbank8Vbev3J%2BFQ&width=2560" alt="Zendaya como Chani">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Zendaya</div>
+                <div class="cast-card-char">Chani</div>
+                <div class="cast-card-role">Fremen · Companheira de Paul</div>
+              </div>
+            </div>
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=C85T5WZSkWew185dknx0y3Of8Fn%2FyzKNvZVNaOsQL4jDXa1LoU%2BHI8BKEcZ4kRop1NRFyfhzFFdjSfusLebh1hzu5d1FxTzYwJRBnXb1eO%2FzXMpbtp4ZW1KYHiYexsFCq897%2FxsQsN38OZdk33l7W03Rwqb4bX3pbeix3FK42cSfxORF&u2=Si1CBwmytuPBfful&width=2560" alt="Anya Taylor-Joy como Alia Atreides">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Anya Taylor-Joy</div>
+                <div class="cast-card-char">Alia Atreides</div>
+                <div class="cast-card-role">Irmã de Paul · A Abominação</div>
+              </div>
+            </div>
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=LHZ8g5dEhMXTJvz5KjQLca%2FlVN%2FVwAHPE%2BDKSKg0HMzqibmq11pSwcYTxTta8e%2BXqLzZc7nIMJhnIoalMp4gedhJMwU8Pv9qIExsnXW5CNqVrNJ4Akx3OeGRQ1xsSSxhvzC779MKQftK1DAVQcpPdmLDkz%2FKtPXpCnWnSADbkAVR6E3MDw%3D%3D&u2=7IJAcG4oh54VAP1o&width=2560" alt="Robert Pattinson como Scytale">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Robert Pattinson</div>
+                <div class="cast-card-char">Scytale</div>
+                <div class="cast-card-role">Face Dancer Tleilaxu · Vilão Principal</div>
+              </div>
+            </div>
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=v92d%2Fa7ANXhszwcz6%2FtDWkth%2BVDhp5kWzpnX3Yb8YH%2Btte6EXtENLdc9KYyRHe4Lzav9icx35CCmNwIlK4lGm%2FTrtFWgMFHDyDDEirC7iCWvpL4%3D&u2=qGwuShIiaPiF6red&width=2560" alt="Florence Pugh como Princesa Irulan">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Florence Pugh</div>
+                <div class="cast-card-char">Princesa Irulan</div>
+                <div class="cast-card-role">Esposa de Paul · Conspiradora</div>
+              </div>
+            </div>
+            <div class="cast-card">
+              <div class="cast-card-img">
+                <img src="https://sspark.genspark.ai/cfimages?u1=VVtXr8Nj%2BhabuHaOpal9%2FxdJESovoNPZ5vaIDQ87%2F5p0ZNB5ABf8gh4iVvpDawrGp0ko1DicYZ4MlplWEfAUvOVKd%2FKwPqtGkraCkTA%2BQ4u1ypwCYgkLla9%2FVBUF8BisGrVkvKbFeUP7Nw%3D%3D&u2=QjA6ybvFSH5i0ekk&width=2560" alt="Jason Momoa como Duncan Idaho">
+              </div>
+              <div class="cast-card-info">
+                <div class="cast-card-actor">Jason Momoa</div>
+                <div class="cast-card-char">Duncan Idaho (Ghola)</div>
+                <div class="cast-card-role">Guerreiro Tleilaxu · Ressuscitado</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-image" style="margin-top:2rem;">
+            <img src="https://sspark.genspark.ai/cfimages?u1=9sUJ6Ofnaxlz7NK656%2FN%2Fo1%2B5fZ9PddJpgKv3PVxW6eUwJ6s5qeR868E3ON2Y5olI1rkuNzvxfa7S8sAlaROF36WSJ3A3CCaRi16q01V%2Bs4ITcor9Cy23en6n4IK4SQ%3D&u2=Lyk51R9fIlpTCu%2Bb&width=2560" alt="Robert Pattinson como Scytale — villain de Dune Part Three">
+            <div class="section-image-caption">Robert Pattinson como Scytale — o Face Dancer do Tleilaxu, o vilão mais insidioso da trilogia.</div>
+          </div>
+        </div>
+
+        <!-- ANÁLISE CINEMATOGRÁFICA -->
+        <div class="f-section reveal">
+          <h2>O Que Esperar do Filme</h2>
+
+          <div class="section-image">
+            <img src="https://sspark.genspark.ai/cfimages?u1=orE7Z4KbdRgzalMDM5TVS9RWk3yRfiW8hSyffeSFTgfcrPhRp0%2BV%2FDM7uWRxEkWQk9%2FGxBARm3XE0LY4RuMVFyN37k%2FtEpZjTgexlO29nU2QPCyiuoQD&u2=vwXEmKBbcrA%2BwW4Y&width=2560" alt="Dune: Part Three — trailer e imagens">
+            <div class="section-image-caption">Denis Villeneuve fecha a trilogia com o capítulo mais sombrio e mais corajoso da saga.</div>
+          </div>
+
+          <h3>Villeneuve Fecha a Trilogia</h3>
+          <p>Denis Villeneuve confirmou que <em>Dune: Part Three</em> será a conclusão da sua trilogia — e promete ser o filme mais ousado dos três. O realizador já declarou publicamente que <em>Dune Messiah</em> é o seu livro favorito da saga, precisamente pela sua recusa em oferecer respostas fáceis ou redenções convenientes.</p>
+          <p><em>"Messiah é o livro que torna a trilogia completa. É onde Frank Herbert explica verdadeiramente o que estava a fazer com Dune. Paul não é um herói — nunca foi. E eu quero que as audiências saiam do cinema a pensar nisso."</em> — Denis Villeneuve</p>
+
+          <h3>Um Paul Atreides Transformado</h3>
+          <p>Timothée Chalamet descreveu a preparação para este terceiro filme como a mais exigente da trilogia. Paul em <em>Messiah</em> é um homem dividido entre o mito que se tornou e a humanidade que perdeu. A performance exigirá mostrar um líder que simultaneamente governa tudo e controla nada — um rei-prisioneiro da sua própria profecia.</p>
+
+          <h3>Anya Taylor-Joy como Alia — A Personagem Mais Complexa</h3>
+          <p>A grande novidade narrativa de <em>Part Three</em> é Alia Atreides — a irmã de Paul, nascida "aberta" à memória ancestral por ter sido exposta à Água da Vida ainda no útero. Anya Taylor-Joy foi brevemente vista em <em>Part Two</em> como visão do futuro, e em <em>Part Three</em> assume um papel central.</p>
+          <p>Alia é simultaneamente criança e adulta, inocente e perigosa, protegida e ameaça — uma das personagens mais psicologicamente complexas de toda a literatura de ficção científica. Taylor-Joy confirmou entusiasmo pela personagem: <em>"Nunca houve ninguém como ela."</em></p>
+
+          <div class="section-image">
+            <img src="https://sspark.genspark.ai/cfimages?u1=W%2FB96lrVWASZ%2BwYvkBoj6XQknOF8FI9yLXgc7vlFCOzh0MaeUC052lGU%2Fmp6NBck8%2Bp8y5CrkywhocabsaAwq%2BAG3DO2uyfxvdSS7JGf5%2BVimWyP5G5fvDWtiHizpi12vV2zRb8gpyYezk48hV9C%2Ba5mKg9pIfb9G%2Bt86ZtYXtIkugXF3yoH&u2=XQ5T5W5WUJVxOSTD&width=2560" alt="Alia Atreides — personagem central de Dune: Part Three">
+            <div class="section-image-caption">Alia Atreides — nascida Reverenda Mãe, "A Abominação" que o Bene Gesserit temia e que o Tleilaxu deseja explorar.</div>
+          </div>
+
+          <h3>Robert Pattinson como Scytale — O Vilão Perfeito</h3>
+          <p>Scytale é um Face Dancer — um ser do Tleilaxu capaz de assumir qualquer aparência humana. É o espião impossível de detectar, o assassino que parece amigo, o monstro com o rosto de um inocente. Robert Pattinson foi o nome mais frequentemente apontado para o papel, e as primeiras imagens confirmam uma performance que promete rivalizar com a de Austin Butler em <em>Part Two</em>.</p>
+          <p>A escolha de Pattinson é cirúrgica: o actor tem uma capacidade única de habitar personagens que são simultaneamente sedutores e perturbadores, familiares e completamente alienígenas.</p>
+
+          <h3>O Regresso de Duncan Idaho — O Ghola</h3>
+          <p>Um dos elementos mais fascinantes de <em>Messiah</em> é o regresso de Duncan Idaho — o guerreiro Atreides morto no primeiro filme — como Ghola: um clone criado pelo Tleilaxu com as memórias do original fragmentadas. Jason Momoa, cujo papel em <em>Part One</em> terminou abruptamente, regressa num dos arcos mais complexos do livro.</p>
+          <p>A pergunta que o livro coloca: quem é um homem quando as suas memórias são implantadas artificialmente? É um ser novo ou uma ressurreição? E a quem serve realmente — aos seus criadores ou àquele que o amava?</p>
+        </div>
+
+        <!-- LIVRO VS FILME -->
+        <div class="f-section reveal">
+          <h2>Livro vs. Filme — Adaptações Esperadas</h2>
+          <div class="compare-block">
+            <div class="compare-row">
+              <div class="compare-label">O Arco de Chani</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Chani morre no parto após beber a Água da Vida. A sua morte é o catalisador final para Paul abandonar o poder.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Esperado</span>Com Zendaya no papel central, Villeneuve poderá expandir e modificar o arco de Chani para manter a tensão dramática durante o filme.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Alia — Cronologia</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>No livro, Alia tem cerca de 4 anos. A sua precocidade sobrenatural é aterrorizante precisamente por ser fisicamente uma criança.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Esperado</span>Com Anya Taylor-Joy, Villeneuve optará por uma Alia adulta — condensando os eventos ou avançando no tempo para justificar o casting.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">O Final de Paul</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Paul fica cego e desaparece no deserto segundo o ritual Fremen — entregando o poder e escolhendo o caminho do herói que abdica.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Esperado</span>Villeneuve confirmou a intenção de ser fiel ao espírito do livro. O final promete ser tão perturbador quanto o de Part Two.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">A Conspiração</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>A aliança entre Tleilaxu, Guilda, Bene Gesserit e Irulan é detalhada e politicamente complexa — o núcleo de suspense da narrativa.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Esperado</span>Este elemento deve ser mantido como motor narrativo central — oferecendo a tensão que o livro anterior estabeleceu mas não resolveu.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIMELINE DO FILME -->
+        <div class="f-section reveal">
+          <h2>Cronologia da Narrativa</h2>
+          <p style="font-size:.85rem;color:rgba(245,240,232,.4);margin-bottom:1.5rem;">Baseado no livro — a adaptação fílmica pode alterar detalhes específicos.</p>
+          <div class="timeline-preview">
+            <div class="tp-item">
+              <div class="tp-dot">I</div>
+              <div class="tp-content">
+                <div class="tp-year">12 Anos Após Part Two</div>
+                <div class="tp-event">Paul Muad'Dib reina como Imperador. A Jihad já devastou mil mundos. Arrakis é a capital do universo. A especiaria flui livremente — mas à custa de tudo.</div>
+              </div>
+            </div>
+            <div class="tp-item">
+              <div class="tp-dot">II</div>
+              <div class="tp-content">
+                <div class="tp-year">A Conspiração Tece-se</div>
+                <div class="tp-event">Scytale (Tleilaxu), o Bispo da Guilda, o Bene Gesserit e a Princesa Irulan formam uma aliança impossível contra Paul. O ghola de Duncan Idaho é a sua arma mais elaborada.</div>
+              </div>
+            </div>
+            <div class="tp-item">
+              <div class="tp-dot">III</div>
+              <div class="tp-content">
+                <div class="tp-year">A Visão Proibida</div>
+                <div class="tp-event">Paul vê nas suas visões prescientes que a sua morte é inevitável. Vê também um caminho alternativo — mas exige o maior sacrifício da sua vida.</div>
+              </div>
+            </div>
+            <div class="tp-item">
+              <div class="tp-dot">IV</div>
+              <div class="tp-content">
+                <div class="tp-year">O Ataque — A Cegueira</div>
+                <div class="tp-event">A conspiração ataca. Uma bomba atômica cega Paul. Deficiente dos sentidos físicos, o Imperador governa agora apenas através da visão presciente — mais poderosa, mais solitária.</div>
+              </div>
+            </div>
+            <div class="tp-item">
+              <div class="tp-dot">V</div>
+              <div class="tp-content">
+                <div class="tp-year">O Duelo Final e a Escolha</div>
+                <div class="tp-event">Paul confronta Scytale. O desfecho não é uma vitória — é uma renúncia. Paul escolhe desaparecer no deserto, cego e sozinho, seguindo o antigo costume Fremen, deixando Alia e Irulan para governar.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Ficha Técnica</h4>
+          <div class="stat-row"><span>Ano</span><span>2026</span></div>
+          <div class="stat-row"><span>Realizador</span><span>Denis Villeneuve</span></div>
+          <div class="stat-row"><span>Guionista</span><span>Denis Villeneuve</span></div>
+          <div class="stat-row"><span>Fotografia</span><span>Greig Fraser (previsto)</span></div>
+          <div class="stat-row"><span>Música</span><span>Hans Zimmer (previsto)</span></div>
+          <div class="stat-row"><span>Estúdio</span><span>Legendary / Warner Bros.</span></div>
+          <div class="stat-row"><span>Estreia prevista</span><span>Dezembro 2026</span></div>
+          <div class="stat-row"><span>Estado</span><span>Em Produção</span></div>
+          <div class="stat-row"><span>Base literária</span><span>Dune Messiah (1969)</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Elenco Confirmado</h4>
+          <div class="stat-row"><span>Paul Atreides</span><span>Timothée Chalamet</span></div>
+          <div class="stat-row"><span>Chani</span><span>Zendaya</span></div>
+          <div class="stat-row"><span>Alia Atreides</span><span>Anya Taylor-Joy</span></div>
+          <div class="stat-row"><span>Scytale</span><span>Robert Pattinson</span></div>
+          <div class="stat-row"><span>Princesa Irulan</span><span>Florence Pugh</span></div>
+          <div class="stat-row"><span>Duncan Idaho (Ghola)</span><span>Jason Momoa</span></div>
+          <div class="stat-row"><span>Lady Jessica</span><span>Rebecca Ferguson</span></div>
+          <div class="stat-row"><span>Stilgar</span><span>Javier Bardem</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Sobre Dune Messiah</h4>
+          <div class="stat-row"><span>Livro original</span><span>Frank Herbert</span></div>
+          <div class="stat-row"><span>Publicação</span><span>1969</span></div>
+          <div class="stat-row"><span>Posição na saga</span><span>Livro #2</span></div>
+          <div class="stat-row"><span>Tom narrativo</span><span>Sombrio / Anti-épico</span></div>
+          <div class="stat-row"><span>Foco</span><span>Consequências do poder</span></div>
+        </div>
+
+        <div class="sidebar-card reveal" style="border-color:rgba(192,57,43,.2);background:rgba(192,57,43,.04);">
+          <h4>Personagens Chave em Messiah</h4>
+          <p style="font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;margin-bottom:.75rem;">Além do elenco de retorno, <em>Messiah</em> introduz algumas das figuras mais fascinantes da saga:</p>
+          <div class="stat-row"><span>Scytale</span><span>Face Dancer Tleilaxu</span></div>
+          <div class="stat-row"><span>Alia</span><span>"A Abominação"</span></div>
+          <div class="stat-row"><span>Duncan (Ghola)</span><span>Ressuscitado pelo Tleilaxu</span></div>
+          <div class="stat-row"><span>Lichna</span><span>Filha de Otheym</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações Rápidas</h4>
+          <div style="display:flex;flex-direction:column;gap:.5rem;">
+            <a href="filme-dune-2021.html" style="font-size:.8rem;color:rgba(245,240,232,.5);text-decoration:none;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">← Dune (2021)</a>
+            <a href="filme-dune-part-two.html" style="font-size:.8rem;color:rgba(245,240,232,.5);text-decoration:none;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">← Dune: Part Two (2024)</a>
+            <a href="livros.html" style="font-size:.8rem;color:rgba(245,240,232,.5);text-decoration:none;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Os Livros da Saga →</a>
+            <a href="personagens.html" style="font-size:.8rem;color:rgba(245,240,232,.5);text-decoration:none;padding:.4rem 0;transition:color .2s;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Todos os Personagens →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="section-sm" style="background:linear-gradient(180deg,var(--color-black),#050000);padding:4rem 0;">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label" style="color:rgba(192,57,43,.8);">Imagens</p>
+      <h2 class="section-title" style="color:var(--fc,#c0392b);">Galeria — Part Three</h2>
+      <div class="section-divider" style="background:rgba(192,57,43,.3);"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;" class="reveal">
+      <div class="section-image" style="margin:0;border:1px solid rgba(192,57,43,.1);border-radius:6px;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=JSn04dEHFVxq8Af5FxXpgH%2BidfNSovUeX77eu8aRmSN6S7W8eGor2mfxC5Aiz1L7FJRwuGr44GX965l%2B%2BH1qS4wSaW%2FyxF4mjdD9GH3TN1M4ElcCWXStvgY%3D&u2=XgArUN2WeF3bvSYl&width=2560" alt="Dune Part Three — Wikipedia">
+      </div>
+      <div class="section-image" style="margin:0;border:1px solid rgba(192,57,43,.1);border-radius:6px;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=Ckc76EdESJo5MUmOcUlV0SwJSu9xlWoLcejoOVYzgTHHhFWZd2MbtTH8oAfjYWBh82L5AFQICPH6lY%2BU%2BpGUcEgn9mIOqmhcjxj%2FY5b07iRi0HYmjzqJh%2Fcof5kaxiVvs6v2qo2Dop1o3K6a8iueZ9nwU%2FMQhC5HHpLeApIqK1bU8%2FMbSGLdFyc%3D&u2=1MPOB3Fu9VYDO3oT&width=2560" alt="Dune Part Three — IMDb">
+      </div>
+      <div class="section-image" style="margin:0;border:1px solid rgba(192,57,43,.1);border-radius:6px;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=7jYwJExQWd5i7fqqVNA6ensUrWV01A4TDtXHhyUZLpRXxZJfXyh0RJxp1jqhYCw7AhVx8cX5Hy4PF8kj7x42Qx%2BX7wFOrpBshKGbds9hES6t1mKfs38XZB01uc5DjEo%3D&u2=wmJ4w7Mpkq06hr2K&width=2560" alt="Dune Part Three 2026">
+      </div>
+      <div class="section-image" style="margin:0;border:1px solid rgba(192,57,43,.1);border-radius:6px;grid-column:span 2;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=QvUbKvVFWg4gKcOqt4RgwRVK0QFcFaowodE%2BxmAT00FZ%2Fl%2BM2T9sqSiQKZoSrba8psbwABW9u7Nusx0lHHpBLG0n2BZcgLREbMgJkU1JF%2FJheNT201jpKhXa%2BVPH&u2=cfBdy%2F%2BrP%2FRaUA3b&width=2560" alt="Dune Part Three — Denis Villeneuve">
+      </div>
+      <div class="section-image" style="margin:0;border:1px solid rgba(192,57,43,.1);border-radius:6px;">
+        <img src="https://sspark.genspark.ai/cfimages?u1=qaKZrsfxDriNirmYqnR3gNZkuBllo4xv3V9NQLhqk51TwY52p6q5e6ZTNKllp9V9kbF53R2l3NZrNY8LWVp4VvLVVpk%3D&u2=2xJ0n2g3YYcxtAyV&width=2560" alt="Dune Part Three — Trailer Official">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION FOOTER -->
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(192,57,43,0.1);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="filme-dune-2021.html" class="btn btn-outline">← Dune (2021)</a>
+      <a href="filme-dune-part-two.html" class="btn btn-outline">← Dune: Part Two (2024)</a>
+      <a href="livros.html" class="btn btn-outline">Os Livros</a>
+      <a href="filmes.html" class="btn btn-ghost">Todos os Filmes</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

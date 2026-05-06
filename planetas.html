@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planetas — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .planet-selector{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.04);margin-bottom:4rem;}
+    .planet-tab{padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s;background:var(--color-black);border:none;font-family:'Raleway',sans-serif;}
+    .planet-tab:hover,.planet-tab.active{background:rgba(212,168,67,.05);}
+    .planet-tab-icon{font-size:1.5rem;display:block;margin-bottom:.5rem;}
+    .planet-tab-name{font-family:'Cinzel',serif;font-size:.8rem;color:#f5f0e8;display:block;margin-bottom:.2rem;}
+    .planet-tab-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.3);}
+    .planet-tab.active .planet-tab-name{color:var(--faction-primary,#d4a843);}
+    .planet-tab.active .planet-tab-label{color:var(--faction-primary,#d4a843);opacity:.6;}
+    .planet-display{display:none;}
+    .planet-display.active{display:grid;grid-template-columns:1fr 2fr;gap:4rem;animation:fadeIn .4s ease;}
+    .planet-visual{position:relative;}
+    .planet-sphere{width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:5rem;font-weight:900;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;}
+    .planet-sphere img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;opacity:0.5;filter:saturate(0.7);}
+    .planet-sphere::before{content:'';position:absolute;inset:0;border-radius:50%;}
+    .planet-stats-mini{margin-top:2rem;display:flex;flex-direction:column;gap:.5rem;}
+    .planet-stat{display:flex;justify-content:space-between;align-items:center;padding:.5rem .75rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:4px;}
+    .planet-stat-label{font-size:.7rem;color:rgba(245,240,232,.4);letter-spacing:.08em;}
+    .planet-stat-value{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .planet-info h2{font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3rem);color:var(--faction-primary,#d4a843);margin-bottom:.5rem;}
+    .planet-info .planet-type{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:1.5rem;}
+    .planet-info p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .planet-info h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .75rem;}
+    .planet-info ul{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;}
+    .planet-info ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .planet-info ul li::before{content:'◆';position:absolute;left:0;color:var(--faction-primary,#d4a843);font-size:.5rem;top:.4rem;}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @media(max-width:900px){.planet-selector{grid-template-columns:repeat(3,1fr);}.planet-display.active{grid-template-columns:1fr;}}
+    @media(max-width:500px){.planet-selector{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero" style="position:relative;overflow:hidden;">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#050402,#0f0c08,#050402);"></div>
+  <img src="https://sspark.genspark.ai/cfimages?u1=l0FTYbi67OJLXssR%2Fvu1Q0fq9X8BaaPasi1l3oJXWYn%2BUvKjcAmjn9E%2BuPmGA2yiDerS0N1QqcViP8hpYAzBWmWLCdOKUKq1midYsGlAMYmbRXXsuvvx49tV6Yta7NsBb%2Bs&u2=69nRNsC0%2FXWknW4B&width=2560" alt="Arrakis Desert Planet" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.2;filter:saturate(0.5) brightness(0.5);z-index:0;">
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Planetas</span></nav>
+    <p class="section-label">Cartografia</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">Os Mundos<br><span style="color:var(--faction-primary,#d4a843);">do Imperium</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">Cada planeta é um ecossistema único que molda as civilizações que o habitam. Explorar os mundos de Dune é explorar diferentes formas de ser humano.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+
+    <!-- Planet tabs -->
+    <div class="planet-selector reveal">
+      <button class="planet-tab active" onclick="showPlanet('arrakis')">
+        <span class="planet-tab-icon">🌍</span>
+        <span class="planet-tab-name">Arrakis</span>
+        <span class="planet-tab-label">Dune</span>
+      </button>
+      <button class="planet-tab" onclick="showPlanet('caladan')">
+        <span class="planet-tab-icon">🌊</span>
+        <span class="planet-tab-name">Caladan</span>
+        <span class="planet-tab-label">Atreides</span>
+      </button>
+      <button class="planet-tab" onclick="showPlanet('giedi')">
+        <span class="planet-tab-icon">⚫</span>
+        <span class="planet-tab-name">Giedi Prime</span>
+        <span class="planet-tab-label">Harkonnen</span>
+      </button>
+      <button class="planet-tab" onclick="showPlanet('kaitain')">
+        <span class="planet-tab-icon">👑</span>
+        <span class="planet-tab-name">Kaitain</span>
+        <span class="planet-tab-label">Imperial</span>
+      </button>
+      <button class="planet-tab" onclick="showPlanet('salusa')">
+        <span class="planet-tab-icon">⚔</span>
+        <span class="planet-tab-name">Salusa Secundus</span>
+        <span class="planet-tab-label">Prisão</span>
+      </button>
+    </div>
+
+    <!-- ARRAKIS -->
+    <div class="planet-display active" id="planet-arrakis">
+      <div class="planet-visual">
+        <div class="planet-sphere" style="background:radial-gradient(circle at 35% 35%,#3d2a10,#1a1005,#0a0602);color:rgba(212,168,67,0.06);">
+          <img src="https://sspark.genspark.ai/cfimages?u1=l0FTYbi67OJLXssR%2Fvu1Q0fq9X8BaaPasi1l3oJXWYn%2BUvKjcAmjn9E%2BuPmGA2yiDerS0N1QqcViP8hpYAzBWmWLCdOKUKq1midYsGlAMYmbRXXsuvvx49tV6Yta7NsBb%2Bs&u2=69nRNsC0%2FXWknW4B&width=2560" alt="Arrakis">
+        </div>
+        <div class="planet-stats-mini">
+          <div class="planet-stat"><span class="planet-stat-label">Tipo</span><span class="planet-stat-value">Planeta Deserto</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Recurso</span><span class="planet-stat-value">Especiaria Melange</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Clima</span><span class="planet-stat-value">Árido extremo</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Habitantes</span><span class="planet-stat-value">Fremen (+ colonos)</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Capital</span><span class="planet-stat-value">Arrakeen</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Importância</span><span class="planet-stat-value">Máxima — Única</span></div>
+        </div>
+      </div>
+      <div class="planet-info">
+        <h2>Arrakis</h2>
+        <div class="planet-type">Dune · O Planeta Deserto · O Centro do Universo</div>
+        <p>Arrakis é o planeta mais importante do universo conhecido — não pela sua beleza (tem pouca), não pelo seu clima (é letal), mas pelo que produz: a Especiaria Melange. O único lugar onde esta substância existe, Arrakis concentra em si toda a gravidade política, económica e espiritual do Imperium.</p>
+        <p>O planeta é coberto quase inteiramente por desertos de areia fina e imaculada — os "ergs" — que podem ter centenas de metros de profundidade. As temperaturas diurnas atingem valores letais para humanos não adaptados. O vento transporta partículas que destroem qualquer máquina não protegida. A água é mais valiosa do que ouro.</p>
+        <h3>Zonas e Locais Importantes</h3>
+        <ul>
+          <li><strong>Arrakeen</strong> — A capital. Sede do governador imperial, das operações de extração de especiaria e do poder político visível.</li>
+          <li><strong>Carthag</strong> — A fortaleza Harkonnen, construída para esmagar qualquer resistência através da sua escala intimidante.</li>
+          <li><strong>Sietch Tabr</strong> — O principal sietch Fremen dos eventos do livro. Lar de Stilgar, Chani e de Paul Muad'Dib.</li>
+          <li><strong>O Erg Setentrional</strong> — A maior extensão de deserto aberto, lar dos maiores Vermes da Areia e dos maiores depósitos de especiaria.</li>
+          <li><strong>Harg Pass</strong> — Uma das raras passagens entre as regiões rochosas e o deserto aberto. Ponto estratégico para os Fremen.</li>
+        </ul>
+        <h3>Os Vermes da Areia (Shai-Hulud)</h3>
+        <p>Os grandes Vermes da Areia são a criatura dominante de Arrakis — e a chave de todo o ecossistema. Podem atingir centenas de metros de comprimento. São a fonte indireta da especiaria através do seu ciclo de vida. Para os Fremen, são objetos de veneração sagrada — "Pai das Eternidades". Montar um Verme é o rito de passagem supremo.</p>
+      </div>
+    </div>
+
+    <!-- CALADAN -->
+    <div class="planet-display" id="planet-caladan">
+      <div class="planet-visual">
+        <div class="planet-sphere" style="background:radial-gradient(circle at 35% 35%,#0d2a3d,#071a28,#030d14);color:rgba(41,128,185,0.06);">🌊</div>
+        <div class="planet-stats-mini">
+          <div class="planet-stat"><span class="planet-stat-label">Tipo</span><span class="planet-stat-value">Planeta Oceânico</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Recurso</span><span class="planet-stat-value">Pesca, Vinho de Pundi</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Clima</span><span class="planet-stat-value">Temperado, húmido</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Habitantes</span><span class="planet-stat-value">Casa Atreides</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Capital</span><span class="planet-stat-value">Caladan City</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Importância</span><span class="planet-stat-value">Alta (Atreides)</span></div>
+        </div>
+      </div>
+      <div class="planet-info">
+        <h2>Caladan</h2>
+        <div class="planet-type">Planeta Natal dos Atreides · Paraíso Oceânico</div>
+        <p>Caladan é o antítese de Arrakis em quase todos os aspetos — e é isso que torna a transição dos Atreides tão dramática. Um planeta de oceanos vastos, montanhas verdes e chuva abundante, Caladan é uma joia rara no universo de Dune: um mundo gentil e belo.</p>
+        <p>A Casa Atreides governou Caladan por 26 gerações. O planeta está profundamente ligado à identidade da casa — o castelo do Duque, os oceanos que Paul e Leto amavam, o vinho de Pundi que só ali existe. Deixar Caladan para ir a Arrakis é, para Paul, perder o único mundo que conheceu.</p>
+        <h3>Importância Narrativa</h3>
+        <ul>
+          <li>Caladan representa o "antes" — o mundo de inocência e segurança que será perdido.</li>
+          <li>O contraste com Arrakis é deliberado: cada elemento que Paul amava em Caladan existe em forma distorcida ou ausente em Arrakis.</li>
+          <li>A água de Caladan torna-se um símbolo: o que os Atreides deram de graça, os Fremen nunca tiveram.</li>
+          <li>Gurney Halleck canta baladas de Caladan durante anos de exílio — a memória do planeta como refúgio mental.</li>
+        </ul>
+        <h3>Descrição do Planeta</h3>
+        <p>O castelo dos Atreides fica sobre falésias que dominam o oceano. As marés de Caladan são poderosas e as tempestades frequentes — mas é uma violência natural, não hostil como a de Arrakis. É um planeta que desafia mas não mata. O ar cheira a sal e a vida. Para Paul, é o cheiro do lar que nunca mais voltará a ter.</p>
+      </div>
+    </div>
+
+    <!-- GIEDI PRIME -->
+    <div class="planet-display" id="planet-giedi">
+      <div class="planet-visual">
+        <div class="planet-sphere" style="background:radial-gradient(circle at 35% 35%,#1a0606,#0d0303,#040101);color:rgba(192,57,43,0.06);">⚫</div>
+        <div class="planet-stats-mini">
+          <div class="planet-stat"><span class="planet-stat-label">Tipo</span><span class="planet-stat-value">Planeta Industrial</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Recurso</span><span class="planet-stat-value">Indústria pesada</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Clima</span><span class="planet-stat-value">Poluído, tóxico</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Habitantes</span><span class="planet-stat-value">Casa Harkonnen</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Capital</span><span class="planet-stat-value">Harko City</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Importância</span><span class="planet-stat-value">Alta (Harkonnen)</span></div>
+        </div>
+      </div>
+      <div class="planet-info">
+        <h2>Giedi Prime</h2>
+        <div class="planet-type">Planeta Natal dos Harkonnen · Inferno Industrial</div>
+        <p>Giedi Prime é a manifestação física da filosofia Harkonnen: um mundo completamente voltado para a produção e o poder, sem qualquer consideração pela natureza, pela beleza ou pelo bem-estar dos seus habitantes. É um planeta coberto de fábricas, poluição e escuridão.</p>
+        <p>O ar é irrespirável sem filtros. Os oceanos foram há muito transformados em esgotos industriais. As florestas foram abatidas gerações atrás para dar lugar a instalações de produção. Giedi Prime é o que acontece quando uma civilização trata o ambiente como recurso infinito sem consequências — e encontra as consequências de qualquer forma.</p>
+        <h3>No Filme (Dune: Part Two)</h3>
+        <p>Denis Villeneuve filmou todas as cenas em Giedi Prime em preto e branco absoluto, usando uma câmara de infravermelhos que transforma a realidade visível: a pele parece cinzenta, o sol parece negro, as nuvens parecem fumo sólido. O resultado é um planeta que parece um pesadelo de expressionismo alemão — e é exatamente o efeito pretendido.</p>
+        <h3>Importância Cultural</h3>
+        <ul>
+          <li>Giedi Prime é o oposto de Caladan — ambos formam os seus habitantes de formas opostas.</li>
+          <li>Os Sardaukar, os soldados imperiais, são formados em Salusa Secundus — mas os Harkonnen têm os seus próprios guerreiros formados pela brutalidade de Giedi Prime.</li>
+          <li>A arena de gladiadores de Giedi Prime é onde Feyd-Rautha construiu a sua reputação e o seu poder pessoal.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- KAITAIN -->
+    <div class="planet-display" id="planet-kaitain">
+      <div class="planet-visual">
+        <div class="planet-sphere" style="background:radial-gradient(circle at 35% 35%,#2a200a,#1a1405,#0a0802);color:rgba(212,168,67,0.06);">👑</div>
+        <div class="planet-stats-mini">
+          <div class="planet-stat"><span class="planet-stat-label">Tipo</span><span class="planet-stat-value">Capital Imperial</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Recurso</span><span class="planet-stat-value">Poder político</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Clima</span><span class="planet-stat-value">Perfeitamente terraformado</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Habitantes</span><span class="planet-stat-value">Casa Corrino + nobreza</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Capital</span><span class="planet-stat-value">Corrinth (Imperial)</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Importância</span><span class="planet-stat-value">Alta (Imperial)</span></div>
+        </div>
+      </div>
+      <div class="planet-info">
+        <h2>Kaitain</h2>
+        <div class="planet-type">Capital do Imperium Galáctico · Sede do Poder</div>
+        <p>Kaitain é o planeta imperial — a sede do Imperador Padishah e da corte imperial. É um planeta artificialmente terraformado à perfeição: jardins imensos, palácios de uma escala impossível, um ambiente que proclama em cada detalhe a grandeza do Imperium e dos Corrinos que o governam.</p>
+        <p>Todo o poder político visível do Imperium passa por Kaitain. As embaixadas das Grandes Casas, o Landsraad em sessão, a Guilda dos Navegadores em negociações, as Bene Gesserit em conselho — todos convergem aqui. É um planeta de aparências e de poder real disfarçado de aparências.</p>
+        <h3>A Sede do Poder</h3>
+        <ul>
+          <li>O Palácio Imperial de Kaitain é uma estrutura que impressiona deliberadamente — concebida para transmitir a imortalidade da Casa Corrino.</li>
+          <li>O Landsraad reúne aqui as suas sessões formais — um conselho de centenas de casas nobres que nominalmente equilibra o poder imperial.</li>
+          <li>Após os eventos de Dune, Arrakeen em Arrakis substitui Kaitain como capital quando Paul assume o trono.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SALUSA SECUNDUS -->
+    <div class="planet-display" id="planet-salusa">
+      <div class="planet-visual">
+        <div class="planet-sphere" style="background:radial-gradient(circle at 35% 35%,#1a0a0a,#100606,#060202);color:rgba(192,57,43,0.06);">⚔</div>
+        <div class="planet-stats-mini">
+          <div class="planet-stat"><span class="planet-stat-label">Tipo</span><span class="planet-stat-value">Planeta Prisão</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Recurso</span><span class="planet-stat-value">Soldados Sardaukar</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Clima</span><span class="planet-stat-value">Brutal — condições extremas</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Habitantes</span><span class="planet-stat-value">Prisioneiros imperiais</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Segredo Imperial</span><span class="planet-stat-value">Altamente classificado</span></div>
+          <div class="planet-stat"><span class="planet-stat-label">Importância</span><span class="planet-stat-value">Estratégica (militar)</span></div>
+        </div>
+      </div>
+      <div class="planet-info">
+        <h2>Salusa Secundus</h2>
+        <div class="planet-type">Planeta Prisão Imperial · A Forja dos Sardaukar</div>
+        <p>O maior segredo militar do Imperium: Salusa Secundus é oficialmente o planeta prisão do Imperador — um mundo de condições brutais onde são enviados os criminosos mais perigosos do universo. Na verdade, é muito mais do que isso.</p>
+        <p>As condições extremas de Salusa — tempestades que matam, predadores que caçam humanos, temperaturas que colocam o corpo no limite — são o ambiente que forja os Sardaukar. Os prisioneiros que sobrevivem tornam-se algo diferente: guerreiros de uma ferocidade incomparável. Os Sardaukar são, em toda a história do Imperium, os soldados mais temidos que existem — até aos Fremen de Arrakis.</p>
+        <h3>O Paralelo com Arrakis</h3>
+        <p>Herbert construiu um paralelo deliberado: Salusa Secundus e Arrakis são os dois planetas que forjam os melhores guerreiros do universo — através de ambientes que matam os fracos e transformam os que sobrevivem. A diferença é que os Harkonnen e o Imperium não viram o que Arrakis estava a fazer nos Fremen durante décadas.</p>
+        <ul>
+          <li>Os Sardaukar temem-se em todo o Imperium — nenhum exército normal pode resistir a eles em campo aberto.</li>
+          <li>O segredo de Salusa é um dos pilares do poder imperial: se os outros soubessem como os Sardaukar são criados, poderiam replicar o processo.</li>
+          <li>Quando os Fremen finalmente enfrentam os Sardaukar, a batalha confirma o que Kynes sempre soube: os filhos do deserto são os melhores guerreiros do universo.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function showPlanet(id){
+  document.querySelectorAll('.planet-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.planet-display').forEach(d=>d.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('planet-'+id).classList.add('active');
+}
+</script>
+</body>
+</html>

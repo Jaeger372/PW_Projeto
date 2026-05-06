@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personagens — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .filter-bar { display:flex; gap:.75rem; margin-bottom:3rem; flex-wrap:wrap; }
+    .filter-btn { padding:8px 20px; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:20px; color:rgba(245,240,232,.5); cursor:pointer; transition:all .3s; font-family:'Raleway',sans-serif; }
+    .filter-btn:hover, .filter-btn.active { border-color:var(--faction-primary,#d4a843); color:var(--faction-primary,#d4a843); background:rgba(212,168,67,.06); }
+    .chars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .char-card { position:relative; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); border-radius:8px; overflow:hidden; transition:all .4s; text-decoration:none; display:block; }
+    .char-card:hover { transform:translateY(-4px); border-color:var(--faction-primary,#d4a843); box-shadow:0 16px 48px rgba(212,168,67,0.1); }
+    .char-card-image { aspect-ratio:3/4; background:linear-gradient(160deg,#1a1205,#100c06,#050402); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:4rem; font-weight:900; position:relative; overflow:hidden; transition:transform .4s; }
+    .char-card-image img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .4s; }
+    .char-card:hover .char-card-image img { transform:scale(1.05); }
+    .char-card-image-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(5,4,2,0.9) 0%, rgba(5,4,2,0.3) 50%, transparent 100%); z-index:2; }
+    .char-card:hover .char-card-image { transform:scale(1.03); }
+    .char-card-image-inner { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+    .char-card-body { padding:1.5rem; }
+    .char-card-faction { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--faction-primary,#d4a843); margin-bottom:.4rem; }
+    .char-card-name { font-family:'Cinzel',serif; font-size:1.1rem; color:#f5f0e8; margin-bottom:.4rem; }
+    .char-card-role { font-size:.8rem; color:rgba(245,240,232,.4); margin-bottom:.75rem; }
+    .char-card-tags { display:flex; gap:.4rem; flex-wrap:wrap; }
+    .char-tag { padding:2px 8px; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; border-radius:10px; }
+    .char-featured { grid-column:span 1; }
+    .char-card[data-recommended="true"] { border-color:var(--faction-primary,#d4a843); }
+    .char-card[data-recommended="true"]::before { content:'Recomendado'; position:absolute; top:.75rem; right:.75rem; z-index:5; padding:3px 10px; font-size:.55rem; letter-spacing:.12em; text-transform:uppercase; background:var(--faction-primary,#d4a843); color:#050402; border-radius:10px; font-weight:700; font-family:'Raleway',sans-serif; }
+    [data-faction-color="atreides"] { --c:#4a9e6a; }
+    [data-faction-color="harkonnen"] { --c:#c0392b; }
+    [data-faction-color="fremen"] { --c:#2980b9; }
+    [data-faction-color="bene-gesserit"] { --c:#8e44ad; }
+    [data-faction-color="corrino"] { --c:#d4a843; }
+    [data-faction-color="neutral"] { --c:#9a8e7a; }
+    .char-card-image[data-faction-color] { background:linear-gradient(160deg,color-mix(in srgb,var(--c,#d4a843) 15%,#050402),#0a0702); }
+    @media(max-width:900px){ .chars-grid{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:500px){ .chars-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#0a0702,#1a1205,#050402);"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Personagens</span></nav>
+    <p class="section-label">Galeria</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">Personagens<br><span style="color:var(--faction-primary,#d4a843);">do Universo</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:560px;line-height:1.9;">As figuras que moldam o destino do cosmos de Dune — heróis, tiranos, manipuladores e sobreviventes.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" onclick="filterChars('all')">Todos</button>
+      <button class="filter-btn" onclick="filterChars('atreides')">⚔ Atreides</button>
+      <button class="filter-btn" onclick="filterChars('harkonnen')">⚡ Harkonnen</button>
+      <button class="filter-btn" onclick="filterChars('fremen')">◈ Fremen</button>
+      <button class="filter-btn" onclick="filterChars('bene-gesserit')">◉ Bene Gesserit</button>
+      <button class="filter-btn" onclick="filterChars('corrino')">👑 Corrino</button>
+      <button class="filter-btn" onclick="filterChars('tleilaxu')">🔬 Tleilaxu</button>
+    </div>
+    <div class="chars-grid" id="charsGrid">
+
+      <!-- PAUL -->
+      <a href="personagem-paul.html" class="char-card faction-recommended" id="personagem-paul" data-faction="atreides">
+        <div class="char-card-image" data-faction-color="atreides">
+          <img src="https://sspark.genspark.ai/cfimages?u1=V3YBhlXUS%2Fm6B0wOll99msI9225GpAe1GDrFdpIEt%2FDCqDk4NVHn%2BWFIHs9%2B2LZxmRRkeDsSo34fjyvirSdT1np0SuKb6sTGi3VCHKpSWGkWDbdUJ2qXAxK%2FYhMatHDFxCGvjEfVbcakabg2Zr2xI13OZUJ%2FjgQtCdlUuzl1WV2nVgxAJgCfo0d%2FR3b1lg%3D%3D&u2=ntiUadYS7f66Szil&width=2560" alt="Paul Atreides">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(74,158,106,0.0);font-size:6rem;font-family:'Cinzel',serif;font-weight:900;"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#4a9e6a;">⚔ Casa Atreides</div>
+          <h3 class="char-card-name">Paul Atreides</h3>
+          <p class="char-card-role">Protagonista · Duque · Muad'Dib</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#4a9e6a;border-color:rgba(74,158,106,.2);background:rgba(74,158,106,.06);">Kwisatz Haderach</span>
+            <span class="char-tag tag">Presciente</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- JESSICA -->
+      <a href="personagem-jessica.html" class="char-card faction-recommended" id="personagem-jessica" data-faction="bene-gesserit">
+        <div class="char-card-image" data-faction-color="bene-gesserit">
+          <img src="https://sspark.genspark.ai/cfimages?u1=NpTi2Pglq3fywOGVyi1Gxm5KkpztHmd%2BMw1yFMhwernOMUC3FGS9rhA9ODoUywt9JaxpWV2xI%2BgdTLbrAg%2Bbaph2eYJUPj6qOmBBYE1kzUVaaRMTULH4M0WsI%2FheUloGqk6Zy4YCFyt3IKYtpnQs%2Fj24UqTKVdkPYqi38mNHHeTZ3Bz3gMOjhForNWouVlV4CENxMLc0TtYAxvzj6JTXmzwelqHCzl5oviEsXXHFxT%2FSAkAQTf9WmKkXik3lhFE4f7BpTx3MTR%2Bh2NtNGh1xSdo4o22E12jg3cqDA87jrTpTrmKYV2bjVUPK5CYuU9YzcUOSl5eOtVSqp20S3qQo60KVKS8ZoJumeMikrw%3D%3D&u2=2VZzoVL5GThp76jZ&width=2560" alt="Lady Jessica">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(142,68,173,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#8e44ad;">◉ Bene Gesserit</div>
+          <h3 class="char-card-name">Lady Jessica</h3>
+          <p class="char-card-role">Mãe de Paul · Reverenda Mãe</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#8e44ad;border-color:rgba(142,68,173,.2);background:rgba(142,68,173,.06);">A Voz</span>
+            <span class="char-tag tag">Prana-Bindu</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- BARON -->
+      <a href="personagem-baron.html" class="char-card faction-recommended" id="personagem-baron" data-faction="harkonnen">
+        <div class="char-card-image" data-faction-color="harkonnen">
+          <img src="https://sspark.genspark.ai/cfimages?u1=zqcCZU249w3xZ7Ep8mYpP84GNc%2B2PGJ2HBt3k876Nj1%2FFoxrskK%2BdzUr1%2F9ljdy06Ji5fX0CTpoXyWhZjkkkfuIuXbUeYCkl6lLxea%2FULxdahX4ckDMo%2FZwonbw4q7bDNo6eCvJcGQ%3D%3D&u2=OuVAhKMHLSquN%2B0J&width=2560" alt="Baron Harkonnen">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(192,57,43,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#c0392b;">⚡ Casa Harkonnen</div>
+          <h3 class="char-card-name">Baron Vladimir Harkonnen</h3>
+          <p class="char-card-role">Antagonista principal · Baron</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#c0392b;border-color:rgba(192,57,43,.2);background:rgba(192,57,43,.06);">Manipulador</span>
+            <span class="char-tag tag">Estrategista</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- CHANI -->
+      <a href="personagem-chani.html" class="char-card faction-recommended" id="personagem-chani" data-faction="fremen">
+        <div class="char-card-image" data-faction-color="fremen">
+          <img src="https://sspark.genspark.ai/cfimages?u1=RRyiah1b4AmMNh8db7nngeF23UU%2F0dFYxSoO%2B0ahVM%2FKGaixmBtHkVnF7O32EHkg0wiimIL5FCpstjzZ3yC2k47JGQt0fCejkpJC3ZBxdp2gtKZdWPG2UhkaUTsKIagq65ET8iF6KuFxiQ%3D%3D&u2=NxK8H4ziDBhVjZkg&width=2560" alt="Chani - Zendaya">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(41,128,185,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#2980b9;">◈ Fremen</div>
+          <h3 class="char-card-name">Chani</h3>
+          <p class="char-card-role">Guerreira Fremen · Companheira de Paul</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#2980b9;border-color:rgba(41,128,185,.2);background:rgba(41,128,185,.06);">Filha de Kynes</span>
+            <span class="char-tag tag">Sihaya</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- STILGAR -->
+      <a href="personagem-stilgar.html" class="char-card faction-recommended" id="personagem-stilgar" data-faction="fremen">
+        <div class="char-card-image" data-faction-color="fremen">
+          <img src="https://sspark.genspark.ai/cfimages?u1=A%2FL66%2BHmHjW45YWJJWGHw586L8i%2BWwrd0%2Fdi1iuCRjrn%2FvjcfLnr3AKH2JvFibUmreDl6Uoohy0IMYgaPRgxBQ%2BRLY2%2Fy2vn8azNlxHDHCaZmFHfslkysOOlTUaiMw2%2BbY0fqpAAY89U14fRbXuQpLY%3D&u2=STsvkdXmNf0EQfv1&width=2560" alt="Stilgar - Javier Bardem">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(41,128,185,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#2980b9;">◈ Fremen</div>
+          <h3 class="char-card-name">Stilgar</h3>
+          <p class="char-card-role">Naib do Sietch Tabr</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#2980b9;border-color:rgba(41,128,185,.2);background:rgba(41,128,185,.06);">Líder Fremen</span>
+            <span class="char-tag tag">Guerreiro</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- DUNCAN IDAHO -->
+      <a href="faccao-atreides.html" class="char-card" data-faction="atreides">
+        <div class="char-card-image" data-faction-color="atreides">
+          <img src="https://sspark.genspark.ai/cfimages?u1=VVtXr8Nj%2BhabuHaOpal9%2FxdJESovoNPZ5vaIDQ87%2F5p0ZNB5ABf8gh4iVvpDawrGp0ko1DicYZ4MlplWEfAUvOVKd%2FKwPqtGkraCkTA%2BQ4u1ypwCYgkLla9%2FVBUF8BisGrVkvKbFeUP7Nw%3D%3D&u2=QjA6ybvFSH5i0ekk&width=2560" alt="Duncan Idaho - Jason Momoa">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(74,158,106,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#4a9e6a;">⚔ Casa Atreides</div>
+          <h3 class="char-card-name">Duncan Idaho</h3>
+          <p class="char-card-role">Mestre de Espadas · Ghola · Part Three</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#4a9e6a;border-color:rgba(74,158,106,.2);background:rgba(74,158,106,.06);">Jason Momoa</span>
+            <span class="char-tag tag">Soldado</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- GURNEY HALLECK -->
+      <a href="faccao-atreides.html" class="char-card" data-faction="atreides">
+        <div class="char-card-image" data-faction-color="atreides">
+          <div class="char-card-image-inner" style="color:rgba(74,158,106,0.08);font-size:6rem;font-family:'Cinzel',serif;font-weight:900;">GH</div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#4a9e6a;">⚔ Casa Atreides</div>
+          <h3 class="char-card-name">Gurney Halleck</h3>
+          <p class="char-card-role">Mestre de Armas · Bardo</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#4a9e6a;border-color:rgba(74,158,106,.2);background:rgba(74,158,106,.06);">Veterano</span>
+            <span class="char-tag tag">Músico</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- FEYD-RAUTHA -->
+      <a href="personagem-feyd.html" class="char-card faction-recommended" id="personagem-feyd" data-faction="harkonnen">
+        <div class="char-card-image" data-faction-color="harkonnen">
+          <img src="https://sspark.genspark.ai/cfimages?u1=ms9HtgyOYLsNN2iFogP%2BLXW%2FjtsrCBuTriHSoA0z9kVI5ja3uFgjNBJVzO9OFZAv7Q%2FKXEhAmPeSBKoO0rEfOe5P4BBvUpJSSNS6DPTXN5M%2F87Et4LGaao3fidB2oTSsuEYJz%2FzXcJn0LLzl%2BEewX%2BrpNIE91g3n2b7mVAUtbgPcL937WFHTIeRZzYEXwzBstyRT1N5aVYqSBLBLYMuE51dL6N%2BPZpZ2S6BDQxLFaMJ04yNW58%2BGRIZX7FOIekJE6g1DA3GWYSS4AysYbdrPhOi%2FUQX0LJEr&u2=pz%2B6Ux5R0PMC%2Fgfr&width=2560" alt="Feyd-Rautha - Austin Butler">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(192,57,43,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#c0392b;">⚡ Casa Harkonnen</div>
+          <h3 class="char-card-name">Feyd-Rautha</h3>
+          <p class="char-card-role">Sobrinho do Baron · Gladiador</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#c0392b;border-color:rgba(192,57,43,.2);background:rgba(192,57,43,.06);">Herdeiro</span>
+            <span class="char-tag tag">Letal</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SHADDAM IV -->
+      <a href="universo.html#imperio" class="char-card" data-faction="corrino">
+        <div class="char-card-image" data-faction-color="corrino">
+          <div class="char-card-image-inner" style="color:rgba(212,168,67,0.08);font-size:6rem;font-family:'Cinzel',serif;font-weight:900;">SH</div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#d4a843;">👑 Casa Corrino</div>
+          <h3 class="char-card-name">Imperador Shaddam IV</h3>
+          <p class="char-card-role">Padishah Imperador</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag">Sardaukar</span>
+            <span class="char-tag tag">Corrino</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- REVERENDA MÃE MOHIAM -->
+      <a href="faccao-bene-gesserit.html" class="char-card" data-faction="bene-gesserit">
+        <div class="char-card-image" data-faction-color="bene-gesserit">
+          <div class="char-card-image-inner" style="color:rgba(142,68,173,0.08);font-size:6rem;font-family:'Cinzel',serif;font-weight:900;">RM</div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#8e44ad;">◉ Bene Gesserit</div>
+          <h3 class="char-card-name">Rev. Mãe Mohiam</h3>
+          <p class="char-card-role">Reverendissima · Conselheira Imperial</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#8e44ad;border-color:rgba(142,68,173,.2);background:rgba(142,68,173,.06);">Gom Jabbar</span>
+            <span class="char-tag tag">Testadora</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- LETO I -->
+      <a href="faccao-atreides.html" class="char-card" data-faction="atreides">
+        <div class="char-card-image" data-faction-color="atreides">
+          <div class="char-card-image-inner" style="color:rgba(74,158,106,0.08);font-size:6rem;font-family:'Cinzel',serif;font-weight:900;">LA</div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#4a9e6a;">⚔ Casa Atreides</div>
+          <h3 class="char-card-name">Duque Leto I Atreides</h3>
+          <p class="char-card-role">Duque · Pai de Paul</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#4a9e6a;border-color:rgba(74,158,106,.2);background:rgba(74,158,106,.06);">Honrado</span>
+            <span class="char-tag tag">Traído</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- ALIA (MESSIAH) -->
+      <a href="personagem-alia.html" class="char-card" data-faction="atreides">
+        <div class="char-card-image" data-faction-color="atreides">
+          <img src="https://sspark.genspark.ai/cfimages?u1=C85T5WZSkWew185dknx0y3Of8Fn%2FyzKNvZVNaOsQL4jDXa1LoU%2BHI8BKEcZ4kRop1NRFyfhzFFdjSfusLebh1hzu5d1FxTzYwJRBnXb1eO%2FzXMpbtp4ZW1KYHiYexsFCq897%2FxsQsN38OZdk33l7W03Rwqb4bX3pbeix3FK42cSfxORF&u2=Si1CBwmytuPBfful&width=2560" alt="Alia Atreides - Anya Taylor-Joy">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(74,158,106,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#8e44ad;">◉ Abominação · Part Three</div>
+          <h3 class="char-card-name">Alia Atreides</h3>
+          <p class="char-card-role">Irmã de Paul · Reverenda Mãe Pré-nascida</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#8e44ad;border-color:rgba(142,68,173,.2);background:rgba(142,68,173,.06);">Anya Taylor-Joy</span>
+            <span class="char-tag tag">Dune: Part Three</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- IRULAN -->
+      <a href="personagem-irulan.html" class="char-card" data-faction="corrino">
+        <div class="char-card-image" data-faction-color="corrino">
+          <img src="https://sspark.genspark.ai/cfimages?u1=v92d%2Fa7ANXhszwcz6%2FtDWkth%2BVDhp5kWzpnX3Yb8YH%2Btte6EXtENLdc9KYyRHe4Lzav9icx35CCmNwIlK4lGm%2FTrtFWgMFHDyDDEirC7iCWvpL4%3D&u2=qGwuShIiaPiF6red&width=2560" alt="Princesa Irulan - Florence Pugh">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(212,168,67,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#d4a843;">👑 Casa Corrino</div>
+          <h3 class="char-card-name">Princesa Irulan</h3>
+          <p class="char-card-role">Filha do Imperador · Esposa de Paul</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#d4a843;border-color:rgba(212,168,67,.2);background:rgba(212,168,67,.06);">Florence Pugh</span>
+            <span class="char-tag tag">Cronista da Saga</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SCYTALE -->
+      <a href="personagem-scytale.html" class="char-card" data-faction="tleilaxu">
+        <div class="char-card-image" style="background:linear-gradient(160deg,#080212,#12021e,#050012);">
+          <img src="https://sspark.genspark.ai/cfimages?u1=LHZ8g5dEhMXTJvz5KjQLca%2FlVN%2FVwAHPE%2BDKSKg0HMzqibmq11pSwcYTxTta8e%2BXqLzZc7nIMJhnIoalMp4gedhJMwU8Pv9qIExsnXW5CNqVrNJ4Akx3OeGRQ1xsSSxhvzC779MKQftK1DAVQcpPdmLDkz%2FKtPXpCnWnSADbkAVR6E3MDw%3D%3D&u2=7IJAcG4oh54VAP1o&width=2560" alt="Scytale - Robert Pattinson">
+          <div class="char-card-image-overlay"></div>
+          <div class="char-card-image-inner" style="color:rgba(155,89,182,0.0);"></div>
+        </div>
+        <div class="char-card-body">
+          <div class="char-card-faction" style="color:#9b59b6;">🔬 Tleilaxu · Part Three</div>
+          <h3 class="char-card-name">Scytale</h3>
+          <p class="char-card-role">Face Dancer · Vilão Principal</p>
+          <div class="char-card-tags">
+            <span class="char-tag tag" style="color:#9b59b6;border-color:rgba(155,89,182,.2);background:rgba(155,89,182,.06);">Robert Pattinson</span>
+            <span class="char-tag tag">Metamorfo</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function filterChars(faction){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  const cards=document.querySelectorAll('.char-card');
+  cards.forEach(c=>{
+    if(faction==='all'||c.getAttribute('data-faction')===faction){
+      c.style.display='block';
+    } else {
+      c.style.display='none';
+    }
+  });
+}
+</script>
+</body>
+</html>

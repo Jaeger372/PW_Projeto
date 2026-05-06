@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dune (2021) — Análise — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .film-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .film-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0802,#1a1408,#050402);}
+    .film-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;filter:saturate(0.6) brightness(0.5);}
+    .film-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .film-body{padding:5rem 0;background:var(--color-black);}
+    .film-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--faction-primary,#d4a843);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(212,168,67,.12);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--faction-primary,#d4a843);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,67,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--faction-primary,#d4a843);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .scene-list{display:flex;flex-direction:column;gap:1rem;}
+    .scene-item{padding:1rem 1.2rem;background:rgba(212,168,67,.04);border-left:2px solid rgba(212,168,67,.3);border-radius:0 6px 6px 0;}
+    .scene-title{font-family:'Cinzel',serif;font-size:.9rem;color:var(--faction-primary,#d4a843);margin-bottom:.3rem;}
+    .scene-desc{font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;}
+    .compare-block{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(212,168,67,.1);border-radius:8px;}
+    .compare-row{margin-bottom:1rem;}
+    .compare-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:.4rem;}
+    .compare-cols{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+    .compare-col{padding:.6rem .8rem;border-radius:4px;font-size:.8rem;color:rgba(245,240,232,.6);line-height:1.5;}
+    .compare-col.book{background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.12);}
+    .compare-col.film{background:rgba(41,128,185,.06);border:1px solid rgba(41,128,185,.12);}
+    .compare-tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.3rem;}
+    .compare-col.book .compare-tag{color:#d4a843;}
+    .compare-col.film .compare-tag{color:#5dade2;}
+    @media(max-width:900px){.film-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="film-hero">
+  <div class="film-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=XCcnQpBnpQ5lg2a%2FO0CQCDUwyPo3rA5S8FhhEbSKVLCuU6Z5Uj2iu%2Bjc0ZjzzUs7vt%2F845udncXScTMqiOCHBhq15cLo3zsO2urqu3i%2FdTVthTha7yCxgurwY0Kg%2BUsmLAjXSLs5dsJ3pjbn5o0VAVnVHkjKWKc6Ug%3D%3D&u2=CVKbt344h93qDauq&width=2560" alt="Dune 2021 - Arrakis">
+  </div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(212,168,67,0.06) 0%,transparent 60%);"></div>
+  <div style="position:absolute;right:5%;bottom:2rem;font-family:'Cinzel',serif;font-size:14rem;font-weight:900;color:rgba(212,168,67,0.04);line-height:1;z-index:1;">2021</div>
+  <div class="container film-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="filmes.html">Filmes</a><span>/</span><span class="current">Dune (2021)</span></nav>
+    <span style="display:inline-block;padding:4px 14px;border:1px solid rgba(212,168,67,.3);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faction-primary,#d4a843);margin-bottom:1.5rem;">Parte I · 2021</span>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;">Dune</h1>
+    <p style="font-family:'Crimson Text',serif;font-size:1.4rem;font-style:italic;color:rgba(212,168,67,.7);margin-bottom:1rem;">"O sonho é a mensagem"</p>
+    <p style="font-size:.9rem;color:rgba(245,240,232,.4);letter-spacing:.1em;">Denis Villeneuve · Timothée Chalamet · Zendaya · Rebecca Ferguson · Oscar Isaac</p>
+  </div>
+</section>
+
+<section class="film-body">
+  <div class="container">
+    <div class="film-grid">
+      <div>
+        <div class="f-section reveal">
+          <h2>Sinopse</h2>
+          <p>Em Dune (2021), a Casa Atreides recebe um comando imperial: assumir o controlo do planeta Arrakis — o único lugar onde a Especiaria Melange pode ser encontrada. O Duque Leto sabe que é uma armadilha. Vai mesmo assim.</p>
+          <p>O jovem Paul Atreides — filho do Duque e da misteriosa Lady Jessica — chega a Arrakis com visões de um futuro que não compreende ainda. Lá encontra um povo — os Fremen — que o aguardava há gerações segundo uma profecia. Quando a traição atinge, Paul perde tudo e tem de fugir para o deserto — o único lugar onde talvez possa encontrar o que sobrou.</p>
+          <p>O filme termina com Paul e Jessica entre os Fremen, no início de uma transformação que mudará o universo. É deliberadamente uma "Parte I" — uma introdução épica a um mundo de escala imensurável.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Análise Cinematográfica</h2>
+          <h3>A Visão de Denis Villeneuve</h3>
+          <p>Villeneuve declara desde o início uma intenção clara: criar um épico de ficção científica que parecesse um filme histórico ou um western do futuro — sólido, físico, sem os habituais artifícios da ficção científica holywoodesca. A estética é deliberada: materiais que parecem pedra, areia, couro e metal; arquitetura que parece ter milhares de anos; tecnologia que se integra em vez de exibir.</p>
+          <p>A decisão de filmar Dune como "Parte I" — sem tentar comprimir tudo num único filme como a versão de 1984 de David Lynch fez desastrosamente — é a decisão que fez toda a diferença. O espaço narrativo que Villeneuve tem permite ritmo, respiração, desenvolvimento de personagens.</p>
+          <h3>A Fotografia de Greig Fraser</h3>
+          <p>A fotografia de Dune ganhou o Óscar — merecidamente. Fraser usa o deserto da Jordânia e dos Emirados como tela, criando imagens de escala aterrorizante. A luz de Arrakis é dura, real, sem filtros de fantasia. O contraste entre o calor dourado do deserto e a frieza azulada das naves e tecnologia imperiais cria uma paleta visual única e identificável.</p>
+          <h3>Hans Zimmer e o Impossível</h3>
+          <p>A banda sonora de Hans Zimmer para Dune é um dos trabalhos mais inventivos da sua carreira. Zimmer recusou usar instrumentos clássicos e criou novos instrumentos especificamente para o filme — incluindo uma "voz feminina processada" que se torna o som principal de Arrakis. O resultado é uma música que parece de outro mundo porque é, literalmente, construída com sons que nunca existiram antes.</p>
+
+          <h3>Cenas Memoráveis</h3>
+          <div class="scene-list">
+            <div class="scene-item">
+              <div class="scene-title">A Chegada a Arrakis</div>
+              <div class="scene-desc">A nave Atreides desce sobre o deserto enquanto os habitantes observam — uma das imagens de abertura mais poderosas do cinema épico recente.</div>
+            </div>
+            <div class="scene-item">
+              <div class="scene-title">O Primeiro Verme</div>
+              <div class="scene-desc">Paul e os soldados encontram o primeiro Verme da Areia. Villeneuve usa o silêncio e a escala para criar terror puro sem recurso ao horror convencional.</div>
+            </div>
+            <div class="scene-item">
+              <div class="scene-title">A Traição</div>
+              <div class="scene-desc">O colapso da Casa Atreides numa sequência noturna caótica e aterrorizante — imagens de guerra urbana que não parecem ficção científica.</div>
+            </div>
+            <div class="scene-item">
+              <div class="scene-title">Paul e Jamis — O Combate</div>
+              <div class="scene-desc">O primeiro combate Fremen de Paul — lento, íntimo, dolorosamente real. A vitória não é gloriosa. É apenas necessária e trágica.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Livro vs. Filme</h2>
+          <div class="compare-block">
+            <div class="compare-row">
+              <div class="compare-label">Visões e Monólogo Interno</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Riquíssimos. Muito do drama acontece na mente de Paul — dúvidas, análise, horror face às visões.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Transformadas em flashes visuais. Menos explicadas, mais poéticas. Mais misteriosas.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Papel de Chani</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Chani aparece pouco no primeiro livro — principalmente nas visões de Paul.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Zendaya tem mais presença e uma abertura em narração — preparando a importância que terá na Parte 2.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">A Política Imperial</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Extremamente detalhada. Capítulos inteiros de perspetiva do Baron, do Imperador, de Shaddam.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Simplificada mas respeitada. O suficiente para compreender o que está em jogo.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Dr. Liet-Kynes</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Homem — imperialista que se apaixonou pelos Fremen e pela sua causa.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Mulher (Sharon Duncan-Brewster). A mudança funciona e adiciona diversidade à representação do poder.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Ficha Técnica</h4>
+          <div class="stat-row"><span>Ano</span><span>2021</span></div>
+          <div class="stat-row"><span>Realizador</span><span>Denis Villeneuve</span></div>
+          <div class="stat-row"><span>Roteiro</span><span>Villeneuve / Roth / Spaihts</span></div>
+          <div class="stat-row"><span>Fotografia</span><span>Greig Fraser</span></div>
+          <div class="stat-row"><span>Música</span><span>Hans Zimmer</span></div>
+          <div class="stat-row"><span>Duração</span><span>2h 35min</span></div>
+          <div class="stat-row"><span>Orçamento</span><span>$165 milhões</span></div>
+          <div class="stat-row"><span>Bilheteira</span><span>$407 milhões</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Elenco Principal</h4>
+          <div class="stat-row"><span>Paul Atreides</span><span>Timothée Chalamet</span></div>
+          <div class="stat-row"><span>Lady Jessica</span><span>Rebecca Ferguson</span></div>
+          <div class="stat-row"><span>Chani</span><span>Zendaya</span></div>
+          <div class="stat-row"><span>Duque Leto</span><span>Oscar Isaac</span></div>
+          <div class="stat-row"><span>Baron Harkonnen</span><span>Stellan Skarsgård</span></div>
+          <div class="stat-row"><span>Duncan Idaho</span><span>Jason Momoa</span></div>
+          <div class="stat-row"><span>Stilgar</span><span>Javier Bardem</span></div>
+          <div class="stat-row"><span>Gurney Halleck</span><span>Josh Brolin</span></div>
+          <div class="stat-row"><span>Rev. Mãe Mohiam</span><span>Charlotte Rampling</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Prémios</h4>
+          <div class="stat-row"><span>Óscares ganhos</span><span>6 de 10 nomeações</span></div>
+          <div class="stat-row"><span>Melhor Fotografia</span><span>✓ Greig Fraser</span></div>
+          <div class="stat-row"><span>Melhor Edição</span><span>✓ Joe Walker</span></div>
+          <div class="stat-row"><span>Melhores Efeitos Visuais</span><span>✓</span></div>
+          <div class="stat-row"><span>Melhor Som</span><span>✓</span></div>
+          <div class="stat-row"><span>Melhor Design de Produção</span><span>✓</span></div>
+          <div class="stat-row"><span>Melhor Banda Sonora</span><span>✓ Hans Zimmer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(212,168,67,0.08);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="filme-dune-part-two.html" class="btn btn-primary">Dune: Part Two →</a>
+      <a href="livros.html" class="btn btn-outline">Os Livros</a>
+      <a href="filmes.html" class="btn btn-ghost">Todos os Filmes</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

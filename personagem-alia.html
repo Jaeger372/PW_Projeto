@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="atreides">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alia Atreides — Personagem — Dune Universe</title>
+  <meta name="description" content="Alia Atreides — A Abominação. Irmã de Paul, nascida já uma Reverenda Mãe, a criança mais temida e poderosa do universo de Dune.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#8e44ad;--fc-dark:#6c3483;--fc-glow:rgba(142,68,173,.2);}
+    .char-hero{min-height:75vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:linear-gradient(135deg,#050008,#0c0015,#050008);}
+    .char-hero-bg{position:absolute;inset:0;}
+    .char-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.22;filter:saturate(0.5) brightness(0.4);}
+    .char-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,0,8,1) 0%,rgba(5,0,8,0.7) 40%,rgba(5,0,8,0.2) 100%);}
+    .char-hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(142,68,173,0.1) 0%,transparent 60%);}
+    .char-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .char-header-grid{display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:end;}
+    .char-portrait{width:100%;max-width:320px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid rgba(142,68,173,.25);position:relative;}
+    .char-portrait img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:saturate(0.8)brightness(0.85);}
+    .char-portrait-glow{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,0,8,.8) 0%,transparent 60%);}
+    .char-faction-tag{display:inline-block;padding:4px 14px;border:1px solid rgba(142,68,173,.3);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fc,#8e44ad);margin-bottom:1rem;background:rgba(142,68,173,.05);}
+    .char-name{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .char-titles{font-size:.9rem;color:rgba(245,240,232,.4);letter-spacing:.1em;margin-bottom:.75rem;}
+    .char-epithet{font-family:'Crimson Text',serif;font-size:1.3rem;font-style:italic;color:rgba(142,68,173,.7);}
+    .char-quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);margin-top:2rem;}
+    .qs-item{padding:1rem;background:var(--color-black);}
+    .qs-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:.3rem;}
+    .qs-value{font-size:.9rem;color:#f5f0e8;font-weight:500;}
+    .char-body{padding:5rem 0;background:var(--color-black);}
+    .char-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .char-section{margin-bottom:3.5rem;}
+    .char-section h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--fc,#8e44ad);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(142,68,173,.12);}
+    .char-section h3{font-family:'Cinzel',serif;font-size:1rem;color:#f5f0e8;margin:1.5rem 0 .5rem;}
+    .char-section p{font-size:.9rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .char-section ul{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
+    .char-section ul li{font-size:.88rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .char-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc,#8e44ad);font-size:.5rem;top:.4rem;}
+    .quote-block{padding:1.5rem 2rem;border-left:3px solid rgba(142,68,173,.4);margin:1.5rem 0;background:rgba(142,68,173,.04);}
+    .quote-block p{font-family:'Crimson Text',serif;font-size:1.1rem;font-style:italic;color:rgba(245,240,232,.65);margin:0;}
+    .quote-source{font-size:.75rem;color:rgba(245,240,232,.3);margin-top:.5rem;display:block;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(142,68,173,.12);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc,#8e44ad);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .messiah-badge{display:inline-block;padding:4px 12px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);border-radius:20px;font-size:.65rem;letter-spacing:.1em;color:rgba(192,57,43,.9);text-transform:uppercase;margin-bottom:.75rem;}
+    @media(max-width:900px){.char-header-grid{grid-template-columns:1fr;gap:2rem;}.char-portrait{max-width:240px;}.char-grid{grid-template-columns:1fr;}.char-quick-stats{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="char-hero">
+  <div class="char-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=W%2FB96lrVWASZ%2BwYvkBoj6XQknOF8FI9yLXgc7vlFCOzh0MaeUC052lGU%2Fmp6NBck8%2Bp8y5CrkywhocabsaAwq%2BAG3DO2uyfxvdSS7JGf5%2BVimWyP5G5fvDWtiHizpi12vV2zRb8gpyYezk48hV9C%2Ba5mKg9pIfb9G%2Bt86ZtYXtIkugXF3yoH&u2=XQ5T5W5WUJVxOSTD&width=2560" alt="Alia Atreides">
+  </div>
+  <div class="char-hero-overlay"></div>
+  <div class="char-hero-glow"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Alia Atreides</span></nav>
+    <div class="char-header-grid">
+      <div class="char-portrait">
+        <img src="https://sspark.genspark.ai/cfimages?u1=C85T5WZSkWew185dknx0y3Of8Fn%2FyzKNvZVNaOsQL4jDXa1LoU%2BHI8BKEcZ4kRop1NRFyfhzFFdjSfusLebh1hzu5d1FxTzYwJRBnXb1eO%2FzXMpbtp4ZW1KYHiYexsFCq897%2FxsQsN38OZdk33l7W03Rwqb4bX3pbeix3FK42cSfxORF&u2=Si1CBwmytuPBfful&width=2560" alt="Alia Atreides — Anya Taylor-Joy">
+        <div class="char-portrait-glow"></div>
+      </div>
+      <div>
+        <div class="char-faction-tag">◉ Bene Gesserit · Atreides</div>
+        <div class="messiah-badge">⚔ Dune: Part Three (2026)</div>
+        <h1 class="char-name">Alia Atreides</h1>
+        <p class="char-titles">Irmã de Paul · Reverenda Mãe Pré-nascida · "A Abominação"</p>
+        <p class="char-epithet">"Ela nasceu já sabendo tudo. É isso que a torna impossível."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Interpretada por</div><div class="qs-value">Anya Taylor-Joy</div></div>
+          <div class="qs-item"><div class="qs-label">Origem</div><div class="qs-value">Arrakis (nascida)</div></div>
+          <div class="qs-item"><div class="qs-label">Mãe</div><div class="qs-value">Lady Jessica</div></div>
+          <div class="qs-item"><div class="qs-label">Irmão</div><div class="qs-value">Paul Muad'Dib</div></div>
+          <div class="qs-item"><div class="qs-label">Condição</div><div class="qs-value">Pré-nascida · Aberta</div></div>
+          <div class="qs-item"><div class="qs-label">Aparece em</div><div class="qs-value">Part Two + Part Three</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="char-body">
+  <div class="container">
+    <div class="char-grid">
+      <div>
+        <div class="char-section reveal">
+          <h2>A Abominação de Arrakis</h2>
+          <p>Alia Atreides é uma das personagens mais perturbadoras de toda a literatura de ficção científica — e uma das mais difíceis de adaptar para o cinema. Ela é a filha de Lady Jessica e do Duque Leto, irmã de Paul, nascida em Arrakis após a sua mãe beber a Água da Vida durante a gravidez.</p>
+          <p>Este acto transformou Alia num ser único e aterrorizante: uma criança que nasceu já "aberta" à memória ancestral — capaz de aceder à consciência de todas as ancestrais Bene Gesserit desde o nascimento. O Bene Gesserit chama a este estado "Abominação" precisamente porque é impossível de controlar: uma criança com o peso de milénios de memória que nunca pediu.</p>
+          <div class="quote-block">
+            <p>"Uma pré-nascida não pode ser treinada. Não pode ser condicionada. Já sabe demais para ser ensinada — e isso é exactamente o perigo."</p>
+            <span class="quote-source">— Bene Gesserit, sobre as Abominações</span>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>O Paradoxo de Alia</h2>
+          <h3>Inocência e Omnisciência</h3>
+          <p>O que torna Alia fascinante é o paradoxo que habita: fisicamente é uma criança (ou jovem adulta, na adaptação fílmica de Anya Taylor-Joy), mas interiormente carrega a sabedoria — e as obsessões, medos e desejos — de milhares de pessoas que viveram antes dela. É simultaneamente a mais inocente e a mais experiente de todas as personagens.</p>
+          <h3>A Memória do Baron</h3>
+          <p>Entre as memórias que Alia carrega está a do Baron Vladimir Harkonnen — o avô que nunca conheceu mas que habita o seu interior. Esta memória é um cancro psíquico que cresce ao longo de <em>Dune Messiah</em> e explode em <em>Children of Dune</em. Em <em>Part Three</em>, a relação de Alia com a memória do Baron será um dos arcos mais tensos do filme.</p>
+          <h3>Protegida e Ameaça</h3>
+          <p>Para os Fremen, Alia é sagrada — a irmã do Messias, tocada pelo deserto antes mesmo de nascer. Para o Bene Gesserit, é um erro que deve ser corrigido. Para o Tleilaxu e os conspiradores de Messiah, é tanto um alvo como uma potencial arma.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Alia no Livro Dune Messiah</h2>
+          <p>No livro original, Alia tem apenas 4 anos durante os eventos de <em>Messiah</em>, mas governa como Regente quando Paul está incapacitado. A sua precocidade física contrasta com a sua maturidade sobrenatural — um elemento que Villeneuve terá de adaptar para o cinema com Anya Taylor-Joy.</p>
+          <ul>
+            <li>Age como Sacerdotisa do culto de Muad'Dib, mantendo o poder religioso que Paul abdicou</li>
+            <li>Mata o Baron Harkonnen (na sua forma de memória interior) durante os eventos de <em>Part Two</em></li>
+            <li>É parte central da conspiração — tanto como alvo dos conspiradores como potencial aliada involuntária</li>
+            <li>No final de <em>Messiah</em>, assume o poder após a partida de Paul — com consequências devastadoras em <em>Children of Dune</em></li>
+          </ul>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Anya Taylor-Joy no Papel</h2>
+          <p>Anya Taylor-Joy foi brevemente vista em <em>Dune: Part Two</em> como uma visão do futuro de Paul — uma apparition etérea que antecipou a personagem. Em <em>Part Three</em>, assume o papel completo.</p>
+          <p>Taylor-Joy confirmou o seu entusiasmo pela personagem: <em>"Nunca houve ninguém como ela. Alia vive numa dualidade impossível — é completamente humana e completamente algo mais. É a personagem mais complexa que já tive oportunidade de explorar."</em></p>
+          <p>A actriz tem uma qualidade particular que a torna ideal para Alia: uma presença que combina vulnerabilidade e intensidade, com olhos que sugerem tanto inocência como profundidade abissal — exactamente o que Alia exige.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Ficha de Personagem</h4>
+          <div class="stat-row"><span>Nome completo</span><span>Alia Atreides</span></div>
+          <div class="stat-row"><span>Pai</span><span>Duque Leto Atreides I</span></div>
+          <div class="stat-row"><span>Mãe</span><span>Lady Jessica</span></div>
+          <div class="stat-row"><span>Irmão</span><span>Paul Muad'Dib</span></div>
+          <div class="stat-row"><span>Planeta</span><span>Arrakis (nascida)</span></div>
+          <div class="stat-row"><span>Condição especial</span><span>Pré-nascida</span></div>
+          <div class="stat-row"><span>Título</span><span>Alia de la Trinidad</span></div>
+          <div class="stat-row"><span>Status BG</span><span>Abominação</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>No Cinema</h4>
+          <div class="stat-row"><span>Actriz</span><span>Anya Taylor-Joy</span></div>
+          <div class="stat-row"><span>Aparece em</span><span>Part Two (visão)</span></div>
+          <div class="stat-row"><span>Papel central</span><span>Part Three (2026)</span></div>
+          <div class="stat-row"><span>Facção</span><span>Atreides / Bene Gesserit</span></div>
+        </div>
+
+        <div class="sidebar-card reveal" style="border-color:rgba(192,57,43,.15);background:rgba(192,57,43,.04);">
+          <h4>⚠ Aviso de Spoiler</h4>
+          <p style="font-size:.82rem;color:rgba(245,240,232,.5);line-height:1.7;margin:0;">O arco de Alia em <em>Dune Messiah</em> e <em>Children of Dune</em> contém revelações dramáticas. Esta página descreve o livro — o filme pode diferir.</p>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Poderes e Capacidades</h4>
+          <div class="stat-row"><span>Memória ancestral</span><span>Acesso total</span></div>
+          <div class="stat-row"><span>Treino BG</span><span>Inato (pré-nascida)</span></div>
+          <div class="stat-row"><span>Prescência</span><span>Limitada</span></div>
+          <div class="stat-row"><span>Combate</span><span>Treinada desde criança</span></div>
+          <div class="stat-row"><span>A Voz</span><span>Domínio natural</span></div>
+        </div>
+
+        <div class="sidebar-card reveal">
+          <h4>Ligações</h4>
+          <a href="personagem-paul.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#8e44ad'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Paul Atreides (irmão)</a>
+          <a href="personagem-jessica.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#8e44ad'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Lady Jessica (mãe)</a>
+          <a href="personagem-baron.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Baron Harkonnen (memória)</a>
+          <a href="filme-dune-messiah.html" style="display:block;font-size:.82rem;color:rgba(245,240,232,.5);padding:.4rem 0;text-decoration:none;" onmouseover="this.style.color='#8e44ad'" onmouseout="this.style.color='rgba(245,240,232,.5)'">Dune: Part Three (2026)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(142,68,173,0.08);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="personagens.html" class="btn btn-outline">← Todos os Personagens</a>
+      <a href="personagem-scytale.html" class="btn btn-outline">Scytale →</a>
+      <a href="filme-dune-messiah.html" class="btn btn-primary">Dune: Part Three →</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paul Atreides — Personagem — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .char-hero { min-height:70vh; position:relative; display:flex; align-items:flex-end; padding-bottom:0; overflow:hidden; }
+    .char-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg,#071510 0%,#0d1f15 40%,#050e08 70%,#020503 100%); }
+    .char-hero-pattern { position:absolute; inset:0; opacity:.04; background-image:repeating-linear-gradient(45deg,#4a9e6a 0,#4a9e6a 1px,transparent 0,transparent 50%); background-size:20px 20px; }
+    .char-hero-glow { position:absolute; left:55%; top:0; bottom:0; width:50%; background:radial-gradient(ellipse at right,rgba(74,158,106,0.08) 0%,transparent 70%); }
+    .char-hero-content { position:relative; z-index:5; width:100%; padding:160px 0 5rem; }
+    .char-header-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; }
+    .char-portrait-wrap { position:relative; }
+    .char-portrait { width:100%; max-width:400px; aspect-ratio:3/4; background:linear-gradient(160deg,#0d2218,#1a3520,#071510); border:1px solid rgba(74,158,106,0.2); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:9rem; font-weight:900; color:rgba(74,158,106,0.06); overflow:hidden; }
+    .char-portrait img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+    .char-info { padding-bottom:2rem; }
+    .char-faction-tag { display:inline-flex; align-items:center; gap:.5rem; padding:6px 14px; background:rgba(74,158,106,0.12); border:1px solid rgba(74,158,106,0.3); border-radius:20px; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:#4a9e6a; margin-bottom:1.5rem; }
+    .char-name { font-family:'Cinzel',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#f5f0e8; line-height:1.05; margin-bottom:.5rem; }
+    .char-titles { font-size:.8rem; letter-spacing:.15em; color:rgba(245,240,232,.35); text-transform:uppercase; margin-bottom:1.5rem; }
+    .char-epithet { font-family:'Crimson Text',serif; font-size:1.4rem; font-style:italic; color:rgba(74,158,106,.7); margin-bottom:2rem; }
+    .char-quick-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .qs-item { padding:1rem; background:rgba(74,158,106,.05); border:1px solid rgba(74,158,106,.12); border-radius:4px; }
+    .qs-label { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(74,158,106,.7); margin-bottom:.3rem; }
+    .qs-value { font-family:'Cinzel',serif; font-size:.95rem; color:#f5f0e8; }
+
+    /* Content */
+    .char-body { padding:5rem 0; }
+    .char-grid { display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:start; }
+    .char-main {}
+    .char-sidebar { position:sticky; top:6rem; }
+
+    .char-section { margin-bottom:4rem; }
+    .char-section h2 { font-family:'Cinzel',serif; font-size:1.6rem; color:#4a9e6a; margin-bottom:1.2rem; padding-bottom:.75rem; border-bottom:1px solid rgba(74,158,106,.15); }
+    .char-section h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:#f5f0e8; margin:1.5rem 0 .6rem; }
+    .char-section p { font-size:.95rem; color:rgba(245,240,232,.6); line-height:1.9; margin-bottom:1rem; }
+    .char-section ul { display:flex; flex-direction:column; gap:.6rem; margin-bottom:1rem; }
+    .char-section ul li { font-size:.9rem; color:rgba(245,240,232,.55); padding-left:1.2rem; position:relative; line-height:1.7; }
+    .char-section ul li::before { content:'◆'; position:absolute; left:0; color:#4a9e6a; font-size:.5rem; top:.4rem; }
+
+    /* Timeline */
+    .timeline-v { position:relative; padding-left:2rem; }
+    .timeline-v::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(180deg,#4a9e6a,rgba(74,158,106,0.1)); }
+    .tl-entry { position:relative; margin-bottom:2rem; }
+    .tl-entry::before { content:''; position:absolute; left:-2.4rem; top:.3rem; width:10px; height:10px; border-radius:50%; background:#4a9e6a; box-shadow:0 0 10px rgba(74,158,106,0.4); }
+    .tl-entry-year { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.1em; color:#4a9e6a; margin-bottom:.3rem; }
+    .tl-entry-title { font-family:'Cinzel',serif; font-size:1rem; color:#f5f0e8; margin-bottom:.4rem; }
+    .tl-entry-text { font-size:.85rem; color:rgba(245,240,232,.5); line-height:1.7; }
+
+    /* Relationships */
+    .rel-grid { display:flex; flex-direction:column; gap:.75rem; }
+    .rel-item { display:flex; align-items:center; gap:1rem; padding:.75rem 1rem; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:6px; text-decoration:none; transition:all .3s; }
+    .rel-item:hover { border-color:rgba(74,158,106,.3); background:rgba(74,158,106,.04); }
+    .rel-icon { width:36px; height:36px; border-radius:50%; background:rgba(74,158,106,.1); border:1px solid rgba(74,158,106,.2); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .rel-info { flex:1; }
+    .rel-name { font-family:'Cinzel',serif; font-size:.85rem; color:#f5f0e8; }
+    .rel-type { font-size:.7rem; letter-spacing:.1em; color:rgba(74,158,106,.7); text-transform:uppercase; }
+
+    /* Sidebar cards */
+    .sidebar-card { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(74,158,106,.1); border-radius:8px; margin-bottom:1.5rem; }
+    .sidebar-card h4 { font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.1em; color:#4a9e6a; text-transform:uppercase; margin-bottom:1rem; }
+    .stat-row { display:flex; justify-content:space-between; align-items:center; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.04); }
+    .stat-row:last-child { border:none; }
+    .stat-row span:first-child { font-size:.8rem; color:rgba(245,240,232,.4); }
+    .stat-row span:last-child { font-size:.8rem; color:#f5f0e8; font-weight:500; }
+
+    .compare-block { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(74,158,106,.1); border-radius:8px; }
+    .compare-block h4 { font-family:'Cinzel',serif; font-size:.85rem; color:#4a9e6a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:1rem; }
+    .compare-row { margin-bottom:1rem; }
+    .compare-label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.35); margin-bottom:.4rem; }
+    .compare-cols { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+    .compare-col { padding:.6rem .8rem; border-radius:4px; font-size:.8rem; color:rgba(245,240,232,.6); line-height:1.5; }
+    .compare-col.book { background:rgba(74,158,106,.06); border:1px solid rgba(74,158,106,.12); }
+    .compare-col.film { background:rgba(212,168,67,.06); border:1px solid rgba(212,168,67,.12); }
+    .compare-tag { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:.3rem; }
+    .compare-col.book .compare-tag { color:#4a9e6a; }
+    .compare-col.film .compare-tag { color:#d4a843; }
+
+    @media(max-width:900px){ .char-header-grid{grid-template-columns:1fr;} .char-portrait{max-width:240px;} .char-grid{grid-template-columns:1fr;} .char-sidebar{position:static;} .char-quick-stats{grid-template-columns:1fr 1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="char-hero">
+  <div class="char-hero-bg"></div>
+  <div class="char-hero-pattern"></div>
+  <div class="char-hero-glow"></div>
+  <div class="sand-particles"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Paul Atreides</span></nav>
+    <div class="char-header-grid">
+      <div class="char-info">
+        <div class="char-faction-tag">⚔ Casa Atreides</div>
+        <h1 class="char-name">Paul<br>Atreides</h1>
+        <p class="char-titles">Muad'Dib · Kwisatz Haderach · Lisan al-Gaib · Duque de Arrakis</p>
+        <p class="char-epithet">"Herói ou tirano? O universo nunca terá resposta."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Pai</div><div class="qs-value">Duque Leto I</div></div>
+          <div class="qs-item"><div class="qs-label">Mãe</div><div class="qs-value">Lady Jessica</div></div>
+          <div class="qs-item"><div class="qs-label">Planeta Natal</div><div class="qs-value">Caladan</div></div>
+        </div>
+      </div>
+      <div class="char-portrait-wrap">
+        <div class="char-portrait">
+          <img src="https://sspark.genspark.ai/cfimages?u1=V3YBhlXUS%2Fm6B0wOll99msI9225GpAe1GDrFdpIEt%2FDCqDk4NVHn%2BWFIHs9%2B2LZxmRRkeDsSo34fjyvirSdT1np0SuKb6sTGi3VCHKpSWGkWDbdUJ2qXAxK%2FYhMatHDFxCGvjEfVbcakabg2Zr2xI13OZUJ%2FjgQtCdlUuzl1WV2nVgxAJgCfo0d%2FR3b1lg%3D%3D&u2=ntiUadYS7f66Szil&width=2560" alt="Paul Atreides - Timothée Chalamet">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="char-body" style="background:var(--color-black);">
+  <div class="container">
+    <div class="char-grid">
+      <div class="char-main">
+
+        <!-- BIO -->
+        <div class="char-section reveal">
+          <h2>Quem é Paul Atreides</h2>
+          <p>Paul Atreides nasceu no planeta Caladan, filho do Duque Leto Atreides I — um dos homens mais respeitados do Landsraad — e de Lady Jessica, concubina do Duque e membro secreto da Bene Gesserit. A sua concepção foi, ela própria, um ato de desobediência: a Bene Gesserit ordenara a Jessica que gerasse uma filha, mas Jessica, por amor ao Duque, escolheu ter um filho.</p>
+          <p>Esta escolha colocaria Paul no centro de uma das maiores profecias da história humana. Desde cedo, Paul demonstra capacidades extraordinárias: reflexos sobre-humanos, intuição quase presciente, e a capacidade de usar a Voz — a técnica Bene Gesserit de forçar obediência através do tom de voz. Com 15 anos, quando a Casa Atreides é enviada para Arrakis, o seu destino começa a concretizar-se.</p>
+          <p>Na superfície de Arrakis, Paul mergulha num mundo de política imperial, traição e sobrevivência. Após a destruição da Casa Atreides pelos Harkonnen (com apoio secreto do Imperador), Paul e Jessica refugiam-se com os Fremen — e Paul começa a compreender que o universo tem planos para ele que transcendem a sua própria vontade.</p>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="char-section reveal">
+          <h2>Timeline Pessoal</h2>
+          <div class="timeline-v">
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.175 A.G. — Nascimento</div>
+              <div class="tl-entry-title">Nasce em Caladan</div>
+              <div class="tl-entry-text">Paul nasce no planeta oceânico de Caladan. Desde cedo é treinado por Gurney Halleck nas artes marciais e por Thufir Hawat em estratégia Mentat.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.190 A.G. — O Teste</div>
+              <div class="tl-entry-title">O Gom Jabbar</div>
+              <div class="tl-entry-text">A Reverenda Mãe Gaius Helen Mohiam testa Paul com o Gom Jabbar — a agulha envenenada que mata quem retirar a mão da dor. Paul passa, confirmando o que a Bene Gesserit suspeitava.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.191 A.G. — Chegada a Arrakis</div>
+              <div class="tl-entry-title">A Armadilha Imperial</div>
+              <div class="tl-entry-text">A Casa Atreides assume o controlo de Arrakis. Paul encontra Chani nas suas visões. O Imperador e os Harkonnen preparam uma traição mortal.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.191 A.G. — A Queda</div>
+              <div class="tl-entry-title">Destruição dos Atreides</div>
+              <div class="tl-entry-text">Os Harkonnen, com Sardaukar imperiais, destroem a Casa Atreides. O Duque Leto morre. Paul e Jessica fogem para o deserto. Começa a transformação.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.191–10.193 A.G.</div>
+              <div class="tl-entry-title">Muad'Dib Nasce</div>
+              <div class="tl-entry-text">Paul vive com os Fremen. Torna-se Usul no Sietch Tabr. Aprende a montar Vermes. A sua visão presciente expande-se. Chani torna-se a sua companheira. Paul vê o futuro — e teme-o.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.193 A.G. — A Jihad</div>
+              <div class="tl-entry-title">A Guerra Santa</div>
+              <div class="tl-entry-text">Paul derrota o Imperador Shaddam IV em Arrakis. Assume o trono. Mas a profecia que o elevou transforma-se em jihad galáctica — uma guerra santa que matará bilhões em seu nome, algo que Paul vê e não consegue parar.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PSICOLÓGICO -->
+        <div class="char-section reveal">
+          <h2>Evolução Psicológica</h2>
+          <h3>O Peso da Visão</h3>
+          <p>O elemento mais trágico de Paul não é a sua omnipotência — é a sua impotência perante o destino que vê. Paul possui a capacidade de ver o futuro com clareza crescente. E o que vê horroriza-o: uma jihad em seu nome que percorre o universo conhecido, deixando bilhões de mortos. Ele tenta resistir ao fluxo do destino — mas descobrirá que a resistência pode ser ela própria parte do plano.</p>
+          <h3>Herói ou Messias Fabricado?</h3>
+          <p>Uma das questões centrais de Dune é: Paul é verdadeiramente especial ou é o produto de um programa de criação genética milenário das Bene Gesserit? A resposta de Herbert é deliberadamente ambígua. Paul é ambas as coisas — e a tensão entre a autenticidade e a construção é o que o torna fascinante e perturbador.</p>
+          <h3>O Custo do Poder</h3>
+          <p>À medida que Paul abraça o seu papel de Muad'Dib — líder dos Fremen, pretendente ao trono, "Messias" — ele perde partes fundamentais da sua humanidade. A sua relação com Chani sofre. A sua capacidade de simplesmente ser um jovem de 15 anos evapora. Em Dune Messiah, vemos o resultado: um Imperador que vê tudo mas não consegue mudar nada, preso numa armadilha dourada de profecia cumprida.</p>
+        </div>
+
+        <!-- LIVRO VS FILME -->
+        <div class="char-section reveal">
+          <h2>Livro vs. Filme</h2>
+          <div class="compare-block" style="margin-bottom:1rem;">
+            <div class="compare-row">
+              <div class="compare-label">Idade e Maturidade</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>15 anos. Mais jovem, mais vulnerável, mais espantado com o seu próprio destino.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Aparenta mais idade. Mais sombrio desde o início. Timothée Chalamet traz uma melancolia adulta.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Voz Interior / Monólogo</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Riquíssimo. O livro acede ao pensamento de Paul constantemente — dúvidas, visões, análises. É na mente que a história acontece.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Muito mais exterior. O espectador vê os resultados das visões, não o processo interno. Mais distante, mais misterioso.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">A Jihad como Consciência</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Paul sente um horror profundo pela jihad que vê. Tenta resistir — e falha. Há tragédia grega no seu arco.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme (Parte 2)</span>Villeneuve acentua a ambiguidade. Paul torna-se mais claramente um agente ativo da destruição, não uma vítima dela.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Relação com Chani</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Chani aceita a profecia e o papel de Paul. A tensão é menos explícita.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Chani é cética e resistente — uma voz de razão. Zendaya amplia o papel para contrapeso moral de Paul.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- char-main -->
+
+      <!-- SIDEBAR -->
+      <div class="char-sidebar">
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Casa</span><span>Atreides</span></div>
+          <div class="stat-row"><span>Planeta natal</span><span>Caladan</span></div>
+          <div class="stat-row"><span>Pai</span><span>Duque Leto I</span></div>
+          <div class="stat-row"><span>Mãe</span><span>Lady Jessica</span></div>
+          <div class="stat-row"><span>Companheira</span><span>Chani</span></div>
+          <div class="stat-row"><span>Filho</span><span>Leto II (futuro)</span></div>
+          <div class="stat-row"><span>Irmã</span><span>Alia Atreides</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Nomes e Títulos</h4>
+          <div class="stat-row"><span>Nome Fremen</span><span>Usul</span></div>
+          <div class="stat-row"><span>Nome de guerra</span><span>Muad'Dib</span></div>
+          <div class="stat-row"><span>Título profético</span><span>Lisan al-Gaib</span></div>
+          <div class="stat-row"><span>Título BG</span><span>Kwisatz Haderach</span></div>
+          <div class="stat-row"><span>Título imperial</span><span>Padishah Imperador</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Capacidades</h4>
+          <div class="stat-row"><span>A Voz</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Presciência</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Combate</span><span>★★★★☆</span></div>
+          <div class="stat-row"><span>Mentat</span><span>★★★★☆</span></div>
+          <div class="stat-row"><span>Liderança</span><span>★★★★★</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--faction-primary,#d4a843);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Relações Principais</h4>
+          <div class="rel-grid">
+            <a href="personagem-jessica.html" class="rel-item"><div class="rel-icon">◉</div><div class="rel-info"><div class="rel-name">Lady Jessica</div><div class="rel-type">Mãe · Bene Gesserit</div></div></a>
+            <a href="personagem-baron.html" class="rel-item"><div class="rel-icon">⚡</div><div class="rel-info"><div class="rel-name">Baron Harkonnen</div><div class="rel-type">Inimigo principal</div></div></a>
+            <a href="faccao-fremen.html" class="rel-item"><div class="rel-icon">◈</div><div class="rel-info"><div class="rel-name">Chani</div><div class="rel-type">Companheira · Fremen</div></div></a>
+            <a href="faccao-fremen.html" class="rel-item"><div class="rel-icon">◈</div><div class="rel-info"><div class="rel-name">Stilgar</div><div class="rel-type">Líder Fremen · Mentor</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="section-sm" style="background:linear-gradient(180deg,var(--color-black),#050402);">
+  <div class="container" style="max-width:700px;">
+    <div class="quote-block reveal">
+      <p>"Não sou um ser humano. Sou um processo de guerra."</p>
+      <cite>Paul Atreides — Dune Messiah</cite>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+      <a href="personagem-jessica.html" class="btn btn-outline">Lady Jessica →</a>
+      <a href="personagem-baron.html" class="btn btn-outline">Baron Harkonnen →</a>
+      <a href="personagens.html" class="btn btn-ghost">Todos os Personagens</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temas — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .theme-hero{background:linear-gradient(135deg,#050402,#0c0a06,#050402);}
+    .themes-tabs{display:flex;gap:.5rem;margin-bottom:3rem;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:1px;}
+    .theme-tab-btn{padding:12px 24px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;border:none;background:none;font-family:'Raleway',sans-serif;border-bottom:2px solid transparent;transition:all .3s;margin-bottom:-1px;}
+    .theme-tab-btn:hover,.theme-tab-btn.active{color:var(--faction-primary,#d4a843);border-bottom-color:var(--faction-primary,#d4a843);}
+    .theme-content{display:none;}
+    .theme-content.active{display:grid;grid-template-columns:1fr 1fr;gap:4rem;animation:fadeIn .4s ease;}
+    .theme-main h2{font-family:'Cinzel',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--faction-primary,#d4a843);margin-bottom:1rem;}
+    .theme-main .lead{font-family:'Crimson Text',serif;font-size:1.2rem;color:rgba(245,240,232,.7);line-height:1.8;margin-bottom:2rem;font-style:italic;}
+    .theme-main p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .theme-main h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:2rem 0 .75rem;}
+    .theme-main ul{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;}
+    .theme-main ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .theme-main ul li::before{content:'◆';position:absolute;left:0;color:var(--faction-primary,#d4a843);font-size:.5rem;top:.4rem;}
+    .theme-sidebar{padding-top:1rem;}
+    .theme-example{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:1.5rem;}
+    .theme-example-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--faction-primary,#d4a843);margin-bottom:.5rem;}
+    .theme-example-title{font-family:'Cinzel',serif;font-size:.9rem;color:#f5f0e8;margin-bottom:.4rem;}
+    .theme-example-text{font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.7;}
+    .quote-theme{padding:1.5rem 2rem;background:rgba(212,168,67,.04);border-left:2px solid var(--faction-primary,#d4a843);border-radius:0 6px 6px 0;margin-bottom:1.5rem;}
+    .quote-theme p{font-family:'Crimson Text',serif;font-size:1rem;font-style:italic;color:rgba(245,240,232,.7);margin-bottom:.5rem;}
+    .quote-theme cite{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faction-primary,#d4a843);}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @media(max-width:900px){.theme-content.active{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero theme-hero">
+  <div class="page-hero-bg" style="background:linear-gradient(135deg,#070502,#1a1508,#050402);"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><span class="current">Temas</span></nav>
+    <p class="section-label">Filosofia</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">Os Grandes<br><span style="color:var(--faction-primary,#d4a843);">Temas</span></h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:580px;line-height:1.9;">Dune não é apenas ficção científica — é uma meditação filosófica sobre as questões mais fundamentais da existência humana. Poder, religião, destino e ecologia — estas não são pano de fundo. São o assunto.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--color-black);">
+  <div class="container">
+
+    <div class="themes-tabs">
+      <button class="theme-tab-btn active" id="tab-religiao" onclick="showTheme('religiao')">Religião &amp; Profecia</button>
+      <button class="theme-tab-btn" id="tab-poder" onclick="showTheme('poder')">Poder &amp; Política</button>
+      <button class="theme-tab-btn" id="tab-destino" onclick="showTheme('destino')">Destino &amp; Livre-arbítrio</button>
+      <button class="theme-tab-btn" id="tab-ecologia" onclick="showTheme('ecologia')">Ecologia &amp; Ambiente</button>
+    </div>
+
+    <!-- RELIGIÃO -->
+    <div class="theme-content active" id="theme-religiao">
+      <div class="theme-main reveal">
+        <h2 id="religiao">Religião &amp; Profecia</h2>
+        <p class="lead">Dune é, entre outras coisas, o mais brilhante estudo alguma vez escrito em ficção sobre como uma religião é construída — e como mesmo uma profecia completamente fabricada pode mudar o universo.</p>
+        <p>Frank Herbert era fascinado pela psicologia religiosa. Não era anticlerical de forma simplista — compreendia que a religião responde a necessidades humanas profundas. O que Herbert explorou com brilhantismo em Dune é mais perturbador: como um sistema de crenças pode ser deliberadamente manufacturado, e como essa manufatura não o torna menos poderoso.</p>
+        <p>A Missionaria Protectiva das Bene Gesserit passou gerações a semear profecias e lendas religiosas em culturas por todo o universo. Em Arrakis, plantaram a profecia do Lisan al-Gaib — o "Enviado do Exterior" que viria guiar os Fremen à liberdade. Quando Paul e Jessica chegam, a estrutura está montada. Paul apenas precisa de se inserir nela.</p>
+        <h3>A Armadilha da Fé</h3>
+        <p>O que torna Dune tão moralmente complexo é que Paul — o beneficiário da profecia — compreende completamente que é uma manufatura. Vê-se a si próprio como o produto de um programa de criação genética e de uma campanha de desinformação religiosa. E ainda assim o resultado é real: milhões de Fremen morrerão por ele, bilhões serão varridos pela Jihad em seu nome.</p>
+        <ul>
+          <li>A profecia do Lisan al-Gaib foi criada pelas Bene Gesserit como ferramenta de controlo — não como verdade espiritual.</li>
+          <li>Stilgar, o líder Fremen, acredita genuinamente na profecia — e esta fé é impossível de ser "desmontada" por argumentos racionais.</li>
+          <li>Paul tenta múltiplas vezes mostrar aos Fremen que não é o messias que esperam — e falhará sempre, porque a estrutura da fé é mais forte do que os factos.</li>
+          <li>Em Dune Messiah, a Jihad em nome de Muad'Dib já matou 61 mil milhões de pessoas — tornando Paul no maior assassino da história humana sem nunca ter dado a ordem explícita.</li>
+        </ul>
+        <h3>Relevância Contemporânea</h3>
+        <p>Herbert escreveu Dune em 1965, mas os temas religiosos são devastadoramente contemporâneos. A fabricação de narrativas religiosas para fins políticos, o uso da fé como mobilizadora de massas, o messianismo como perigo — estes temas ressoam com igual ou maior força hoje do que quando foram escritos.</p>
+      </div>
+      <div class="theme-sidebar">
+        <div class="quote-theme">
+          <p>"Cuidado com o herói. O poder exige sempre um preço. Ele pagará contigo."</p>
+          <cite>Frank Herbert — nas notas de Dune</cite>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">Stilgar e a Profecia</div>
+          <div class="theme-example-text">Stilgar, o Naib mais inteligente e pragmático dos Fremen, transforma-se gradualmente num crente devoto de Muad'Dib. Em Dune Messiah, Paul observa com horror que Stilgar já não consegue sequer desafiá-lo — a fé substituiu completamente o pensamento crítico.</div>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">A Missionaria Protectiva</div>
+          <div class="theme-example-text">Revelado que as Bene Gesserit passaram gerações a colocar profecias em Arrakis. Jessica usa deliberadamente estas profecias quando chegam ao deserto — invocando o papel de Reverenda Mãe que os Fremen esperavam. É manipulação consciente de uma manipulação prévia.</div>
+        </div>
+        <a href="universo.html" class="btn btn-ghost" style="width:100%;">Explorar o Universo</a>
+      </div>
+    </div>
+
+    <!-- PODER -->
+    <div class="theme-content" id="theme-poder">
+      <div class="theme-main reveal">
+        <h2 id="poder">Poder &amp; Política</h2>
+        <p class="lead">Dune é um manual de ciência política disfarçado de épico de ficção científica. A sua análise das estruturas de poder, dos equilíbrios de terror e da corrupção que o poder impõe é tão rigorosa como qualquer texto académico — e muito mais legível.</p>
+        <p>O sistema político do Imperium de Dune é um equilíbrio de terror de uma elegância diabólica: o Imperador teme o Landsraad unido; o Landsraad teme os Sardaukar do Imperador; todos temem a Guilda que pode cortar qualquer transporte interestelar; a Bene Gesserit manipula tudo em silêncio. Nenhuma parte pode eliminar as outras sem criar um vácuo que a destruiria.</p>
+        <p>A especiaria é a metáfora do petróleo — e do petróleo do futuro, qualquer que seja a forma que tome. Um recurso único numa região instável, controlado por forças externas, com consequências devastadoras para os povos que habitam a terra onde ele existe. A analogia com o Médio Oriente é tão óbvia que Herbert não a negou jamais.</p>
+        <h3>O Problema do Herói no Poder</h3>
+        <p>Mas o tema mais profundo e mais perturbador de Dune sobre poder é a sua análise do que o poder faz ao herói. Paul Atreides começa o primeiro livro como um jovem de 15 anos genuinamente bom. Termina o segundo livro como o Imperador de uma Jihad que matou bilhões. O poder não o corrompeu no sentido simples — foi mais subtil e mais devastador: o poder eliminou as suas escolhas uma a uma até não restar nenhuma.</p>
+        <ul>
+          <li>O Imperium é um sistema onde a honra é uma desvantagem competitiva — os Atreides, os mais honestos, são os primeiros a cair.</li>
+          <li>A política do CHOAM revela que o poder real é sempre económico — quem controla o recurso controla tudo o mais.</li>
+          <li>Shaddam IV destrói a Casa Atreides precisamente porque têm demasiado poder popular — a popularidade sem força militar é uma vulnerabilidade fatal.</li>
+        </ul>
+      </div>
+      <div class="theme-sidebar">
+        <div class="quote-theme">
+          <p>"O primeiro passo de destruir uma cultura é colonizar o seu imaginário."</p>
+          <cite>Frank Herbert — implícito em Dune</cite>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">O Equilíbrio de Terror</div>
+          <div class="theme-example-text">A razão pela qual o Imperador precisa do Baron para destruir os Atreides — e não pode fazê-lo abertamente — é que o Landsraad retaliaria. O sistema de equilíbrios força à traição. É o poder a criar as suas próprias regras perversas.</div>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">Paul como Tirano Inevitável</div>
+          <div class="theme-example-text">Em Dune Messiah, Paul vê claramente que se tentar ser um governante justo, as forças que o rodeiam o destroem. Para sobreviver, tem de ser o que não quer ser. É uma armadilha — e foi construída antes de ele nascer.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESTINO -->
+    <div class="theme-content" id="theme-destino">
+      <div class="theme-main reveal">
+        <h2 id="destino">Destino &amp; Livre-Arbítrio</h2>
+        <p class="lead">Se houve um tema que Herbert explorou com mais consistência e profundidade ao longo dos seis livros, foi este: pode um homem que vê o futuro escolher livremente? E se pode, deve?</p>
+        <p>A presciência de Paul não é uma dádiva — é uma maldição. Paul vê o futuro com uma clareza crescente e aterrorizante. Vê a Jihad. Vê os bilhões de mortos. Vê a sua própria tragédia. E o que descobre — ao longo de dois livros — é que tentar alterar o futuro pode ser impossível, ou pode torná-lo pior.</p>
+        <p>Há uma lógica paradoxal na presciência de Dune: ao ver o futuro, Paul torna-se incapaz de o alterar porque as suas ações para o alterar são parte do futuro que viu. É um paradoxo temporal que Herbert não resolve — porque não existe resolução. Só existe a escolha de agir ou não agir, sabendo que ambas as escolhas têm um custo impossível.</p>
+        <h3>O Paradoxo da Escolha</h3>
+        <p>O momento mais trágico de Dune não é a queda da Casa Atreides — é a cena em que Paul vê todos os possíveis futuros e compreende que não existe nenhum em que a Jihad não aconteça. A única variável é o número de mortos. A menor Jihad possível ainda mata bilhões. Esta é a sua escolha: escolher o menos mau dos apocalipses.</p>
+        <ul>
+          <li>Paul experimenta múltiplas vezes tentar desviar-se do caminho que vê — e cada desvio confirma que o caminho está lá.</li>
+          <li>Em Dune Messiah, Paul vai ainda mais longe: deixa que a conspiração contra ele prossiga porque vê que interferir produz um futuro ainda pior.</li>
+          <li>Leto II, no terceiro livro, vai além — abraça voluntariamente um destino de 3500 anos de tirania para libertar a humanidade de uma dependência ainda maior do messianismo.</li>
+        </ul>
+        <h3>A Liberdade dentro do Destino</h3>
+        <p>O grande insight de Herbert é que mesmo dentro de um destino inescapável, existe liberdade — a liberdade de como caminhar para esse destino. Paul pode não escolher o que acontece, mas pode escolher quem é quando acontece. É uma distinção filosófica que recusa tanto o determinismo total quanto a ilusão de controlo absoluto.</p>
+      </div>
+      <div class="theme-sidebar">
+        <div class="quote-theme">
+          <p>"O futuro perfeito é uma armadilha. Aquele que o vê está condenado a ele."</p>
+          <cite>Paul Muad'Dib — Dune Messiah</cite>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">As Visões de Paul</div>
+          <div class="theme-example-text">Paul vê repetidamente a Jihad nas suas visões antes de chegar a Arrakis. Tenta evitá-la recusando o papel de messias — e descobre que a sua recusa é parte do processo que leva à Jihad de qualquer forma.</div>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">O Prescrito Dourado de Leto II</div>
+          <div class="theme-example-text">Leto II vê que o único futuro em que a humanidade sobrevive a longo prazo passa por 3500 anos de tirania total da sua parte. Abraça voluntariamente o destino de ser o tirano mais odiado da história — porque o alternativo é a extinção da espécie.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECOLOGIA -->
+    <div class="theme-content" id="theme-ecologia">
+      <div class="theme-main reveal">
+        <h2 id="ecologia">Ecologia &amp; Ambiente</h2>
+        <p class="lead">Herbert foi um dos primeiros romancistas a colocar a ecologia no centro absoluto de uma narrativa épica. Arrakis não é apenas o cenário — é uma personagem, um sistema, um argumento sobre o que acontece quando um ecossistema é explorado sem compreensão das suas interdependências.</p>
+        <p>A ecologia de Arrakis é um sistema fechado de uma elegância perturbadora: os Vermes da Areia precisam de terreno seco para existir; as Sand Trout garantem este terreno encapsulando a água subterrânea; esta secura produz o ambiente para a especiaria; a especiaria sustenta os Navigadores; os Navigadores sustentam o Imperium. Cada elemento depende de todos os outros.</p>
+        <p>Herbert estudou a fixação de dunas de areia no Oregon quando escrevia Dune — os esforços para controlar o movimento das areias com intervenção humana. A conclusão que tirou foi que os sistemas ecológicos têm uma lógica própria que resiste à imposição humana. Esta conclusão moldou toda a visão de Arrakis.</p>
+        <h3>O Dilema da Terraformação</h3>
+        <p>O elemento mais perturbador da ecologia de Dune é o Sonho Verde dos Fremen: transformar Arrakis num planeta com água e vegetação. É o sonho de um povo que nunca conheceu outra coisa senão a aridez. Mas Herbert revela que realizar este sonho destruiria os Vermes da Areia — e com eles, a especiaria, e com ela, toda a civilização galáctica.</p>
+        <ul>
+          <li>O planetologista Liet-Kynes é o guardião do Sonho Verde — e da consciência trágica do que o seu cumprimento implicaria.</li>
+          <li>A água é simultaneamente o desejo supremo dos Fremen e o veneno do ecossistema que os mantém.</li>
+          <li>Herbert usa este dilema para argumentar que a "natureza" não é uma coisa estável que se preserva ou se restaura — é um processo em constante tensão.</li>
+          <li>Em Filhos de Dune, quando Arrakis começa a ficar verde, os Vermes da Areia começam a desaparecer — confirmando a tragédia prevista.</li>
+        </ul>
+        <h3>A Metáfora do Petróleo</h3>
+        <p>A especiaria e o petróleo são intercambiáveis como metáforas. Um recurso único, concentrado numa região instável e habitada por um povo que não beneficia do seu valor. Controlado por forças externas que tratam o povo local como irrelevante. Com consequências ecológicas da sua extração que ninguém quer olhar de frente. Herbert escreveu esta crítica em 1965 — antes do primeiro choque petrolífero de 1973.</p>
+      </div>
+      <div class="theme-sidebar">
+        <div class="quote-theme">
+          <p>"O deserto conserva tudo — os segredos, os sonhos e os ossos dos que nunca compreenderam."</p>
+          <cite>Liet-Kynes — Dune</cite>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">O Ciclo da Especiaria</div>
+          <div class="theme-example-text">Herbert descreve em detalhe o ciclo de vida das Sand Trout para os Vermes para a especiaria — não como detalhe world-building, mas como argumento: tudo está ligado, e intervir num ponto afeta todos os outros.</div>
+        </div>
+        <div class="theme-example">
+          <div class="theme-example-label">Exemplo no Texto</div>
+          <div class="theme-example-title">A Morte de Kynes</div>
+          <div class="theme-example-text">O planetologista Liet-Kynes morre sozinho no deserto. No seu delírio final, tem uma conversa imaginada com o pai — sobre o Sonho Verde, sobre o que significa transformar um mundo, sobre o custo de sonhar grande demais. É uma das cenas mais filosóficas do livro.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function showTheme(id){
+  document.querySelectorAll('.theme-tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.theme-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.getElementById('theme-'+id).classList.add('active');
+}
+</script>
+</body>
+</html>

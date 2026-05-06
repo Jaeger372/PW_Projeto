@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUNE Universe — Portal do Universo Dune</title>
+  <meta name="description" content="Explore o universo épico de Dune: personagens, facções, planetas, filmes e livros. Um portal imersivo sobre a obra de Frank Herbert.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ============================================
+       HOMEPAGE SPECIFIC STYLES
+       ============================================ */
+
+    /* --- HERO --- */
+    .hero-main {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-desert-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 70%, rgba(180, 120, 20, 0.12) 0%, transparent 60%),
+        linear-gradient(180deg,
+          #050402 0%,
+          #0a0702 20%,
+          #0f0a03 50%,
+          #0d0903 75%,
+          #050402 100%
+        );
+    }
+
+    .hero-desert-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: saturate(0.7) brightness(0.6);
+    }
+
+    /* Desert landscape SVG-like shape */
+    .hero-dunes {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      overflow: hidden;
+    }
+
+    .hero-dunes::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -5%;
+      width: 110%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 100%, rgba(15,10,2,0.9) 40%, transparent 70%),
+        radial-gradient(ellipse 90% 70% at 80% 100%, rgba(15,10,2,0.9) 40%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(12,8,2,0.8) 30%, transparent 60%);
+    }
+
+    .hero-dunes::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(180deg, transparent, rgba(5,4,2,0.95) 60%, #050402 100%);
+    }
+
+    /* Atmospheric glow */
+    .hero-glow {
+      position: absolute;
+      bottom: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(212,168,67,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Hero text content */
+    .hero-content-main {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 2rem;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--faction-primary, var(--color-gold));
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    .hero-headline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.15;
+      color: #f5f0e8;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease 0.6s forwards;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--faction-primary, var(--color-gold));
+    }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      color: rgba(245,240,232,0.55);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeInUp 1s ease 1s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp 1s ease 1.3s forwards;
+    }
+
+    .hero-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--faction-primary, var(--color-gold)), transparent);
+      margin: 2rem auto;
+      animation: expandWidth 1s ease 0.8s forwards;
+    }
+
+    @keyframes expandWidth {
+      to { width: 120px; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.3);
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 1px solid rgba(212,168,67,0.5);
+      border-bottom: 1px solid rgba(212,168,67,0.5);
+      transform: rotate(45deg);
+      animation: bounceDown 1.5s ease infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
+      50% { transform: rotate(45deg) translateY(4px); opacity: 1; }
+    }
+
+    /* --- FILMS SECTION --- */
+    .films-section {
+      padding: 6rem 0;
+      background: var(--color-black);
+    }
+
+    .films-scroll {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .film-panel {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .film-panel-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s ease;
+    }
+
+    .film-panel:hover .film-panel-bg {
+      transform: scale(1.05);
+    }
+
+    .film-panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,4,2,0.95) 0%, rgba(5,4,2,0.5) 40%, rgba(5,4,2,0.1) 100%);
+      transition: background 0.4s ease;
+    }
+
+    .film-panel:hover .film-panel-overlay {
+      background: linear-gradient(to top, rgba(5,4,2,0.98) 0%, rgba(5,4,2,0.6) 50%, rgba(5,4,2,0.2) 100%);
+    }
+
+    .film-panel-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+    }
+
+    .film-year {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--faction-primary, var(--color-gold));
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .film-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 600;
+      color: #f5f0e8;
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .film-phrase {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 1rem;
+    }
+
+    .film-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--faction-primary, var(--color-gold));
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.3s ease;
+    }
+
+    .film-panel:hover .film-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- PAUL FOCUS SECTION --- */
+    .paul-section {
+      padding: 8rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .paul-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #050402 0%, #0c0905 50%, #050402 100%);
+    }
+
+    .paul-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .paul-image-container {
+      position: relative;
+    }
+
+    .paul-image-frame {
+      position: relative;
+      border: 1px solid rgba(212,168,67,0.15);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .paul-image-frame::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--faction-primary, var(--color-gold)), transparent, var(--faction-primary, var(--color-gold)));
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    .paul-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(1.1);
+      display: block;
+      background: linear-gradient(135deg, #1a1205, #2a1a08, #0f0c06);
+    }
+
+    .paul-portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: 
+        linear-gradient(160deg, #1a1205 0%, #2a1a08 40%, #0f0c06 70%, #050402 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .paul-portrait-placeholder .portrait-text {
+      font-family: 'Cinzel', serif;
+      font-size: 8rem;
+      color: rgba(212,168,67,0.08);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .paul-badge {
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      padding: 6px 14px;
+      background: var(--faction-primary, var(--color-gold));
+      color: #050402;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .paul-text {
+      padding: 2rem 0;
+    }
+
+    .paul-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--faction-primary, var(--color-gold));
+      margin-bottom: 1rem;
+    }
+
+    .paul-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: #f5f0e8;
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+
+    .paul-question {
+      font-family: 'Crimson Text', serif;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-style: italic;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 1.5rem;
+    }
+
+    .paul-desc {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .paul-traits {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    /* --- CONFLICT SECTION --- */
+    .conflict-section {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .conflict-label {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      background: var(--color-black);
+    }
+
+    .split-screen {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 60vh;
+      min-height: 400px;
+      position: relative;
+      transition: grid-template-columns 0.5s ease;
+    }
+
+    .split-screen.hover-left {
+      grid-template-columns: 65fr 35fr;
+    }
+
+    .split-screen.hover-right {
+      grid-template-columns: 35fr 65fr;
+    }
+
+    .split-left, .split-right {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .split-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .split-left .split-bg {
+      background: linear-gradient(135deg, #071510 0%, #0d2218 50%, #0a1a10 100%);
+      background-image: url('https://sspark.genspark.ai/cfimages?u1=iPlL%2B8l7qwHPavkX4iiej2Qu66CbU8M3LmO6yez3T%2FbqBde2PH%2B0DvwWJcnUR9HOmLQCOFee57ABPDwZ74eaAcagiOfffYb%2FmuVoqEAC8zNusVfjhFXkvH4%3D&u2=bp2LjAnoi%2FyhWEic&width=2560');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+    }
+
+    .split-right .split-bg {
+      background: linear-gradient(135deg, #0a0606 0%, #160a0a 50%, #1a0808 100%);
+      background-image: url('https://sspark.genspark.ai/cfimages?u1=JnoDTuOTUGDaKGQ7EOjn8ZbSGaRZEw9xtd8ke03ef%2FPOuPr%2BYyIGmKisgrzohho6NGfhGzNjnU0xSPcHNOxHjA0ijL%2BLrj1w4JfhsPBGVLUT%2FS1qv5H4fDfpxW%2FGM%2Bq8NloWj3%2F1CyUWB8j0jlCyoemcVPk95clx5o4I5omqTQtjdiFI7jr4%2F%2BZfluZMoKFcQU%2FnMRwO0xqsmiowzhZHd7QAfbn59ch3hE08EvZ3uS8DDLvb0CfSzAhTy74W7q7IVF%2Fn%2BKfNjx2zvm0Pr6h114fSR6XsRX0VaaIhvvpNk0rKStUmMKNuREMZnap%2Fr3o%2B%2BTehtX4JFAmKHo6V5nIoddRvGtFyGQs%2Bxe09qOAERb86nvi7226ttYjW%2FV2zJQCVMn977I6Adf231b7G0rBEZ%2Fqqx72edCsr35yh1Z3cuNEQVhL5WGoJK%2BWhxqy3HTnommf%2BGme%2BzDIeAHuYVlSe3%2FlMefFzWrk4E9i49CxfP9CyympE0weywpEJffolhGaFZn2me3w%3D%3D&u2=nWNT6TisfL7svNVC&width=2560');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+    }
+
+    .split-screen.hover-right .split-left .split-bg {
+      filter: brightness(0.5);
+    }
+
+    .split-screen.hover-left .split-right .split-bg {
+      filter: brightness(0.5);
+    }
+
+    /* Decorative grid pattern */
+    .split-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(74,158,106,0.03) 60px, rgba(74,158,106,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(74,158,106,0.03) 60px, rgba(74,158,106,0.03) 61px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .split-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(192,57,43,0.03) 60px, rgba(192,57,43,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(192,57,43,0.03) 60px, rgba(192,57,43,0.03) 61px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .split-content {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .split-symbol {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .split-left:hover .split-symbol,
+    .split-right:hover .split-symbol {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .split-left .split-symbol { color: #4a9e6a; }
+    .split-right .split-symbol { color: #c0392b; }
+
+    .split-house {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .split-left .split-house { color: rgba(74,158,106,0.7); }
+    .split-right .split-house { color: rgba(192,57,43,0.7); }
+
+    .split-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3vw, 3rem);
+      font-weight: 700;
+      color: #f5f0e8;
+      margin-bottom: 0.8rem;
+    }
+
+    .split-desc {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.4);
+      max-width: 260px;
+      line-height: 1.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .split-left:hover .split-desc,
+    .split-right:hover .split-desc {
+      color: rgba(245,240,232,0.7);
+    }
+
+    .split-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(212,168,67,0.4), transparent);
+      transform: translateX(-50%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .split-vs {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      width: 48px;
+      height: 48px;
+      background: var(--color-black);
+      border: 1px solid rgba(212,168,67,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(212,168,67,0.6);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+
+    /* --- UNIVERSE CARDS SECTION --- */
+    .universe-section {
+      padding: 6rem 0;
+      background: linear-gradient(180deg, var(--color-black) 0%, #0a0702 50%, var(--color-black) 100%);
+    }
+
+    .universe-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .universe-card {
+      position: relative;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: block;
+    }
+
+    .universe-card-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .universe-card:nth-child(1) .universe-card-bg {
+      background: radial-gradient(ellipse at bottom left, rgba(212,168,67,0.08) 0%, transparent 70%);
+    }
+    .universe-card:nth-child(2) .universe-card-bg {
+      background: radial-gradient(ellipse at bottom left, rgba(41,128,185,0.08) 0%, transparent 70%);
+    }
+    .universe-card:nth-child(3) .universe-card-bg {
+      background: radial-gradient(ellipse at bottom left, rgba(142,68,173,0.08) 0%, transparent 70%);
+    }
+
+    .universe-card:hover .universe-card-bg {
+      opacity: 1;
+    }
+
+    .universe-card:hover {
+      border-color: rgba(212,168,67,0.2);
+      transform: translateY(-4px);
+    }
+
+    .universe-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .universe-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: #f5f0e8;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .universe-card-desc {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.45);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .universe-card-arrow {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.4);
+      transition: color 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .universe-card:hover .universe-card-arrow {
+      color: var(--faction-primary, var(--color-gold));
+    }
+
+    /* --- THEMES SECTION --- */
+    .themes-section {
+      padding: 6rem 0;
+      background: var(--color-black);
+    }
+
+    .themes-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .theme-item {
+      padding: 2.5rem;
+      background: var(--color-black);
+      transition: background 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .theme-item:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .theme-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: rgba(212,168,67,0.08);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .theme-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #f5f0e8;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s ease;
+    }
+
+    .theme-item:hover .theme-name {
+      color: var(--faction-primary, var(--color-gold));
+    }
+
+    .theme-desc {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.4);
+      line-height: 1.7;
+    }
+
+    /* --- STATS BAR --- */
+    .stats-bar {
+      padding: 4rem 0;
+      background: rgba(212,168,67,0.03);
+      border-top: 1px solid rgba(212,168,67,0.06);
+      border-bottom: 1px solid rgba(212,168,67,0.06);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--faction-primary, var(--color-gold));
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+    }
+
+    /* --- CTA FINAL --- */
+    .cta-final {
+      padding: 10rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.05) 0%, transparent 60%),
+        var(--color-black);
+    }
+
+    .cta-final-headline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      color: #f5f0e8;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-final-sub {
+      font-size: 1rem;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-final-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .films-scroll {
+        grid-template-columns: 1fr;
+      }
+
+      .film-panel {
+        aspect-ratio: 16/8;
+      }
+
+      .paul-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .split-screen {
+        height: 70vh;
+      }
+
+      .split-screen.hover-left,
+      .split-screen.hover-right {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .universe-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .themes-list {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .split-screen {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .split-left, .split-right {
+        height: 300px;
+      }
+
+      .split-divider, .split-vs {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo">DUNE</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- Nav placeholder -->
+  <div id="nav-placeholder"></div>
+
+  <!-- ========================
+       HERO
+       ======================== -->
+  <section class="hero-main">
+    <div class="hero-desert-bg">
+      <img src="https://sspark.genspark.ai/cfimages?u1=XCcnQpBnpQ5lg2a%2FO0CQCDUwyPo3rA5S8FhhEbSKVLCuU6Z5Uj2iu%2Bjc0ZjzzUs7vt%2F845udncXScTMqiOCHBhq15cLo3zsO2urqu3i%2FdTVthTha7yCxgurwY0Kg%2BUsmLAjXSLs5dsJ3pjbn5o0VAVnVHkjKWKc6Ug%3D%3D&u2=CVKbt344h93qDauq&width=2560" alt="Arrakis - Planeta Deserto" loading="eager">
+    </div>
+    <div class="hero-dunes"></div>
+    <div class="hero-glow"></div>
+    <div class="sand-particles"></div>
+
+    <div class="hero-content-main">
+      <span class="hero-eyebrow">Frank Herbert · Universo Dune</span>
+      <h1 class="hero-headline">
+        Quem controla a especiaria<br>controla o <em>universo</em>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">
+        Mergulha no universo épico de Dune — o mundo de arrakis, facções poderosas, personagens complexos e os temas que moldaram a ficção científica para sempre.
+      </p>
+      <div class="hero-ctas">
+        <a href="universo.html" class="btn btn-primary">Explorar Universo</a>
+        <a href="filmes.html" class="btn btn-outline">Ver Filmes</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Explorar</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ========================
+       FILMS
+       ======================== -->
+  <section class="films-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Cinema</p>
+        <h2 class="section-title">A Saga nos Ecrãs</h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">Denis Villeneuve trouxe o universo de Frank Herbert para o cinema com uma visão épica e poética.</p>
+      </div>
+    </div>
+    <div class="films-scroll reveal">
+      <a href="filme-dune-2021.html" class="film-panel">
+        <div class="film-panel-bg" style="background: linear-gradient(135deg, #1a1205 0%, #2a1808 40%, #0f0a03 70%, #050402 100%); background-image: url('https://sspark.genspark.ai/cfimages?u1=WNQGFSOM49iKzu9RM%2FTOTDGKmiV2NZdw85eaj2YkXNkfH3JbXF8o0tRaN10tISr%2F25Oy%2BQaNdzuleA2r0E%2Fznc8PMhMy6chT6TmFwCWYmJ2sXGH4r3imYwxxD67JlHrWhm4tTCEh&u2=sVK7tcgHWo6zHbmr&width=2560'); background-blend-mode: overlay; background-size: cover; background-position: center; filter: brightness(0.6);"></div>
+        <div class="film-panel-overlay"></div>
+        <div class="film-panel-content">
+          <span class="film-year">2021</span>
+          <h3 class="film-title">Dune</h3>
+          <p class="film-phrase">"Uma jornada para além do imaginável. O início de uma lenda."</p>
+          <a href="filme-dune-2021.html" class="film-link">Ver análise →</a>
+        </div>
+      </a>
+      <a href="filme-dune-part-two.html" class="film-panel">
+        <div class="film-panel-bg" style="background: linear-gradient(135deg, #0a0702 0%, #1f1508 40%, #1a0f04 70%, #050402 100%); background-image: url('https://sspark.genspark.ai/cfimages?u1=pJ4LiRmSMrVOVfJRp7UptkQSLgS8wltIXq66xaj17pHVMGKg0V9dz7RRK547ldhcmcJOfQK9n9h6CF3UgujY37hTwIv5Zy1vWkOubBh3Pffp9FRo0xJoqCyDZWMi&u2=%2FE1ia%2FRqevc3v9lb&width=2560'); background-blend-mode: overlay; background-size: cover; background-position: center; filter: brightness(0.6);"></div>
+        <div class="film-panel-overlay"></div>
+        <div class="film-panel-content">
+          <span class="film-year">2024</span>
+          <h3 class="film-title">Dune: Part Two</h3>
+          <p class="film-phrase">"O Messias levanta-se. O universo tremeu."</p>
+          <a href="filme-dune-part-two.html" class="film-link">Ver análise →</a>
+        </div>
+      </a>
+      <a href="filme-dune-messiah.html" class="film-panel">
+        <div class="film-panel-bg" style="background: linear-gradient(135deg, #0a0002 0%, #180405 40%, #0a0002 70%, #050000 100%); background-image: url('https://sspark.genspark.ai/cfimages?u1=HXvT3GRwRkf3cNz0Jdbs1Qjxb2VTg7NlwpOiW5%2Bqfy8SmpB506hy5sKmwsWMhkXqRUCMUZmrkaq39vdHLPAtOAmvqRG%2BzXz6jRbPPaN%2BuxRqeDXkhmmLpghuBCjqVnjCTVE%3D&u2=001whLVPZXw0sHng&width=2560'); background-blend-mode: overlay; background-size: cover; background-position: center; filter: brightness(0.55) saturate(0.7);"></div>
+        <div class="film-panel-overlay" style="background:linear-gradient(to top,rgba(5,0,0,0.95),rgba(192,57,43,0.05) 70%,transparent);"></div>
+        <div class="film-panel-content">
+          <span class="film-year" style="color:#c0392b;border-color:rgba(192,57,43,.4);">2026</span>
+          <h3 class="film-title">Dune: Part Three</h3>
+          <p class="film-phrase">"O messias cai. O império desmorona."</p>
+          <span style="display:inline-block;padding:3px 10px;font-size:.6rem;letter-spacing:.15em;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:rgba(192,57,43,.9);margin-bottom:.75rem;">Em Produção</span>
+          <a href="filme-dune-messiah.html" class="film-link" style="color:#c0392b;">Explorar →</a>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================
+       PAUL ATREIDES FOCUS
+       ======================== -->
+  <section class="paul-section">
+    <div class="paul-bg"></div>
+    <div class="container">
+      <div class="paul-grid">
+        <div class="paul-image-container reveal-left">
+          <div class="paul-image-frame">
+            <div class="paul-portrait-placeholder" style="padding:0;overflow:hidden;">
+              <img src="https://sspark.genspark.ai/cfimages?u1=IWjregtnM%2BP4bUwS%2Fb%2BdmvOFaEzAbH%2BAVXajE3b8b0q5g3SIudufIqMkrgkNESBAR0%2BCGUsiVwykg0BgGPfBRuuiAx%2FQgFOkT7eCOK8fg20fZnzNPxjZJezL9nLYSfldi6zFpAiqiP7yBnznNbpZdkKM2SAz6c9BeEIV6a0f3sFKuvMQMNN2AlzWv2qw2GYj2L4%3D%3D&u2=yZ2Dp2NHs7Q2C7VN&width=2560" alt="Paul Atreides" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
+            </div>
+          </div>
+          <div class="paul-badge">Personagem Principal</div>
+        </div>
+        <div class="paul-text reveal-right">
+          <p class="paul-label">Casa Atreides · Personagem Foco</p>
+          <h2 class="paul-name">Paul Atreides</h2>
+          <p class="paul-question">"Herói ou tirano?"</p>
+          <p class="paul-desc">
+            Filho do Duque Leto Atreides e de Lady Jessica, Paul nasce com capacidades que transcendem a compreensão humana comum. A sua chegada a Arrakis desencadeia uma profecia que mudará o universo — mas a um preço impossível de prever.
+          </p>
+          <div class="paul-traits">
+            <span class="tag">Kwisatz Haderach</span>
+            <span class="tag">Muad'Dib</span>
+            <span class="tag">Lisan al-Gaib</span>
+            <span class="tag">Duque Atreides</span>
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="personagem-paul.html" class="btn btn-primary">Explorar personagem</a>
+            <a href="personagens.html" class="btn btn-ghost">Todos os personagens</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       CONFLICT: ATREIDES VS HARKONNEN
+       ======================== -->
+  <section class="conflict-section">
+    <div class="conflict-label">
+      <p class="section-label">O Grande Conflito</p>
+      <h2 class="section-title" style="color: #f5f0e8;">Dois Mundos em Colisão</h2>
+    </div>
+    <div class="split-screen" id="splitScreen">
+      <a href="faccao-atreides.html" class="split-left">
+        <div class="split-bg"></div>
+        <div class="split-content">
+          <span class="split-symbol">⚔</span>
+          <span class="split-house">Casa Atreides</span>
+          <h3 class="split-name">Honra &amp; Coragem</h3>
+          <p class="split-desc">Uma casa nobre que acredita que o poder deve servir o povo. Estratégia, lealdade e sacrifício.</p>
+        </div>
+      </a>
+      <div class="split-divider"></div>
+      <div class="split-vs">VS</div>
+      <a href="faccao-harkonnen.html" class="split-right">
+        <div class="split-bg"></div>
+        <div class="split-content">
+          <span class="split-symbol">⚡</span>
+          <span class="split-house">Casa Harkonnen</span>
+          <h3 class="split-name">Medo &amp; Poder</h3>
+          <p class="split-desc">Domínio pela força bruta e terror. Para os Harkonnen, fraqueza é o único pecado.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================
+       UNIVERSE CARDS
+       ======================== -->
+  <section class="universe-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">O Universo</p>
+        <h2 class="section-title">Explorar o Cosmos de Dune</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="universe-cards">
+        <a href="planetas.html" class="universe-card reveal">
+          <div class="universe-card-bg"></div>
+          <img src="https://sspark.genspark.ai/cfimages?u1=l0FTYbi67OJLXssR%2Fvu1Q0fq9X8BaaPasi1l3oJXWYn%2BUvKjcAmjn9E%2BuPmGA2yiDerS0N1QqcViP8hpYAzBWmWLCdOKUKq1midYsGlAMYmbRXXsuvvx49tV6Yta7NsBb%2Bs&u2=69nRNsC0%2FXWknW4B&width=2560" alt="Planetas" style="width:100%;height:140px;object-fit:cover;border-radius:4px 4px 0 0;margin:-2.5rem -2rem 1.5rem -2rem;opacity:0.5;">
+          <span class="universe-card-icon" style="margin-top:0;">🌍</span>
+          <h3 class="universe-card-title">Planetas</h3>
+          <p class="universe-card-desc">Arrakis, Caladan, Giedi Prime — mundos com identidades únicas que moldam as civilizações que os habitam.</p>
+          <div class="universe-card-arrow">Explorar →</div>
+        </a>
+        <a href="faccoes.html" class="universe-card reveal" style="transition-delay: 0.1s;">
+          <div class="universe-card-bg"></div>
+          <img src="https://sspark.genspark.ai/cfimages?u1=PdDv%2BfeHGLPreJJPi%2FUPJhLDwsj6qCnF8%2FPDypHvV5B%2BGtrOJFTd5QQ3ZEfrkdzCp1iBG30dgwPshztqUNNZWjzkl%2BOvvOSQD0RF9BLDKoX1sx8Q3kk3vVZG4ctZafz4jyuuMGYHOrwF4J1K6n8D&u2=6QKcL%2BHuDVTOw76F&width=2560" alt="Facções" style="width:100%;height:140px;object-fit:cover;border-radius:4px 4px 0 0;margin:-2.5rem -2rem 1.5rem -2rem;opacity:0.5;">
+          <span class="universe-card-icon" style="margin-top:0;">🏛</span>
+          <h3 class="universe-card-title">Casas &amp; Facções</h3>
+          <p class="universe-card-desc">As grandes casas do Imperium, os Fremen e as ordens secretas que manipulam o destino humano.</p>
+          <div class="universe-card-arrow">Explorar →</div>
+        </a>
+        <a href="tecnologia.html" class="universe-card reveal" style="transition-delay: 0.2s;">
+          <div class="universe-card-bg"></div>
+          <img src="https://sspark.genspark.ai/cfimages?u1=BOSVwcUpJbCz4t%2FtHJItzjXae5TmK3DCEKsRmwheyoPR3zX9CcLDcFnJ4E2IAW3RT8ThmG2ze%2BTWhe31MwU0gJDOvkE19W77zbU%2FLKq6%2BiBgRj%2BJNp%2BQTXtOye5OShAp5ec37mq8%2BVoFcONMRt64eiuMgiT8YVCC7J7AihDChFDe&u2=zxIWCBM10Fa0zlOa&width=2560" alt="Tecnologia" style="width:100%;height:140px;object-fit:cover;border-radius:4px 4px 0 0;margin:-2.5rem -2rem 1.5rem -2rem;opacity:0.5;">
+          <span class="universe-card-icon" style="margin-top:0;">⚙</span>
+          <h3 class="universe-card-title">Tecnologia</h3>
+          <p class="universe-card-desc">Num universo sem computadores, Mentats, Bene Gesserit e a Guilda redefinem o que significa ser humano.</p>
+          <div class="universe-card-arrow">Explorar →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       THEMES
+       ======================== -->
+  <section class="themes-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Profundidade</p>
+        <h2 class="section-title">Os Grandes Temas de Dune</h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">Mais do que ficção científica — Dune é uma meditação filosófica sobre poder, destino e a alma humana.</p>
+      </div>
+      <div class="themes-list reveal">
+        <a href="temas.html#religiao" class="theme-item">
+          <div class="theme-number">01</div>
+          <h3 class="theme-name">Religião &amp; Profecia</h3>
+          <p class="theme-desc">Como a fé pode ser fabricada — e como mesmo profetas manufaturados podem mudar o mundo para sempre.</p>
+        </a>
+        <a href="temas.html#poder" class="theme-item">
+          <div class="theme-number">02</div>
+          <h3 class="theme-name">Poder &amp; Política</h3>
+          <p class="theme-desc">A especiaria como metáfora do petróleo. O controle de recursos como instrumento de dominação imperial.</p>
+        </a>
+        <a href="temas.html#destino" class="theme-item">
+          <div class="theme-number">03</div>
+          <h3 class="theme-name">Destino &amp; Livre-Arbítrio</h3>
+          <p class="theme-desc">Paul vê o futuro mas não pode escapar a ele. Até onde um homem pode lutar contra o inevitável?</p>
+        </a>
+        <a href="temas.html#ecologia" class="theme-item">
+          <div class="theme-number">04</div>
+          <h3 class="theme-name">Ecologia &amp; Ambiente</h3>
+          <p class="theme-desc">Arrakis como sistema ecológico frágil. Frank Herbert como pioneiro do pensamento ambiental na ficção.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       STATS
+       ======================== -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number"><span data-counter="6">0</span></div>
+          <div class="stat-label">Livros Originais</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+          <div class="stat-number"><span data-counter="25">0</span>+</div>
+          <div class="stat-label">Personagens Principais</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+          <div class="stat-number"><span data-counter="4">0</span></div>
+          <div class="stat-label">Grandes Facções</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+          <div class="stat-number"><span data-counter="58">0</span></div>
+          <div class="stat-label">Anos de Legado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================
+       CTA FINAL
+       ======================== -->
+  <section class="cta-final">
+    <div class="cta-final-bg"></div>
+    <div class="container">
+      <h2 class="cta-final-headline reveal">Entrar no Universo</h2>
+      <p class="cta-final-sub reveal">Explora todos os cantos do cosmos de Frank Herbert</p>
+      <div class="cta-final-actions reveal">
+        <a href="universo.html" class="btn btn-primary">Universo Completo</a>
+        <a href="personagens.html" class="btn btn-outline">Personagens</a>
+        <a href="quiz.html" class="btn btn-ghost">Quiz de Facção</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/faction.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Check if first visit — redirect to entry
+    window.addEventListener('load', () => {
+      const faction = localStorage.getItem('dune_faction');
+      const hasVisited = localStorage.getItem('dune_visited');
+      if (!faction && !hasVisited) {
+        localStorage.setItem('dune_visited', '1');
+        window.location.href = 'entry.html';
+      }
+      localStorage.setItem('dune_visited', '1');
+    });
+
+    // Split screen interaction
+    const splitLeft = document.querySelector('.split-left');
+    const splitRight = document.querySelector('.split-right');
+    const splitWrapper = document.getElementById('splitScreen');
+
+    if (splitLeft && splitRight && splitWrapper) {
+      splitLeft.addEventListener('mouseenter', () => {
+        splitWrapper.classList.add('hover-left');
+        splitWrapper.classList.remove('hover-right');
+      });
+      splitRight.addEventListener('mouseenter', () => {
+        splitWrapper.classList.add('hover-right');
+        splitWrapper.classList.remove('hover-left');
+      });
+      splitWrapper.addEventListener('mouseleave', () => {
+        splitWrapper.classList.remove('hover-left', 'hover-right');
+      });
+    }
+  </script>
+</body>
+</html>

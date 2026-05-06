@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="harkonnen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Harkonnen — Facções — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#c0392b;--fc-bg:#0a0404;--fc-glow:rgba(192,57,43,0.12);}
+    .f-hero{min-height:70vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .f-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0404,#1a0606,#100404);}
+    .f-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.2;filter:saturate(0.4) brightness(0.4);}
+    .f-hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .f-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .f-symbol{font-size:8rem;color:rgba(192,57,43,0.08);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:5%;bottom:2rem;line-height:1;}
+    .f-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(192,57,43,0.12);border:1px solid rgba(192,57,43,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .f-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .f-motto{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .f-body{padding:5rem 0;background:var(--color-black);}
+    .f-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(192,57,43,.15);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(192,57,43,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .member-list{display:flex;flex-direction:column;gap:.75rem;}
+    .member-item{display:flex;align-items:center;gap:1rem;padding:.75rem;background:rgba(192,57,43,.04);border:1px solid rgba(192,57,43,.1);border-radius:6px;text-decoration:none;transition:all .3s;}
+    .member-item:hover{border-color:rgba(192,57,43,.3);}
+    .member-icon{width:36px;height:36px;border-radius:50%;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .member-name{font-family:'Cinzel',serif;font-size:.85rem;color:#f5f0e8;}
+    .member-role{font-size:.7rem;color:rgba(192,57,43,.7);text-transform:uppercase;letter-spacing:.1em;}
+    @media(max-width:900px){.f-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="f-hero">
+  <div class="f-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=JnoDTuOTUGDaKGQ7EOjn8ZbSGaRZEw9xtd8ke03ef%2FPOuPr%2BYyIGmKisgrzohho6NGfhGzNjnU0xSPcHNOxHjA0ijL%2BLrj1w4JfhsPBGVLUT%2FS1qv5H4fDfpxW%2FGM%2Bq8NloWj3%2F1CyUWB8j0jlCyoemcVPk95clx5o4I5omqTQtjdiFI7jr4%2F%2BZfluZMoKFcQU%2FnMRwO0xqsmiowzhZHd7QAfbn59ch3hE08EvZ3uS8DDLvb0CfSzAhTy74W7q7IVF%2Fn%2BKfNjx2zvm0Pr6h114fSR6XsRX0VaaIhvvpNk0rKStUmMKNuREMZnap%2Fr3o%2B%2BTehtX4JFAmKHo6V5nIoddRvGtFyGQs%2Bxe09qOAERb86nvi7226ttYjW%2FV2zJQCVMn977I6Adf231b7G0rBEZ%2Fqqx72edCsr35yh1Z3cuNEQVhL5WGoJK%2BWhxqy3HTnommf%2BGme%2BzDIeAHuYVlSe3%2FlMefFzWrk4E9i49CxfP9CyympE0weywpEJffolhGaFZn2me3w%3D%3D&u2=nWNT6TisfL7svNVC&width=2560" alt="Casa Harkonnen - Giedi Prime">
+  </div><div class="f-hero-pattern"></div>
+  <div class="f-symbol">⚡</div>
+  <div class="container f-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="faccoes.html">Facções</a><span>/</span><span class="current">Harkonnen</span></nav>
+    <div class="f-tag">⚡ Casa Nobre do Landsraad</div>
+    <h1 class="f-name">Casa<br>Harkonnen</h1>
+    <p class="f-motto">"Poder acima de tudo"</p>
+  </div>
+</section>
+
+<section class="f-body">
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="f-section reveal">
+          <h2>História</h2>
+          <p>A Casa Harkonnen ascendeu ao poder através de um caminho radicalmente diferente dos Atreides. Onde os Atreides ganharam respeito, os Harkonnen compraram-no, impuseram-no ou simplesmente eliminaram quem o recusava. A sua filosofia é consistente há gerações: o poder é o único valor real, e tudo o resto — honra, lealdade, moralidade — são instrumentos que os fracos usam para compensar a sua fraqueza.</p>
+          <p>A riqueza Harkonnen foi construída em décadas de exploração de Arrakis. Durante o período em que governaram o planeta deserto, extraíram especiaria com eficiência brutal e sem qualquer consideração pelo bem-estar dos habitantes locais ou pela sustentabilidade do processo. O resultado foi uma riqueza obscena — e um ódio profundo por parte dos Fremen.</p>
+          <p>A inimizade entre Atreides e Harkonnen é antiga e vai além da competição política. Há um insulto histórico no centro — um Duque Atreides que humilhou publicamente um antecessor Harkonnen — que o Baron nunca esqueceu e que molda toda a sua obsessão em destruir a família rival.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Filosofia do Terror</h2>
+          <h3>O Terror como Instrumento Racional</h3>
+          <p>Para os Harkonnen, o terror não é excesso nem sadismo gratuito — é política calculada. Um povo que vive com medo não conspira. Um vassalo que sabe o que acontece aos traidores não trai. A crueldade, usada com precisão, é mais eficiente do que a generosidade. Esta lógica é apresentada com clareza perturbadora pelo Baron nas suas reflexões internas.</p>
+          <h3>O Plano a Longo Prazo</h3>
+          <p>O Baron não é apenas um tirano impulsivo — é um estrategista de décadas. O seu plano para Arrakis é uma obra de arte perversa: instalar Rabban como governador brutal para esgotar a população com terror; depois, no momento exato, substituí-lo por Feyd-Rautha como "salvador magnânimo"; colher a gratidão e o poder. É uma manipulação da psicologia coletiva ao nível de uma obra de arte.</p>
+          <h3>A Visão de Giedi Prime</h3>
+          <p>O planeta Harkonnen — Giedi Prime — é a manifestação física da sua filosofia: um mundo industrial poluído, voltado inteiramente para a produção e o poder, sem beleza, sem natureza, sem compaixão. É o ambiente que os Harkonnen criaram e que os criou de volta.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Estratégia Política</h2>
+          <ul>
+            <li><strong>Aliança com o Imperador</strong> — O Baron joga habilmente com os medos de Shaddam IV em relação à popularidade dos Atreides para obter apoio imperial na destruição da casa rival.</li>
+            <li><strong>Controlo da informação</strong> — Os Harkonnen infiltram espiões em qualquer organização que possam — incluindo, fatalmente, na própria Casa Atreides.</li>
+            <li><strong>Divisão interna nos inimigos</strong> — A descoberta do traidor nos Atreides (Piter de Vries como Mentat, mais o Dr. Yueh) demonstra a capacidade Harkonnen de explorar fraquezas humanas.</li>
+            <li><strong>Recursos económicos como poder</strong> — A riqueza da especiaria financia exércitos, corrupção e influência em todo o Landsraad.</li>
+          </ul>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>A Tragédia Harkonnen</h2>
+          <p>O que torna os Harkonnen fascinantes — e não apenas repulsivos — é que Herbert apresenta a sua derrota como inevitável pela mesma razão que os Atreides quase perderam: a sua própria filosofia. Os Harkonnen criam um ambiente de terror e desconfiança que impede qualquer lealdade genuína. Quando a crise chega, não há Duncan Idaho disposto a morrer por eles. Há apenas medo — e o medo termina quando o poder termina.</p>
+          <p>O Baron é morto pela sua própria neta — um produto da linha genética Bene Gesserit que nunca controlou. É uma ironia que a sua mentalidade de controlo total tornaria impossível de aceitar: a maior ameaça veio de dentro, de uma linha de sangue que ele não sabia que existia.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Planeta Base</span><span>Giedi Prime</span></div>
+          <div class="stat-row"><span>Planeta Explorado</span><span>Arrakis</span></div>
+          <div class="stat-row"><span>Cor Heráldica</span><span>Preto e Vermelho</span></div>
+          <div class="stat-row"><span>Símbolo</span><span>Grifo</span></div>
+          <div class="stat-row"><span>Lema</span><span>"Poder acima de tudo"</span></div>
+          <div class="stat-row"><span>Riqueza</span><span>Imenso (especiaria)</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Forças e Fraquezas</h4>
+          <div class="stat-row"><span>Recursos económicos</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Crueldade eficaz</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Inteligência política</span><span>★★★★☆</span></div>
+          <div class="stat-row"><span>Lealdade interna</span><span>★★☆☆☆</span></div>
+          <div class="stat-row"><span>Popularidade</span><span>★☆☆☆☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--fc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Membros Principais</h4>
+          <div class="member-list">
+            <a href="personagem-baron.html" class="member-item"><div class="member-icon">⚡</div><div><div class="member-name">Baron Vladimir</div><div class="member-role">Chefe de Casa</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚡</div><div><div class="member-name">Feyd-Rautha</div><div class="member-role">Herdeiro · Gladiador</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚡</div><div><div class="member-name">Glossu Rabban</div><div class="member-role">Governador Brutal</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">⚡</div><div><div class="member-name">Piter de Vries</div><div class="member-role">Mentat Torcido</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:700px;margin:0 auto 4rem;padding:0 2rem;">
+  <div class="quote-block reveal" style="border-left-color:var(--fc);">
+    <p>"Odeio quando o meu inimigo pensa. Os Atreides pensam demasiado."</p>
+    <cite>Baron Vladimir Harkonnen</cite>
+  </div>
+</div>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(192,57,43,0.1);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="faccao-atreides.html" class="btn btn-outline">Casa Atreides</a>
+      <a href="faccao-fremen.html" class="btn btn-outline">Fremen</a>
+      <a href="faccao-bene-gesserit.html" class="btn btn-outline">Bene Gesserit</a>
+      <a href="faccoes.html" class="btn btn-ghost">Todas as Facções</a>
+    </div>
+  </div>
+</section>
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

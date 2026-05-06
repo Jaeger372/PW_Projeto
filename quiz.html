@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Facção — Descobre o teu Caminho — Dune Universe</title>
+  <meta name="description" content="Descobre a que facção de Dune pertences: Casa Atreides, Casa Harkonnen, Fremen ou Bene Gesserit.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ============ QUIZ PAGE ============ */
+
+    .quiz-wrapper {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 1rem 4rem;
+    }
+
+    .quiz-box {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* Progress */
+    .quiz-progress {
+      margin-bottom: 2.5rem;
+    }
+    .quiz-progress-bar {
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 1px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--faction-primary, #d4a843);
+      border-radius: 1px;
+      transition: width 0.5s ease;
+    }
+    .quiz-progress-text {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.3);
+    }
+    .quiz-progress-text span {
+      color: var(--faction-primary, #d4a843);
+    }
+
+    /* Question */
+    .quiz-question-wrap {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    .quiz-q-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faction-primary, #d4a843);
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+    .quiz-q-text {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: #f5f0e8;
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-q-context {
+      font-family: 'Crimson Text', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(245,240,232,0.35);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* Options */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .quiz-option {
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      width: 100%;
+      font-family: 'Raleway', sans-serif;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .quiz-option:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(212,168,67,0.2);
+      transform: translateX(4px);
+    }
+    .quiz-option.selected {
+      background: rgba(212,168,67,0.06);
+      border-color: rgba(212,168,67,0.4);
+    }
+    .quiz-option-letter {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: rgba(245,240,232,0.4);
+      transition: all 0.25s ease;
+      font-family: 'Cinzel', serif;
+    }
+    .quiz-option:hover .quiz-option-letter,
+    .quiz-option.selected .quiz-option-letter {
+      background: var(--faction-primary, #d4a843);
+      border-color: var(--faction-primary, #d4a843);
+      color: #050402;
+    }
+    .quiz-option-text {
+      font-size: 0.92rem;
+      color: rgba(245,240,232,0.65);
+      line-height: 1.6;
+      padding-top: 4px;
+      transition: color 0.25s ease;
+    }
+    .quiz-option:hover .quiz-option-text,
+    .quiz-option.selected .quiz-option-text {
+      color: rgba(245,240,232,0.9);
+    }
+
+    /* Nav buttons */
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+    .quiz-btn-next {
+      padding: 12px 28px;
+      background: var(--faction-primary, #d4a843);
+      color: #050402;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .quiz-btn-next.enabled {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .quiz-btn-next.enabled:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212,168,67,0.2);
+    }
+    .quiz-btn-back {
+      padding: 12px 20px;
+      background: transparent;
+      color: rgba(245,240,232,0.3);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .quiz-btn-back:hover {
+      color: rgba(245,240,232,0.7);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    /* ===== RESULT SCREEN ===== */
+    .quiz-result {
+      display: none;
+      animation: fadeInUp 0.8s ease forwards;
+      text-align: center;
+    }
+    .quiz-result.visible {
+      display: block;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-symbol {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      display: block;
+      animation: pulseGlow 2s ease infinite;
+    }
+    .result-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .result-faction-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .result-motto {
+      font-family: 'Crimson Text', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 2rem;
+    }
+    .result-desc {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.9;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Traits bars */
+    .result-traits {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .result-traits h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      margin-bottom: 1.5rem;
+    }
+    .trait-row {
+      margin-bottom: 1rem;
+    }
+    .trait-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 0.4rem;
+    }
+    .trait-label span:last-child {
+      color: var(--faction-primary, #d4a843);
+      font-weight: 600;
+    }
+    .trait-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .trait-fill {
+      height: 100%;
+      background: var(--faction-primary, #d4a843);
+      border-radius: 2px;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Score breakdown */
+    .score-breakdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .score-col {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 1rem 0.75rem;
+      text-align: center;
+    }
+    .score-col.winner {
+      border-color: var(--faction-primary, #d4a843);
+      background: rgba(212,168,67,0.04);
+    }
+    .score-col-symbol {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .score-col-name {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.3);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .score-col-pts {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: rgba(245,240,232,0.6);
+    }
+    .score-col.winner .score-col-pts {
+      color: var(--faction-primary, #d4a843);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Start screen */
+    .quiz-start {
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .quiz-start-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: pulseGlow 2.5s ease infinite;
+    }
+    .quiz-start h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #f5f0e8;
+      margin-bottom: 1rem;
+    }
+    .quiz-start .start-sub {
+      font-size: 1rem;
+      color: rgba(245,240,232,0.45);
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto 0.75rem;
+    }
+    .quiz-start .start-note {
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.25);
+      margin-bottom: 2.5rem;
+    }
+    .factions-preview {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .faction-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(245,240,232,0.4);
+      background: rgba(255,255,255,0.02);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .score-breakdown { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">DUNE</div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+<div id="nav-placeholder"></div>
+
+<div class="quiz-wrapper">
+  <div class="quiz-box">
+
+    <!-- START SCREEN -->
+    <div id="quizStart" class="quiz-start">
+      <span class="quiz-start-icon">◎</span>
+      <h1>A Que Facção Pertences?</h1>
+      <p class="start-sub">Responde a 10 perguntas e descobre se és um Atreides nobre, um Harkonnen implacável, um Fremen do deserto ou um Bene Gesserit enigmático.</p>
+      <p class="start-note">10 perguntas · ~3 minutos</p>
+      <div class="factions-preview">
+        <div class="faction-pill"><span>⚔</span> Casa Atreides</div>
+        <div class="faction-pill"><span>⚡</span> Casa Harkonnen</div>
+        <div class="faction-pill"><span>◈</span> Fremen</div>
+        <div class="faction-pill"><span>◉</span> Bene Gesserit</div>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()" style="font-size: 0.8rem; letter-spacing: 0.15em;">
+        Começar o Quiz
+      </button>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quizScreen" style="display:none;">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div class="quiz-progress-text">Pergunta <span id="qNum">1</span> de <span id="qTotal">10</span></div>
+      </div>
+      <div id="questionContainer"></div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-back" id="backBtn" onclick="prevQuestion()" style="display:none;">← Anterior</button>
+        <div></div>
+        <button class="quiz-btn-next" id="nextBtn" onclick="nextQuestion()">
+          <span id="nextBtnText">Próxima →</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="quizResult" class="quiz-result"></div>
+
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/faction.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+<script>
+// ============================================
+// QUIZ DATA
+// ============================================
+const questions = [
+  {
+    label: "Liderança",
+    question: "Quando assumires o comando, a tua primeira preocupação é:",
+    context: "O poder revela o verdadeiro carácter de uma pessoa.",
+    options: [
+      { text: "A segurança e o bem-estar dos que dependem de ti. Lideras para servir.", faction: "atreides" },
+      { text: "Consolidar o controlo antes que alguém o tente tomar. O medo é o teu escudo.", faction: "harkonnen" },
+      { text: "A sobrevivência do teu povo e a integridade do teu território.", faction: "fremen" },
+      { text: "Compreender todas as forças em jogo antes de agir. O conhecimento precede a acção.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Valores",
+    question: "Qual destas afirmações ressoa mais profundamente contigo?",
+    context: "Os nossos valores definem as nossas escolhas — mesmo quando ninguém está a ver.",
+    options: [
+      { text: "\"A honra é a única coisa que não pode ser tirada, apenas dada.\"", faction: "atreides" },
+      { text: "\"Quem hesita, perde. A força é a única língua universal.\"", faction: "harkonnen" },
+      { text: "\"Conheces o deserto ou o deserto conhece-te a ti.\"", faction: "fremen" },
+      { text: "\"O que não sabes sobre ti mesmo pode destruir-te mais depressa do que qualquer inimigo.\"", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Conflito",
+    question: "O teu inimigo oferece-te uma trégua vantajosa. O que fazes?",
+    context: "A paz oferecida pode ser uma armadilha ou uma oportunidade real.",
+    options: [
+      { text: "Aceitas, mas verificas cuidadosamente os termos. A honra exige que cumpras o acordo se for genuíno.", faction: "atreides" },
+      { text: "Recusas. A trégua é fraqueza — usas a oportunidade para atacar enquanto estão distraídos.", faction: "harkonnen" },
+      { text: "Consideras o custo para o teu povo. Se a trégua poupar vidas Fremen, é considerada.", faction: "fremen" },
+      { text: "Analisas o que o inimigo ganha com a trégua. A informação real está no que ele não diz.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Força",
+    question: "De onde vem a tua força?",
+    context: "A verdadeira fonte do poder é diferente para cada um.",
+    options: [
+      { text: "Da lealdade das pessoas que escolheram estar do teu lado. Força partilhada é força real.", faction: "atreides" },
+      { text: "Do domínio sobre os outros. Quem controla a dor controla as pessoas.", faction: "harkonnen" },
+      { text: "Da tua ligação ao ambiente e à tua comunidade. O deserto faz-te forte.", faction: "fremen" },
+      { text: "Da disciplina interior e do autoconhecimento. A mente que se controla a si própria não pode ser derrotada.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Arrakis",
+    question: "Chega a Arrakis. O deserto imenso estende-se à tua frente. O que sentes?",
+    context: "A nossa reacção ao ambiente revela quem somos.",
+    options: [
+      { text: "Respeito pela dificuldade. Este planeta tem potencial — há pessoas aqui que merecem um governante justo.", faction: "atreides" },
+      { text: "Oportunidade. Esta terra produz especiaria — a maior riqueza do universo. Tudo o resto é detalhe.", faction: "harkonnen" },
+      { text: "Pertença. Este é o teu lar. Conheces cada duna, cada vento, cada segredo do Erg.", faction: "fremen" },
+      { text: "Curiosidade. Cada sistema tem padrões. Quem controla Arrakis controla o fluxo da especiaria — e portanto, tudo.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Traição",
+    question: "Um membro próximo da tua casa/grupo trai-te por interesse próprio. A tua reacção é:",
+    context: "A traição teste a verdadeira natureza de quem a recebe.",
+    options: [
+      { text: "Dor profunda, mas julgamento justo. Traição tem consequências — mas a crueldade gratuita não é tua.", faction: "atreides" },
+      { text: "Resposta imediata e exemplar. Outros precisam ver o que acontece a quem te trai.", faction: "harkonnen" },
+      { text: "Julgamento do sietch. A comunidade decide — não és juiz sozinho nos teus próprios assuntos.", faction: "fremen" },
+      { text: "Analisas porque aconteceu. A traição revelou uma fraqueza no teu sistema. Corriges e usas o conhecimento.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "O Futuro",
+    question: "Se pudesses ver o futuro, mas não pudesses mudá-lo, o que farias?",
+    context: "Paul Atreides enfrentou exactamente esta escolha.",
+    options: [
+      { text: "Prepararias os outros para o que está a vir. Mesmo que doloroso, merecem saber.", faction: "atreides" },
+      { text: "Usarias o conhecimento para te posicionares de forma a beneficiares de cada evento, independentemente do custo para outros.", faction: "harkonnen" },
+      { text: "Focarias no presente. O futuro é o deserto — vasto e imprevisível. Vives o hoje com toda a intensidade.", faction: "fremen" },
+      { text: "Analisarias os padrões e trabalharias subtilmente para guiar para os melhores resultados possíveis.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Ecologia",
+    question: "A tua filosofia em relação ao ambiente é:",
+    context: "A relação com o mundo que nos rodeia reflecte os nossos valores fundamentais.",
+    options: [
+      { text: "Responsabilidade. Somos mordomos dos planetas que habitamos — devemos deixá-los melhores do que os encontrámos.", faction: "atreides" },
+      { text: "Recurso. Os planetas existem para fornecer o que necessitamos. A exploração é progresso.", faction: "harkonnen" },
+      { text: "Simbiose sagrada. Arrakis é um ser vivo. Os Fremen protegem o equilíbrio porque dele dependem.", faction: "fremen" },
+      { text: "Sistema a compreender. Cada ecologia tem padrões e vulnerabilidades. O conhecimento ecológico é poder.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Sacrifício",
+    question: "O que estarias disposto a sacrificar para atingir o teu objetivo maior?",
+    context: "O verdadeiro preço de qualquer conquista revela os nossos limites morais.",
+    options: [
+      { text: "Conforto pessoal, privilégio, talvez a própria segurança. Mas nunca a dignidade dos outros.", faction: "atreides" },
+      { text: "Tudo e todos — se necessário. O objetivo justifica qualquer meio.", faction: "harkonnen" },
+      { text: "Tudo de ti mesmo — mas nunca comprometes o teu povo ou o teu código de honra tribal.", faction: "fremen" },
+      { text: "Emoções, conforto, ligações pessoais — a disciplina exige libertares-te dos apegos que limitam a visão.", faction: "bene-gesserit" }
+    ]
+  },
+  {
+    label: "Legado",
+    question: "Como queres ser lembrado?",
+    context: "O legado é o que persiste quando tudo mais passa.",
+    options: [
+      { text: "Como alguém que governou com justiça e deixou o seu povo melhor do que o encontrou.", faction: "atreides" },
+      { text: "Como alguém que nunca foi derrotado. Que todos temiam e respeitavam pelo poder.", faction: "harkonnen" },
+      { text: "Como um guardião do deserto, dos seus segredos e do seu povo. O teu nome sussurrado nas sietchs.", faction: "fremen" },
+      { text: "Como arquitecto de um futuro melhor — mesmo que ninguém saiba que foste tu a construí-lo.", faction: "bene-gesserit" }
+    ]
+  }
+];
+
+const factionData = {
+  atreides: {
+    name: 'Casa Atreides',
+    symbol: '⚔',
+    motto: '"Corage e Honra"',
+    color: '#4a9e6a',
+    bgColor: 'rgba(74,158,106,0.08)',
+    borderColor: 'rgba(74,158,106,0.3)',
+    desc: 'A tua bússola moral aponta sempre para o norte. Como os Atreides, encontras força na lealdade, na honra e no serviço aos outros. O teu poder deriva não do medo que inspiras, mas do amor que conquistas. Numa galáxia de tiranos, escolhes ser diferente — e isso tem um custo que aceitas com dignidade.',
+    traits: [
+      { name: 'Honra & Integridade', value: 95 },
+      { name: 'Liderança Servidora', value: 88 },
+      { name: 'Coragem Estratégica', value: 80 },
+      { name: 'Lealdade', value: 92 }
+    ],
+    page: 'faccao-atreides.html'
+  },
+  harkonnen: {
+    name: 'Casa Harkonnen',
+    symbol: '⚡',
+    motto: '"Poder acima de tudo"',
+    color: '#c0392b',
+    bgColor: 'rgba(192,57,43,0.08)',
+    borderColor: 'rgba(192,57,43,0.3)',
+    desc: 'Entendes o poder de forma visceral e directa. Como os Harkonnen, sabes que o universo não tem piedade e que a fraqueza é um convite. Não te iludiste com noções de nobreza — aplicas força onde necessário e resultados onde importa. Numa galáxia que premia o implacável, a tua clareza sobre o que é necessário é uma forma de honestidade brutal.',
+    traits: [
+      { name: 'Força & Domínio', value: 97 },
+      { name: 'Pragmatismo Absoluto', value: 90 },
+      { name: 'Ambição Estratégica', value: 88 },
+      { name: 'Implacabilidade', value: 95 }
+    ],
+    page: 'faccao-harkonnen.html'
+  },
+  fremen: {
+    name: 'Fremen',
+    symbol: '◈',
+    motto: '"O deserto é nossa arma"',
+    color: '#2980b9',
+    bgColor: 'rgba(41,128,185,0.08)',
+    borderColor: 'rgba(41,128,185,0.3)',
+    desc: 'A tua força vem da terra que habitas e do povo que és. Como os Fremen, possuis uma resistência que os privilegiados nunca entenderão — porque foi forjada em adversidade real. Vives em harmonia com o que te rodeia, levas a sério os teus compromissos e a tua comunidade é sagrada. No universo de Dune, és o mais temível de todos: aquele que não tem nada a perder e tudo a defender.',
+    traits: [
+      { name: 'Resistência & Adaptação', value: 97 },
+      { name: 'Ligação ao Ambiente', value: 93 },
+      { name: 'Lealdade Tribal', value: 90 },
+      { name: 'Guerreiro do Deserto', value: 88 }
+    ],
+    page: 'faccao-fremen.html'
+  },
+  'bene-gesserit': {
+    name: 'Bene Gesserit',
+    symbol: '◉',
+    motto: '"Ver além do véu"',
+    color: '#8e44ad',
+    bgColor: 'rgba(142,68,173,0.08)',
+    borderColor: 'rgba(142,68,173,0.3)',
+    desc: 'Moves-te pelas sombras com uma elegância que poucos conseguem perceber. Como a Bene Gesserit, compreendes que o poder real raramente é visível — é exercido através de padrões de informação, posicionamento cuidadoso e compreensão profunda da natureza humana. A tua paciência é a tua arma mais poderosa.',
+    traits: [
+      { name: 'Percepção & Intuição', value: 97 },
+      { name: 'Manipulação Estratégica', value: 93 },
+      { name: 'Disciplina Interior', value: 95 },
+      { name: 'Visão de Longo Prazo', value: 90 }
+    ],
+    page: 'faccao-bene-gesserit.html'
+  }
+};
+
+// ============================================
+// QUIZ STATE
+// ============================================
+let currentQ = 0;
+let answers = []; // array of faction strings
+let scores = { atreides: 0, harkonnen: 0, fremen: 0, 'bene-gesserit': 0 };
+let selectedOption = null;
+
+function startQuiz() {
+  document.getElementById('quizStart').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  currentQ = 0;
+  answers = [];
+  scores = { atreides: 0, harkonnen: 0, fremen: 0, 'bene-gesserit': 0 };
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  const total = questions.length;
+  selectedOption = answers[currentQ] || null;
+
+  // Progress
+  document.getElementById('progressFill').style.width = `${(currentQ / total) * 100}%`;
+  document.getElementById('qNum').textContent = currentQ + 1;
+  document.getElementById('qTotal').textContent = total;
+
+  // Back button
+  const backBtn = document.getElementById('backBtn');
+  backBtn.style.display = currentQ > 0 ? 'block' : 'none';
+
+  // Next button
+  const nextBtn = document.getElementById('nextBtn');
+  document.getElementById('nextBtnText').textContent = currentQ === total - 1 ? 'Ver Resultado →' : 'Próxima →';
+  nextBtn.classList.toggle('enabled', selectedOption !== null);
+
+  // Letters
+  const letters = ['A', 'B', 'C', 'D'];
+
+  // Render
+  const container = document.getElementById('questionContainer');
+  container.innerHTML = `
+    <div class="quiz-question-wrap">
+      <div class="quiz-q-label">${q.label}</div>
+      <h2 class="quiz-q-text">${q.question}</h2>
+      <p class="quiz-q-context">${q.context}</p>
+      <div class="quiz-options">
+        ${q.options.map((opt, i) => `
+          <button class="quiz-option ${selectedOption === opt.faction ? 'selected' : ''}"
+                  onclick="selectOption('${opt.faction}', this)">
+            <div class="quiz-option-letter">${letters[i]}</div>
+            <div class="quiz-option-text">${opt.text}</div>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function selectOption(faction, btn) {
+  document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedOption = faction;
+  document.getElementById('nextBtn').classList.add('enabled');
+}
+
+function nextQuestion() {
+  if (!selectedOption) return;
+
+  // Save answer
+  answers[currentQ] = selectedOption;
+  scores[selectedOption]++;
+
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    // Undo score from current
+    if (answers[currentQ]) {
+      scores[answers[currentQ]]--;
+    }
+    currentQ--;
+    renderQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizScreen').style.display = 'none';
+  const resultEl = document.getElementById('quizResult');
+  resultEl.classList.add('visible');
+
+  // Find winner
+  let winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const fd = factionData[winner];
+
+  // Apply faction
+  document.documentElement.setAttribute('data-faction', winner);
+  localStorage.setItem('dune_faction', winner);
+  if (window.FactionSystem) FactionSystem.apply(winner);
+
+  resultEl.innerHTML = `
+    <div style="text-align:center; margin-bottom:2rem;">
+      <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.3);margin-bottom:0.75rem;">O teu resultado</div>
+      <span class="result-symbol" style="color:${fd.color}">${fd.symbol}</span>
+      <div class="result-label">A tua facção é</div>
+      <div class="result-faction-name" style="color:${fd.color}">${fd.name}</div>
+      <div class="result-motto" style="color:${fd.color}; opacity:0.7;">${fd.motto}</div>
+    </div>
+
+    <div style="background:${fd.bgColor};border:1px solid ${fd.borderColor};border-radius:8px;padding:1.5rem;margin-bottom:2rem;">
+      <p class="result-desc" style="margin:0;">${fd.desc}</p>
+    </div>
+
+    <div class="result-traits">
+      <h4>Os Teus Traços Dominantes</h4>
+      ${fd.traits.map(t => `
+        <div class="trait-row">
+          <div class="trait-label">
+            <span>${t.name}</span>
+            <span>${t.value}%</span>
+          </div>
+          <div class="trait-bar">
+            <div class="trait-fill" data-width="${t.value}" style="width:0%;background:${fd.color}"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.3);margin-bottom:1rem;text-align:center;">Distribuição das tuas respostas</div>
+      <div class="score-breakdown">
+        ${Object.entries(scores).sort((a,b) => b[1]-a[1]).map(([fac, pts]) => {
+          const fd2 = factionData[fac];
+          return `
+            <div class="score-col ${fac === winner ? 'winner' : ''}">
+              <span class="score-col-symbol">${fd2.symbol}</span>
+              <span class="score-col-name">${fd2.name.replace('Casa ','')}</span>
+              <span class="score-col-pts" style="${fac===winner?'color:'+fd.color:''}">${pts}</span>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <a href="${fd.page}" class="btn btn-primary" style="font-size:0.78rem;background:${fd.color};color:#050402;">
+        Explorar a tua Facção →
+      </a>
+      <button onclick="restartQuiz()" class="btn btn-outline" style="font-size:0.78rem;border-color:${fd.color};color:${fd.color};">
+        Refazer Quiz
+      </button>
+      <a href="faccoes.html" class="btn btn-ghost" style="font-size:0.78rem;">
+        Todas as Facções
+      </a>
+    </div>
+  `;
+
+  // Animate trait bars
+  setTimeout(() => {
+    document.querySelectorAll('.trait-fill[data-width]').forEach(bar => {
+      bar.style.width = bar.getAttribute('data-width') + '%';
+    });
+  }, 300);
+}
+
+function restartQuiz() {
+  document.getElementById('quizResult').classList.remove('visible');
+  document.getElementById('quizResult').innerHTML = '';
+  scores = { atreides: 0, harkonnen: 0, fremen: 0, 'bene-gesserit': 0 };
+  answers = [];
+  currentQ = 0;
+  document.getElementById('quizScreen').style.display = 'block';
+  renderQuestion();
+}
+</script>
+</body>
+</html>

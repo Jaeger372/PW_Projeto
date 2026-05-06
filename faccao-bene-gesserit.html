@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="bene-gesserit">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bene Gesserit — Facções — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    :root{--fc:#8e44ad;--fc-bg:#0a060e;--fc-glow:rgba(142,68,173,0.12);}
+    .f-hero{min-height:70vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+    .f-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a060e,#160a20,#0a050e);}
+    .f-hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25;filter:saturate(0.5) brightness(0.4);}
+    .f-hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--fc) 0,var(--fc) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .f-hero-content{position:relative;z-index:5;width:100%;padding:160px 0 5rem;}
+    .f-symbol{font-size:8rem;color:rgba(142,68,173,0.08);font-family:'Cinzel',serif;font-weight:900;position:absolute;right:5%;bottom:2rem;line-height:1;}
+    .f-tag{display:inline-flex;align-items:center;gap:.5rem;padding:6px 14px;background:rgba(142,68,173,0.12);border:1px solid rgba(142,68,173,0.3);border-radius:20px;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fc);margin-bottom:1.5rem;}
+    .f-name{font-family:'Cinzel',serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;color:#f5f0e8;line-height:1;margin-bottom:.5rem;}
+    .f-motto{font-family:'Crimson Text',serif;font-size:1.6rem;font-style:italic;color:var(--fc);margin-bottom:1rem;}
+    .f-body{padding:5rem 0;background:var(--color-black);}
+    .f-grid{display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start;}
+    .f-section{margin-bottom:4rem;}
+    .f-section h2{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--fc);margin-bottom:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(142,68,173,.15);}
+    .f-section h3{font-family:'Cinzel',serif;font-size:1.1rem;color:#f5f0e8;margin:1.5rem 0 .6rem;}
+    .f-section p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.9;margin-bottom:1rem;}
+    .f-section ul{display:flex;flex-direction:column;gap:.6rem;}
+    .f-section ul li{font-size:.9rem;color:rgba(245,240,232,.55);padding-left:1.2rem;position:relative;line-height:1.7;}
+    .f-section ul li::before{content:'◆';position:absolute;left:0;color:var(--fc);font-size:.5rem;top:.4rem;}
+    .sidebar-card{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(142,68,173,.1);border-radius:8px;margin-bottom:1.5rem;}
+    .sidebar-card h4{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;color:var(--fc);text-transform:uppercase;margin-bottom:1rem;}
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+    .stat-row:last-child{border:none;}
+    .stat-row span:first-child{font-size:.8rem;color:rgba(245,240,232,.4);}
+    .stat-row span:last-child{font-size:.8rem;color:#f5f0e8;font-weight:500;}
+    .member-list{display:flex;flex-direction:column;gap:.75rem;}
+    .member-item{display:flex;align-items:center;gap:1rem;padding:.75rem;background:rgba(142,68,173,.04);border:1px solid rgba(142,68,173,.1);border-radius:6px;text-decoration:none;transition:all .3s;}
+    .member-item:hover{border-color:rgba(142,68,173,.3);}
+    .member-icon{width:36px;height:36px;border-radius:50%;background:rgba(142,68,173,.12);border:1px solid rgba(142,68,173,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .member-name{font-family:'Cinzel',serif;font-size:.85rem;color:#f5f0e8;}
+    .member-role{font-size:.7rem;color:rgba(142,68,173,.7);text-transform:uppercase;letter-spacing:.1em;}
+    .ability-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1rem 0;}
+    .ability-card{padding:1.2rem;background:rgba(142,68,173,.04);border:1px solid rgba(142,68,173,.1);border-radius:6px;}
+    .ability-name{font-family:'Cinzel',serif;font-size:.85rem;color:#bb8fce;margin-bottom:.4rem;}
+    .ability-desc{font-size:.8rem;color:rgba(245,240,232,.5);line-height:1.6;}
+    @media(max-width:900px){.f-grid{grid-template-columns:1fr;}.ability-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="f-hero">
+  <div class="f-hero-bg">
+    <img src="https://sspark.genspark.ai/cfimages?u1=ECukwJ%2Fw2WEl3XZ%2BuWd%2FFkYt8gWwWt4k846EhDjl8wqDhTHAGqriEEfAtB0GYFE3H0i%2BcLsE1nHD08VNaukeQ0IqG%2BThpqjoD67A89vCL2NnzkB5%2FzzPlPQsgKCy0Zn1j%2BCCnAN1QHEg%2FhC4Nw8u1GmziOFulZxFgB86%2Fw4x%2FxF445vhdrMAYc6kdr2zoQgNyKrUSvTWT3Av89V&u2=Gi2MXuuFkSlIy4eo&width=2560" alt="Bene Gesserit">
+  </div><div class="f-hero-pattern"></div>
+  <div class="f-symbol">◉</div>
+  <div class="container f-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="faccoes.html">Facções</a><span>/</span><span class="current">Bene Gesserit</span></nav>
+    <div class="f-tag">◉ Ordem Sistérica Secular</div>
+    <h1 class="f-name">Bene<br>Gesserit</h1>
+    <p class="f-motto">"Ver além do véu"</p>
+  </div>
+</section>
+
+<section class="f-body">
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="f-section reveal">
+          <h2>O que é a Bene Gesserit</h2>
+          <p>A Bene Gesserit é uma das organizações mais fascinantes e perturbadoras do universo de Dune — uma irmandade de mulheres que durante milénios manipulou silenciosamente a política, as linhagens genéticas e a psicologia coletiva da humanidade, tudo em direção a um objetivo que a maioria dos seus membros nunca vê completamente.</p>
+          <p>Externamente, as Bene Gesserit aparecem como conselheiras, concubinas e educadoras — posições que lhes permitem influenciar qualquer nível da sociedade do Imperium. Internamente, são uma hierarquia altamente disciplinada de mulheres com capacidades físicas e mentais extraordinárias, moldadas por décadas de treino intensivo e pela Memória Ancestral que lhes permite aceder às experiências de todas as Reverendas Mães que vieram antes.</p>
+          <p>O seu projeto mais ambicioso é o Programa de Criação — um trabalho de seleção genética que dura 90 gerações, destinado a criar o Kwisatz Haderach: um ser humano com capacidades prescientes únicas, capaz de aceder tanto à memória ancestral feminina quanto masculina. Este projeto, quando "tem sucesso" com Paul Atreides, produz algo muito diferente — e muito mais imprevisível — do que a Bene Gesserit esperava.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>Capacidades e Disciplinas</h2>
+          <div class="ability-grid">
+            <div class="ability-card"><div class="ability-name">A Voz</div><div class="ability-desc">A capacidade de usar o tom, frequência e modulação da voz para forçar obediência imediata em qualquer ser humano. Uma das armas mais discretas e mortais do universo.</div></div>
+            <div class="ability-card"><div class="ability-name">Prana-Bindu</div><div class="ability-desc">Controlo total dos músculos e nervos do próprio corpo. Permite feitos de força, precisão e resistência sobre-humanos. As Bene Gesserit são combatentes letais quando necessário.</div></div>
+            <div class="ability-card"><div class="ability-name">Memória Ancestral</div><div class="ability-desc">Após o ritual da Água da Vida, a Reverenda Mãe ganha acesso às memórias de todas as Reverendas Mães que vieram antes — gerações de experiência acumulada.</div></div>
+            <div class="ability-card"><div class="ability-name">Perceção Aumentada</div><div class="ability-desc">Capacidade de ler microexpressões, padrões de respiração e tensão muscular para detetar mentiras e emoções ocultas com precisão quase perfeita.</div></div>
+            <div class="ability-card"><div class="ability-name">Controlo Biológico</div><div class="ability-desc">As Bene Gesserit podem controlar a sua biologia interna: acelerar cura, controlar fertiilidade, sintetizar antídotos internamente, controlar dor.</div></div>
+            <div class="ability-card"><div class="ability-name">Condicionamento Kwisatz</div><div class="ability-desc">Através de gerações de seleção, as BG desenvolveram o programa genético que resultaria no Kwisatz Haderach — o ser além das suas capacidades.</div></div>
+          </div>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>A Manipulação da Religião</h2>
+          <p>Uma das ferramentas mais poderosas da Bene Gesserit é o Missionaria Protectiva — um programa sistemático de semear profecias e lendas religiosas em culturas por todo o universo, de modo que quando uma Bene Gesserit apareça, possa invocar estas profecias como "cumprimento" e obter proteção ou influência imediatas.</p>
+          <p>Foi exatamente isto que fizeram nos Fremen de Arrakis. Gerações antes dos eventos do primeiro livro, as Bene Gesserit semearam a profecia do "Lisan al-Gaib" — o Enviado do Exterior que viria guiar os Fremen. Quando Paul e Jessica chegam ao deserto, a profecia está pronta para os receber.</p>
+          <p>A ironia devastadora é que o produto do seu programa genético — Paul Atreides — supera completamente os parâmetros da Bene Gesserit. Ele não é o instrumento controlável que planearam. É algo que transcende o seu controlo e, em Dune Messiah, que se volta ativamente contra elas. O Frankenstein da Bene Gesserit ganhou vida própria.</p>
+        </div>
+
+        <div class="f-section reveal">
+          <h2>O Projeto das 90 Gerações</h2>
+          <p>O Programa de Criação das Bene Gesserit é um dos elementos mais perturbadores de Dune. Durante 90 gerações, a ordem controlou quem se casava com quem entre as casas nobres do Imperium — colocando as suas membras como concubinas e esposas, orientando cruzamentos genéticos específicos, tudo para chegar a um resultado preciso.</p>
+          <p>O objetivo: criar o Kwisatz Haderach — um ser que consegue aceder tanto à memória ancestral feminina (que as Reverendas Mães possuem) quanto à masculina (que nenhuma mulher consegue alcançar — a "câmara interna" permanece vedada). Este ser teria presciência funcional e seria o instrumento da Bene Gesserit para influência absoluta.</p>
+          <p>O plano "falhou" na geração final quando Jessica — por amor ao Duque Leto — gerou um filho em vez de uma filha. Mas este "erro" produziu algo que o plano original nunca poderia: um Kwisatz Haderach que tinha também as capacidades Fremen, o treinamento Mentat e a experiência de Arrakis — uma combinação explosiva que a Bene Gesserit nunca previu e não consegue controlar.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Sede</span><span>Wallach IX</span></div>
+          <div class="stat-row"><span>Tipo</span><span>Ordem Sistérica</span></div>
+          <div class="stat-row"><span>Objetivo</span><span>Kwisatz Haderach</span></div>
+          <div class="stat-row"><span>Influência</span><span>Todo o Imperium</span></div>
+          <div class="stat-row"><span>Membros</span><span>Secreto</span></div>
+          <div class="stat-row"><span>Lema</span><span>"Ver além do véu"</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Poder Relativo</h4>
+          <div class="stat-row"><span>Influência política</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Capacidades físicas</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Controlo genético</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Força militar</span><span>★★★☆☆</span></div>
+          <div class="stat-row"><span>Previsibilidade</span><span>★☆☆☆☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--fc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Figuras Principais</h4>
+          <div class="member-list">
+            <a href="personagem-jessica.html" class="member-item"><div class="member-icon">◉</div><div><div class="member-name">Lady Jessica</div><div class="member-role">Reverenda Mãe (Fremen)</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">◉</div><div><div class="member-name">Rev. Mãe Mohiam</div><div class="member-role">Reverendissima</div></div></a>
+            <a href="personagens.html" class="member-item"><div class="member-icon">◉</div><div><div class="member-name">Alia Atreides</div><div class="member-role">Abominação</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:700px;margin:0 auto 4rem;padding:0 2rem;">
+  <div class="quote-block reveal" style="border-left-color:var(--fc);">
+    <p>"Nunca faças aquilo que o teu inimigo espera que faças. Faz aquilo que ele mais teme."</p>
+    <cite>Reverenda Mãe Gaius Helen Mohiam</cite>
+  </div>
+</div>
+
+<section class="section-sm" style="background:var(--color-black);border-top:1px solid rgba(142,68,173,0.1);">
+  <div class="container text-center">
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="faccao-atreides.html" class="btn btn-outline">Casa Atreides</a>
+      <a href="faccao-harkonnen.html" class="btn btn-outline">Casa Harkonnen</a>
+      <a href="faccao-fremen.html" class="btn btn-outline">Fremen</a>
+      <a href="faccoes.html" class="btn btn-ghost">Todas as Facções</a>
+    </div>
+  </div>
+</section>
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

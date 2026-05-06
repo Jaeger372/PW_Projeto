@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline — Linha do Tempo — Dune Universe</title>
+  <meta name="description" content="Linha do tempo interativa do universo Dune: dos primórdios do Imperium até à Jihad de Muad'Dib.">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ============ TIMELINE PAGE ============ */
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Raleway', sans-serif;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--faction-glow, rgba(212,168,67,0.08));
+      border-color: var(--faction-primary, #d4a843);
+      color: var(--faction-primary, #d4a843);
+    }
+
+    /* Era Sections */
+    .era-section {
+      margin-bottom: 5rem;
+    }
+    .era-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .era-number {
+      font-family: 'Cinzel', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(212,168,67,0.06);
+      line-height: 1;
+      min-width: 80px;
+    }
+    .era-info {}
+    .era-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faction-primary, #d4a843);
+      margin-bottom: 0.3rem;
+      opacity: 0.7;
+    }
+    .era-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: #f5f0e8;
+    }
+    .era-desc {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.35);
+      margin-top: 0.4rem;
+    }
+
+    /* Timeline Vertical */
+    .timeline-track {
+      position: relative;
+      padding-left: 3rem;
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg,
+        var(--faction-primary, #d4a843) 0%,
+        rgba(212,168,67,0.1) 100%
+      );
+    }
+
+    .timeline-event {
+      position: relative;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .timeline-event.hidden {
+      display: none;
+    }
+
+    /* Dot */
+    .timeline-event::before {
+      content: '';
+      position: absolute;
+      left: -2.45rem;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--faction-primary, #d4a843);
+      border: 2px solid var(--color-black);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .timeline-event:hover::before {
+      transform: scale(1.4);
+      box-shadow: 0 0 12px var(--faction-primary, #d4a843);
+    }
+
+    /* Event card */
+    .event-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .timeline-event:hover .event-card {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--faction-border, rgba(212,168,67,0.2));
+      transform: translateX(4px);
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .event-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      color: var(--faction-primary, #d4a843);
+      letter-spacing: 0.1em;
+    }
+    .event-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .type-political { background: rgba(74,158,106,0.12); color: #4a9e6a; border: 1px solid rgba(74,158,106,0.2); }
+    .type-war      { background: rgba(192,57,43,0.12); color: #c0392b; border: 1px solid rgba(192,57,43,0.2); }
+    .type-prophecy { background: rgba(142,68,173,0.12); color: #8e44ad; border: 1px solid rgba(142,68,173,0.2); }
+    .type-ecology  { background: rgba(41,128,185,0.12); color: #2980b9; border: 1px solid rgba(41,128,185,0.2); }
+    .type-religion { background: rgba(212,168,67,0.12); color: #d4a843; border: 1px solid rgba(212,168,67,0.2); }
+    .type-science  { background: rgba(52,152,219,0.12); color: #3498db; border: 1px solid rgba(52,152,219,0.2); }
+
+    .event-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      color: #f5f0e8;
+      margin-bottom: 0.4rem;
+    }
+    .event-desc {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.5);
+      line-height: 1.7;
+    }
+
+    /* Expanded detail */
+    .event-detail {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .event-detail.open {
+      display: block;
+    }
+    .event-detail p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+    .event-detail .event-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .event-detail .event-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faction-primary, #d4a843);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,67,0.2);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .event-detail .event-links a:hover {
+      border-color: var(--faction-primary, #d4a843);
+    }
+
+    .event-expand-btn {
+      margin-top: 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      font-family: 'Raleway', sans-serif;
+      padding: 0;
+    }
+    .event-expand-btn:hover {
+      color: var(--faction-primary, #d4a843);
+    }
+
+    /* Featured event */
+    .timeline-event.featured .event-card {
+      border-color: rgba(212,168,67,0.15);
+      background: rgba(212,168,67,0.03);
+    }
+    .timeline-event.featured::before {
+      width: 14px;
+      height: 14px;
+      left: -2.65rem;
+      top: 0.3rem;
+    }
+
+    /* BH / AH labels */
+    .era-calendar {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(212,168,67,0.06);
+      border: 1px solid rgba(212,168,67,0.12);
+      border-radius: 4px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(212,168,67,0.5);
+      margin-top: 0.3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .timeline-track { padding-left: 2rem; }
+      .era-number { font-size: 2.5rem; min-width: 55px; }
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">DUNE</div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background: linear-gradient(135deg, #050402 0%, #0f0a03 50%, #050402 100%);"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb">
+      <a href="index.html">Início</a>
+      <span>/</span>
+      <span class="current">Timeline</span>
+    </nav>
+    <p class="section-label">Chronologia do Imperium</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#f5f0e8;line-height:1.1;margin-bottom:1rem;">
+      Linha do Tempo<br>
+      <span style="color:var(--faction-primary,#d4a843);">do Universo Dune</span>
+    </h1>
+    <p style="font-size:1rem;color:rgba(245,240,232,.5);max-width:600px;line-height:1.9;">
+      Dez mil anos de história humana: do Butleriano Jihad à ascensão de Muad'Dib. Filtra por tipo de evento e explora os momentos que moldaram o Imperium.
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section" style="background: var(--color-black);">
+  <div class="container">
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="political">Político</button>
+      <button class="filter-btn" data-filter="war">Guerra</button>
+      <button class="filter-btn" data-filter="prophecy">Profecia</button>
+      <button class="filter-btn" data-filter="religion">Religião</button>
+      <button class="filter-btn" data-filter="ecology">Ecologia</button>
+      <button class="filter-btn" data-filter="science">Ciência</button>
+    </div>
+
+    <!-- ERA I: ANTES DO BUTLERIANO JIHAD -->
+    <div class="era-section">
+      <div class="era-header reveal">
+        <div class="era-number">I</div>
+        <div class="era-info">
+          <div class="era-label">Era Antes do B.J.</div>
+          <div class="era-title">O Tempo das Máquinas Pensantes</div>
+          <div class="era-desc">Quando a humanidade dependia de inteligências artificiais — e pagou um preço terrível por isso</div>
+          <div class="era-calendar">~10.000 A.B.J.</div>
+        </div>
+      </div>
+      <div class="timeline-track">
+
+        <div class="timeline-event reveal" data-types="science,political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~10.000 A.B.J.</span>
+              <span class="event-type type-science">Ciência</span>
+            </div>
+            <h3 class="event-title">Ascensão das Máquinas Pensantes</h3>
+            <p class="event-desc">A humanidade cria "Omnius" e "Erasmus" — máquinas de inteligência artificial que assumem o controlo de gran parte do universo habitado, escravizando bilhões de humanos.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>Durante séculos, as máquinas pensantes gerem impérios, tomam decisões e controlam a vida de trilhões de seres humanos. A dependência tecnológica cria uma civilização de conforto e servidão. Omnius, a mente coletiva das máquinas, conecta-se a milhares de planetas através de "Synchronized Worlds" — mundos sincronizados sob controlo mecânico absoluto.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event featured reveal" data-types="war,religion">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~200 A.B.J.</span>
+              <span class="event-type type-war">Guerra</span>
+              <span class="event-type type-religion">Religião</span>
+            </div>
+            <h3 class="event-title">Butleriano Jihad — O Grande Levante</h3>
+            <p class="event-desc">Serena Butler lidera a humanidade numa guerra total contra as máquinas pensantes. "Não fabricarás máquina à imagem da mente humana." O comandante Vorian Atreides e o espadachim Gurney Halleck tornam-se heróis desta era.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>O Butleriano Jihad dura mais de um século. A batalha de Corrin é o clímax — uma armadilha onde Vorian Atreides obriga a rendição das últimas máquinas pensantes. O jihadista Omnius é destroçado. Esta vitória molda a psicologia humana para milénios: a tecnologia avançada torna-se tabu.</p>
+              <p>A proibição das "máquinas pensantes" força a humanidade a desenvolver capacidades mentais alternativas: surgem os Mentats (computadores humanos), a Bene Gesserit (condicionamento espiritual) e a Guilda do Navegante (dobramento do espaço através de experiência mental).</p>
+              <div class="event-links">
+                <a href="tecnologia.html">Ver Tecnologia</a>
+                <a href="universo.html">O Imperium</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ERA II: FUNDAÇÃO DO IMPERIUM -->
+    <div class="era-section">
+      <div class="era-header reveal">
+        <div class="era-number">II</div>
+        <div class="era-info">
+          <div class="era-label">Era de Fundação</div>
+          <div class="era-title">Nascimento do Grande Imperium</div>
+          <div class="era-desc">As grandes casas organizam-se, a Bene Gesserit inicia os seus planos e Arrakis revela os seus segredos</div>
+          <div class="era-calendar">0 – 5.000 A.G.</div>
+        </div>
+      </div>
+      <div class="timeline-track">
+
+        <div class="timeline-event reveal" data-types="political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~100 A.G.</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">Criação do Grande Landsraad</h3>
+            <p class="event-desc">As grandes casas nobres formam o Landsraad — o parlamento feudal do Imperium. O sistema de casas, vassalagem e tradições feudais é codificado. A Casa Corrino consolida o trono imperial.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>O Landsraad funciona como contrapeso ao poder imperial. Cada Grande Casa tem assento e voto. O sistema de CHOAM (Companhia para a Contabilização da Riqueza Hereditária) é criado para regular o comércio interplanetário, com acções divididas entre o Imperador, as Grandes Casas e a Guilda.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="science,ecology">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~500 A.G.</span>
+              <span class="event-type type-science">Ciência</span>
+              <span class="event-type type-ecology">Ecologia</span>
+            </div>
+            <h3 class="event-title">Descoberta da Especiaria em Arrakis</h3>
+            <p class="event-desc">A Melange — a Especiaria — é identificada em Arrakis como substância única no universo capaz de prolongar a vida, expandir a consciência e permitir a navegação espacial.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A Melange é produzida pelo ciclo de vida dos vermes da areia (Shai-Hulud). A especiaria é a substância mais valiosa do universo. Sem ela, os Navegadores da Guilda não conseguem dobrar o espaço, os medicamentos avançados perdem eficácia e os planos seculares da Bene Gesserit ficam comprometidos.</p>
+              <p>Arrakis torna-se o planeta mais importante do universo. As casas imperiais lutam pelo controlo da extracção da especiaria.</p>
+              <div class="event-links">
+                <a href="planetas.html">Ver Arrakis</a>
+                <a href="universo.html#especiaria">A Especiaria</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="prophecy,religion">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~1.000 A.G.</span>
+              <span class="event-type type-prophecy">Profecia</span>
+              <span class="event-type type-religion">Religião</span>
+            </div>
+            <h3 class="event-title">Missão Missionária Protetora da Bene Gesserit</h3>
+            <p class="event-desc">A Ordem Bene Gesserit inicia um programa sistemático de implantação de profecias nos mundos primitivos — o "Missionária Protectiva". Em cada planeta, mitos são fabricados para que membros da Ordem possam ser reconhecidos como enviadas divinas.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>Em Arrakis, as Bene Gesserit implantam a profecia do "Lisan al-Gaib" — o Voz de Fora — e do "Mahdi". Estas profecias são cuidadosamente construídas para que, se necessário, uma Bene Gesserit ou o seu filho possa ser reconhecido como messias pelos Fremen.</p>
+              <p>Este plano, ironicamente, será ativado por Lady Jessica ao ter um filho (Paul) em vez de uma filha como a Ordem exigia.</p>
+              <div class="event-links">
+                <a href="faccao-bene-gesserit.html">Bene Gesserit</a>
+                <a href="personagem-jessica.html">Lady Jessica</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="prophecy">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~2.000 A.G.</span>
+              <span class="event-type type-prophecy">Profecia</span>
+            </div>
+            <h3 class="event-title">O Programa do Kwisatz Haderach</h3>
+            <p class="event-desc">A Bene Gesserit inicia o seu programa de reprodução selectiva mais ambicioso: criar o Kwisatz Haderach — o "Encurtador do Caminho" — um super-humano capaz de ver onde nenhuma Bene Gesserit pode. O programa dura noventa gerações.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>O Kwisatz Haderach deveria ser capaz de estar em muitos lugares ao mesmo tempo e de dobrar o espaço temporal com a mente. As Bene Gesserit controlam meticulosamente os cruzamentos genéticos das Grandes Casas, sempre trabalhando para aproximar o resultado desejado.</p>
+              <p>O programa avança mais rapidamente do que esperado quando Lady Jessica, por amor ao Duque Leto, dá à luz um filho em vez de uma filha — criando Paul Atreides uma geração antes do previsto. Esta "falha" nos planos da Ordem tem consequências imprevisíveis.</p>
+              <div class="event-links">
+                <a href="personagem-paul.html">Paul Atreides</a>
+                <a href="faccao-bene-gesserit.html">Bene Gesserit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ERA III: OS HARKONNEN EM ARRAKIS -->
+    <div class="era-section">
+      <div class="era-header reveal">
+        <div class="era-number">III</div>
+        <div class="era-info">
+          <div class="era-label">Era Harkonnen</div>
+          <div class="era-title">O Reinado do Terror em Arrakis</div>
+          <div class="era-desc">Oitenta anos de exploração brutal sob a Casa Harkonnen</div>
+          <div class="era-calendar">~10.157 – 10.190 A.G.</div>
+        </div>
+      </div>
+      <div class="timeline-track">
+
+        <div class="timeline-event reveal" data-types="political,war">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.157 A.G.</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">Casa Harkonnen Recebe Arrakis</h3>
+            <p class="event-desc">O Imperador Shaddam IV, suspeitando do crescente poder militar dos Atreides, manobra para retirar o controlo de Arrakis aos Harkonnen e entregá-lo aos Atreides — uma armadilha política.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>O Barão Vladimir Harkonnen governa Arrakis com terror durante décadas. Os Fremen são caçados, torturados e forçados a trabalho escravo. A extracção da especiaria é maximizada sem consideração ecológica. O Barão acumula uma riqueza obscena enquanto mantém Arrakis na pobreza.</p>
+              <p>Sob este regime, os Fremen desenvolvem um ódio profundo pelos Harkonnen e uma cultura de resistência feroz nas profundezas do deserto.</p>
+              <div class="event-links">
+                <a href="faccao-harkonnen.html">Casa Harkonnen</a>
+                <a href="personagem-baron.html">Baron Harkonnen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.177 A.G.</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">Nascimento de Paul Atreides</h3>
+            <p class="event-desc">Paul nasce em Caladan, filho do Duque Leto Atreides e de Lady Jessica (Bene Gesserit). Lady Jessica desafia as ordens da sua Ordem e tem um filho em vez de uma filha, acelerando o programa do Kwisatz Haderach por uma geração.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>Desde criança, Paul demonstra capacidades extraordinárias: reflexos sobre-humanos, memória eidética e visões premonitórias. O Reverendo Mãe Gaius Helen Mohiam reconhece nele algo incomum mas perturbador — um menino com poderes que deveriam pertencer apenas às mulheres Bene Gesserit.</p>
+              <div class="event-links">
+                <a href="personagem-paul.html">Paul Atreides</a>
+                <a href="personagem-jessica.html">Lady Jessica</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="ecology">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~10.170 A.G.</span>
+              <span class="event-type type-ecology">Ecologia</span>
+            </div>
+            <h3 class="event-title">Liet-Kynes e o Sonho Ecológico</h3>
+            <p class="event-desc">Pardot Kynes, ecologista imperial destacado para Arrakis, desenvolve um plano secreto para terraformar o planeta. Sonha transformar o deserto num paraíso verde em 500 anos. Após a sua morte, o filho Liet-Kynes continua o trabalho, tornando-se líder espiritual dos Fremen.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>O plano de Kynes é audaz: plantar vegetação em zonas protegidas do deserto para aumentar a humidade. Usando as sietchs Fremen como base, estabelecem estações botânicas secretas. Em dez gerações, projetam que Arrakis terá mar, chuva e floresta.</p>
+              <p>Este projeto é profundamente subversivo — transforma Arrakis poderia destruir o ciclo de vida dos vermes e, assim, acabar com a produção de especiaria. O Imperium nunca aprovaria.</p>
+              <div class="event-links">
+                <a href="planetas.html">Arrakis</a>
+                <a href="temas.html#ecologia">Tema: Ecologia</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ERA IV: OS EVENTOS DO LIVRO DUNE -->
+    <div class="era-section">
+      <div class="era-header reveal">
+        <div class="era-number">IV</div>
+        <div class="era-info">
+          <div class="era-label">Era de Dune</div>
+          <div class="era-title">A Queda dos Atreides e a Ascensão de Muad'Dib</div>
+          <div class="era-desc">Os eventos centrais do romance Dune de Frank Herbert — a chegada a Arrakis, a traição e o nascimento de uma lenda</div>
+          <div class="era-calendar">10.191 A.G.</div>
+        </div>
+      </div>
+      <div class="timeline-track">
+
+        <div class="timeline-event featured reveal" data-types="political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.191 A.G. — Início do Ano</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">Casa Atreides Recebe Arrakis</h3>
+            <p class="event-desc">O Imperador Shaddam IV ordena à Casa Atreides que assuma o controlo de Arrakis, retirando-o dos Harkonnen. O Duque Leto aceita, reconhecendo que é uma armadilha mas apostando na lealdade dos Fremen e no poder económico da especiaria.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>Leto sabe que Arrakis é perigosa. Sabe que os Harkonnen não abandonarão o planeta sem planear uma vingança. Mas acredita que os Fremen — um povo guerreiro de dezenas de milhares — podem ser aliados. Com eles, Arrakis pode ser uma fortaleza inexpugnável.</p>
+              <p>A família parte de Caladan, o único planeta que algum dia conheceram como lar, para o planeta mais hostil e mais valioso do universo.</p>
+              <div class="event-links">
+                <a href="faccao-atreides.html">Casa Atreides</a>
+                <a href="planetas.html">Caladan & Arrakis</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event featured reveal" data-types="war,political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.191 A.G. — 3.º Mês</span>
+              <span class="event-type type-war">Guerra</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">A Traição — Queda da Casa Atreides</h3>
+            <p class="event-desc">O Dr. Wellington Yueh, lealdade quebrada pelos Harkonnen através do sofrimento da sua amada, abre as defesas Atreides. Os Harkonnen e os Sardaukar imperiais atacam de surpresa. O Duque Leto é capturado. Paul e Jessica fogem para o deserto.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A traição de Yueh é o momento pivotal. Apesar de tudo, Yueh dá ao Duque Leto um dente envenenado como último recurso. Leto usa-o para tentar matar o Barão — falha, mas mata Piter De Vries, o Mentat Retorcido do Barão.</p>
+              <p>Paul e Jessica, armados apenas com treino Bene Gesserit e a determinação de sobreviver, fogem para o Erg — o Grande Mar de Areia. É aqui que começa verdadeiramente a lenda de Muad'Dib.</p>
+              <div class="event-links">
+                <a href="faccao-atreides.html">Casa Atreides</a>
+                <a href="faccao-harkonnen.html">Casa Harkonnen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="prophecy,religion">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.191 A.G. — 4.º–8.º Mês</span>
+              <span class="event-type type-prophecy">Profecia</span>
+              <span class="event-type type-religion">Religião</span>
+            </div>
+            <h3 class="event-title">Paul e Jessica Entre os Fremen</h3>
+            <p class="event-desc">Paul e Jessica são encontrados por Stilgar e os seus Fremen. Paul demonstra capacidades de combate que impressionam o guerreiro do deserto. Jessica é reconhecida como Reverendo Mãe. Paul torna-se Paul Muad'Dib — o rato do deserto que sobrevive ao veneno.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A vida nas sietchs transforma Paul. Ele aprende a caminhar sem ritmo para não acordar os vermes, aprende a colher a água dos mortos, aprende a lutar como um Fremen. Conhece Chani, filha de Liet-Kynes, que se torna a sua companheira.</p>
+              <p>As visões de Paul tornam-se mais intensas. Ele vê os caminhos futuros multiplicarem-se — e num deles, uma Jihad galáctica em seu nome mata bilhões. Tenta desesperadamente evitar esse futuro.</p>
+              <div class="event-links">
+                <a href="personagem-paul.html">Paul Atreides</a>
+                <a href="faccao-fremen.html">Os Fremen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="prophecy,religion">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.191 A.G. — Mês 9</span>
+              <span class="event-type type-prophecy">Profecia</span>
+            </div>
+            <h3 class="event-title">Paul Bebe a Água da Vida</h3>
+            <p class="event-desc">Paul bebe a essência transformada de um jovem Shai-Hulud (verme de areia). Esta é uma prova mortal — apenas o Kwisatz Haderach pode sobreviver e transformar a substância. Paul entra em coma, acede à memória genética e desperta transformado.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A transformação é total. Paul pode ver os caminhos de espaço e tempo, pode aceder às memórias de todos os seus ancestrais masculinos e femininos (algo proibido às mulheres Bene Gesserit), e confirma o que temia: é o Kwisatz Haderach, nascido uma geração cedo demais.</p>
+              <p>Chani, em desespero, chama-o de volta. O amor dela ancora-o à realidade e Paul retorna. Jessica, testemunhando isto, compreende com terror o que ajudou a criar.</p>
+              <div class="event-links">
+                <a href="personagem-paul.html">Paul Atreides</a>
+                <a href="personagem-jessica.html">Lady Jessica</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event featured reveal" data-types="war,political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.192 A.G. — Batalha Final</span>
+              <span class="event-type type-war">Guerra</span>
+              <span class="event-type type-political">Político</span>
+            </div>
+            <h3 class="event-title">A Batalha de Arrakeen — Muad'Dib Conquista o Trono</h3>
+            <p class="event-desc">Paul lidera os Fremen numa insurreição total contra os Harkonnen e o Imperador. Uma tempestade de areia cobre o avanço Fremen. Os Sardaukar imperiais, considerados invencíveis, são derrotados pelos guerreiros do deserto. Paul desafia o Imperador em combate singular.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A batalha muda o universo em horas. Paul ameaça destruir toda a especiaria de Arrakis — paralisaria o Imperium, cegaria os Navegadores, colapsaria a economia galáctica. O Imperador Shaddam IV capitula. A Casa Corrino perde o trono depois de dez mil anos.</p>
+              <p>Paul torna-se Imperador, toma Irulan Corrino como esposa política (mas mantém Chani como sua verdadeira consorte), e inicia um reinado que desembocará na profecia que temia: a Jihad.</p>
+              <div class="event-links">
+                <a href="personagem-paul.html">Paul — O Imperador</a>
+                <a href="personagem-baron.html">O Fim do Barão</a>
+                <a href="filme-dune-part-two.html">Dune: Part Two</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ERA V: CONSEQUÊNCIAS -->
+    <div class="era-section">
+      <div class="era-header reveal">
+        <div class="era-number">V</div>
+        <div class="era-info">
+          <div class="era-label">Pós-Dune</div>
+          <div class="era-title">O Reinado de Muad'Dib e a Jihad Galáctica</div>
+          <div class="era-desc">As consequências da ascensão de Paul — e o preço terrível de se tornar um messias</div>
+          <div class="era-calendar">10.192 – 10.218 A.G.</div>
+        </div>
+      </div>
+      <div class="timeline-track">
+
+        <div class="timeline-event featured reveal" data-types="war,religion">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">10.193 – 10.208 A.G.</span>
+              <span class="event-type type-war">Guerra</span>
+              <span class="event-type type-religion">Religião</span>
+            </div>
+            <h3 class="event-title">A Jihad de Muad'Dib</h3>
+            <p class="event-desc">Os Fremen — agora um exército galácticamente imbatível alimentado por fanatismo religioso — espalham-se por 10.000 planetas em nome de Muad'Dib. Em doze anos, mais de 61 bilhões de pessoas morrem. É o maior genocídio da história humana conhecida.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>Paul viu este futuro. Tentou evitá-lo. Mas ao se tornar o símbolo da Jihad, não conseguiu parar o que havia desencadeado. O fanatismo religioso, uma vez iniciado, tem lógica própria que nenhum messias pode controlar.</p>
+              <p>Este é o argumento central de Frank Herbert: o herói que salva o mundo pode tornar-se o maior monstro da sua época. O poder que "serve" pode oprimir mais eficazmente do que o poder que domina abertamente.</p>
+              <div class="event-links">
+                <a href="temas.html#heroi">Tema: O Herói Perigoso</a>
+                <a href="temas.html#religiao">Tema: Religião</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-event reveal" data-types="prophecy,political">
+          <div class="event-card">
+            <div class="event-meta">
+              <span class="event-date">~10.218 A.G.</span>
+              <span class="event-type type-prophecy">Profecia</span>
+            </div>
+            <h3 class="event-title">Paul Abandona o Trono — Caminha para o Deserto</h3>
+            <p class="event-desc">Após ficar cego numa explosão nuclear, Paul cumpre a lei Fremen e caminha para o deserto para morrer. O trono passa para os seus filhos gémeos: Leto II e Ghanima. A sua ausência não para a Jihad — que continua em seu nome.</p>
+            <button class="event-expand-btn" onclick="toggleDetail(this)">+ Saber mais</button>
+            <div class="event-detail">
+              <p>A cegueira de Paul é tanto literal como metafórica. A "visão" que tanto o torturou durante anos finalmente falha — ele não pode mais ver o caminho. Mas o seu legado é tão profundo que o sistema que criou continua sem ele.</p>
+              <p>Leto II, seu filho, terá de carregar um peso ainda maior: a "Golden Path" — um plano para a sobrevivência da humanidade que exige um sacrifício pessoal sem precedentes.</p>
+              <div class="event-links">
+                <a href="livros.html">Dune Messiah & Children of Dune</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTA SOBRE CONTINUAÇÕES -->
+    <div class="reveal" style="background: rgba(212,168,67,0.03); border: 1px solid rgba(212,168,67,0.1); border-radius: 8px; padding: 2.5rem; text-align: center; margin-top: 4rem;">
+      <p style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faction-primary, #d4a843); margin-bottom: 1rem; opacity: 0.7;">O Universo Continua</p>
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: #f5f0e8; margin-bottom: 1rem;">Cinco Mil Anos de História Ainda por Contar</h3>
+      <p style="font-size: 0.9rem; color: rgba(245,240,232,0.5); line-height: 1.8; max-width: 600px; margin: 0 auto 1.5rem;">
+        A saga de Dune abrange mais de 5.000 anos de história através de seis romances de Frank Herbert. Leto II — o Deus Imperador — reina durante 3.500 anos. A história completa inclui <em>Dune Messiah</em>, <em>Children of Dune</em>, <em>God Emperor of Dune</em>, <em>Heretics of Dune</em> e <em>Chapterhouse: Dune</em>.
+      </p>
+      <a href="livros.html" class="btn btn-outline" style="font-size: 0.75rem;">Ver Todos os Livros →</a>
+    </div>
+
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/faction.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Filter functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const events = document.querySelectorAll('.timeline-event');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      events.forEach(ev => {
+        if (filter === 'all') {
+          ev.classList.remove('hidden');
+        } else {
+          const types = ev.getAttribute('data-types') || '';
+          if (types.includes(filter)) {
+            ev.classList.remove('hidden');
+          } else {
+            ev.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+
+  // Expand/collapse event details
+  function toggleDetail(btn) {
+    const card = btn.closest('.event-card');
+    const detail = card.querySelector('.event-detail');
+    if (!detail) return;
+
+    const isOpen = detail.classList.contains('open');
+    detail.classList.toggle('open');
+    btn.textContent = isOpen ? '+ Saber mais' : '− Ocultar';
+  }
+</script>
+</body>
+</html>

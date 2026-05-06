@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt" data-faction="neutral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lady Jessica — Personagem — Dune Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .char-hero { min-height:70vh; position:relative; display:flex; align-items:flex-end; overflow:hidden; }
+    .char-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg,#0a060e 0%,#160a20 40%,#0a050e 70%,#050204 100%); }
+    .char-hero-pattern { position:absolute; inset:0; opacity:.03; background-image:repeating-linear-gradient(45deg,#8e44ad 0,#8e44ad 1px,transparent 0,transparent 50%); background-size:20px 20px; }
+    .char-hero-glow { position:absolute; right:0; top:0; bottom:0; width:50%; background:radial-gradient(ellipse at right,rgba(142,68,173,0.07) 0%,transparent 70%); }
+    .char-hero-content { position:relative; z-index:5; width:100%; padding:160px 0 5rem; }
+    .char-header-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; }
+    .char-portrait { width:100%; max-width:400px; aspect-ratio:3/4; background:linear-gradient(160deg,#160a22,#200d30,#0a0510); border:1px solid rgba(142,68,173,0.2); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:9rem; font-weight:900; color:rgba(142,68,173,0.06); overflow:hidden; }
+    .char-portrait img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+    .char-faction-tag { display:inline-flex; align-items:center; gap:.5rem; padding:6px 14px; background:rgba(142,68,173,0.12); border:1px solid rgba(142,68,173,0.3); border-radius:20px; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:#bb8fce; margin-bottom:1.5rem; }
+    .char-name { font-family:'Cinzel',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#f5f0e8; line-height:1.05; margin-bottom:.5rem; }
+    .char-titles { font-size:.8rem; letter-spacing:.15em; color:rgba(245,240,232,.35); text-transform:uppercase; margin-bottom:1.5rem; }
+    .char-epithet { font-family:'Crimson Text',serif; font-size:1.4rem; font-style:italic; color:rgba(142,68,173,.7); margin-bottom:2rem; }
+    .char-quick-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .qs-item { padding:1rem; background:rgba(142,68,173,.05); border:1px solid rgba(142,68,173,.12); border-radius:4px; }
+    .qs-label { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(142,68,173,.7); margin-bottom:.3rem; }
+    .qs-value { font-family:'Cinzel',serif; font-size:.95rem; color:#f5f0e8; }
+    .char-body { padding:5rem 0; background:var(--color-black); }
+    .char-grid { display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:start; }
+    .char-section { margin-bottom:4rem; }
+    .char-section h2 { font-family:'Cinzel',serif; font-size:1.6rem; color:#8e44ad; margin-bottom:1.2rem; padding-bottom:.75rem; border-bottom:1px solid rgba(142,68,173,.15); }
+    .char-section h3 { font-family:'Cinzel',serif; font-size:1.1rem; color:#f5f0e8; margin:1.5rem 0 .6rem; }
+    .char-section p { font-size:.95rem; color:rgba(245,240,232,.6); line-height:1.9; margin-bottom:1rem; }
+    .char-section ul { display:flex; flex-direction:column; gap:.6rem; margin-bottom:1rem; }
+    .char-section ul li { font-size:.9rem; color:rgba(245,240,232,.55); padding-left:1.2rem; position:relative; line-height:1.7; }
+    .char-section ul li::before { content:'◆'; position:absolute; left:0; color:#8e44ad; font-size:.5rem; top:.4rem; }
+    .timeline-v { position:relative; padding-left:2rem; }
+    .timeline-v::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(180deg,#8e44ad,rgba(142,68,173,0.1)); }
+    .tl-entry { position:relative; margin-bottom:2rem; }
+    .tl-entry::before { content:''; position:absolute; left:-2.4rem; top:.3rem; width:10px; height:10px; border-radius:50%; background:#8e44ad; box-shadow:0 0 10px rgba(142,68,173,0.4); }
+    .tl-entry-year { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.1em; color:#8e44ad; margin-bottom:.3rem; }
+    .tl-entry-title { font-family:'Cinzel',serif; font-size:1rem; color:#f5f0e8; margin-bottom:.4rem; }
+    .tl-entry-text { font-size:.85rem; color:rgba(245,240,232,.5); line-height:1.7; }
+    .sidebar-card { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(142,68,173,.1); border-radius:8px; margin-bottom:1.5rem; }
+    .sidebar-card h4 { font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.1em; color:#8e44ad; text-transform:uppercase; margin-bottom:1rem; }
+    .stat-row { display:flex; justify-content:space-between; align-items:center; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.04); }
+    .stat-row:last-child { border:none; }
+    .stat-row span:first-child { font-size:.8rem; color:rgba(245,240,232,.4); }
+    .stat-row span:last-child { font-size:.8rem; color:#f5f0e8; font-weight:500; }
+    .compare-col.book { background:rgba(142,68,173,.06); border:1px solid rgba(142,68,173,.12); }
+    .compare-col.film { background:rgba(212,168,67,.06); border:1px solid rgba(212,168,67,.12); }
+    .compare-col { padding:.6rem .8rem; border-radius:4px; font-size:.8rem; color:rgba(245,240,232,.6); line-height:1.5; }
+    .compare-tag { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:.3rem; }
+    .compare-col.book .compare-tag { color:#8e44ad; }
+    .compare-col.film .compare-tag { color:#d4a843; }
+    .compare-cols { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+    .compare-label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.35); margin-bottom:.4rem; }
+    .compare-row { margin-bottom:1rem; }
+    .compare-block { padding:1.5rem; background:rgba(255,255,255,.02); border:1px solid rgba(142,68,173,.1); border-radius:8px; }
+    .rel-grid { display:flex; flex-direction:column; gap:.75rem; }
+    .rel-item { display:flex; align-items:center; gap:1rem; padding:.75rem 1rem; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:6px; text-decoration:none; transition:all .3s; }
+    .rel-item:hover { border-color:rgba(142,68,173,.3); background:rgba(142,68,173,.04); }
+    .rel-icon { width:36px; height:36px; border-radius:50%; background:rgba(142,68,173,.1); border:1px solid rgba(142,68,173,.2); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .rel-name { font-family:'Cinzel',serif; font-size:.85rem; color:#f5f0e8; }
+    .rel-type { font-size:.7rem; letter-spacing:.1em; color:rgba(142,68,173,.7); text-transform:uppercase; }
+    @media(max-width:900px){ .char-header-grid{grid-template-columns:1fr;} .char-grid{grid-template-columns:1fr;} .char-quick-stats{grid-template-columns:1fr 1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo">DUNE</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<div id="nav-placeholder"></div>
+
+<section class="char-hero">
+  <div class="char-hero-bg"></div><div class="char-hero-pattern"></div><div class="char-hero-glow"></div>
+  <div class="sand-particles"></div>
+  <div class="container char-hero-content">
+    <nav class="breadcrumb"><a href="index.html">Início</a><span>/</span><a href="personagens.html">Personagens</a><span>/</span><span class="current">Lady Jessica</span></nav>
+    <div class="char-header-grid">
+      <div>
+        <div class="char-faction-tag">◉ Bene Gesserit · Casa Atreides</div>
+        <h1 class="char-name">Lady<br>Jessica</h1>
+        <p class="char-titles">Reverenda Mãe · Concubina do Duque · Mãe do Kwisatz Haderach</p>
+        <p class="char-epithet">"O amor ou a obediência — ela escolheu ambos. E pagou o preço de cada escolha."</p>
+        <div class="char-quick-stats">
+          <div class="qs-item"><div class="qs-label">Ordem</div><div class="qs-value">Bene Gesserit</div></div>
+          <div class="qs-item"><div class="qs-label">Companheiro</div><div class="qs-value">Duque Leto I</div></div>
+          <div class="qs-item"><div class="qs-label">Filhos</div><div class="qs-value">Paul, Alia</div></div>
+        </div>
+      </div>
+      <div class="char-portrait">
+          <img src="https://sspark.genspark.ai/cfimages?u1=Zo69U8BIrxZWUZ74VGJL4qm6VveRds6WwN4NYIYy5PSvN2hofHPznfB4BLMPHXQQPLQx%2BNkN2D0AbZ1Oeeb7&u2=9GG0GwBExT3bC0Cn&width=2560" alt="Lady Jessica - Rebecca Ferguson">
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="char-body">
+  <div class="container">
+    <div class="char-grid">
+      <div class="char-main">
+        <div class="char-section reveal">
+          <h2>Quem é Lady Jessica</h2>
+          <p>Lady Jessica é talvez a personagem mais complexa e moralmente rica de Dune. Membro da Bene Gesserit — a ordem secreta de mulheres que manipula a política e as linhagens genéticas humanas há milénios — Jessica foi colocada como concubina do Duque Leto Atreides para produzir uma filha que avançaria o programa genético da ordem.</p>
+          <p>Em vez disso, por amor ao Duque, Jessica gerou um filho. Este ato de desobediência pessoal — de afeto humano contra a racionalidade institucional — é o pivô que põe toda a narrativa de Dune em movimento. Sem esta escolha, não há Paul. Não há Muad'Dib. Não há Jihad.</p>
+          <p>Jessica é simultaneamente vítima e autora do seu próprio destino. É uma mulher presa entre o dever à sua ordem, o amor ao seu senhor, e o terror de ver o que criou. No decorrer da saga, Jessica torna-se Reverenda Mãe dos Fremen — alcançando o nível mais elevado da sua hierarquia através de um ritual perigoso que transforma a sua filha Alia numa "Abominação" nascida com memórias de ancestrais que não suportou.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Timeline Pessoal</h2>
+          <div class="timeline-v">
+            <div class="tl-entry">
+              <div class="tl-entry-year">Infância — Wallach IX</div>
+              <div class="tl-entry-title">Formação Bene Gesserit</div>
+              <div class="tl-entry-text">Jessica é criada nas escolas da Bene Gesserit em Wallach IX desde bebé. A sua origem exata é ocultada — ela nunca sabe quem são os seus verdadeiros pais. Este segredo tem implicações enormes.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">Juventude — Caladan</div>
+              <div class="tl-entry-title">A Concubina do Duque</div>
+              <div class="tl-entry-text">Jessica é colocada junto ao Duque Leto Atreides. O que devia ser um relacionamento estratégico transforma-se em amor profundo e sincero — algo que a Bene Gesserit não previa e que complica todos os seus planos.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">A Escolha</div>
+              <div class="tl-entry-title">Um Filho em Vez de Uma Filha</div>
+              <div class="tl-entry-text">Contra as instruções da sua ordem, Jessica usa as suas capacidades para conceber um filho — Paul. Esta desobediência é motivada pelo amor e pela intuição de que Paul pode ser "aquele". A Bene Gesserit nunca lhe perdoa completamente.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">10.191 A.G. — Arrakis</div>
+              <div class="tl-entry-title">A Fuga para o Deserto</div>
+              <div class="tl-entry-text">Após a destruição da Casa Atreides, Jessica e Paul fogem para o erg — o mar de areia aberto. Grávida de Alia, Jessica guia o filho através das provações do deserto até encontrarem os Fremen.</div>
+            </div>
+            <div class="tl-entry">
+              <div class="tl-entry-year">Entre os Fremen</div>
+              <div class="tl-entry-title">O Ritual da Reverenda Mãe</div>
+              <div class="tl-entry-text">Jessica bebe a Água da Vida — o veneno das larvas — para salvar a Reverenda Mãe Fremen moribunda. O ritual transmite-lhe a memória de gerações de Reverendas Mães. O mesmo acontece involuntariamente com Alia no útero.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>O Dilema de Jessica</h2>
+          <h3>Dever vs. Amor</h3>
+          <p>Jessica representa um conflito universal: a escolha entre a instituição e o indivíduo, entre a racionalidade estratégica e o impulso humano. A Bene Gesserit tinha um plano. Jessica destruiu-o por amor. O resultado foi tanto mais glorioso quanto mais catastrófico do que qualquer plano poderia prever.</p>
+          <h3>A Culpa de Alia</h3>
+          <p>A transformação mais dolorosa de Jessica é a consciência de que gerou Alia numa "Abominação". Ao beber a Água da Vida grávida, Jessica inundou a consciência de Alia com memórias de ancestrais que a mente de um bebé não consegue processar. Alia nasce já com a memória de gerações — uma criança que nunca foi apenas criança. Esta culpa persegue Jessica ao longo dos livros seguintes.</p>
+          <h3>A Força mais Subtil</h3>
+          <p>Jessica é a personagem com mais poder real em Dune, mas o menos visível. Ela não lidera exércitos. Não faz profecias públicas. Trabalha através de Paul, através da sua formação, através das Bene Gesserit e dos Fremen. O seu poder é o poder da formação, da influência e da paciência — o poder mais duradouro de todos.</p>
+        </div>
+
+        <div class="char-section reveal">
+          <h2>Livro vs. Filme</h2>
+          <div class="compare-block">
+            <div class="compare-row">
+              <div class="compare-label">Conhecimento da Sua Origem</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Jessica desconhece quem são os seus pais — um segredo que tem enormes implicações genealógicas exploradas nos livros seguintes.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>O segredo é menos enfatizado, mantendo-se como informação de background sem desenvolvimento explícito.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Complexidade Emocional</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Constantemente dividida entre lógica Bene Gesserit e emoções humanas. A sua luta interna é central na narrativa.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme</span>Rebecca Ferguson projeta vulnerabilidade física e determinação silenciosa. Menos acesso à luta interna, mais performance exterior.</div>
+              </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Papel na Parte 2</div>
+              <div class="compare-cols">
+                <div class="compare-col book"><span class="compare-tag">📚 Livro</span>Torna-se Reverenda Mãe Fremen. Papel mais contido e interior.</div>
+                <div class="compare-col film"><span class="compare-tag">🎬 Filme (P2)</span>Mais ativa na manipulação política e religiosa dos Fremen. Villeneuve amplifica a sua cumplicidade nos eventos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="char-sidebar">
+        <div class="sidebar-card reveal">
+          <h4>Perfil</h4>
+          <div class="stat-row"><span>Ordem</span><span>Bene Gesserit</span></div>
+          <div class="stat-row"><span>Casa</span><span>Atreides (concubina)</span></div>
+          <div class="stat-row"><span>Planeta formação</span><span>Wallach IX</span></div>
+          <div class="stat-row"><span>Companheiro</span><span>Duque Leto I</span></div>
+          <div class="stat-row"><span>Filho</span><span>Paul Atreides</span></div>
+          <div class="stat-row"><span>Filha</span><span>Alia Atreides</span></div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>Capacidades Bene Gesserit</h4>
+          <div class="stat-row"><span>A Voz</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Prana-Bindu</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Controlo interno</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Perceção sensorial</span><span>★★★★★</span></div>
+          <div class="stat-row"><span>Memória ancestral</span><span>★★★★☆</span></div>
+        </div>
+        <div class="reveal">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:#8e44ad;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;">Relações Principais</h4>
+          <div class="rel-grid">
+            <a href="personagem-paul.html" class="rel-item"><div class="rel-icon">⚔</div><div class="rel-info"><div class="rel-name">Paul Atreides</div><div class="rel-type">Filho · Kwisatz Haderach</div></div></a>
+            <a href="faccao-bene-gesserit.html" class="rel-item"><div class="rel-icon">◉</div><div class="rel-info"><div class="rel-name">Bene Gesserit</div><div class="rel-type">Ordem · Conflito de lealdades</div></div></a>
+            <a href="faccao-fremen.html" class="rel-item"><div class="rel-icon">◈</div><div class="rel-info"><div class="rel-name">Fremen</div><div class="rel-type">Reverenda Mãe</div></div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:linear-gradient(180deg,var(--color-black),#050402);">
+  <div class="container" style="max-width:700px;">
+    <div class="quote-block reveal" style="border-left-color:#8e44ad;">
+      <p>"Fiz a escolha que uma mãe faz. Que qualquer mulher com coração faria. E ainda não sei se foi certa."</p>
+      <cite>Lady Jessica</cite>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+      <a href="personagem-paul.html" class="btn btn-outline">Paul Atreides →</a>
+      <a href="personagem-baron.html" class="btn btn-outline">Baron Harkonnen →</a>
+      <a href="personagens.html" class="btn btn-ghost">Todos os Personagens</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

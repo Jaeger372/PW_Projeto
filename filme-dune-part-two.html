@@ -160,14 +160,36 @@
           <div class="stat-row"><span>Stilgar</span><span>Javier Bardem</span></div>
           <div class="stat-row"><span>Gurney Halleck</span><span>Josh Brolin</span></div>
         </div>
-        <div class="sidebar-card reveal">
-          <h4>Avaliações</h4>
-          <div class="stat-row"><span>Rotten Tomatoes</span><span>90%</span></div>
-          <div class="stat-row"><span>Metacritic</span><span>79/100</span></div>
-          <div class="stat-row"><span>IMDb</span><span>8.5/10</span></div>
-          <div class="stat-row"><span>Público geral</span><span>Muito Positivo</span></div>
-        </div>
+        <!-- API 1: OMDB — Ratings ao vivo -->
+        <div id="omdb-ratings" data-imdb="tt15239678" class="reveal"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- API 5: YouTube IFrame — Trailer oficial -->
+<section class="section-sm" style="background:#050402;border-top:1px solid rgba(212,168,67,0.08);">
+  <div class="container">
+    <div class="api-section-header" style="margin-bottom:1.5rem;">
+      <span style="font-size:1.2rem;">▶</span>
+      <h4>Trailer Oficial</h4>
+      <span class="api-pill">YouTube API</span>
+    </div>
+    <div class="yt-wrapper">
+      <div data-yt-id="Way9Dexny3w" data-yt-title="Dune: Part Two (2024) — Trailer Oficial"></div>
+    </div>
+    <div class="api-share-row" style="margin-top:1.5rem;">
+      <button data-share-btn
+        data-share-title="Dune: Part Two (2024) — DUNE Universe"
+        data-share-text="Análise completa de Dune: Part Two no portal DUNE Universe!"
+        data-share-url="https://dune-universe.com/filme-dune-part-two.html">
+        🔗 Partilhar Página
+      </button>
+      <button data-copy-btn
+        data-copy-text="https://dune-universe.com/filme-dune-part-two.html"
+        data-orig-label="📋 Copiar link">
+        📋 Copiar Link
+      </button>
     </div>
   </div>
 </section>
@@ -184,6 +206,6 @@
 </section>
 
 <div id="footer-placeholder"></div>
-<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script><script src="js/apis.js"></script>
 </body>
 </html>

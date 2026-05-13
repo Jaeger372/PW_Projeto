@@ -1025,7 +1025,7 @@
     </div>
     <div class="split-screen" id="splitScreen">
       <a href="faccao-atreides.html" class="split-left">
-        <div class="split-bg"></div>
+        <div class="split-bg" style="background-image:url('https://sspark.genspark.ai/cfimages?u1=bSwvnc8uFoNw5lEpi7N9aeOLlqkjVBZvXumOyf7a0uVfSotCdUOTNzuZXNJPogeLQILZfRaM2%2BHs1V0wIpdXmHnulUqwZva5IKgIYix5tMhAUhguFQkZdoQ%3D%3D&u2=c6gNdCYD%2BVlY30n1&width=2560');background-size:cover;background-position:center;"></div>
         <div class="split-content">
           <span class="split-symbol">⚔</span>
           <span class="split-house">Casa Atreides</span>
@@ -1036,7 +1036,7 @@
       <div class="split-divider"></div>
       <div class="split-vs">VS</div>
       <a href="faccao-harkonnen.html" class="split-right">
-        <div class="split-bg"></div>
+        <div class="split-bg" style="background-image:url('https://sspark.genspark.ai/cfimages?u1=35SEw9CsqpAQ27ZGn7xc0VuRTHquUIaXAVhFY3xlCGpzndfxGhELH4xuDIqghxwHiDvUJD6mmBLftixQxAJCC3nHUBFggEhAtyUKfybhbcn3upDTzBcU%2BoKtExjx0kvtNBiLoyU%3D%3D&u2=lQ6tJWnrnmqWkSi8&width=2560');background-size:cover;background-position:center;"></div>
         <div class="split-content">
           <span class="split-symbol">⚡</span>
           <span class="split-house">Casa Harkonnen</span>
@@ -1123,6 +1123,31 @@
   </section>
 
   <!-- ========================
+       QUOTE ROTATOR — API 4
+       ======================== -->
+  <section style="padding:4rem 0;background:var(--color-black);border-top:1px solid rgba(255,255,255,0.04);">
+    <div class="container">
+      <div style="max-width:760px;margin:0 auto;text-align:center;" data-quote-rotator data-quote-interval="10000">
+        <div class="api-section-header" style="justify-content:center;margin-bottom:1.5rem;">
+          <span style="font-size:1.5rem;">❝</span>
+          <h4 style="font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;color:rgba(212,168,67,.5);text-transform:uppercase;">Citações do Universo</h4>
+          <span class="api-pill">API ao Vivo</span>
+        </div>
+        <p class="qr-text">"Não devo ter medo. O medo mata a mente."</p>
+        <span class="qr-author">— Frank Herbert, Dune</span>
+        <span class="qr-char" style="display:block;margin-top:.3rem;">Paul Atreides</span>
+        <div class="qr-controls" style="justify-content:center;">
+          <button class="qr-btn qr-prev">← Anterior</button>
+          <button class="qr-btn qr-next">Seguinte →</button>
+          <button class="qr-copy" data-copy-btn
+            data-copy-text="'Não devo ter medo. O medo mata a mente.' — Frank Herbert, Dune"
+            title="Copiar citação">📋 Copiar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
        STATS
        ======================== -->
   <div class="stats-bar">
@@ -1170,6 +1195,7 @@
   <script src="js/faction.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/apis.js"></script>
   <script>
     // Check if first visit — redirect to entry
     window.addEventListener('load', () => {

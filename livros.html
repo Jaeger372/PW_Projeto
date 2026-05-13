@@ -51,9 +51,19 @@
   </div>
 </section>
 
-<div class="container hero-quote reveal">
-  <p>"Não devo ter medo. O medo mata a mente. O medo é a pequena morte que traz a obliteração total. Enfrentarei o meu medo."</p>
-  <cite>A Litania contra o Medo — Frank Herbert, Dune (1965)</cite>
+<div class="container reveal" style="padding-top:3rem;">
+  <!-- API 4: Quote Rotator -->
+  <div data-quote-rotator data-quote-interval="11000"
+       style="max-width:700px;margin:0 auto;text-align:center;padding:2rem 0;">
+    <p class="qr-text" style="font-family:'Crimson Text',serif;font-size:clamp(1.1rem,2.5vw,1.7rem);font-style:italic;color:rgba(245,240,232,.8);line-height:1.7;margin-bottom:.75rem;">"Não devo ter medo. O medo mata a mente."</p>
+    <span class="qr-author" style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,168,67,.6);display:block;margin-bottom:.3rem;">— Frank Herbert, Dune</span>
+    <span class="qr-char" style="font-size:.7rem;color:rgba(245,240,232,.3);display:block;margin-bottom:1rem;">Paul Atreides</span>
+    <div class="qr-controls" style="justify-content:center;">
+      <button class="qr-btn qr-prev">← Anterior</button>
+      <button class="qr-btn qr-next">Seguinte →</button>
+      <button class="qr-copy" data-copy-btn data-copy-text="'Não devo ter medo. O medo mata a mente.' — Frank Herbert, Dune" title="Copiar citação">📋 Copiar</button>
+    </div>
+  </div>
 </div>
 
 <section class="section" style="background:var(--color-black);">
@@ -220,7 +230,7 @@
 </section>
 
 <div id="footer-placeholder"></div>
-<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script>
+<script src="js/faction.js"></script><script src="js/nav.js"></script><script src="js/main.js"></script><script src="js/apis.js"></script>
 <script>
 function toggleExtra(id){
   const el=document.getElementById(id);

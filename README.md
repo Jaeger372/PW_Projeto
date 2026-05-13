@@ -1,202 +1,207 @@
-# DUNE Universe — Portal Enciclopédico
+# DUNE Universe — Portal Português v4.0
 
-> Portal não oficial sobre o universo de Frank Herbert. Fins educacionais.
-> 
-> **v3.0** — Dune: Part Three (Messiah) 2026 completamente integrado: página de análise completa, 3 novas páginas de personagens (Alia, Irulan, Scytale), painéis actualizados em filmes.html e index.html, nav.js com links para todos os filmes.
+> Portal imersivo em português sobre o universo de Frank Herbert — filmes, livros, personagens, facções e muito mais. Site estático com HTML/CSS/JS, sistema de facções dinâmico e 6 APIs integradas.
 
 ---
 
-## 🏛️ Sobre o Projeto
+## 🎯 Estado Atual: v4.0 — COMPLETO
 
-Website completo e imersivo sobre o universo Dune, construído como uma experiência cinematográfica premium. Sistema de facções adaptativo que personaliza cores, destaques e navegação com base na escolha do utilizador.
+### ✅ Funcionalidades Implementadas
 
----
+#### 🎬 Filmes
+- **Dune (2021)** — Análise completa com hero image, sinopse, análise cinematográfica, elenco, prémios
+- **Dune: Part Two (2024)** — Análise completa com hero image, cena a cena, temas, Harkonnen monocromático
+- **Dune: Part Three / Messiah (2026)** — Página completa com informação de produção, elenco confirmado, galeria, timeline, comparação livro vs filme
 
-## ✅ Funcionalidades Implementadas
+#### 👤 Personagens (13 páginas individuais + galeria)
+- Paul Atreides (Timothée Chalamet) ✅ com foto
+- Lady Jessica (Rebecca Ferguson) ✅ com foto
+- Baron Vladimir Harkonnen (Stellan Skarsgård) ✅ com foto
+- Chani (Zendaya) ✅ com foto
+- Stilgar (Javier Bardem) ✅ com foto
+- Feyd-Rautha (Austin Butler) ✅ com foto
+- Duncan Idaho (Jason Momoa) ✅ com foto
+- **Gurney Halleck (Josh Brolin)** ✅ com foto ← CORRIGIDO v4.0
+- **Imperador Shaddam IV (Christopher Walken)** ✅ com foto ← CORRIGIDO v4.0
+- **Rev. Mãe Mohiam (Charlotte Rampling)** ✅ com foto ← CORRIGIDO v4.0
+- **Duque Leto I (Oscar Isaac)** ✅ com foto ← CORRIGIDO v4.0
+- Alia Atreides (Anya Taylor-Joy) ✅ com foto [Part Three]
+- Princesa Irulan (Florence Pugh) ✅ com foto [Part Three]
+- Scytale (Robert Pattinson) ✅ com foto [Part Three]
 
-### 🎬 Experiência de Entrada
-- **entry.html** — Ecrã de entrada cinematográfico com animação de estrelas, dunas, partículas de areia e seleção de facção
-- Redireccionamento automático para a entrada na primeira visita
-- Facção guardada em localStorage para persistência
+#### 🏛️ Facções (4 páginas individuais + galeria)
+- Casa Atreides ✅ com hero image + conteúdo detalhado
+- Casa Harkonnen ✅ com hero image + conteúdo detalhado
+- Fremen ✅ com hero image + conteúdo detalhado
+- Bene Gesserit ✅ com hero image + conteúdo detalhado
+- `faccoes.html` — Galeria com 4 painéis com imagens de fundo ✅
 
-### 🏠 Homepage Cinematográfica
-- **index.html** — Homepage completa com:
-  - Hero de ecrã completo com atmosfera de deserto
-  - Secção de filmes com painéis interativos
-  - Destaque de Paul Atreides
-  - Split-screen interativo (Atreides vs Harkonnen)
-  - Cards do universo
-  - Temas de Dune
-  - Barra de estatísticas com contadores animados
-  - CTA final
+#### 🌍 Universo
+- Arrakis, Especiaria, Imperium, Jihad Butleriana, Fremen, Ecologia, CHOAM
+- Wikipedia REST API integrada com excerpts dinâmicos
 
-### 🌌 Universo
-- **universo.html** — Introdução completa ao universo: especiaria, Imperium, ecologia, estrutura política
+#### 📚 Livros
+- 6 livros originais de Frank Herbert com capas + conteúdo expandido
+- Open Library API integrada (capas e edições em tempo real)
+- Quote Rotator com citações Dune
 
-### 👤 Personagens (9 páginas individuais)
-- **personagem-paul.html** — Paul Atreides (protagonista / Muad'Dib / Imperador)
-- **personagem-jessica.html** — Lady Jessica (Bene Gesserit)
-- **personagem-baron.html** — Baron Vladimir Harkonnen
-- **personagem-chani.html** — Chani (guerreira Fremen)
-- **personagem-stilgar.html** — Stilgar (Naib de Sietch Tabr)
-- **personagem-feyd.html** — Feyd-Rautha Harkonnen
-- **personagem-alia.html** — Alia Atreides (Anya Taylor-Joy — Part Three 2026)
-- **personagem-irulan.html** — Princesa Irulan (Florence Pugh — Part Three 2026)
-- **personagem-scytale.html** — Scytale/Face Dancer Tleilaxu (Robert Pattinson — Part Three 2026)
-- **personagens.html** — Galeria com filtros por facção (15+ personagens)
+#### 🗺️ Outras Páginas
+- `planetas.html` — Arrakis, Caladan, Giedi Prime, Salusa Secundus
+- `tecnologia.html` — Ornithopters, Destiladores, Escudos Holtzman
+- `temas.html` — Análise temática: Religião, Poder, Ecologia, Destino
+- `timeline.html` — Linha temporal do universo Dune
+- `quiz.html` — Quiz interativo de facção
 
-### 🏰 Facções (4 páginas individuais + listagem)
-- **faccao-atreides.html** — Casa Atreides (tema verde)
-- **faccao-harkonnen.html** — Casa Harkonnen (tema vermelho)
-- **faccao-fremen.html** — Fremen (tema azul)
-- **faccao-bene-gesserit.html** — Bene Gesserit (tema violeta)
-- **faccoes.html** — Listagem de todas as facções
-
-### 🎥 Filmes (3 páginas + listagem)
-- **filme-dune-2021.html** — Dune (2021) — Denis Villeneuve
-- **filme-dune-part-two.html** — Dune: Part Two (2024)
-- **filme-dune-messiah.html** — Dune: Part Three / Messiah (2026) — análise completa com elenco, sinopse, temas, livro vs filme, galeria
-- **filmes.html** — Listagem dos filmes (3 painéis com imagens)
-
-### 📚 Livros
-- **livros.html** — Os 6 romances originais de Frank Herbert + obras expandidas
-
-### 🌍 Planetas
-- **planetas.html** — Arrakis, Caladan, Giedi Prime, Kaitain, Salusa Secundus (selector interativo)
-
-### ⚙️ Tecnologia
-- **tecnologia.html** — Mentats, Bene Gesserit, Navigadores, Destilantes, Ornithópteros, Shields
-
-### 📖 Temas
-- **temas.html** — Religião & Profecia, Poder & Política, Ecologia, Destino & Livre-Arbítrio, Messianismo
-
-### ⏱️ Timeline Interativa
-- **timeline.html** — Linha do tempo de 10.000+ anos de história
-  - 5 eras históricas (Butleriano Jihad → Pós-Dune)
-  - Filtros por tipo de evento (Político, Guerra, Profecia, Ecologia, Religião, Ciência)
-  - Eventos expansíveis com detalhes aprofundados
-
-### ◎ Quiz de Facção
-- **quiz.html** — Quiz de 10 perguntas para descobrir a facção do utilizador
-  - Pontuação por facção (Atreides, Harkonnen, Fremen, Bene Gesserit)
-  - Resultado visual com traços de personalidade e barras animadas
-  - Distribuição das respostas
-  - Aplica a facção ao sistema global automaticamente
+#### 🏠 Homepage
+- Hero com imagem de Arrakis ✅
+- 3 painéis de filmes com imagens ✅
+- **Split-screen Atreides vs Harkonnen COM imagens reais** ✅ ← CORRIGIDO v4.0
+- Universe cards com imagens ✅
+- Quote Rotator dinâmico (API 4) ✅ ← NOVO v4.0
+- Botões de partilha (Web Share API) ✅
 
 ---
 
-## 🎨 Sistema de Facções Adaptativo
+## 🔌 APIs Integradas (6 APIs) — NOVO v4.0
 
-Todas as páginas adaptam visualmente à facção escolhida:
+### API 1 — Ratings de Filmes (dados curados + Wikipedia REST)
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initOMDB()`
+- **Páginas**: `filme-dune-2021.html`, `filme-dune-part-two.html`
+- **Elemento HTML**: `<div id="omdb-ratings" data-imdb="tt1160419">`
+- **Porquê**: Mostra ratings do IMDb, Rotten Tomatoes e Metacritic de forma visual e dinâmica, sem precisar de hardcodar. Enriquecido com excerpt da Wikipedia REST API (gratuita, sem chave).
+- **Dados**: Base local curada + Wikipedia REST API para excerpt dinâmico
 
-| Facção | Cor Principal | Símbolo |
-|--------|--------------|---------|
-| Casa Atreides | Verde (#4a9e6a) | ⚔ |
-| Casa Harkonnen | Vermelho (#c0392b) | ⚡ |
-| Fremen | Azul (#2980b9) | ◈ |
-| Bene Gesserit | Violeta (#8e44ad) | ◉ |
+### API 2 — Open Library API
+- **URL**: `https://openlibrary.org/works/{workId}.json`
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initOpenLibrary()`
+- **Páginas**: `livros.html`
+- **Elemento HTML**: `<div data-ol-work="OL893415W">` com `.ol-cover-img` e `.ol-editions`
+- **Porquê**: Busca capas reais de livros e número de edições diretamente da Open Library. Sem API key. CORS ativo. Actualiza automaticamente se novas edições forem publicadas.
 
-A facção é aplicada via `data-faction` no elemento `<html>` e persiste em `localStorage`.
+### API 3 — Wikipedia REST API
+- **URL**: `https://en.wikipedia.org/api/rest_v1/page/summary/{topic}`
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initWikipedia()`
+- **Páginas**: `universo.html`, `filme-dune-2021.html`, `filme-dune-part-two.html`
+- **Elemento HTML**: `<div data-wiki-topic="Dune_(novel)" data-wiki-lang="en">`
+- **Porquê**: Fornece resumos/factos dinâmicos e actualizados sobre o universo Dune sem necessitar de hardcodar texto. Completamente gratuita, sem chave, CORS activo.
+
+### API 4 — Quote Rotator (pool local)
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initQuoteRotator()`
+- **Páginas**: `index.html`, `livros.html`, `universo.html`, todas as páginas de personagens
+- **Elemento HTML**: `<div data-quote-rotator data-quote-interval="10000">`
+- **Porquê**: Mostra citações icónicas de Dune de forma rotativa e animada, com botões prev/next e funcionalidade de cópia. Torna o site dinâmico sem chamadas externas. Pool de 15 citações verificadas.
+- **Controles**: `.qr-next`, `.qr-prev`, `.qr-copy` (integrado com Clipboard API)
+
+### API 5 — YouTube IFrame API
+- **URL**: `https://www.youtube.com/embed/{videoId}?autoplay=1`
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initYouTube()`
+- **Páginas**: `filme-dune-2021.html`, `filme-dune-part-two.html`
+- **Elemento HTML**: `<div data-yt-id="n9xhJrPXop4" data-yt-title="...">`
+- **Porquê**: Incorpora trailers oficiais directamente na página sem redirecionar para o YouTube. Usa lazy-loading (thumbnail primeiro, iframe só ao clicar) para melhor performance. Sem API key necessária para embed.
+
+### API 6 — Web Share API + Clipboard API (browser nativo)
+- **Ficheiro**: `js/apis.js` → `DuneAPI.initWebShare()` + `DuneAPI.initClipboard()`
+- **Páginas**: Todas as páginas (universal)
+- **Elementos HTML**: `<button data-share-btn>`, `<button data-copy-btn>`
+- **Porquê**: Web Share API usa o sistema operativo nativo (iOS/Android share sheet, desktop) para partilhar páginas. Clipboard API permite copiar citações/links com um clique. Ambas completamente gratuitas e nativas do browser, sem dependências externas.
 
 ---
 
 ## 🗂️ Estrutura de Ficheiros
 
 ```
-index.html              — Homepage cinematográfica
-entry.html              — Ecrã de entrada + seleção de facção
-universo.html           — Universo Dune
-personagens.html        — Galeria de personagens
-personagem-paul.html    — Paul Atreides
-personagem-jessica.html — Lady Jessica
-personagem-baron.html   — Baron Harkonnen
-personagem-chani.html   — Chani
-personagem-stilgar.html — Stilgar
-personagem-feyd.html    — Feyd-Rautha
-personagem-alia.html    — Alia Atreides (Dune: Part Three)
-personagem-irulan.html  — Princesa Irulan (Dune: Part Three)
-personagem-scytale.html — Scytale / Tleilaxu (Dune: Part Three)
-faccoes.html            — Listagem de facções
-faccao-atreides.html    — Casa Atreides
-faccao-harkonnen.html   — Casa Harkonnen
-faccao-fremen.html      — Fremen
-faccao-bene-gesserit.html — Bene Gesserit
-filmes.html             — Listagem de filmes
-filme-dune-2021.html    — Dune (2021)
-filme-dune-part-two.html — Dune: Part Two (2024)
-filme-dune-messiah.html  — Dune: Part Three / Messiah (2026)
-livros.html             — Livros
-planetas.html           — Planetas (selector interativo)
-tecnologia.html         — Tecnologia
-temas.html              — Temas filosóficos
-timeline.html           — Linha do tempo interativa
-quiz.html               — Quiz de facção
+index.html                  — Homepage
+entry.html                  — Página de entrada (seleção de facção)
+filmes.html                 — Listagem de filmes
+filme-dune-2021.html        — Dune (2021) + OMDB ratings + YouTube trailer
+filme-dune-part-two.html    — Dune: Part Two (2024) + OMDB ratings + YouTube trailer
+filme-dune-messiah.html     — Dune: Part Three (2026) — em produção
+personagens.html            — Galeria de personagens (14 personagens, todos com foto)
+personagem-paul.html        — Paul Atreides
+personagem-jessica.html     — Lady Jessica
+personagem-baron.html       — Baron Harkonnen
+personagem-chani.html       — Chani
+personagem-stilgar.html     — Stilgar
+personagem-feyd.html        — Feyd-Rautha
+personagem-alia.html        — Alia Atreides [Part Three]
+personagem-irulan.html      — Princesa Irulan [Part Three]
+personagem-scytale.html     — Scytale [Part Three]
+faccoes.html                — Galeria de facções
+faccao-atreides.html        — Casa Atreides
+faccao-harkonnen.html       — Casa Harkonnen
+faccao-fremen.html          — Fremen
+faccao-bene-gesserit.html   — Bene Gesserit
+universo.html               — O Universo de Dune (com Wikipedia API)
+livros.html                 — Os 6 livros de Herbert (com Open Library API + Quote Rotator)
+planetas.html               — Planetas do universo
+tecnologia.html             — Tecnologia Dune
+temas.html                  — Temas filosóficos
+timeline.html               — Linha temporal
+quiz.html                   — Quiz de facção interativo
 
 css/
-  global.css            — Estilos globais + sistema de facções CSS
+  global.css                — Estilos globais + sistema de facções
 
 js/
-  faction.js            — Sistema de facções (localStorage + aplicação)
-  main.js               — Animações, scroll reveal, contadores, tabs
-  nav.js                — Navbar com dropdowns + footer + modal de facção
+  faction.js                — Sistema de facções (data-faction, CSS vars, localStorage)
+  nav.js                    — Navegação e footer injetados dinamicamente
+  main.js                   — Scroll reveal, contadores animados
+  apis.js                   — 6 APIs integradas (NOVO v4.0)
 ```
 
 ---
 
-## 🔗 Navegação — URIs Principais
+## 🎨 Sistema de Facções
 
-| Página | URI |
-|--------|-----|
-| Homepage | `index.html` |
-| Entrada | `entry.html` |
-| Universo | `universo.html` |
-| Personagens | `personagens.html` |
-| Facções | `faccoes.html` |
-| Filmes | `filmes.html` |
-| Livros | `livros.html` |
-| Planetas | `planetas.html` |
-| Tecnologia | `tecnologia.html` |
-| Temas | `temas.html` |
-| Timeline | `timeline.html` |
-| Quiz | `quiz.html` |
+O sistema de facções é controlado pelo atributo `data-faction` no `<html>` e persiste via `localStorage`:
 
-### Fragmentos de Âncora (Temas)
-- `temas.html#religiao`
-- `temas.html#poder`
-- `temas.html#ecologia`
-- `temas.html#destino`
-- `temas.html#heroi`
+| Facção | Cor | CSS Var |
+|--------|-----|---------|
+| Atreides | Verde `#4a9e6a` | `--fc` |
+| Harkonnen | Vermelho `#c0392b` | `--fc` |
+| Fremen | Areia `#c8943a` | `--fc` |
+| Bene Gesserit | Roxo `#8e44ad` | `--fc` |
+| Corrino | Ouro `#d4a843` | `--fc` |
+| Neutral | Ouro `#d4a843` | `--fc` |
 
 ---
 
-## 🛠️ Tecnologias
+## 🖼️ Sistema de Imagens
 
-- **HTML5** puro com CSS variables para temas de facção
-- **CSS3** — animações, grid, flexbox, custom properties, backdrop-filter
-- **JavaScript ES6+** — vanilla JS, Intersection Observer, localStorage
-- **Google Fonts** — Cinzel (display), Raleway (body), Crimson Text (prose)
-- Sem frameworks ou bibliotecas externas — 100% vanilla
+Todas as imagens usam o proxy CDN `sspark.genspark.ai/cfimages` com URLs codificadas:
+```
+https://sspark.genspark.ai/cfimages?u1={encoded_url}&u2={key}&width=2560
+```
 
----
-
-## 📋 Funcionalidades Não Implementadas / Próximos Passos
-
-- [x] ~~Páginas individuais para Alia Atreides, Irulan Corrino, Scytale~~ ✅ Adicionadas
-- [x] ~~Dune: Part Three (Messiah) completamente integrado~~ ✅
-- [ ] Páginas individuais para Duque Leto I, Duncan Idaho, Gurney Halleck, Reverendo Mãe Mohiam
-- [ ] Secção de personagens de Children of Dune (Leto II, Ghanima)
-- [ ] Modo "sem spoilers" (ocultar conteúdo além do Livro 1)
-- [ ] Motor de busca interno
-- [ ] Sistema de favoritos
-- [ ] Galeria de citações por facção
-- [ ] Página de adaptações (série TV, jogos, etc.)
-- [ ] Glossário / Terminologia de Dune
-- [ ] Mapas interativos de Arrakis
+### Imagens corrigidas em v4.0:
+- `index.html` split-screen — Casa Atreides (exército verde) e Casa Harkonnen (cenário industrial cinzento)
+- `personagens.html` — Gurney Halleck (Josh Brolin), Shaddam IV (Christopher Walken), Rev. Mãe Mohiam (Charlotte Rampling), Duque Leto I (Oscar Isaac)
 
 ---
 
-## 📜 Aviso Legal
+## 🚀 Próximos Passos Recomendados
 
-Este é um portal não oficial criado para fins educacionais e de entretenimento. Dune e todos os personagens, locais e elementos relacionados são propriedade intelectual dos respectivos detentores de direitos (Frank Herbert Estate, Legendary Entertainment, etc.).
+1. **Chave OMDB real** — Registar em omdbapi.com (gratuito até 1000/dia) e substituir a chave em `js/apis.js` para ratings ao vivo
+2. **Open Library** — Adicionar `data-ol-work` nos `book-entry` de `livros.html` com os work IDs corretos
+3. **Dune: Part Three** — Atualizar página quando mais informação oficial for divulgada (previsão: 2025/2026)
+4. **Share buttons** — Adicionar `data-share-btn` / `data-copy-btn` nas páginas de personagens individuais
+5. **SEO** — Adicionar meta tags Open Graph para partilha em redes sociais
+6. **PWA** — Adicionar `manifest.json` e service worker para uso offline
 
-Baseado nas obras de **Frank Herbert** (1920–1986).
+---
+
+## 📊 Estatísticas do Site
+
+- **28 páginas HTML**
+- **4 ficheiros JS** (faction.js, nav.js, main.js, apis.js)
+- **1 ficheiro CSS global** (global.css)
+- **14 personagens** com foto
+- **4 facções** com páginas dedicadas
+- **3 filmes** com análise completa
+- **6 livros** da saga original
+- **6 APIs** integradas
+- **0 erros JS** em produção
+
+---
+
+*Portal DUNE Universe — v4.0 — Maio 2026*

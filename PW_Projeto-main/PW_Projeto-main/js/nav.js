@@ -29,10 +29,10 @@ function renderNav() {
       href: 'faccoes.html', label: 'Facções',
       dropdown: [
         { href: 'faccao-atreides.html', label: '⚔ Casa Atreides' },
-        { href: 'faccao-harkonnen.html', label: '⚡ Casa Harkonnen' },
-        { href: 'faccao-fremen.html', label: '◈ Fremen' },
-        { href: 'faccao-bene-gesserit.html', label: '◉ Bene Gesserit' },
-        { href: 'faccoes.html', label: '→ Todas as Facções' },
+        { href: 'faccao-harkonnen.html', label: 'Casa Harkonnen' },
+        { href: 'faccao-fremen.html', label: 'Fremen' },
+        { href: 'faccao-bene-gesserit.html', label: 'Bene Gesserit' },
+        { href: 'faccoes.html', label: 'Todas as Facções' },
       ]
     },
     {
@@ -40,7 +40,7 @@ function renderNav() {
       dropdown: [
         { href: 'filme-dune-2021.html', label: 'Dune (2021)' },
         { href: 'filme-dune-part-two.html', label: 'Dune: Part Two (2024)' },
-        { href: 'filme-dune-messiah.html', label: '🔴 Dune: Part Three (2026)' },
+        { href: 'filme-dune-messiah.html', label: ' Dune: Part Three (2026)' },
         { href: 'filmes.html', label: '→ Todos os Filmes' },
       ]
     },
@@ -48,11 +48,11 @@ function renderNav() {
     {
       href: '#explorar', label: 'Explorar',
       dropdown: [
-        { href: 'planetas.html', label: '🌍 Planetas' },
-        { href: 'tecnologia.html', label: '⚙ Tecnologia' },
-        { href: 'temas.html', label: '📚 Temas' },
-        { href: 'timeline.html', label: '⏱ Timeline' },
-        { href: 'quiz.html', label: '◎ Quiz de Facção' },
+        { href: 'planetas.html', label: 'Planetas' },
+        { href: 'tecnologia.html', label: 'Tecnologia' },
+        { href: 'temas.html', label: 'Temas' },
+        { href: 'timeline.html', label: 'Timeline' },
+        { href: 'quiz.html', label: 'Quiz de Facção' },
       ]
     },
   ];
@@ -216,11 +216,11 @@ function renderFooter() {
             <h4>Facções &amp; Obras</h4>
             <ul>
               <li><a href="faccao-atreides.html">⚔ Casa Atreides</a></li>
-              <li><a href="faccao-harkonnen.html">⚡ Casa Harkonnen</a></li>
+              <li><a href="faccao-harkonnen.html">Casa Harkonnen</a></li>
               <li><a href="faccao-fremen.html">◈ Fremen</a></li>
-              <li><a href="faccao-bene-gesserit.html">◉ Bene Gesserit</a></li>
+              <li><a href="faccao-bene-gesserit.html">Bene Gesserit</a></li>
               <li><a href="livros.html">Livros</a></li>
-              <li><a href="filme-dune-messiah.html">🔴 Dune: Part Three</a></li>
+              <li><a href="filme-dune-messiah.html">Dune: Part Three</a></li>
               <li><a href="filmes.html">Todos os Filmes</a></li>
               <li><a href="quiz.html">Quiz de Facção</a></li>
             </ul>
